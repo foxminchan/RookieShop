@@ -1,6 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+		<PackageReference Include="EntityFrameworkCore.Exceptions.SqlServer" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ardalis.SmartEnum.EFCore" />
+		<PackageReference Include="Ardalis.Specification.EntityFrameworkCore" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\RookieShop.Infrastructure\RookieShop.Infrastructure.csproj" />
 	</ItemGroup>
 
@@ -9,6 +23,10 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Constants\" />
 	</ItemGroup>
 
 </Project>

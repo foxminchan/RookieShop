@@ -37,7 +37,7 @@
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EfVersion)" />
-		<PackageVersion Include="EntityFrameworkCore.Exceptions.SqlServer" Version="$(EfVersion)" />
+		<PackageVersion Include="EntityFrameworkCore.Exceptions.SqlServer" Version="8.1.2" />
 		<!-- OpenTelemetry -->
 		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
