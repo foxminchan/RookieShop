@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
+		<EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
+		<UserSecretsId>1a2b4760-e928-4ffe-84c0-65da05f3af3f</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ContainerEnvironmentVariable Include="ASPNETCORE_HTTPS_PORTS">
+			<Value>8081</Value>
+		</ContainerEnvironmentVariable>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\RookieShop.Application\RookieShop.Application.csproj" />
+	</ItemGroup>
+
+</Project>

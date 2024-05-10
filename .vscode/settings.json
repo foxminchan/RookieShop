@@ -1,0 +1,8 @@
+{
+  "files.eol": "\n",
+  "dotnet.defaultSolution": "RookieShop.sln",
+  "sonarlint.connectedMode.project": {
+    "connectionId": "foxminchan",
+    "projectKey": "foxminchan_RookieShop"
+  }
+}
