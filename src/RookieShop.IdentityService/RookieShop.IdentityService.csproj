@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
+		<EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
+		<UserSecretsId>9d931bc8-4591-4b74-9363-2bdc0c20d835</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Serilog.AspNetCore" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Duende.IdentityServer.AspNetIdentity" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ContainerEnvironmentVariable Include="ASPNETCORE_HTTPS_PORTS">
+			<Value>8081</Value>
+		</ContainerEnvironmentVariable>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\RookieShop.Infrastructure\RookieShop.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Exceptions\" />
+	</ItemGroup>
+
+</Project>

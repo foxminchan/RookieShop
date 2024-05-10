@@ -1,0 +1,32 @@
+{
+  "name": "C# (.NET)",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "moby": true,
+      "installDockerBuildx": true,
+      "version": "latest",
+      "dockerDashComposeVersion": "v2"
+    },
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "nodeGypDependencies": true,
+      "version": "lts",
+      "nvmVersion": "latest"
+    },
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.vscodeintellicode-csharp",
+        "bradlc.vscode-tailwindcss",
+        "dsznajder.es7-react-js-snippets"
+      ]
+    }
+  }
+}

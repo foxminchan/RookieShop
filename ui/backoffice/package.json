@@ -1,0 +1,55 @@
+{
+  "name": "backoffice",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Nhan Nguyen",
+    "email": "nguyenxuannhan407@gmail.com"
+  },
+  "description": "A project developed by a rookie transitioning to an engineer at NashTech",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=--max_old_space_size=4096 refine dev",
+    "build": "refine build",
+    "start": "refine start",
+    "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
+    "refine": "refine"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.17",
+    "@mui/lab": "5.0.0-alpha.170",
+    "@mui/material": "^5.15.17",
+    "@mui/x-data-grid": "^6.19.11",
+    "@refinedev/cli": "^2.16.31",
+    "@refinedev/core": "^4.49.2",
+    "@refinedev/devtools": "^1.2.1",
+    "@refinedev/kbar": "^1.3.10",
+    "@refinedev/mui": "^5.15.1",
+    "@refinedev/nextjs-router": "^6.0.4",
+    "@refinedev/react-hook-form": "^4.8.18",
+    "@refinedev/simple-rest": "^5.0.6",
+    "js-cookie": "^3.0.5",
+    "next": "14.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^18.19.33",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/parser": "5.48.0",
+    "autoprefixer": "^10.4.19",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^4.9.5"
+  }
+}

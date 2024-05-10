@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net8.0": {
+      "SonarAnalyzer.CSharp": {
+        "type": "Direct",
+        "requested": "[9.25.0.90414, )",
+        "resolved": "9.25.0.90414",
+        "contentHash": "T5zhLMv1uC98eDXZtLNOcS+fIlRJZ8VNlWLaXVlgmI7wPuYwTPDpfaKXB0UfTMFAvnMCAsG2kFpdRszUY3kh5g=="
+      },
+      "rookieshop.application": {
+        "type": "Project",
+        "dependencies": {
+          "RookieShop.Persistence": "[1.0.0, )"
+        }
+      },
+      "rookieshop.domain": {
+        "type": "Project"
+      },
+      "rookieshop.infrastructure": {
+        "type": "Project",
+        "dependencies": {
+          "RookieShop.Domain": "[1.0.0, )"
+        }
+      },
+      "rookieshop.persistence": {
+        "type": "Project",
+        "dependencies": {
+          "RookieShop.Infrastructure": "[1.0.0, )"
+        }
+      }
+    },
+    "net8.0/linux-x64": {}
+  }
+}
