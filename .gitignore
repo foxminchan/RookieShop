@@ -1,3 +1,7 @@
+# Custom .gitignore for Visual Studio and .NET projects
+
+mnt/
+
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
 # Logs

@@ -1,0 +1,72 @@
+version: "3.9"
+
+services:
+  rookie.db:
+    image: mcr.microsoft.com/mssql/server:2022-CU12-ubuntu-22.04
+    container_name: rookie.db
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "NashTech@2024"
+    ports:
+      - 1433:1433
+    volumes:
+      - ./mnt/mssql:/var/opt/mssql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/opt/mssql-tools/bin/sqlcmd",
+          "-U",
+          "SA",
+          "-P",
+          "NashTech@2024",
+          "-Q",
+          "SELECT 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rookie-network
+
+  rookie.cache:
+    image: redis/redis-stack:7.2.0-v10
+    container_name: rookie.cache
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --requirepass NashTech@2024
+    volumes:
+      - ./mnt/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rookie-network
+
+  rookie.storage:
+    image: mcr.microsoft.com/azure-storage/azurite:3.9.0
+    container_name: rookie.storage
+    ports:
+      - 10000-10002:10000-10002
+    volumes:
+      - ./mnt/azurite:/data
+    networks:
+      - rookie-network
+
+  rookie.observability:
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.7
+    container_name: rookie.observability
+    ports:
+      - 1888:1888
+      - 4317:1889
+    networks:
+      - rookie-network
+
+networks:
+  rookie-network:
+    name: rookie-network
+    driver: bridge
