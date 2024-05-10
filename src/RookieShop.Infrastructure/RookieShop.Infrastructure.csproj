@@ -1,6 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
+		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Polly" />
+		<PackageReference Include="Scrutor" />
+		<PackageReference Include="DistributedLock.Redis" />
+		<PackageReference Include="Swashbuckle.AspNetCore" />
+		<PackageReference Include="FluentValidation.AspNetCore" />
+		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Asp.Versioning.Http" />
+		<PackageReference Include="Asp.Versioning.Mvc" />
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\RookieShop.Domain\RookieShop.Domain.csproj" />
 	</ItemGroup>
 
