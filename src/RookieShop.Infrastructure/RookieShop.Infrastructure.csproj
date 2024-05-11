@@ -38,6 +38,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="Polly" />
+		<PackageReference Include="Polly.Extensions" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Scrutor" />
 		<PackageReference Include="Azure.Storage.Blobs" />
 	</ItemGroup>

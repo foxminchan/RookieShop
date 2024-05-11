@@ -8,6 +8,7 @@
 		<TestcontainersVersion>3.8.0</TestcontainersVersion>
 		<MicrosoftExtensionsVersion>8.4.0</MicrosoftExtensionsVersion>
 		<XabarilVersion>8.0.1</XabarilVersion>
+		<PollyVersion>8.4.0</PollyVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- Ardalis -->
@@ -75,8 +76,10 @@
 		<!-- FluentEmail -->
 		<PackageVersion Include="FluentEmail.Razor" Version="3.0.2" />
 		<PackageVersion Include="FluentEmail.Mailtrap" Version="2.7.0" />
+		<!-- Polly -->
+		<PackageVersion Include="Polly" Version="$(PollyVersion)" />
+		<PackageVersion Include="Polly.Extensions" Version="$(PollyVersion)" />
 		<!-- Miscellaneous -->
-		<PackageVersion Include="Polly" Version="8.3.1" />
 		<PackageVersion Include="Dapper" Version="2.1.35" />
 		<PackageVersion Include="Scrutor" Version="4.2.2" />
 		<PackageVersion Include="MediatR" Version="12.2.0" />
