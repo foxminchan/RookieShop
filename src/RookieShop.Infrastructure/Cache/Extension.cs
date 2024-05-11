@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using RookieShop.Infrastructure.Cache.Redis;
 using RookieShop.Infrastructure.Cache.Redis.Internal;
 using RookieShop.Infrastructure.Cache.Redis.Settings;
+using RookieShop.Infrastructure.Validator;
 using StackExchange.Redis;
 
 namespace RookieShop.Infrastructure.Cache;
@@ -17,7 +17,9 @@ public static class Extension
         if (builder.Services.Contains(ServiceDescriptor.Singleton<IRedisService, RedisService>()))
             return builder;
 
-        builder.Services.AddSingleton<IConfigureOptions<RedisSettings>, RedisSettingsService>();
+        builder.Services.AddOptionsWithValidateOnStart<RedisSettings>()
+            .Bind(builder.Configuration.GetSection(nameof(RedisSettings)))
+            .ValidateFluentValidation();
 
         var redisSettings = builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>();
 

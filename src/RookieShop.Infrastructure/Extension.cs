@@ -65,7 +65,7 @@ public static class Extension
         return builder;
     }
 
-    public static IHostApplicationBuilder AddInfrastructureService(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddInfrastructure(this IHostApplicationBuilder builder)
     {
         builder
             .AddValidator()
@@ -85,7 +85,7 @@ public static class Extension
         return builder;
     }
 
-    public static IApplicationBuilder UseInfrastructureService(this WebApplication app)
+    public static IApplicationBuilder MapInfrastructure(this WebApplication app)
     {
         app
             .UseCustomCors()

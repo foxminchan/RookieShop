@@ -6,7 +6,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7060"
+      "applicationUrl": "https://localhost:7080"
     },
     "Container (.NET SDK)": {
       "commandName": "SdkContainer",

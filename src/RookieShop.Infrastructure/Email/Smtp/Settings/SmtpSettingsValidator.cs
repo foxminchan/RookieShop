@@ -8,7 +8,7 @@ public sealed class SmtpSettingsValidator : AbstractValidator<SmtpSettings>
     {
         RuleFor(x => x.Host).NotEmpty();
         RuleFor(x => x.Port).InclusiveBetween(1, 65535);
-        RuleFor(x => x.Email).NotEmpty();
+        RuleFor(x => x.Email).NotEmpty().EmailAddress();
         RuleFor(x => x.Secret).NotEmpty();
     }
 }

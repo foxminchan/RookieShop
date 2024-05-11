@@ -14,9 +14,9 @@ public static class Extension
 {
     public static IHostApplicationBuilder AddPersistence(this IHostApplicationBuilder builder)
     {
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        var connectionString = builder.Configuration.GetConnectionString("Postgres");
 
-        Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
+        Guard.Against.Null(connectionString, message: "Connection string 'Postgres' not found.");
 
         builder.Services.AddSingleton<AuditableEntityInterceptor>();
 

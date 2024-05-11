@@ -13,7 +13,7 @@ public static class Extension
 {
     public static IHostApplicationBuilder AddHealthCheck(this IHostApplicationBuilder builder)
     {
-        var dbConn = builder.Configuration.GetConnectionString("DefaultConnection");
+        var dbConn = builder.Configuration.GetConnectionString("Postgres");
         Guard.Against.Null(dbConn);
 
         var cache = builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>();
