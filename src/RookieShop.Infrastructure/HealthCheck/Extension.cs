@@ -14,18 +14,18 @@ public static class Extension
     public static IHostApplicationBuilder AddHealthCheck(this IHostApplicationBuilder builder)
     {
         var dbConn = builder.Configuration.GetConnectionString("DefaultConnection");
-        Guard.Against.Null(dbConn, message: "Connection string 'DefaultConnection' not found.");
+        Guard.Against.Null(dbConn);
 
-        var cacheConn = builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>()?.Url;
-        Guard.Against.Null(cacheConn, message: "Redis Url not found.");
+        var cache = builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>();
+        Guard.Against.Null(cache);
 
         var isConn = builder.Configuration.GetValue<string>("OAuth:Authority");
-        Guard.Against.Null(isConn, message: "OAuth Authority not found.");
+        Guard.Against.Null(isConn);
 
         builder.Services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
             .AddNpgSql(dbConn, name: "Postgres", tags: ["database"])
-            .AddRedis(cacheConn, "Redis", tags: ["redis"])
+            .AddRedis(cache.GetConnectionString(), "Redis", tags: ["redis"])
             .AddIdentityServer(new Uri(isConn), name: "Identity Server", tags: ["identity-server"]);
 
         builder.Services

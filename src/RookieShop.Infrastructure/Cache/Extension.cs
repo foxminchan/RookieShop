@@ -1,35 +1,32 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Ardalis.GuardClauses;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using RookieShop.Infrastructure.Cache.Redis;
 using RookieShop.Infrastructure.Cache.Redis.Internal;
 using RookieShop.Infrastructure.Cache.Redis.Settings;
-using RookieShop.Infrastructure.Validator;
 using StackExchange.Redis;
 
 namespace RookieShop.Infrastructure.Cache;
 
 public static class Extension
 {
-    public static IHostApplicationBuilder AddRedisCache(
-        this IHostApplicationBuilder builder,
-        Action<RedisSettings>? setupAction = null)
+    public static IHostApplicationBuilder AddRedisCache(this IHostApplicationBuilder builder)
     {
         if (builder.Services.Contains(ServiceDescriptor.Singleton<IRedisService, RedisService>()))
             return builder;
 
-        RedisSettings redisSettings = new();
+        builder.Services.AddSingleton<IConfigureOptions<RedisSettings>, RedisSettingsService>();
 
-        builder.Services.AddOptionsWithValidateOnStart<RedisSettings>()
-            .Bind(builder.Configuration.GetSection(nameof(RedisSettings)))
-            .ValidateFluentValidation();
+        var redisSettings = builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>();
 
-        setupAction?.Invoke(redisSettings);
+        Guard.Against.Null(redisSettings);
 
         builder.Services.AddStackExchangeRedisCache(options =>
         {
             options.InstanceName = builder.Configuration[redisSettings.Prefix];
-            options.ConfigurationOptions = GetRedisConfigurationOptions(redisSettings, builder.Configuration);
+            options.ConfigurationOptions = GetRedisConfigurationOptions(redisSettings);
         });
 
         builder.Services.AddSingleton<IRedisService, RedisService>();
@@ -37,7 +34,7 @@ public static class Extension
         return builder;
     }
 
-    private static ConfigurationOptions GetRedisConfigurationOptions(RedisSettings redisSettings, IConfiguration config)
+    private static ConfigurationOptions GetRedisConfigurationOptions(RedisSettings redisSettings)
     {
         ConfigurationOptions configurationOptions = new()
         {
@@ -51,9 +48,6 @@ public static class Extension
         };
 
         if (!string.IsNullOrWhiteSpace(redisSettings.Password)) configurationOptions.Password = redisSettings.Password;
-
-        redisSettings.Url = config.GetSection(nameof(RedisSettings)).Get<RedisSettings>()?.Url
-                            ?? throw new InvalidOperationException();
 
         foreach (var endpoint in redisSettings.Url.Split(',')) configurationOptions.EndPoints.Add(endpoint);
 

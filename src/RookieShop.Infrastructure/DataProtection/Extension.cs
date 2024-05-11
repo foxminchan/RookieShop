@@ -12,9 +12,13 @@ public static class Extension
 {
     public static IHostApplicationBuilder AddRedisDataProtection(this IHostApplicationBuilder builder)
     {
-        var conn = builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>()?.Url;
+        var redis = builder.Configuration
+            .GetSection(nameof(RedisSettings))
+            .Get<RedisSettings>();
 
-        Guard.Against.Null(conn, message: "Redis Url not found.");
+        Guard.Against.Null(redis);
+
+        var conn = redis.GetConnectionString();
 
         builder.Services.AddDataProtection()
             .SetDefaultKeyLifetime(TimeSpan.FromDays(14))

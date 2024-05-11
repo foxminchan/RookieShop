@@ -13,7 +13,13 @@ public static class Extension
 {
     public static IHostApplicationBuilder AddRedisDistributedLock(this IHostApplicationBuilder builder)
     {
-        var conn = builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>()?.Url;
+        var redis = builder.Configuration
+            .GetSection(nameof(RedisSettings))
+            .Get<RedisSettings>();
+
+        Guard.Against.Null(redis);
+
+        var conn = redis.GetConnectionString();
 
         Guard.Against.Null(conn, message: "Redis Url not found.");
 

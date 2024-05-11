@@ -72,15 +72,15 @@ public static class Extension
             .AddVersioning()
             .AddOpenApi()
             .AddCustomCors()
+            .AddRateLimiting()
             .AddIdentity()
             .AddRedisCache()
-            .AddRateLimiting()
-            .ConfigureOpenTelemetry()
             .AddRedisDataProtection()
             .AddRedisDistributedLock()
-            .AddHealthCheck()
             .AddStorage()
-            .AddEmail();
+            .AddEmail()
+            .AddHealthCheck()
+            .ConfigureOpenTelemetry();
 
         return builder;
     }
