@@ -23,6 +23,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="FluentEmail.Razor" />
+		<PackageReference Include="FluentEmail.Mailtrap" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="AspNetCore.HealthChecks.Redis" />
 		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
 		<PackageReference Include="AspNetCore.HealthChecks.OpenIdConnectServer" />
@@ -58,6 +63,11 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Email\Smtp\Internal\" />
+	  <Folder Include="Email\Smtp\Abstractions\" />
 	</ItemGroup>
 
 </Project>

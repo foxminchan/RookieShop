@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using RookieShop.Domain.Constants;
 using RookieShop.Infrastructure.Cache;
 using RookieShop.Infrastructure.DataProtection;
+using RookieShop.Infrastructure.Email;
 using RookieShop.Infrastructure.HealthCheck;
 using RookieShop.Infrastructure.Lock;
 using RookieShop.Infrastructure.OpenTelemetry;
@@ -78,7 +79,8 @@ public static class Extension
             .AddRedisDataProtection()
             .AddRedisDistributedLock()
             .AddHealthCheck()
-            .AddStorage();
+            .AddStorage()
+            .AddEmail();
 
         return builder;
     }
