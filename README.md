@@ -93,8 +93,8 @@ docker-compose --env-file .env up -d
 - Or run the application from your terminal:
 
 ```bash
-dotnet run --project src/RookieShop.Api/RookieShop.Api.csproj
-dotnet run --project src/RookieShop.IdentityServer/RookieShop.IdentityServer.csproj
+dotnet run --project src/RookieShop.ApiService/RookieShop.ApiService.csproj
+dotnet run --project src/RookieShop.IdentityService/RookieShop.IdentityService.csproj
 ```
 
 2. Run the frontend for the user-facing website
