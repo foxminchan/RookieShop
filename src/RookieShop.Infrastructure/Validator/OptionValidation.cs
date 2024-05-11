@@ -15,12 +15,16 @@ public sealed class OptionValidation<TOption>(IServiceProvider serviceProvider)
         Guard.Against.Null(options);
 
         using var scope = serviceProvider.CreateScope();
+
         var result = scope.ServiceProvider.GetRequiredService<IValidator<TOption>>().Validate(options);
 
         if (result.IsValid) return ValidateOptionsResult.Success;
 
         var type = options.GetType().Name;
-        var errors = result.Errors.Select(error => $"{error.PropertyName}: {error.ErrorMessage}").ToList();
+
+        var errors = result.Errors
+            .Select(error => $"{error.PropertyName}: {error.ErrorMessage}")
+            .ToList();
 
         return ValidateOptionsResult.Fail($"{type} has validation errors: {string.Join(", ", errors)}");
     }

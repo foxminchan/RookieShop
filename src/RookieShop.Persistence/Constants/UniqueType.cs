@@ -2,6 +2,6 @@
 
 public static class UniqueType
 {
-    public const string Identifier = "UNIQUEIDENTIFIER";
-    public const string NewIdentifier = "NEWID()";
+    public const string Extension = "uuid-ossp";
+    public const string Algorithm = "uuid_generate_v4()";
 }

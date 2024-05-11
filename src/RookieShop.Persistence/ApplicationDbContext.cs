@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RookieShop.Domain.SeedWork;
 using RookieShop.Domain.SharedKernel;
+using RookieShop.Persistence.Constants;
 using SmartEnum.EFCore;
 
 namespace RookieShop.Persistence;
@@ -29,6 +30,7 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ConfigureSmartEnum();
+        modelBuilder.HasPostgresExtension(UniqueType.Extension);
         modelBuilder.ApplyConfigurationsFromAssembly(AssemblyReference.DbContextAssembly);
     }
 }

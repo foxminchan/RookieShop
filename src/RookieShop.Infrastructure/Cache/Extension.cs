@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using RookieShop.Infrastructure.Cache.Redis;
 using RookieShop.Infrastructure.Cache.Redis.Internal;
 using RookieShop.Infrastructure.Cache.Redis.Settings;
+using RookieShop.Infrastructure.Validator;
 using StackExchange.Redis;
 
 namespace RookieShop.Infrastructure.Cache;
@@ -21,7 +22,7 @@ public static class Extension
 
         builder.Services.AddOptionsWithValidateOnStart<RedisSettings>()
             .Bind(builder.Configuration.GetSection(nameof(RedisSettings)))
-            .ValidateDataAnnotations();
+            .ValidateFluentValidation();
 
         setupAction?.Invoke(redisSettings);
 
