@@ -1,6 +1,5 @@
 using System.Text.Json;
 using Ardalis.ListStartupServices;
-using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using RookieShop.ApiService.Middlewares;
 using RookieShop.Application;
@@ -36,8 +35,6 @@ builder.Services.ConfigureHttpClientDefaults(http => http.AddStandardResilienceH
 
 builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
 
-builder.Services.AddW3CLogging(logging => logging.LoggingFields = W3CLoggingFields.All);
-
 builder.AddInfrastructure().AddPersistence().AddApplication();
 
 builder.AddEndpoints(typeof(Program));
@@ -54,8 +51,6 @@ else
     app.UseExceptionHandler("/error");
     app.UseHsts();
 }
-
-app.UseW3CLogging();
 
 app.UseAntiforgery();
 

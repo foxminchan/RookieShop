@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Npgsql;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
 namespace RookieShop.Infrastructure.OpenTelemetry;
@@ -45,10 +46,20 @@ public static class Extension
     {
         var useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
 
+        var resourceBuilder = ResourceBuilder
+            .CreateDefault()
+            .AddService(
+                serviceName: builder.Environment.ApplicationName,
+                serviceVersion: "unknown",
+                serviceInstanceId: Environment.MachineName);
+
         if (!useOtlpExporter) return;
 
-        builder.Services.Configure<OpenTelemetryLoggerOptions>(logging => logging.AddOtlpExporter());
-        builder.Services.ConfigureOpenTelemetryMeterProvider(metrics => metrics.AddOtlpExporter());
-        builder.Services.ConfigureOpenTelemetryTracerProvider(tracing => tracing.AddOtlpExporter());
+        builder.Services.Configure<OpenTelemetryLoggerOptions>(logging =>
+            logging.SetResourceBuilder(resourceBuilder).AddOtlpExporter());
+        builder.Services.ConfigureOpenTelemetryMeterProvider(metrics =>
+            metrics.SetResourceBuilder(resourceBuilder).AddOtlpExporter());
+        builder.Services.ConfigureOpenTelemetryTracerProvider(tracing =>
+            tracing.SetResourceBuilder(resourceBuilder).AddOtlpExporter());
     }
 }

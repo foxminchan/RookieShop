@@ -9,7 +9,7 @@ services:
   rookie.db:
     image: postgres:16.2-alpine3.19
     container_name: rookie.db
-    restart: always
+    restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
@@ -31,7 +31,7 @@ services:
   rookie.cache:
     image: redis/redis-stack:7.2.0-v10
     container_name: rookie.cache
-    restart: always
+    restart: unless-stopped
     ports:
       - 6379:6379
     command: redis-server --requirepass ${DB_PASSWORD}
@@ -49,7 +49,7 @@ services:
   rookie.storage:
     image: mcr.microsoft.com/azure-storage/azurite:3.9.0
     container_name: rookie.storage
-    restart: always
+    restart: unless-stopped
     ports:
       - 10000-10002:10000-10002
     command: azurite-blob --blobHost 0.0.0.0 --loose /data
@@ -60,12 +60,12 @@ services:
       - rookie-network
 
   rookie.observability:
-    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.7
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.6
     container_name: rookie.observability
-    restart: always
+    restart: unless-stopped
     ports:
-      - 1888:1888
-      - 4317:1889
+      - "18888:18888"
+      - "4317:18889"
     logging: *logging
     networks:
       - rookie-network
