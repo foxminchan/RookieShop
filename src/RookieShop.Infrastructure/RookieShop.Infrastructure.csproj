@@ -19,6 +19,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AspNetCore.HealthChecks.Redis" />
+		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
+		<PackageReference Include="AspNetCore.HealthChecks.OpenIdConnectServer" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Polly" />
 		<PackageReference Include="Scrutor" />
 		<PackageReference Include="DistributedLock.Redis" />

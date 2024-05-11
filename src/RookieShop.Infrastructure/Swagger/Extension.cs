@@ -26,7 +26,7 @@ public static class Extension
         return builder;
     }
 
-    public static IApplicationBuilder UseOpenApi(this WebApplication app)
+    public static WebApplication UseOpenApi(this WebApplication app)
     {
         const string appName = "Rookie Shop API";
 

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using RookieShop.Domain.Constants;
 using RookieShop.Infrastructure.Cache;
 using RookieShop.Infrastructure.DataProtection;
+using RookieShop.Infrastructure.HealthCheck;
 using RookieShop.Infrastructure.Lock;
 using RookieShop.Infrastructure.OpenTelemetry;
 using RookieShop.Infrastructure.RateLimiter;
@@ -74,7 +75,8 @@ public static class Extension
             .AddRateLimiting()
             .ConfigureOpenTelemetry()
             .AddRedisDataProtection()
-            .AddRedisDistributedLock();
+            .AddRedisDistributedLock()
+            .AddHealthCheck();
 
         return builder;
     }
@@ -86,7 +88,8 @@ public static class Extension
             .UseAuthentication()
             .UseAuthorization();
 
-        app.UseOpenApi();
+        app.UseOpenApi()
+            .MapHealthCheck();
 
         return app;
     }
