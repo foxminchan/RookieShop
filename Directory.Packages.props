@@ -83,6 +83,7 @@
 		<PackageVersion Include="Dapper" Version="2.1.35" />
 		<PackageVersion Include="Scrutor" Version="4.2.2" />
 		<PackageVersion Include="MediatR" Version="12.2.0" />
+		<PackageVersion Include="Stripe.net" Version="44.7.0" />
 		<PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
 		<PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
 		<PackageVersion Include="StronglyTypedId" Version="1.0.0-beta07" />

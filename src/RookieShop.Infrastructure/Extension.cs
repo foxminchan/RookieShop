@@ -9,6 +9,7 @@ using RookieShop.Infrastructure.DataProtection;
 using RookieShop.Infrastructure.Email;
 using RookieShop.Infrastructure.HealthCheck;
 using RookieShop.Infrastructure.Lock;
+using RookieShop.Infrastructure.Merchant;
 using RookieShop.Infrastructure.OpenTelemetry;
 using RookieShop.Infrastructure.RateLimiter;
 using RookieShop.Infrastructure.Storage;
@@ -80,6 +81,7 @@ public static class Extension
             .AddStorage()
             .AddEmail()
             .AddHealthCheck()
+            .AddStripeService()
             .ConfigureOpenTelemetry();
 
         return builder;

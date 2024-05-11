@@ -49,7 +49,7 @@ public static class Extension
         var resourceBuilder = ResourceBuilder
             .CreateDefault()
             .AddService(
-                serviceName: builder.Environment.ApplicationName,
+                builder.Environment.ApplicationName,
                 serviceVersion: "unknown",
                 serviceInstanceId: Environment.MachineName);
 

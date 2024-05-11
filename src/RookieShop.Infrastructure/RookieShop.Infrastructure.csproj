@@ -43,6 +43,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Scrutor" />
+		<PackageReference Include="Stripe.net" />
 		<PackageReference Include="Azure.Storage.Blobs" />
 	</ItemGroup>
 
