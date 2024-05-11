@@ -1,7 +1,7 @@
+using System.Text.Json;
 using Ardalis.ListStartupServices;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using RookieShop.ApiService.Middlewares;
-using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +15,7 @@ builder.WebHost.ConfigureKestrel(options =>
 builder.Services
     .AddResponseCompression()
     .AddRouting(options => options.LowercaseUrls = true)
-    .AddSingleton(new JsonSerializerOptions()
+    .AddSingleton(new JsonSerializerOptions
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         PropertyNameCaseInsensitive = true

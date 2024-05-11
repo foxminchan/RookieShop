@@ -21,10 +21,7 @@ public static class Extension
         builder.Services.AddOpenTelemetry()
             .WithTracing(tracing =>
             {
-                if (builder.Environment.IsDevelopment())
-                {
-                    tracing.SetSampler(new AlwaysOnSampler());
-                }
+                if (builder.Environment.IsDevelopment()) tracing.SetSampler(new AlwaysOnSampler());
 
                 tracing
                     .AddAspNetCoreInstrumentation()

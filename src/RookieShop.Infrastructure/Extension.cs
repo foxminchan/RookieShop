@@ -49,7 +49,7 @@ public static class Extension
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new()
                 {
-                    ValidateAudience = false,
+                    ValidateAudience = false
                 };
             });
 
