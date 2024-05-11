@@ -11,12 +11,12 @@ namespace RookieShop.Infrastructure.Cache;
 
 public static class Extension
 {
-    public static IServiceCollection AddRedisCache(
+    public static IHostApplicationBuilder AddRedisCache(
         this IHostApplicationBuilder builder,
         Action<RedisSettings>? setupAction = null)
     {
         if (builder.Services.Contains(ServiceDescriptor.Singleton<IRedisService, RedisService>()))
-            return builder.Services;
+            return builder;
 
         RedisSettings redisSettings = new();
 
@@ -34,7 +34,7 @@ public static class Extension
 
         builder.Services.AddSingleton<IRedisService, RedisService>();
 
-        return builder.Services;
+        return builder;
     }
 
     private static ConfigurationOptions GetRedisConfigurationOptions(RedisSettings redisSettings, IConfiguration config)

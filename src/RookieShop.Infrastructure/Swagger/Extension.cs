@@ -2,7 +2,6 @@
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -13,8 +12,9 @@ namespace RookieShop.Infrastructure.Swagger;
 
 public static class Extension
 {
-    public static IServiceCollection AddOpenApi(this IServiceCollection services)
-        => services
+    public static IHostApplicationBuilder AddOpenApi(this IHostApplicationBuilder builder)
+    {
+        builder.Services
             .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerGenOptions>()
             .AddFluentValidationRulesToSwagger()
             .AddSwaggerGen(c =>
@@ -23,7 +23,10 @@ public static class Extension
                 c.SchemaFilter<SmartEnumSchemaFilter>();
             });
 
-    public static IApplicationBuilder UseOpenApi(this WebApplication app, IConfiguration configuration)
+        return builder;
+    }
+
+    public static IApplicationBuilder UseOpenApi(this WebApplication app)
     {
         const string appName = "Rookie Shop API";
 
@@ -57,8 +60,8 @@ public static class Extension
                 .ForEach(endpoint => c.SwaggerEndpoint(endpoint.url, endpoint.name));
 
             c.DocumentTitle = appName;
-            c.OAuthClientId(configuration["OAuth:ClientId"]);
-            c.OAuthClientSecret(configuration["OAuth:ClientSecret"]);
+            c.OAuthClientId(app.Configuration["OAuth:ClientId"]);
+            c.OAuthClientSecret(app.Configuration["OAuth:ClientSecret"]);
             c.OAuthAppName(appName);
             c.OAuthUsePkce();
             c.DisplayRequestDuration();

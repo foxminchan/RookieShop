@@ -22,7 +22,7 @@ public sealed class Index : PageModel
 
         if (!localAddresses.Contains(HttpContext.Connection.RemoteIpAddress?.ToString())) return NotFound();
 
-        View = new ViewModel(await HttpContext.AuthenticateAsync());
+        View = new(await HttpContext.AuthenticateAsync());
 
         return Page();
     }

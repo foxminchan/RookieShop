@@ -23,7 +23,8 @@ public sealed class SecurityHeadersAttribute : ActionFilterAttribute
             context.HttpContext.Response.Headers.Append("X-Frame-Options", "DENY");
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-        const string csp = "default-src 'self'; object-src 'none'; frame-ancestors 'none'; sandbox allow-forms allow-same-origin allow-scripts; base-uri 'self';";
+        const string csp =
+            "default-src 'self'; object-src 'none'; frame-ancestors 'none'; sandbox allow-forms allow-same-origin allow-scripts; base-uri 'self';";
         // also consider adding upgrade-insecure-requests once you have HTTPS in place for production
 
 #pragma warning disable S125 // Sections of code should not be commented out

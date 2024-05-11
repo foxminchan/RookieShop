@@ -9,11 +9,15 @@ namespace RookieShop.Infrastructure.DataProtection;
 
 public static class Extension
 {
-    public static void AddRedisDataProtection(this IHostApplicationBuilder builder) =>
+    public static IHostApplicationBuilder AddRedisDataProtection(this IHostApplicationBuilder builder)
+    {
         builder.Services.AddDataProtection()
             .SetDefaultKeyLifetime(TimeSpan.FromDays(14))
             .SetApplicationName(builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>()!.Prefix)
             .PersistKeysToStackExchangeRedis(
                 ConnectionMultiplexer.Connect(builder.Configuration.GetSection(nameof(RedisSettings))
                     .Get<RedisSettings>()!.Url), nameof(DataProtection));
+
+        return builder;
+    }
 }

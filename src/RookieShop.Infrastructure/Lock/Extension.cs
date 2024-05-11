@@ -10,9 +10,13 @@ namespace RookieShop.Infrastructure.Lock;
 
 public static class Extension
 {
-    public static void AddRedisDistributedLock(this IHostApplicationBuilder builder) =>
+    public static IHostApplicationBuilder AddRedisDistributedLock(this IHostApplicationBuilder builder)
+    {
         builder.Services.AddSingleton<IDistributedLockProvider>(_ =>
             new RedisDistributedSynchronizationProvider(ConnectionMultiplexer
                 .Connect(builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>()!.Url)
                 .GetDatabase()));
+
+        return builder;
+    }
 }

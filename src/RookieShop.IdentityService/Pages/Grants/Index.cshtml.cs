@@ -50,7 +50,7 @@ public sealed class Index(
             list.Add(item);
         }
 
-        View = new ViewModel
+        View = new()
         {
             Grants = list
         };

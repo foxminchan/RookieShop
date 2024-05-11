@@ -58,10 +58,12 @@ public sealed class Index(
             await interaction.DenyAuthorizationAsync(context, AuthorizationError.AccessDenied);
 
             // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
-            return context.IsNativeClient() ?
+            return context.IsNativeClient()
+                ?
                 // The client is native, so this change in how to
                 // return the response is for better UX for the end user.
-                this.LoadingPage(Input.ReturnUrl) : Redirect(Input.ReturnUrl ?? "~/");
+                this.LoadingPage(Input.ReturnUrl)
+                : Redirect(Input.ReturnUrl ?? "~/");
 
             // since we don't have a valid context, then we just go back to the home page
         }
@@ -82,10 +84,12 @@ public sealed class Index(
                     // This "can't happen", because if the ReturnUrl was null, then the context would be null
                     ArgumentNullException.ThrowIfNull(Input.ReturnUrl);
 
-                    return context.IsNativeClient() ?
+                    return context.IsNativeClient()
+                        ?
                         // The client is native, so this change in how to
                         // return the response is for better UX for the end user.
-                        this.LoadingPage(Input.ReturnUrl) :
+                        this.LoadingPage(Input.ReturnUrl)
+                        :
                         // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
                         Redirect(Input.ReturnUrl ?? "~/");
                 }
@@ -114,7 +118,7 @@ public sealed class Index(
 
     private async Task BuildModelAsync(string? returnUrl)
     {
-        Input = new InputModel
+        Input = new()
         {
             ReturnUrl = returnUrl
         };
@@ -125,7 +129,7 @@ public sealed class Index(
             var local = context.IdP == IdentityServerConstants.LocalIdentityProvider;
 
             // this is meant to short circuit the UI and only trigger the one external IdP
-            View = new ViewModel
+            View = new()
             {
                 EnableLocalLogin = local
             };
@@ -167,7 +171,7 @@ public sealed class Index(
                     client.IdentityProviderRestrictions.Contains(provider.AuthenticationScheme)).ToList();
         }
 
-        View = new ViewModel
+        View = new()
         {
             AllowRememberLogin = LoginOptions.AllowRememberLogin,
             EnableLocalLogin = allowLocal && LoginOptions.AllowLocalLogin,

@@ -10,7 +10,7 @@ namespace RookieShop.Infrastructure.OpenTelemetry;
 
 public static class Extension
 {
-    public static IHostApplicationBuilder AddOpenTelemetry(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
         builder.Logging.AddOpenTelemetry(logging =>
         {

@@ -18,7 +18,7 @@ public sealed class LoggedOut(IIdentityServerInteractionService interactionServi
         // get context information (client name, post logout redirect URI and iframe for federated sign out)
         var logout = await interactionService.GetLogoutContextAsync(logoutId);
 
-        View = new LoggedOutViewModel
+        View = new()
         {
             AutomaticRedirectAfterSignOut = LogoutOptions.AutomaticRedirectAfterSignOut,
             PostLogoutRedirectUri = logout.PostLogoutRedirectUri,

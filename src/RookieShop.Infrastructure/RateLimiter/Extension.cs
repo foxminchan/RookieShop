@@ -2,7 +2,6 @@
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace RookieShop.Infrastructure.RateLimiter;
@@ -11,8 +10,9 @@ public static class RateLimitExtensions
 {
     private const string Policy = "PerUserRatelimit";
 
-    public static IServiceCollection AddRateLimiting(this IHostApplicationBuilder builder)
-        => builder.Services.AddRateLimiter(options =>
+    public static IHostApplicationBuilder AddRateLimiting(this IHostApplicationBuilder builder)
+    {
+        builder.Services.AddRateLimiter(options =>
         {
             options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 
@@ -31,6 +31,9 @@ public static class RateLimitExtensions
                     });
             });
         });
+
+        return builder;
+    }
 
     public static IEndpointConventionBuilder RequirePerUserRateLimit(this IEndpointConventionBuilder builder)
         => builder.RequireRateLimiting(Policy);

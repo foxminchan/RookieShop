@@ -42,7 +42,7 @@ public sealed class Index(
             return Page();
         }
 
-        Input = new InputModel
+        Input = new()
         {
             UserCode = userCode
         };
@@ -68,7 +68,7 @@ public sealed class Index(
         {
             // user clicked 'no' - send back the standard 'access_denied' response
             case "no":
-                grantedConsent = new ConsentResponse
+                grantedConsent = new()
                 {
                     Error = AuthorizationError.AccessDenied
                 };
@@ -87,7 +87,7 @@ public sealed class Index(
                 if (!ConsentOptions.EnableOfflineAccess)
                     scopes = scopes.Where(x => x != IdentityServerConstants.StandardScopes.OfflineAccess);
 
-                grantedConsent = new ConsentResponse
+                grantedConsent = new()
                 {
                     RememberConsent = Input.RememberConsent,
                     ScopesValuesConsented = scopes.ToArray(),
@@ -137,7 +137,7 @@ public sealed class Index(
             return true;
         }
 
-        View = new ViewModel();
+        View = new();
         return false;
     }
 

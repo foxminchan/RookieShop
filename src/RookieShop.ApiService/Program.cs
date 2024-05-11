@@ -1,7 +1,27 @@
 using Ardalis.ListStartupServices;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using RookieShop.ApiService.Middlewares;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.AddServerHeader = false;
+    options.AllowResponseHeaderCompression = true;
+    options.ConfigureEndpointDefaults(o => o.Protocols = HttpProtocols.Http1AndHttp2AndHttp3);
+});
+
+builder.Services
+    .AddResponseCompression()
+    .AddRouting(options => options.LowercaseUrls = true)
+    .AddSingleton(new JsonSerializerOptions()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        PropertyNameCaseInsensitive = true
+    });
+
+builder.Services.AddAntiforgery();
 
 builder.Services.AddExceptionHandler<ExceptionHandler>();
 
@@ -23,6 +43,10 @@ else
     app.UseExceptionHandler("/error");
     app.UseHsts();
 }
+
+app.UseAntiforgery();
+
+app.UseResponseCompression();
 
 app.UseHttpsRedirection();
 

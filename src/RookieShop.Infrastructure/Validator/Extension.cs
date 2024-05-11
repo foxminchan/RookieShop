@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace RookieShop.Infrastructure.Validator;
@@ -22,10 +23,14 @@ public static class Extension
     }
 
     [DebuggerStepThrough]
-    public static IServiceCollection AddValidator(this IServiceCollection services)
-        => services.Scan(scan => scan
+    public static IHostApplicationBuilder AddValidator(this IHostApplicationBuilder builder)
+    {
+        builder.Services.Scan(scan => scan
             .FromAssemblies(AssemblyReference.Assembly)
             .AddClasses(c => c.AssignableTo(typeof(IValidator<>)))
             .AsImplementedInterfaces()
             .WithTransientLifetime());
+
+        return builder;
+    }
 }

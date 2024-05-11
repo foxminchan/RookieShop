@@ -47,7 +47,7 @@ public static class SeedData
         var bob = userMgr.FindByNameAsync("bob").Result;
         if (bob == null)
         {
-            bob = new ApplicationUser
+            bob = new()
             {
                 UserName = "bob",
                 Email = "BobSmith@email.com",

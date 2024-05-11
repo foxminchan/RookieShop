@@ -28,7 +28,7 @@ public sealed class Consent(
     {
         if (!await SetViewModelAsync(id)) return RedirectToPage("/Home/Error/Index");
 
-        Input = new InputModel
+        Input = new()
         {
             Id = id
         };
@@ -56,7 +56,7 @@ public sealed class Consent(
         {
             // user clicked 'no' - send back the standard 'access_denied' response
             case "no":
-                result = new CompleteBackchannelLoginRequest(Input.Id);
+                result = new(Input.Id);
 
                 // emit event
                 await events.RaiseAsync(new ConsentDeniedEvent(User.GetSubjectId(), request.Client.ClientId,
@@ -72,7 +72,7 @@ public sealed class Consent(
                 if (!ConsentOptions.EnableOfflineAccess)
                     scopes = scopes.Where(x => x != IdentityServerConstants.StandardScopes.OfflineAccess);
 
-                result = new CompleteBackchannelLoginRequest(Input.Id)
+                result = new(Input.Id)
                 {
                     ScopesValuesConsented = scopes.ToArray(),
                     Description = Input.Description
@@ -139,7 +139,7 @@ public sealed class Consent(
         var resourceIndicators = request.RequestedResourceIndicators ?? [];
         var apiResources =
             request.ValidatedResources.Resources.ApiResources.Where(x => resourceIndicators.Contains(x.Name))
-            .ToArray();
+                .ToArray();
 
         var apiScopes = new List<ScopeViewModel>();
         foreach (var parsedScope in request.ValidatedResources.ParsedScopes)
@@ -184,7 +184,7 @@ public sealed class Consent(
         if (!string.IsNullOrWhiteSpace(parsedScopeValue.ParsedParameter))
             displayName += ":" + parsedScopeValue.ParsedParameter;
 
-        return new ScopeViewModel
+        return new()
         {
             Name = parsedScopeValue.ParsedName,
             Value = parsedScopeValue.RawValue,

@@ -3,7 +3,6 @@
 
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
-using Duende.IdentityServer.Stores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -28,7 +27,7 @@ public sealed class IndexModel(ISessionManagementService? sessionManagementServi
     public async Task OnGet()
     {
         if (sessionManagementService is not null)
-            UserSessions = await sessionManagementService.QuerySessionsAsync(new SessionQuery
+            UserSessions = await sessionManagementService.QuerySessionsAsync(new()
             {
                 ResultsToken = Token,
                 RequestPriorResults = Prev == "true",
@@ -42,7 +41,7 @@ public sealed class IndexModel(ISessionManagementService? sessionManagementServi
     {
         ArgumentNullException.ThrowIfNull(sessionManagementService);
 
-        await sessionManagementService.RemoveSessionsAsync(new RemoveSessionsContext
+        await sessionManagementService.RemoveSessionsAsync(new()
         {
             SessionId = SessionId
         });

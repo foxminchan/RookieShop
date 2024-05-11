@@ -29,7 +29,7 @@ public sealed class Index(
     {
         if (!await SetViewModelAsync(returnUrl)) return RedirectToPage("/Home/Error/Index");
 
-        Input = new InputModel
+        Input = new()
         {
             ReturnUrl = returnUrl
         };
@@ -49,7 +49,7 @@ public sealed class Index(
         {
             // user clicked 'no' - send back the standard 'access_denied' response
             case "no":
-                grantedConsent = new ConsentResponse { Error = AuthorizationError.AccessDenied };
+                grantedConsent = new() { Error = AuthorizationError.AccessDenied };
 
                 // emit event
                 await events.RaiseAsync(new ConsentDeniedEvent(User.GetSubjectId(), request.Client.ClientId,
@@ -65,7 +65,7 @@ public sealed class Index(
                 if (!ConsentOptions.EnableOfflineAccess)
                     scopes = scopes.Where(x => x != IdentityServerConstants.StandardScopes.OfflineAccess);
 
-                grantedConsent = new ConsentResponse
+                grantedConsent = new()
                 {
                     RememberConsent = Input.RememberConsent,
                     ScopesValuesConsented = scopes.ToArray(),
@@ -99,10 +99,12 @@ public sealed class Index(
             await interaction.GrantConsentAsync(request, grantedConsent);
 
             // redirect back to authorization endpoint
-            return request.IsNativeClient() ?
+            return request.IsNativeClient()
+                ?
                 // The client is native, so this change in how to
                 // return the response is for better UX for the end user.
-                this.LoadingPage(Input.ReturnUrl) : Redirect(Input.ReturnUrl);
+                this.LoadingPage(Input.ReturnUrl)
+                : Redirect(Input.ReturnUrl);
         }
 
         // we need to redisplay the consent UI
@@ -187,7 +189,7 @@ public sealed class Index(
         if (!string.IsNullOrWhiteSpace(parsedScopeValue.ParsedParameter))
             displayName += ":" + parsedScopeValue.ParsedParameter;
 
-        return new ScopeViewModel
+        return new()
         {
             Name = parsedScopeValue.ParsedName,
             Value = parsedScopeValue.RawValue,

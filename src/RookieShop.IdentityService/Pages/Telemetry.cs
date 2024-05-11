@@ -31,7 +31,8 @@ public static class Telemetry
 
         private static readonly Counter<long> _consentCounter = _meter.CreateCounter<long>(Counters.Consent);
 
-        private static readonly Counter<long> _grantsRevokedCounter = _meter.CreateCounter<long>(Counters.GrantsRevoked);
+        private static readonly Counter<long>
+            _grantsRevokedCounter = _meter.CreateCounter<long>(Counters.GrantsRevoked);
 
         private static readonly Counter<long> _userLoginCounter = _meter.CreateCounter<long>(Counters.UserLogin);
 
@@ -69,9 +70,11 @@ public static class Telemetry
         {
             ArgumentNullException.ThrowIfNull(scopes);
             foreach (var scope in scopes)
-                _consentCounter.Add(1, new KeyValuePair<string, object?>(Tags.Client, clientId),
-                    new KeyValuePair<string, object?>(Tags.Scope, scope),
-                    new KeyValuePair<string, object?>(Tags.Consent, TagValues.Denied));
+            {
+                _consentCounter.Add(1, new(Tags.Client, clientId),
+                    new(Tags.Scope, scope),
+                    new(Tags.Consent, TagValues.Denied));
+            }
         }
 
         /// <summary>
@@ -87,8 +90,8 @@ public static class Telemetry
         /// <param name="clientId">Client Id, if available</param>
         /// <param name="idp"></param>
         public static void UserLogin(string? clientId, string idp)
-            => _userLoginCounter.Add(1, new KeyValuePair<string, object?>(Tags.Client, clientId),
-                new KeyValuePair<string, object?>(Tags.Idp, idp));
+            => _userLoginCounter.Add(1, new(Tags.Client, clientId),
+                new(Tags.Idp, idp));
 
         /// <summary>
         ///     Helper method to increase <see cref="Counters.UserLoginCounter" /> counter on failure.
@@ -98,8 +101,8 @@ public static class Telemetry
         /// <param name="error">Error message</param>
         [SuppressMessage("ReSharper", "InvalidXmlDocComment")]
         public static void UserLoginFailure(string? clientId, string idp, string error)
-            => _userLoginCounter.Add(1, new KeyValuePair<string, object?>(Tags.Client, clientId),
-                new KeyValuePair<string, object?>(Tags.Idp, idp), new KeyValuePair<string, object?>(Tags.Error, error));
+            => _userLoginCounter.Add(1, new(Tags.Client, clientId),
+                new(Tags.Idp, idp), new(Tags.Error, error));
 
         /// <summary>
         ///     Helper method to increase the <see cref="Counters.UserLogout" /> counter.

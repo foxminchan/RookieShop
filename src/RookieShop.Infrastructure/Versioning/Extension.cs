@@ -1,13 +1,14 @@
 ﻿using Asp.Versioning;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace RookieShop.Infrastructure.Versioning;
 
 public static class Extension
 {
-    public static IServiceCollection AddVersioning(this IServiceCollection services)
+    public static IHostApplicationBuilder AddVersioning(this IHostApplicationBuilder builder)
     {
-        services.AddApiVersioning(options =>
+        builder.Services.AddApiVersioning(options =>
             {
                 options.DefaultApiVersion = new(1, 0);
                 options.ApiVersionReader = new UrlSegmentApiVersionReader();
@@ -18,6 +19,6 @@ public static class Extension
                 options.SubstituteApiVersionInUrl = true;
             });
 
-        return services;
+        return builder;
     }
 }

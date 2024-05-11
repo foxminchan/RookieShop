@@ -56,7 +56,7 @@ public sealed class Callback(
         // this might be where you might initiate a custom workflow for user registration
         // in this sample we don't show how that would be done, as our sample implementation
         // simply auto-provisions new external user
-        var user = await userManager.FindByLoginAsync(provider, providerUserId) 
+        var user = await userManager.FindByLoginAsync(provider, providerUserId)
                    ?? await AutoProvisionUserAsync(provider, providerUserId, externalUser.Claims);
 
         // this allows us to collect any additional claims or properties
@@ -115,7 +115,7 @@ public sealed class Callback(
                    enumerable.Find(x => x.Type == ClaimTypes.Name)?.Value;
         if (name is not null)
         {
-            filtered.Add(new Claim(JwtClaimTypes.Name, name));
+            filtered.Add(new(JwtClaimTypes.Name, name));
         }
         else
         {
@@ -124,10 +124,10 @@ public sealed class Callback(
             var last = enumerable.Find(x => x.Type == JwtClaimTypes.FamilyName)?.Value ??
                        enumerable.Find(x => x.Type == ClaimTypes.Surname)?.Value;
             if (first is not null && last is not null)
-                filtered.Add(new Claim(JwtClaimTypes.Name, first + " " + last));
+                filtered.Add(new(JwtClaimTypes.Name, first + " " + last));
             else if (first is not null)
-                filtered.Add(new Claim(JwtClaimTypes.Name, first));
-            else if (last is not null) filtered.Add(new Claim(JwtClaimTypes.Name, last));
+                filtered.Add(new(JwtClaimTypes.Name, first));
+            else if (last is not null) filtered.Add(new(JwtClaimTypes.Name, last));
         }
 
         var identityResult = await userManager.CreateAsync(user);
@@ -140,7 +140,7 @@ public sealed class Callback(
                 throw new InvalidOperationException(identityResult.Errors.First().Description);
         }
 
-        identityResult = await userManager.AddLoginAsync(user, new UserLoginInfo(provider, providerUserId, provider));
+        identityResult = await userManager.AddLoginAsync(user, new(provider, providerUserId, provider));
         if (!identityResult.Succeeded) throw new InvalidOperationException(identityResult.Errors.First().Description);
 
         return user;
@@ -154,17 +154,17 @@ public sealed class Callback(
         ArgumentNullException.ThrowIfNull(externalResult.Principal);
 
         // capture the idp used to log in, so the session knows where the user came from
-        localClaims.Add(new Claim(JwtClaimTypes.IdentityProvider,
+        localClaims.Add(new(JwtClaimTypes.IdentityProvider,
             externalResult.Properties?.Items["scheme"] ?? "unknown identity provider"));
 
         // if the external system sent a session id claim, copy it over
         // so we can use it for single sign-out
         var sid = externalResult.Principal.Claims.FirstOrDefault(x => x.Type == JwtClaimTypes.SessionId);
-        if (sid is not null) localClaims.Add(new Claim(JwtClaimTypes.SessionId, sid.Value));
+        if (sid is not null) localClaims.Add(new(JwtClaimTypes.SessionId, sid.Value));
 
         // if the external provider issued an id_token, we'll keep it for sign-out
         var idToken = externalResult.Properties?.GetTokenValue("id_token");
         if (idToken is not null)
-            localSignInProps.StoreTokens([new AuthenticationToken { Name = "id_token", Value = idToken }]);
+            localSignInProps.StoreTokens([new() { Name = "id_token", Value = idToken }]);
     }
 }
