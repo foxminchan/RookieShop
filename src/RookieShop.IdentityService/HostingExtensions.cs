@@ -1,4 +1,5 @@
 using Duende.IdentityServer;
+using EntityFramework.Exceptions.PostgreSQL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RookieShop.IdentityService.Data;
@@ -16,8 +17,10 @@ internal static class HostingExtensions
 
         builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
             options
-                .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-                .UseModel(ApplicationDbContextModel.Instance));
+                .UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+                .UseExceptionProcessor()
+                .UseModel(ApplicationDbContextModel.Instance)
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()

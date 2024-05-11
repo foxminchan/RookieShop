@@ -1,32 +1,30 @@
 version: "3.9"
+x-default-logging: &logging
+  driver: "json-file"
+  options:
+    max-size: "5m"
+    max-file: "2"
 
 services:
   rookie.db:
-    image: mcr.microsoft.com/mssql/server:2022-CU12-ubuntu-22.04
+    image: postgres:16.2-alpine3.19
     container_name: rookie.db
     restart: always
-    environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "NashTech@2024"
     ports:
-      - 1433:1433
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=shopdb
+      - PGDATA=/data/postgres
     volumes:
-      - ./mnt/mssql:/var/opt/mssql
+      - ./mnt/postgres:/data/postgres
     healthcheck:
-      test:
-        [
-          "CMD",
-          "/opt/mssql-tools/bin/sqlcmd",
-          "-U",
-          "SA",
-          "-P",
-          "NashTech@2024",
-          "-Q",
-          "SELECT 1",
-        ]
+      test: ["CMD", "pg_isready", "-U", "${DB_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
+    logging: *logging
     networks:
       - rookie-network
 
@@ -36,7 +34,7 @@ services:
     restart: always
     ports:
       - 6379:6379
-    command: redis-server --requirepass NashTech@2024
+    command: redis-server --requirepass ${DB_PASSWORD}
     volumes:
       - ./mnt/redis:/data
     healthcheck:
@@ -44,25 +42,31 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    logging: *logging
     networks:
       - rookie-network
 
   rookie.storage:
     image: mcr.microsoft.com/azure-storage/azurite:3.9.0
     container_name: rookie.storage
+    restart: always
     ports:
       - 10000-10002:10000-10002
+    command: azurite-blob --blobHost 0.0.0.0 --loose /data
     volumes:
       - ./mnt/azurite:/data
+    logging: *logging
     networks:
       - rookie-network
 
   rookie.observability:
     image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.7
     container_name: rookie.observability
+    restart: always
     ports:
       - 1888:1888
       - 4317:1889
+    logging: *logging
     networks:
       - rookie-network
 

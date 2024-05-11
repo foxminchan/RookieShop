@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Ardalis.GuardClauses;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace RookieShop.Persistence;
 
@@ -18,7 +18,7 @@ public sealed class DatabaseFactory : IDatabaseFactory
 
     public IDbConnection GetOpenConnection()
     {
-        var connection = new SqlConnection(_connectionString);
+        var connection = new NpgsqlConnection(_connectionString);
         connection.Open();
         return connection;
     }

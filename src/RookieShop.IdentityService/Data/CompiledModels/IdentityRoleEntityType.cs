@@ -4,8 +4,9 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 
 #pragma warning disable 219, 612, 618
 #nullable disable
@@ -27,25 +28,22 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                 propertyInfo: typeof(IdentityRole<string>).GetProperty("Id", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(IdentityRole<string>).GetField("<Id>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 afterSaveBehavior: PropertySaveBehavior.Throw);
-            id.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
+            id.TypeMapping = StringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 keyComparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 providerValueComparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(450)",
-                    size: 450,
-                    unicode: true,
                     dbType: System.Data.DbType.String));
-            id.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+            id.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
             var concurrencyStamp = runtimeEntityType.AddProperty(
                 "ConcurrencyStamp",
@@ -54,7 +52,7 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                 fieldInfo: typeof(IdentityRole<string>).GetField("<ConcurrencyStamp>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 nullable: true,
                 concurrencyToken: true);
-            concurrencyStamp.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
+            concurrencyStamp.TypeMapping = StringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
                     (string v1, string v2) => v1 == v2,
                     (string v) => v.GetHashCode(),
@@ -68,11 +66,8 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                     (string v) => v.GetHashCode(),
                     (string v) => v),
                 mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(max)",
-                    unicode: true,
-                    dbType: System.Data.DbType.String),
-                storeTypePostfix: StoreTypePostfix.None);
-            concurrencyStamp.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+                    dbType: System.Data.DbType.String));
+            concurrencyStamp.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
             var name = runtimeEntityType.AddProperty(
                 "Name",
@@ -81,7 +76,7 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                 fieldInfo: typeof(IdentityRole<string>).GetField("<Name>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 nullable: true,
                 maxLength: 256);
-            name.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
+            name.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
                     (string v1, string v2) => v1 == v2,
                     (string v) => v.GetHashCode(),
@@ -95,63 +90,61 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                     (string v) => v.GetHashCode(),
                     (string v) => v),
                 mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(256)",
-                    size: 256,
-                    unicode: true,
-                    dbType: System.Data.DbType.String));
-            name.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+                    storeTypeName: "character varying(256)",
+                    size: 256));
+            name.TypeMapping = ((NpgsqlStringTypeMapping)name.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
+        name.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
-            var normalizedName = runtimeEntityType.AddProperty(
-                "NormalizedName",
-                typeof(string),
-                propertyInfo: typeof(IdentityRole<string>).GetProperty("NormalizedName", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(IdentityRole<string>).GetField("<NormalizedName>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                nullable: true,
-                maxLength: 256);
-            normalizedName.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
-                comparer: new ValueComparer<string>(
-                    (string v1, string v2) => v1 == v2,
-                    (string v) => v.GetHashCode(),
-                    (string v) => v),
-                keyComparer: new ValueComparer<string>(
-                    (string v1, string v2) => v1 == v2,
-                    (string v) => v.GetHashCode(),
-                    (string v) => v),
-                providerValueComparer: new ValueComparer<string>(
-                    (string v1, string v2) => v1 == v2,
-                    (string v) => v.GetHashCode(),
-                    (string v) => v),
-                mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(256)",
-                    size: 256,
-                    unicode: true,
-                    dbType: System.Data.DbType.String));
-            normalizedName.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+        var normalizedName = runtimeEntityType.AddProperty(
+            "NormalizedName",
+            typeof(string),
+            propertyInfo: typeof(IdentityRole<string>).GetProperty("NormalizedName", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+            fieldInfo: typeof(IdentityRole<string>).GetField("<NormalizedName>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+            nullable: true,
+            maxLength: 256);
+        normalizedName.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
+            comparer: new ValueComparer<string>(
+                (string v1, string v2) => v1 == v2,
+                (string v) => v.GetHashCode(),
+                (string v) => v),
+            keyComparer: new ValueComparer<string>(
+                (string v1, string v2) => v1 == v2,
+                (string v) => v.GetHashCode(),
+                (string v) => v),
+            providerValueComparer: new ValueComparer<string>(
+                (string v1, string v2) => v1 == v2,
+                (string v) => v.GetHashCode(),
+                (string v) => v),
+            mappingInfo: new RelationalTypeMappingInfo(
+                storeTypeName: "character varying(256)",
+                size: 256));
+        normalizedName.TypeMapping = ((NpgsqlStringTypeMapping)normalizedName.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
+    normalizedName.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
-            var key = runtimeEntityType.AddKey(
-                new[] { id });
-            runtimeEntityType.SetPrimaryKey(key);
+    var key = runtimeEntityType.AddKey(
+        new[] { id });
+    runtimeEntityType.SetPrimaryKey(key);
 
-            var index = runtimeEntityType.AddIndex(
-                new[] { normalizedName },
-                unique: true);
-            index.AddAnnotation("Relational:Name", "RoleNameIndex");
+    var index = runtimeEntityType.AddIndex(
+        new[] { normalizedName },
+        unique: true);
+    index.AddAnnotation("Relational:Name", "RoleNameIndex");
 
-            return runtimeEntityType;
-        }
+    return runtimeEntityType;
+}
 
-        public static void CreateAnnotations(RuntimeEntityType runtimeEntityType)
-        {
-            runtimeEntityType.AddAnnotation("Relational:FunctionName", null);
-            runtimeEntityType.AddAnnotation("Relational:Schema", null);
-            runtimeEntityType.AddAnnotation("Relational:SqlQuery", null);
-            runtimeEntityType.AddAnnotation("Relational:TableName", "AspNetRoles");
-            runtimeEntityType.AddAnnotation("Relational:ViewName", null);
-            runtimeEntityType.AddAnnotation("Relational:ViewSchema", null);
+public static void CreateAnnotations(RuntimeEntityType runtimeEntityType)
+{
+    runtimeEntityType.AddAnnotation("Relational:FunctionName", null);
+    runtimeEntityType.AddAnnotation("Relational:Schema", null);
+    runtimeEntityType.AddAnnotation("Relational:SqlQuery", null);
+    runtimeEntityType.AddAnnotation("Relational:TableName", "AspNetRoles");
+    runtimeEntityType.AddAnnotation("Relational:ViewName", null);
+    runtimeEntityType.AddAnnotation("Relational:ViewSchema", null);
 
-            Customize(runtimeEntityType);
-        }
+    Customize(runtimeEntityType);
+}
 
-        static partial void Customize(RuntimeEntityType runtimeEntityType);
-    }
+static partial void Customize(RuntimeEntityType runtimeEntityType);
+}
 }

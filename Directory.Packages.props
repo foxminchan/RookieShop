@@ -7,6 +7,7 @@
 		<EfVersion>8.0.4</EfVersion>
 		<TestcontainersVersion>3.8.0</TestcontainersVersion>
 		<MicrosoftExtensionsVersion>8.4.0</MicrosoftExtensionsVersion>
+		<XabarilVersion>8.0.1</XabarilVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- Ardalis -->
@@ -36,22 +37,23 @@
 		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfVersion)" />
-		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EfVersion)" />
-		<PackageVersion Include="EntityFrameworkCore.Exceptions.SqlServer" Version="8.1.2" />
+		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+		<PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
+		<PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
 		<!-- OpenTelemetry -->
 		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
+		<PackageVersion Include="Npgsql.OpenTelemetry" Version="8.0.3" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
-		<PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.8.0-beta.1" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.14" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.0.0-beta.10" />
 		<!-- Xabaril -->
-		<PackageVersion Include="AspNetCore.HealthChecks.UI" Version="8.0.1" />
-		<PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
-		<PackageVersion Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="8.0.1" />
-		<PackageVersion Include="AspNetCore.HealthChecks.Redis" Version="8.0.1" />
-		<PackageVersion Include="AspNetCore.HealthChecks.SqlServer" Version="8.0.2" />
-		<PackageVersion Include="AspNetCore.HealthChecks.OpenIdConnectServer" Version="8.0.1" />
+		<PackageVersion Include="AspNetCore.HealthChecks.UI" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.Redis" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.OpenIdConnectServer" Version="$(XabarilVersion)" />
 		<!-- VS Test -->
 		<PackageVersion Include="coverlet.collector" Version="6.0.2" />
 		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
@@ -60,9 +62,9 @@
 		<PackageVersion Include="xunit.runner.visualstudio" Version="2.8.0" />
 		<!-- TestContainers -->
 		<PackageVersion Include="Testcontainers" Version="$(TestcontainersVersion)" />
-		<PackageVersion Include="Testcontainers.MsSql" Version="$(TestcontainersVersion)" />
 		<PackageVersion Include="Testcontainers.Redis" Version="$(TestcontainersVersion)" />
 		<PackageVersion Include="Testcontainers.Azurite" Version="$(TestcontainersVersion)" />
+		<PackageVersion Include="Testcontainers.PostgreSql" Version="$(TestcontainersVersion)" />
 		<!-- Testkits -->
 		<PackageVersion Include="ReportGenerator" Version="5.2.5" />
 		<PackageVersion Include="FluentAssertions" Version="6.12.0" />

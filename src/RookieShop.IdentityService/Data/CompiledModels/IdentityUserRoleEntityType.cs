@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #pragma warning disable 219, 612, 618
 #nullable disable
@@ -28,25 +28,22 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                 propertyInfo: typeof(IdentityUserRole<string>).GetProperty("UserId", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(IdentityUserRole<string>).GetField("<UserId>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 afterSaveBehavior: PropertySaveBehavior.Throw);
-            userId.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
+            userId.TypeMapping = StringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 keyComparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 providerValueComparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(450)",
-                    size: 450,
-                    unicode: true,
                     dbType: System.Data.DbType.String));
-            userId.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+            userId.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
             var roleId = runtimeEntityType.AddProperty(
                 "RoleId",
@@ -54,25 +51,22 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                 propertyInfo: typeof(IdentityUserRole<string>).GetProperty("RoleId", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(IdentityUserRole<string>).GetField("<RoleId>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 afterSaveBehavior: PropertySaveBehavior.Throw);
-            roleId.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
+            roleId.TypeMapping = StringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 keyComparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 providerValueComparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(450)",
-                    size: 450,
-                    unicode: true,
                     dbType: System.Data.DbType.String));
-            roleId.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+            roleId.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
             var key = runtimeEntityType.AddKey(
                 new[] { userId, roleId });

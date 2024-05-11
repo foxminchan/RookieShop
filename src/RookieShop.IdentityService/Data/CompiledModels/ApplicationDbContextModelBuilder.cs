@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #pragma warning disable 219, 612, 618
 #nullable disable
@@ -39,9 +40,9 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             IdentityUserTokenEntityType.CreateAnnotations(identityUserToken);
             ApplicationUserEntityType.CreateAnnotations(applicationUser);
 
+            AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
             AddAnnotation("ProductVersion", "8.0.4");
-            AddAnnotation("Relational:MaxIdentifierLength", 128);
-            AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            AddAnnotation("Relational:MaxIdentifierLength", 63);
             AddRuntimeAnnotation("Relational:RelationalModel", CreateRelationalModel());
         }
 
@@ -54,19 +55,19 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var defaultTableMappings = new List<TableMappingBase<ColumnMappingBase>>();
             identityRole.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings);
             var microsoftAspNetCoreIdentityIdentityRoleTableBase = new TableBase("Microsoft.AspNetCore.Identity.IdentityRole", null, relationalModel);
-            var concurrencyStampColumnBase = new ColumnBase<ColumnMappingBase>("ConcurrencyStamp", "nvarchar(max)", microsoftAspNetCoreIdentityIdentityRoleTableBase)
+            var concurrencyStampColumnBase = new ColumnBase<ColumnMappingBase>("ConcurrencyStamp", "text", microsoftAspNetCoreIdentityIdentityRoleTableBase)
             {
                 IsNullable = true
             };
             microsoftAspNetCoreIdentityIdentityRoleTableBase.Columns.Add("ConcurrencyStamp", concurrencyStampColumnBase);
-            var idColumnBase = new ColumnBase<ColumnMappingBase>("Id", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityRoleTableBase);
+            var idColumnBase = new ColumnBase<ColumnMappingBase>("Id", "text", microsoftAspNetCoreIdentityIdentityRoleTableBase);
             microsoftAspNetCoreIdentityIdentityRoleTableBase.Columns.Add("Id", idColumnBase);
-            var nameColumnBase = new ColumnBase<ColumnMappingBase>("Name", "nvarchar(256)", microsoftAspNetCoreIdentityIdentityRoleTableBase)
+            var nameColumnBase = new ColumnBase<ColumnMappingBase>("Name", "character varying(256)", microsoftAspNetCoreIdentityIdentityRoleTableBase)
             {
                 IsNullable = true
             };
             microsoftAspNetCoreIdentityIdentityRoleTableBase.Columns.Add("Name", nameColumnBase);
-            var normalizedNameColumnBase = new ColumnBase<ColumnMappingBase>("NormalizedName", "nvarchar(256)", microsoftAspNetCoreIdentityIdentityRoleTableBase)
+            var normalizedNameColumnBase = new ColumnBase<ColumnMappingBase>("NormalizedName", "character varying(256)", microsoftAspNetCoreIdentityIdentityRoleTableBase)
             {
                 IsNullable = true
             };
@@ -83,19 +84,19 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var tableMappings = new List<TableMapping>();
             identityRole.SetRuntimeAnnotation("Relational:TableMappings", tableMappings);
             var aspNetRolesTable = new Table("AspNetRoles", null, relationalModel);
-            var idColumn = new Column("Id", "nvarchar(450)", aspNetRolesTable);
+            var idColumn = new Column("Id", "text", aspNetRolesTable);
             aspNetRolesTable.Columns.Add("Id", idColumn);
-            var concurrencyStampColumn = new Column("ConcurrencyStamp", "nvarchar(max)", aspNetRolesTable)
+            var concurrencyStampColumn = new Column("ConcurrencyStamp", "text", aspNetRolesTable)
             {
                 IsNullable = true
             };
             aspNetRolesTable.Columns.Add("ConcurrencyStamp", concurrencyStampColumn);
-            var nameColumn = new Column("Name", "nvarchar(256)", aspNetRolesTable)
+            var nameColumn = new Column("Name", "character varying(256)", aspNetRolesTable)
             {
                 IsNullable = true
             };
             aspNetRolesTable.Columns.Add("Name", nameColumn);
-            var normalizedNameColumn = new Column("NormalizedName", "nvarchar(256)", aspNetRolesTable)
+            var normalizedNameColumn = new Column("NormalizedName", "character varying(256)", aspNetRolesTable)
             {
                 IsNullable = true
             };
@@ -130,19 +131,19 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var defaultTableMappings0 = new List<TableMappingBase<ColumnMappingBase>>();
             identityRoleClaim.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings0);
             var microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase = new TableBase("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", null, relationalModel);
-            var claimTypeColumnBase = new ColumnBase<ColumnMappingBase>("ClaimType", "nvarchar(max)", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase)
+            var claimTypeColumnBase = new ColumnBase<ColumnMappingBase>("ClaimType", "text", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase)
             {
                 IsNullable = true
             };
             microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase.Columns.Add("ClaimType", claimTypeColumnBase);
-            var claimValueColumnBase = new ColumnBase<ColumnMappingBase>("ClaimValue", "nvarchar(max)", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase)
+            var claimValueColumnBase = new ColumnBase<ColumnMappingBase>("ClaimValue", "text", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase)
             {
                 IsNullable = true
             };
             microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase.Columns.Add("ClaimValue", claimValueColumnBase);
-            var idColumnBase0 = new ColumnBase<ColumnMappingBase>("Id", "int", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase);
+            var idColumnBase0 = new ColumnBase<ColumnMappingBase>("Id", "integer", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase);
             microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase.Columns.Add("Id", idColumnBase0);
-            var roleIdColumnBase = new ColumnBase<ColumnMappingBase>("RoleId", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase);
+            var roleIdColumnBase = new ColumnBase<ColumnMappingBase>("RoleId", "text", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase);
             microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase.Columns.Add("RoleId", roleIdColumnBase);
             relationalModel.DefaultTables.Add("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase);
             var microsoftAspNetCoreIdentityIdentityRoleClaimstringMappingBase = new TableMappingBase<ColumnMappingBase>(identityRoleClaim, microsoftAspNetCoreIdentityIdentityRoleClaimstringTableBase, true);
@@ -156,19 +157,20 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var tableMappings0 = new List<TableMapping>();
             identityRoleClaim.SetRuntimeAnnotation("Relational:TableMappings", tableMappings0);
             var aspNetRoleClaimsTable = new Table("AspNetRoleClaims", null, relationalModel);
-            var idColumn0 = new Column("Id", "int", aspNetRoleClaimsTable);
+            var idColumn0 = new Column("Id", "integer", aspNetRoleClaimsTable);
             aspNetRoleClaimsTable.Columns.Add("Id", idColumn0);
-            var claimTypeColumn = new Column("ClaimType", "nvarchar(max)", aspNetRoleClaimsTable)
+            idColumn0.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+            var claimTypeColumn = new Column("ClaimType", "text", aspNetRoleClaimsTable)
             {
                 IsNullable = true
             };
             aspNetRoleClaimsTable.Columns.Add("ClaimType", claimTypeColumn);
-            var claimValueColumn = new Column("ClaimValue", "nvarchar(max)", aspNetRoleClaimsTable)
+            var claimValueColumn = new Column("ClaimValue", "text", aspNetRoleClaimsTable)
             {
                 IsNullable = true
             };
             aspNetRoleClaimsTable.Columns.Add("ClaimValue", claimValueColumn);
-            var roleIdColumn = new Column("RoleId", "nvarchar(450)", aspNetRoleClaimsTable);
+            var roleIdColumn = new Column("RoleId", "text", aspNetRoleClaimsTable);
             aspNetRoleClaimsTable.Columns.Add("RoleId", roleIdColumn);
             var pK_AspNetRoleClaims = new UniqueConstraint("PK_AspNetRoleClaims", aspNetRoleClaimsTable, new[] { idColumn0 });
             aspNetRoleClaimsTable.PrimaryKey = pK_AspNetRoleClaims;
@@ -200,19 +202,19 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var defaultTableMappings1 = new List<TableMappingBase<ColumnMappingBase>>();
             identityUserClaim.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings1);
             var microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase = new TableBase("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", null, relationalModel);
-            var claimTypeColumnBase0 = new ColumnBase<ColumnMappingBase>("ClaimType", "nvarchar(max)", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase)
+            var claimTypeColumnBase0 = new ColumnBase<ColumnMappingBase>("ClaimType", "text", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase)
             {
                 IsNullable = true
             };
             microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase.Columns.Add("ClaimType", claimTypeColumnBase0);
-            var claimValueColumnBase0 = new ColumnBase<ColumnMappingBase>("ClaimValue", "nvarchar(max)", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase)
+            var claimValueColumnBase0 = new ColumnBase<ColumnMappingBase>("ClaimValue", "text", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase)
             {
                 IsNullable = true
             };
             microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase.Columns.Add("ClaimValue", claimValueColumnBase0);
-            var idColumnBase1 = new ColumnBase<ColumnMappingBase>("Id", "int", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase);
+            var idColumnBase1 = new ColumnBase<ColumnMappingBase>("Id", "integer", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase);
             microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase.Columns.Add("Id", idColumnBase1);
-            var userIdColumnBase = new ColumnBase<ColumnMappingBase>("UserId", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase);
+            var userIdColumnBase = new ColumnBase<ColumnMappingBase>("UserId", "text", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase);
             microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase.Columns.Add("UserId", userIdColumnBase);
             relationalModel.DefaultTables.Add("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase);
             var microsoftAspNetCoreIdentityIdentityUserClaimstringMappingBase = new TableMappingBase<ColumnMappingBase>(identityUserClaim, microsoftAspNetCoreIdentityIdentityUserClaimstringTableBase, true);
@@ -226,19 +228,20 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var tableMappings1 = new List<TableMapping>();
             identityUserClaim.SetRuntimeAnnotation("Relational:TableMappings", tableMappings1);
             var aspNetUserClaimsTable = new Table("AspNetUserClaims", null, relationalModel);
-            var idColumn1 = new Column("Id", "int", aspNetUserClaimsTable);
+            var idColumn1 = new Column("Id", "integer", aspNetUserClaimsTable);
             aspNetUserClaimsTable.Columns.Add("Id", idColumn1);
-            var claimTypeColumn0 = new Column("ClaimType", "nvarchar(max)", aspNetUserClaimsTable)
+            idColumn1.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+            var claimTypeColumn0 = new Column("ClaimType", "text", aspNetUserClaimsTable)
             {
                 IsNullable = true
             };
             aspNetUserClaimsTable.Columns.Add("ClaimType", claimTypeColumn0);
-            var claimValueColumn0 = new Column("ClaimValue", "nvarchar(max)", aspNetUserClaimsTable)
+            var claimValueColumn0 = new Column("ClaimValue", "text", aspNetUserClaimsTable)
             {
                 IsNullable = true
             };
             aspNetUserClaimsTable.Columns.Add("ClaimValue", claimValueColumn0);
-            var userIdColumn = new Column("UserId", "nvarchar(450)", aspNetUserClaimsTable);
+            var userIdColumn = new Column("UserId", "text", aspNetUserClaimsTable);
             aspNetUserClaimsTable.Columns.Add("UserId", userIdColumn);
             var pK_AspNetUserClaims = new UniqueConstraint("PK_AspNetUserClaims", aspNetUserClaimsTable, new[] { idColumn1 });
             aspNetUserClaimsTable.PrimaryKey = pK_AspNetUserClaims;
@@ -270,16 +273,16 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var defaultTableMappings2 = new List<TableMappingBase<ColumnMappingBase>>();
             identityUserLogin.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings2);
             var microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase = new TableBase("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", null, relationalModel);
-            var loginProviderColumnBase = new ColumnBase<ColumnMappingBase>("LoginProvider", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase);
+            var loginProviderColumnBase = new ColumnBase<ColumnMappingBase>("LoginProvider", "text", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase);
             microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase.Columns.Add("LoginProvider", loginProviderColumnBase);
-            var providerDisplayNameColumnBase = new ColumnBase<ColumnMappingBase>("ProviderDisplayName", "nvarchar(max)", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase)
+            var providerDisplayNameColumnBase = new ColumnBase<ColumnMappingBase>("ProviderDisplayName", "text", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase)
             {
                 IsNullable = true
             };
             microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase.Columns.Add("ProviderDisplayName", providerDisplayNameColumnBase);
-            var providerKeyColumnBase = new ColumnBase<ColumnMappingBase>("ProviderKey", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase);
+            var providerKeyColumnBase = new ColumnBase<ColumnMappingBase>("ProviderKey", "text", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase);
             microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase.Columns.Add("ProviderKey", providerKeyColumnBase);
-            var userIdColumnBase0 = new ColumnBase<ColumnMappingBase>("UserId", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase);
+            var userIdColumnBase0 = new ColumnBase<ColumnMappingBase>("UserId", "text", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase);
             microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase.Columns.Add("UserId", userIdColumnBase0);
             relationalModel.DefaultTables.Add("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase);
             var microsoftAspNetCoreIdentityIdentityUserLoginstringMappingBase = new TableMappingBase<ColumnMappingBase>(identityUserLogin, microsoftAspNetCoreIdentityIdentityUserLoginstringTableBase, true);
@@ -293,16 +296,16 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var tableMappings2 = new List<TableMapping>();
             identityUserLogin.SetRuntimeAnnotation("Relational:TableMappings", tableMappings2);
             var aspNetUserLoginsTable = new Table("AspNetUserLogins", null, relationalModel);
-            var loginProviderColumn = new Column("LoginProvider", "nvarchar(450)", aspNetUserLoginsTable);
+            var loginProviderColumn = new Column("LoginProvider", "text", aspNetUserLoginsTable);
             aspNetUserLoginsTable.Columns.Add("LoginProvider", loginProviderColumn);
-            var providerKeyColumn = new Column("ProviderKey", "nvarchar(450)", aspNetUserLoginsTable);
+            var providerKeyColumn = new Column("ProviderKey", "text", aspNetUserLoginsTable);
             aspNetUserLoginsTable.Columns.Add("ProviderKey", providerKeyColumn);
-            var providerDisplayNameColumn = new Column("ProviderDisplayName", "nvarchar(max)", aspNetUserLoginsTable)
+            var providerDisplayNameColumn = new Column("ProviderDisplayName", "text", aspNetUserLoginsTable)
             {
                 IsNullable = true
             };
             aspNetUserLoginsTable.Columns.Add("ProviderDisplayName", providerDisplayNameColumn);
-            var userIdColumn0 = new Column("UserId", "nvarchar(450)", aspNetUserLoginsTable);
+            var userIdColumn0 = new Column("UserId", "text", aspNetUserLoginsTable);
             aspNetUserLoginsTable.Columns.Add("UserId", userIdColumn0);
             var pK_AspNetUserLogins = new UniqueConstraint("PK_AspNetUserLogins", aspNetUserLoginsTable, new[] { loginProviderColumn, providerKeyColumn });
             aspNetUserLoginsTable.PrimaryKey = pK_AspNetUserLogins;
@@ -334,9 +337,9 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var defaultTableMappings3 = new List<TableMappingBase<ColumnMappingBase>>();
             identityUserRole.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings3);
             var microsoftAspNetCoreIdentityIdentityUserRolestringTableBase = new TableBase("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", null, relationalModel);
-            var roleIdColumnBase0 = new ColumnBase<ColumnMappingBase>("RoleId", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserRolestringTableBase);
+            var roleIdColumnBase0 = new ColumnBase<ColumnMappingBase>("RoleId", "text", microsoftAspNetCoreIdentityIdentityUserRolestringTableBase);
             microsoftAspNetCoreIdentityIdentityUserRolestringTableBase.Columns.Add("RoleId", roleIdColumnBase0);
-            var userIdColumnBase1 = new ColumnBase<ColumnMappingBase>("UserId", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserRolestringTableBase);
+            var userIdColumnBase1 = new ColumnBase<ColumnMappingBase>("UserId", "text", microsoftAspNetCoreIdentityIdentityUserRolestringTableBase);
             microsoftAspNetCoreIdentityIdentityUserRolestringTableBase.Columns.Add("UserId", userIdColumnBase1);
             relationalModel.DefaultTables.Add("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", microsoftAspNetCoreIdentityIdentityUserRolestringTableBase);
             var microsoftAspNetCoreIdentityIdentityUserRolestringMappingBase = new TableMappingBase<ColumnMappingBase>(identityUserRole, microsoftAspNetCoreIdentityIdentityUserRolestringTableBase, true);
@@ -348,9 +351,9 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var tableMappings3 = new List<TableMapping>();
             identityUserRole.SetRuntimeAnnotation("Relational:TableMappings", tableMappings3);
             var aspNetUserRolesTable = new Table("AspNetUserRoles", null, relationalModel);
-            var userIdColumn1 = new Column("UserId", "nvarchar(450)", aspNetUserRolesTable);
+            var userIdColumn1 = new Column("UserId", "text", aspNetUserRolesTable);
             aspNetUserRolesTable.Columns.Add("UserId", userIdColumn1);
-            var roleIdColumn0 = new Column("RoleId", "nvarchar(450)", aspNetUserRolesTable);
+            var roleIdColumn0 = new Column("RoleId", "text", aspNetUserRolesTable);
             aspNetUserRolesTable.Columns.Add("RoleId", roleIdColumn0);
             var pK_AspNetUserRoles = new UniqueConstraint("PK_AspNetUserRoles", aspNetUserRolesTable, new[] { userIdColumn1, roleIdColumn0 });
             aspNetUserRolesTable.PrimaryKey = pK_AspNetUserRoles;
@@ -380,13 +383,13 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var defaultTableMappings4 = new List<TableMappingBase<ColumnMappingBase>>();
             identityUserToken.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings4);
             var microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase = new TableBase("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", null, relationalModel);
-            var loginProviderColumnBase0 = new ColumnBase<ColumnMappingBase>("LoginProvider", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase);
+            var loginProviderColumnBase0 = new ColumnBase<ColumnMappingBase>("LoginProvider", "text", microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase);
             microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase.Columns.Add("LoginProvider", loginProviderColumnBase0);
-            var nameColumnBase0 = new ColumnBase<ColumnMappingBase>("Name", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase);
+            var nameColumnBase0 = new ColumnBase<ColumnMappingBase>("Name", "text", microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase);
             microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase.Columns.Add("Name", nameColumnBase0);
-            var userIdColumnBase2 = new ColumnBase<ColumnMappingBase>("UserId", "nvarchar(450)", microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase);
+            var userIdColumnBase2 = new ColumnBase<ColumnMappingBase>("UserId", "text", microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase);
             microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase.Columns.Add("UserId", userIdColumnBase2);
-            var valueColumnBase = new ColumnBase<ColumnMappingBase>("Value", "nvarchar(max)", microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase)
+            var valueColumnBase = new ColumnBase<ColumnMappingBase>("Value", "text", microsoftAspNetCoreIdentityIdentityUserTokenstringTableBase)
             {
                 IsNullable = true
             };
@@ -403,13 +406,13 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var tableMappings4 = new List<TableMapping>();
             identityUserToken.SetRuntimeAnnotation("Relational:TableMappings", tableMappings4);
             var aspNetUserTokensTable = new Table("AspNetUserTokens", null, relationalModel);
-            var userIdColumn2 = new Column("UserId", "nvarchar(450)", aspNetUserTokensTable);
+            var userIdColumn2 = new Column("UserId", "text", aspNetUserTokensTable);
             aspNetUserTokensTable.Columns.Add("UserId", userIdColumn2);
-            var loginProviderColumn0 = new Column("LoginProvider", "nvarchar(450)", aspNetUserTokensTable);
+            var loginProviderColumn0 = new Column("LoginProvider", "text", aspNetUserTokensTable);
             aspNetUserTokensTable.Columns.Add("LoginProvider", loginProviderColumn0);
-            var nameColumn0 = new Column("Name", "nvarchar(450)", aspNetUserTokensTable);
+            var nameColumn0 = new Column("Name", "text", aspNetUserTokensTable);
             aspNetUserTokensTable.Columns.Add("Name", nameColumn0);
-            var valueColumn = new Column("Value", "nvarchar(max)", aspNetUserTokensTable)
+            var valueColumn = new Column("Value", "text", aspNetUserTokensTable)
             {
                 IsNullable = true
             };
@@ -436,59 +439,59 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var defaultTableMappings5 = new List<TableMappingBase<ColumnMappingBase>>();
             applicationUser.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings5);
             var rookieShopIdentityServiceModelsApplicationUserTableBase = new TableBase("RookieShop.IdentityService.Models.ApplicationUser", null, relationalModel);
-            var accessFailedCountColumnBase = new ColumnBase<ColumnMappingBase>("AccessFailedCount", "int", rookieShopIdentityServiceModelsApplicationUserTableBase);
+            var accessFailedCountColumnBase = new ColumnBase<ColumnMappingBase>("AccessFailedCount", "integer", rookieShopIdentityServiceModelsApplicationUserTableBase);
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("AccessFailedCount", accessFailedCountColumnBase);
-            var concurrencyStampColumnBase0 = new ColumnBase<ColumnMappingBase>("ConcurrencyStamp", "nvarchar(max)", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var concurrencyStampColumnBase0 = new ColumnBase<ColumnMappingBase>("ConcurrencyStamp", "text", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("ConcurrencyStamp", concurrencyStampColumnBase0);
-            var emailColumnBase = new ColumnBase<ColumnMappingBase>("Email", "nvarchar(256)", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var emailColumnBase = new ColumnBase<ColumnMappingBase>("Email", "character varying(256)", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("Email", emailColumnBase);
-            var emailConfirmedColumnBase = new ColumnBase<ColumnMappingBase>("EmailConfirmed", "bit", rookieShopIdentityServiceModelsApplicationUserTableBase);
+            var emailConfirmedColumnBase = new ColumnBase<ColumnMappingBase>("EmailConfirmed", "boolean", rookieShopIdentityServiceModelsApplicationUserTableBase);
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("EmailConfirmed", emailConfirmedColumnBase);
-            var idColumnBase2 = new ColumnBase<ColumnMappingBase>("Id", "nvarchar(450)", rookieShopIdentityServiceModelsApplicationUserTableBase);
+            var idColumnBase2 = new ColumnBase<ColumnMappingBase>("Id", "text", rookieShopIdentityServiceModelsApplicationUserTableBase);
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("Id", idColumnBase2);
-            var lockoutEnabledColumnBase = new ColumnBase<ColumnMappingBase>("LockoutEnabled", "bit", rookieShopIdentityServiceModelsApplicationUserTableBase);
+            var lockoutEnabledColumnBase = new ColumnBase<ColumnMappingBase>("LockoutEnabled", "boolean", rookieShopIdentityServiceModelsApplicationUserTableBase);
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("LockoutEnabled", lockoutEnabledColumnBase);
-            var lockoutEndColumnBase = new ColumnBase<ColumnMappingBase>("LockoutEnd", "datetimeoffset", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var lockoutEndColumnBase = new ColumnBase<ColumnMappingBase>("LockoutEnd", "timestamp with time zone", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("LockoutEnd", lockoutEndColumnBase);
-            var normalizedEmailColumnBase = new ColumnBase<ColumnMappingBase>("NormalizedEmail", "nvarchar(256)", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var normalizedEmailColumnBase = new ColumnBase<ColumnMappingBase>("NormalizedEmail", "character varying(256)", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("NormalizedEmail", normalizedEmailColumnBase);
-            var normalizedUserNameColumnBase = new ColumnBase<ColumnMappingBase>("NormalizedUserName", "nvarchar(256)", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var normalizedUserNameColumnBase = new ColumnBase<ColumnMappingBase>("NormalizedUserName", "character varying(256)", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("NormalizedUserName", normalizedUserNameColumnBase);
-            var passwordHashColumnBase = new ColumnBase<ColumnMappingBase>("PasswordHash", "nvarchar(max)", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var passwordHashColumnBase = new ColumnBase<ColumnMappingBase>("PasswordHash", "text", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("PasswordHash", passwordHashColumnBase);
-            var phoneNumberColumnBase = new ColumnBase<ColumnMappingBase>("PhoneNumber", "nvarchar(max)", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var phoneNumberColumnBase = new ColumnBase<ColumnMappingBase>("PhoneNumber", "text", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("PhoneNumber", phoneNumberColumnBase);
-            var phoneNumberConfirmedColumnBase = new ColumnBase<ColumnMappingBase>("PhoneNumberConfirmed", "bit", rookieShopIdentityServiceModelsApplicationUserTableBase);
+            var phoneNumberConfirmedColumnBase = new ColumnBase<ColumnMappingBase>("PhoneNumberConfirmed", "boolean", rookieShopIdentityServiceModelsApplicationUserTableBase);
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("PhoneNumberConfirmed", phoneNumberConfirmedColumnBase);
-            var securityStampColumnBase = new ColumnBase<ColumnMappingBase>("SecurityStamp", "nvarchar(max)", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var securityStampColumnBase = new ColumnBase<ColumnMappingBase>("SecurityStamp", "text", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("SecurityStamp", securityStampColumnBase);
-            var twoFactorEnabledColumnBase = new ColumnBase<ColumnMappingBase>("TwoFactorEnabled", "bit", rookieShopIdentityServiceModelsApplicationUserTableBase);
+            var twoFactorEnabledColumnBase = new ColumnBase<ColumnMappingBase>("TwoFactorEnabled", "boolean", rookieShopIdentityServiceModelsApplicationUserTableBase);
             rookieShopIdentityServiceModelsApplicationUserTableBase.Columns.Add("TwoFactorEnabled", twoFactorEnabledColumnBase);
-            var userNameColumnBase = new ColumnBase<ColumnMappingBase>("UserName", "nvarchar(256)", rookieShopIdentityServiceModelsApplicationUserTableBase)
+            var userNameColumnBase = new ColumnBase<ColumnMappingBase>("UserName", "character varying(256)", rookieShopIdentityServiceModelsApplicationUserTableBase)
             {
                 IsNullable = true
             };
@@ -516,59 +519,59 @@ namespace RookieShop.IdentityService.Data.CompiledModels
             var tableMappings5 = new List<TableMapping>();
             applicationUser.SetRuntimeAnnotation("Relational:TableMappings", tableMappings5);
             var aspNetUsersTable = new Table("AspNetUsers", null, relationalModel);
-            var idColumn2 = new Column("Id", "nvarchar(450)", aspNetUsersTable);
+            var idColumn2 = new Column("Id", "text", aspNetUsersTable);
             aspNetUsersTable.Columns.Add("Id", idColumn2);
-            var accessFailedCountColumn = new Column("AccessFailedCount", "int", aspNetUsersTable);
+            var accessFailedCountColumn = new Column("AccessFailedCount", "integer", aspNetUsersTable);
             aspNetUsersTable.Columns.Add("AccessFailedCount", accessFailedCountColumn);
-            var concurrencyStampColumn0 = new Column("ConcurrencyStamp", "nvarchar(max)", aspNetUsersTable)
+            var concurrencyStampColumn0 = new Column("ConcurrencyStamp", "text", aspNetUsersTable)
             {
                 IsNullable = true
             };
             aspNetUsersTable.Columns.Add("ConcurrencyStamp", concurrencyStampColumn0);
-            var emailColumn = new Column("Email", "nvarchar(256)", aspNetUsersTable)
+            var emailColumn = new Column("Email", "character varying(256)", aspNetUsersTable)
             {
                 IsNullable = true
             };
             aspNetUsersTable.Columns.Add("Email", emailColumn);
-            var emailConfirmedColumn = new Column("EmailConfirmed", "bit", aspNetUsersTable);
+            var emailConfirmedColumn = new Column("EmailConfirmed", "boolean", aspNetUsersTable);
             aspNetUsersTable.Columns.Add("EmailConfirmed", emailConfirmedColumn);
-            var lockoutEnabledColumn = new Column("LockoutEnabled", "bit", aspNetUsersTable);
+            var lockoutEnabledColumn = new Column("LockoutEnabled", "boolean", aspNetUsersTable);
             aspNetUsersTable.Columns.Add("LockoutEnabled", lockoutEnabledColumn);
-            var lockoutEndColumn = new Column("LockoutEnd", "datetimeoffset", aspNetUsersTable)
+            var lockoutEndColumn = new Column("LockoutEnd", "timestamp with time zone", aspNetUsersTable)
             {
                 IsNullable = true
             };
             aspNetUsersTable.Columns.Add("LockoutEnd", lockoutEndColumn);
-            var normalizedEmailColumn = new Column("NormalizedEmail", "nvarchar(256)", aspNetUsersTable)
+            var normalizedEmailColumn = new Column("NormalizedEmail", "character varying(256)", aspNetUsersTable)
             {
                 IsNullable = true
             };
             aspNetUsersTable.Columns.Add("NormalizedEmail", normalizedEmailColumn);
-            var normalizedUserNameColumn = new Column("NormalizedUserName", "nvarchar(256)", aspNetUsersTable)
+            var normalizedUserNameColumn = new Column("NormalizedUserName", "character varying(256)", aspNetUsersTable)
             {
                 IsNullable = true
             };
             aspNetUsersTable.Columns.Add("NormalizedUserName", normalizedUserNameColumn);
-            var passwordHashColumn = new Column("PasswordHash", "nvarchar(max)", aspNetUsersTable)
+            var passwordHashColumn = new Column("PasswordHash", "text", aspNetUsersTable)
             {
                 IsNullable = true
             };
             aspNetUsersTable.Columns.Add("PasswordHash", passwordHashColumn);
-            var phoneNumberColumn = new Column("PhoneNumber", "nvarchar(max)", aspNetUsersTable)
+            var phoneNumberColumn = new Column("PhoneNumber", "text", aspNetUsersTable)
             {
                 IsNullable = true
             };
             aspNetUsersTable.Columns.Add("PhoneNumber", phoneNumberColumn);
-            var phoneNumberConfirmedColumn = new Column("PhoneNumberConfirmed", "bit", aspNetUsersTable);
+            var phoneNumberConfirmedColumn = new Column("PhoneNumberConfirmed", "boolean", aspNetUsersTable);
             aspNetUsersTable.Columns.Add("PhoneNumberConfirmed", phoneNumberConfirmedColumn);
-            var securityStampColumn = new Column("SecurityStamp", "nvarchar(max)", aspNetUsersTable)
+            var securityStampColumn = new Column("SecurityStamp", "text", aspNetUsersTable)
             {
                 IsNullable = true
             };
             aspNetUsersTable.Columns.Add("SecurityStamp", securityStampColumn);
-            var twoFactorEnabledColumn = new Column("TwoFactorEnabled", "bit", aspNetUsersTable);
+            var twoFactorEnabledColumn = new Column("TwoFactorEnabled", "boolean", aspNetUsersTable);
             aspNetUsersTable.Columns.Add("TwoFactorEnabled", twoFactorEnabledColumn);
-            var userNameColumn = new Column("UserName", "nvarchar(256)", aspNetUsersTable)
+            var userNameColumn = new Column("UserName", "character varying(256)", aspNetUsersTable)
             {
                 IsNullable = true
             };

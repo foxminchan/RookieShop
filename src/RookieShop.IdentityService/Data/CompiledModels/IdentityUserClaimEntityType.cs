@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #pragma warning disable 219, 612, 618
 #nullable disable
@@ -42,8 +42,10 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                 providerValueComparer: new ValueComparer<int>(
                     (int v1, int v2) => v1 == v2,
                     (int v) => v,
-                    (int v) => v));
-            id.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    (int v) => v),
+                mappingInfo: new RelationalTypeMappingInfo(
+                    storeTypeName: "integer"));
+            id.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             var claimType = runtimeEntityType.AddProperty(
                 "ClaimType",
@@ -51,7 +53,7 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                 propertyInfo: typeof(IdentityUserClaim<string>).GetProperty("ClaimType", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(IdentityUserClaim<string>).GetField("<ClaimType>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 nullable: true);
-            claimType.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
+            claimType.TypeMapping = StringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
                     (string v1, string v2) => v1 == v2,
                     (string v) => v.GetHashCode(),
@@ -65,11 +67,8 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                     (string v) => v.GetHashCode(),
                     (string v) => v),
                 mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(max)",
-                    unicode: true,
-                    dbType: System.Data.DbType.String),
-                storeTypePostfix: StoreTypePostfix.None);
-            claimType.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+                    dbType: System.Data.DbType.String));
+            claimType.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
             var claimValue = runtimeEntityType.AddProperty(
                 "ClaimValue",
@@ -77,7 +76,7 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                 propertyInfo: typeof(IdentityUserClaim<string>).GetProperty("ClaimValue", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(IdentityUserClaim<string>).GetField("<ClaimValue>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 nullable: true);
-            claimValue.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
+            claimValue.TypeMapping = StringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
                     (string v1, string v2) => v1 == v2,
                     (string v) => v.GetHashCode(),
@@ -91,36 +90,30 @@ namespace RookieShop.IdentityService.Data.CompiledModels
                     (string v) => v.GetHashCode(),
                     (string v) => v),
                 mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(max)",
-                    unicode: true,
-                    dbType: System.Data.DbType.String),
-                storeTypePostfix: StoreTypePostfix.None);
-            claimValue.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+                    dbType: System.Data.DbType.String));
+            claimValue.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
             var userId = runtimeEntityType.AddProperty(
                 "UserId",
                 typeof(string),
                 propertyInfo: typeof(IdentityUserClaim<string>).GetProperty("UserId", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(IdentityUserClaim<string>).GetField("<UserId>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-            userId.TypeMapping = SqlServerStringTypeMapping.Default.Clone(
+            userId.TypeMapping = StringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 keyComparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 providerValueComparer: new ValueComparer<string>(
-                    (string l, string r) => string.Equals(l, r, StringComparison.OrdinalIgnoreCase),
-                    (string v) => v == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(v),
+                    (string v1, string v2) => v1 == v2,
+                    (string v) => v.GetHashCode(),
                     (string v) => v),
                 mappingInfo: new RelationalTypeMappingInfo(
-                    storeTypeName: "nvarchar(450)",
-                    size: 450,
-                    unicode: true,
                     dbType: System.Data.DbType.String));
-            userId.AddAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.None);
+            userId.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
             var key = runtimeEntityType.AddKey(
                 new[] { id });

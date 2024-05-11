@@ -1,5 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using EntityFramework.Exceptions.SqlServer;
+using EntityFramework.Exceptions.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +24,7 @@ public static class Extension
 
         builder.Services.AddDbContextPool<ApplicationDbContext>((sp, options) =>
         {
-            options.UseSqlServer(connectionString, sqlOptions =>
+            options.UseNpgsql(connectionString, sqlOptions =>
                 {
                     sqlOptions.MigrationsAssembly(AssemblyReference.DbContextAssembly.FullName);
                     sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30),
@@ -32,6 +32,7 @@ public static class Extension
                 })
                 .UseExceptionProcessor()
                 .EnableServiceProviderCaching()
+                .UseSnakeCaseNamingConvention()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             options.AddInterceptors(sp.GetRequiredService<AuditableEntityInterceptor>());
