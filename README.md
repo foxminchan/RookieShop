@@ -1,6 +1,6 @@
 # RookieShop: Rookie Phase-1 Assignment Project
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=foxminchan_RookieShop&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=foxminchan_RookieShop)
+[![Build](https://github.com/foxminchan/RookieShop/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/foxminchan/RookieShop/actions/workflows/build.yml)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <p align="justify">
