@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Ardalis.ListStartupServices" />
 		<PackageReference Include="Microsoft.Extensions.Http.Resilience" />
 	</ItemGroup>
 

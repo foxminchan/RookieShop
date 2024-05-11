@@ -42,7 +42,7 @@ public static class Extension
                     .LogTo(Console.WriteLine, LogLevel.Information)
                     .EnableDetailedErrors()
                     .EnableSensitiveDataLogging();
-        });
+        }).AddDatabaseDeveloperPageExceptionFilter();
 
         builder.Services.AddScoped<IDatabaseFacade>(p => p.GetRequiredService<ApplicationDbContext>());
         builder.Services.AddScoped<IDomainEventContext>(p => p.GetRequiredService<ApplicationDbContext>());

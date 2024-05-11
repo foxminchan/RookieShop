@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<ItemGroup>
+		<PackageReference Include="Ardalis.Result.AspNetCore" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\RookieShop.Persistence\RookieShop.Persistence.csproj" />
 	</ItemGroup>
 
