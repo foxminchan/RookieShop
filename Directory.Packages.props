@@ -38,7 +38,7 @@
 		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfVersion)" />
-		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
 		<PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
 		<PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
 		<!-- OpenTelemetry -->

@@ -1,4 +1,6 @@
 ﻿using Duende.IdentityServer.Models;
+using RookieShop.Domain.Constants;
+using Duende.IdentityServer;
 
 namespace RookieShop.IdentityService;
 
@@ -12,38 +14,82 @@ public static class Config
 
     public static IEnumerable<ApiScope> ApiScopes =>
     [
-        new("scope1"),
-        new("scope2")
+        new(AuthScope.Read, "Read Access to API"),
+        new(AuthScope.Write, "Write Access to API"),
     ];
 
-    public static IEnumerable<Client> Clients =>
+    public static IEnumerable<ApiResource> ApiResources =>
     [
-        // m2m client credentials flow client
         new()
         {
-            ClientId = "m2m.client",
-            ClientName = "Client Credentials Client",
+            Name = "api.rookie-shop",
+            DisplayName = "Rookie Shop API",
+            Scopes = { AuthScope.Read, AuthScope.Write }
+        }
+    ];
 
-            AllowedGrantTypes = GrantTypes.ClientCredentials,
-            ClientSecrets = { new("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-
-            AllowedScopes = { "scope1" }
+    public static IEnumerable<Client> Clients(IConfiguration configuration) =>
+    [
+        new()
+        {
+            ClientId = "ro.client",
+            ClientName = "Resource Owner Client",
+            AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+            ClientSecrets = { new("secret".Sha256()) },
+            AllowedScopes = { AuthScope.Read, AuthScope.Write },
         },
-
-        // interactive client using code flow + pkce
         new()
         {
-            ClientId = "interactive",
-            ClientSecrets = { new("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
-
+            ClientId = "api-swagger-ui",
+            ClientName = "Rookie Shop API",
+            ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = GrantTypes.Code,
-
-            RedirectUris = { "https://localhost:44300/signin-oidc" },
-            FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-            PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
-
-            AllowOfflineAccess = true,
-            AllowedScopes = { "openid", "profile", "scope2" }
+            RequireConsent = false,
+            RequirePkce = true,
+            RedirectUris = { $"{configuration["Client:Swagger"]}/swagger/oauth2-redirect.html" },
+            PostLogoutRedirectUris = { $"{configuration["ClientUrl:Swagger"]}/swagger/oauth2-redirect.html" },
+            AllowedCorsOrigins = { configuration["Client:Swagger"] ?? throw new InvalidOperationException() },
+            AllowedScopes =
+            {
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                AuthScope.Read,
+                AuthScope.Write
+            }
+        },
+        new()
+        {
+            ClientId = "store-front",
+            ClientName = "Store Front",
+            ClientSecrets = { new("secret".Sha256()) },
+            AllowedGrantTypes = [GrantType.AuthorizationCode],
+            RedirectUris = { $"{configuration["Client:StoreFront"]}/api/auth/callback/sample-identity-server" },
+            PostLogoutRedirectUris = { $"{configuration["Client:StoreFront"]}" },
+            AllowedCorsOrigins = { $"{configuration["Client:StoreFront"]}" },
+            AllowedScopes =
+            {
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                AuthScope.Read,
+                AuthScope.Write
+            }
+        },
+        new()
+        {
+            ClientId = "back-office",
+            ClientName = "Back Office",
+            ClientSecrets = { new("secret".Sha256()) },
+            AllowedGrantTypes = [GrantType.AuthorizationCode],
+            RedirectUris = { $"{configuration["Client:BackOffice"]}/api/auth/callback/sample-identity-server" },
+            PostLogoutRedirectUris = { $"{configuration["Client:BackOffice"]}" },
+            AllowedCorsOrigins = { $"{configuration["Client:BackOffice"]}" },
+            AllowedScopes =
+            {
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                AuthScope.Read,
+                AuthScope.Write
+            }
         }
     ];
 }

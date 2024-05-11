@@ -26,7 +26,7 @@ internal static class HostingExtensions
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        builder.Services
+        var identityServerBuilder = builder.Services
             .AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
@@ -39,8 +39,12 @@ internal static class HostingExtensions
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients)
+            .AddInMemoryApiResources(Config.ApiResources)
+            .AddInMemoryClients(Config.Clients(builder.Configuration))
             .AddAspNetIdentity<ApplicationUser>();
+
+        // not recommended for production - you need to store your key material somewhere secure
+        if (builder.Environment.IsDevelopment()) identityServerBuilder.AddDeveloperSigningCredential();
 
         builder.Services.AddAuthentication()
             .AddGoogle(options =>
