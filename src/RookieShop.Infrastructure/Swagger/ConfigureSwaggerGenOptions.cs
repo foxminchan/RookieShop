@@ -30,7 +30,7 @@ public sealed class ConfigureSwaggerGenOptions(IApiVersionDescriptionProvider pr
 
         var urlExternal = config.GetValue<string>("OAuth:Authority");
 
-        options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme,
+        options.AddSecurityDefinition("oauth2",
             new()
             {
                 Type = SecuritySchemeType.OAuth2,
@@ -43,7 +43,7 @@ public sealed class ConfigureSwaggerGenOptions(IApiVersionDescriptionProvider pr
                         Scopes = new Dictionary<string, string>
                         {
                             { AuthScope.Read, "Read Access to API" },
-                            { AuthScope.Write, "Write Access to API" },
+                            { AuthScope.Write, "Write Access to API" }
                         }
                     }
                 }

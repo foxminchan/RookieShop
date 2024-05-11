@@ -1,7 +1,7 @@
 ﻿using Ardalis.GuardClauses;
-using Asp.Versioning.ApiExplorer;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +25,8 @@ public static class Extension
 
     public static IApplicationBuilder UseOpenApi(this WebApplication app, IConfiguration configuration)
     {
-        const string appName = "Drug Store API";
+        const string appName = "Rookie Shop API";
+
         app.UseSwagger(c => c.PreSerializeFilters.Add((swagger, httpReq) =>
         {
             Guard.Against.Null(httpReq);
@@ -46,18 +47,18 @@ public static class Extension
 
         app.UseSwaggerUI(c =>
         {
-            foreach (var (url, name) in from ApiVersionDescription desc
-                         in app.DescribeApiVersions()
-                     let url = $"/swagger/{desc.GroupName}/swagger.json"
-                     let name = desc.GroupName.ToUpperInvariant()
-                     select (url, name))
-            {
-                c.SwaggerEndpoint(url, name);
-            }
+            app.DescribeApiVersions()
+                .Select(desc => new
+                {
+                    url = $"/swagger/{desc.GroupName}/swagger.json",
+                    name = desc.GroupName.ToUpperInvariant()
+                })
+                .ToList()
+                .ForEach(endpoint => c.SwaggerEndpoint(endpoint.url, endpoint.name));
 
             c.DocumentTitle = appName;
-            c.OAuthClientId(configuration["IdentityServer:ClientId"]);
-            c.OAuthClientSecret(configuration["IdentityServer:ClientSecret"]);
+            c.OAuthClientId(configuration["OAuth:ClientId"]);
+            c.OAuthClientSecret(configuration["OAuth:ClientSecret"]);
             c.OAuthAppName(appName);
             c.OAuthUsePkce();
             c.DisplayRequestDuration();
@@ -66,6 +67,8 @@ public static class Extension
             c.EnableTryItOutByDefault();
             c.EnablePersistAuthorization();
         });
+
+        app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 
         return app;
     }

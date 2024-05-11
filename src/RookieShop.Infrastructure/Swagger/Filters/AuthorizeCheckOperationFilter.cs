@@ -10,18 +10,13 @@ public sealed class AuthorizeCheckOperationFilter : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        var hasAuthorize =
-            context.MethodInfo.DeclaringType?.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any() ??
-            context.MethodInfo.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any();
+        var metadata = context.ApiDescription.ActionDescriptor.EndpointMetadata;
 
-        if (!hasAuthorize) return;
+        if (!metadata.OfType<IAuthorizeData>().Any()) return;
 
-        operation.Responses.TryAdd(
-            StatusCodes.Status401Unauthorized.ToString(), new() { Description = "Unauthorized" }
-        );
-        operation.Responses.TryAdd(
-            StatusCodes.Status403Forbidden.ToString(), new() { Description = "Forbidden" }
-        );
+        operation.Responses.TryAdd(StatusCodes.Status401Unauthorized.ToString(),
+            new() { Description = "Unauthorized" });
+        operation.Responses.TryAdd(StatusCodes.Status403Forbidden.ToString(), new() { Description = "Forbidden" });
 
         OpenApiSecurityScheme oAuthScheme = new()
         {
