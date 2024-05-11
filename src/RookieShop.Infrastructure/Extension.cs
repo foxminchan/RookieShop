@@ -10,6 +10,7 @@ using RookieShop.Infrastructure.HealthCheck;
 using RookieShop.Infrastructure.Lock;
 using RookieShop.Infrastructure.OpenTelemetry;
 using RookieShop.Infrastructure.RateLimiter;
+using RookieShop.Infrastructure.Storage;
 using RookieShop.Infrastructure.Swagger;
 using RookieShop.Infrastructure.Validator;
 using RookieShop.Infrastructure.Versioning;
@@ -76,7 +77,8 @@ public static class Extension
             .ConfigureOpenTelemetry()
             .AddRedisDataProtection()
             .AddRedisDistributedLock()
-            .AddHealthCheck();
+            .AddHealthCheck()
+            .AddStorage();
 
         return builder;
     }

@@ -3,6 +3,10 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DistributedLock.Redis" />
 		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
 		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
 	</ItemGroup>
@@ -30,7 +34,7 @@
 	<ItemGroup>
 		<PackageReference Include="Polly" />
 		<PackageReference Include="Scrutor" />
-		<PackageReference Include="DistributedLock.Redis" />
+		<PackageReference Include="Azure.Storage.Blobs" />
 	</ItemGroup>
 
 	<ItemGroup>

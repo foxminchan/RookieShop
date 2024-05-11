@@ -55,9 +55,9 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
 
     public async Task<T> GetOrSet<T>(string key, Func<T> valueFactory, TimeSpan expiration)
     {
-        var keyWithPrefix = $"{_redisCacheSetting.Prefix}:{key}";
-
         Guard.Against.NullOrEmpty(key);
+
+        var keyWithPrefix = $"{_redisCacheSetting.Prefix}:{key}";
 
         var cachedValue = await Database.StringGetAsync(keyWithPrefix);
         if (!string.IsNullOrEmpty(cachedValue)) return GetByteToObject<T>(cachedValue);
@@ -71,9 +71,9 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
 
     public async Task<T?> Get<T>(string key)
     {
-        var keyWithPrefix = $"{_redisCacheSetting.Prefix}:{key}";
-
         Guard.Against.NullOrEmpty(_redisCacheSetting.Prefix);
+
+        var keyWithPrefix = $"{_redisCacheSetting.Prefix}:{key}";
 
         var cachedValue = await Database.StringGetAsync(keyWithPrefix);
         return !string.IsNullOrEmpty(cachedValue)
