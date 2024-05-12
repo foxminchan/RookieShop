@@ -45,6 +45,9 @@ public sealed class Index(
         // check if we are in the context of an authorization request
         var context = await interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
 
+        if (Input.Button == "register")
+            return RedirectToPage("/Account/Register/Index", new { returnUrl = Input.ReturnUrl });
+
         // the user clicked the "cancel" button
         if (Input.Button != "login")
         {
@@ -136,7 +139,7 @@ public sealed class Index(
 
             Input.Username = context.LoginHint;
 
-            if (!local) View.ExternalProviders = new[] { new ViewModel.ExternalProvider(context.IdP) };
+            if (!local) View.ExternalProviders = [new(context.IdP)];
 
             return;
         }
