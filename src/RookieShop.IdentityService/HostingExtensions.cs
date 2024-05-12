@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using RookieShop.IdentityService.Data;
 using RookieShop.IdentityService.Data.CompiledModels;
 using RookieShop.IdentityService.Models;
+using RookieShop.Infrastructure.DataProtection;
+using RookieShop.Infrastructure.OpenTelemetry;
 using Serilog;
 
 namespace RookieShop.IdentityService;
@@ -13,11 +15,15 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        builder.AddRedisDataProtection();
+
+        builder.ConfigureOpenTelemetry();
+
         builder.Services.AddRazorPages();
 
         builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
             options
-                .UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+                .UseNpgsql(builder.Configuration.GetConnectionString("Postgres"))
                 .UseExceptionProcessor()
                 .UseModel(ApplicationDbContextModel.Instance)
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
@@ -54,8 +60,10 @@ internal static class HostingExtensions
                 // register your IdentityServer with Google at https://console.developers.google.com
                 // enable the Google+ API
                 // set the redirect URI to https://localhost:5001/signin-google
-                options.ClientId = "copy client ID from Google here";
-                options.ClientSecret = "copy client secret from Google here";
+                options.ClientId = builder.Configuration.GetValue<string>("Provider:Google:ClientId") ??
+                                   throw new InvalidOperationException();
+                options.ClientSecret = builder.Configuration.GetValue<string>("Provider:Google:ClientSecret") ??
+                                       throw new InvalidOperationException();
             });
 
         return builder.Build();

@@ -1,6 +1,7 @@
 ﻿using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RookieShop.Domain.Constants;
 using RookieShop.IdentityService.Data;
 using RookieShop.IdentityService.Exceptions;
 using RookieShop.IdentityService.Models;
@@ -16,60 +17,124 @@ public static class SeedData
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         context.Database.Migrate();
 
+        var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+        var admin = roleMgr.FindByNameAsync("admin").Result;
+
+        if (admin is null)
+        {
+            admin = new()
+            {
+                Name = "staff"
+            };
+
+            var result = roleMgr.CreateAsync(admin).Result;
+
+            if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
+
+            roleMgr.AddClaimAsync(admin, new(JwtClaimTypes.Role, AuthScope.Read)).Wait();
+            roleMgr.AddClaimAsync(admin, new(JwtClaimTypes.Role, AuthScope.Write)).Wait();
+
+            Log.Debug("staff created");
+        }
+        else
+        {
+            Log.Debug("staff already exists");
+        }
+
+        var user = roleMgr.FindByNameAsync("user").Result;
+
+        if (user is null)
+        {
+            user = new()
+            {
+                Name = "user"
+            };
+
+            var result = roleMgr.CreateAsync(user).Result;
+
+            if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
+
+            roleMgr.AddClaimAsync(user, new(JwtClaimTypes.Role, AuthScope.Read)).Wait();
+
+            Log.Debug("user created");
+        }
+        else
+        {
+            Log.Debug("user already exists");
+        }
+
         var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-        var alice = userMgr.FindByNameAsync("alice").Result;
-        if (alice == null)
+
+        var nhan = userMgr.FindByNameAsync("nhan").Result;
+
+        if (nhan is null)
         {
-            alice = new()
+            nhan = new()
             {
-                UserName = "alice",
-                Email = "AliceSmith@email.com",
-                EmailConfirmed = true
+                UserName = "nhan@gmail.com",
+                Email = "nhan@gmail.com",
+                EmailConfirmed = true,
+                PhoneNumber = "1234567890"
             };
-            var result = userMgr.CreateAsync(alice, "Pass123$").Result;
+
+            var result = userMgr.CreateAsync(nhan, "NashTech@2024").Result;
+
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
 
-            result = userMgr.AddClaimsAsync(alice,
+            result = userMgr.AddClaimsAsync(nhan,
             [
-                new(JwtClaimTypes.Name, "Alice Smith"),
-                new(JwtClaimTypes.GivenName, "Alice"),
-                new(JwtClaimTypes.FamilyName, "Smith"),
-                new(JwtClaimTypes.WebSite, "http://alice.com")
+                new(JwtClaimTypes.Name, "Nhan Nguyen"),
+                new(JwtClaimTypes.GivenName, "Nhan"),
+                new(JwtClaimTypes.FamilyName, "Nguyen"),
+                new(JwtClaimTypes.WebSite, "https://github.com/foxminchan")
             ]).Result;
+
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
-            Log.Debug("alice created");
+
+            userMgr.AddToRoleAsync(nhan, "staff").Wait();
+
+            if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
+
+            Log.Debug("nhan created");
         }
         else
         {
-            Log.Debug("alice already exists");
+            Log.Debug("nhan already exists");
         }
 
-        var bob = userMgr.FindByNameAsync("bob").Result;
-        if (bob == null)
+        var fox = userMgr.FindByNameAsync("fox").Result;
+
+        if (fox is null)
         {
-            bob = new()
+            fox = new()
             {
-                UserName = "bob",
-                Email = "BobSmith@email.com",
-                EmailConfirmed = true
+                UserName = "fox@gmail.com",
+                Email = "fox@gmail.com",
+                EmailConfirmed = true,
+                PhoneNumber = "1234567890"
             };
-            var result = userMgr.CreateAsync(bob, "Pass123$").Result;
+
+            var result = userMgr.CreateAsync(fox, "NashTech@2024").Result;
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
 
-            result = userMgr.AddClaimsAsync(bob,
+            result = userMgr.AddClaimsAsync(fox,
             [
-                new(JwtClaimTypes.Name, "Bob Smith"),
-                new(JwtClaimTypes.GivenName, "Bob"),
-                new(JwtClaimTypes.FamilyName, "Smith"),
-                new(JwtClaimTypes.WebSite, "http://bob.com"),
-                new("location", "somewhere")
+                new(JwtClaimTypes.Name, "Fox Chan"),
+                new(JwtClaimTypes.GivenName, "Fox"),
+                new(JwtClaimTypes.FamilyName, "Chan"),
+                new(JwtClaimTypes.WebSite, "https://github.com/foxminchan")
             ]).Result;
+
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
-            Log.Debug("bob created");
+
+            userMgr.AddToRoleAsync(fox, "user").Wait();
+
+            Log.Debug("fox created");
         }
         else
         {
-            Log.Debug("bob already exists");
+            Log.Debug("fox already exists");
         }
     }
 }

@@ -91,6 +91,7 @@ public static class Extension
     {
         app
             .UseCustomCors()
+            .UseRateLimiter()
             .UseAuthentication()
             .UseAuthorization();
 

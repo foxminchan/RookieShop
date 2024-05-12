@@ -1,6 +1,8 @@
 ﻿using Ardalis.GuardClauses;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -42,16 +44,20 @@ public static class Extension
 
     public static void MapHealthCheck(this WebApplication app)
     {
-        app.MapHealthChecks("/hc",
-            new()
+        app.UseHealthChecks("/hc", new HealthCheckOptions
+        {
+            Predicate = _ => true,
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+            ResultStatusCodes =
             {
-                Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
-                AllowCachingResponses = false
-            });
+                [HealthStatus.Healthy] = StatusCodes.Status200OK,
+                [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
+                [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable,
+            },
+        });
 
         app.MapHealthChecks("/alive", new() { Predicate = r => r.Name.Contains("self") });
 
-        app.MapHealthChecksUI(options => options.UIPath = "/hc-ui");
+        app.UseHealthChecksUI(options => options.UIPath = "/hc-ui");
     }
 }
