@@ -15,7 +15,8 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
     [
         new(AuthScope.Read, "Read Access to API"),
-        new(AuthScope.Write, "Write Access to API")
+        new(AuthScope.Write, "Write Access to API"),
+        new(AuthScope.All, "Read and Write Access to API")
     ];
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -63,15 +64,14 @@ public static class Config
             ClientName = "Store Front",
             ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{configuration["Client:StoreFront"]}/api/auth/callback/duende-identity-service" },
+            RedirectUris = { $"{configuration["Client:StoreFront"]}/api/auth/callback/duende-identityserver6" },
             PostLogoutRedirectUris = { $"{configuration["Client:StoreFront"]}" },
             AllowedCorsOrigins = { $"{configuration["Client:StoreFront"]}" },
             AllowedScopes =
             {
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
-                AuthScope.Read,
-                AuthScope.Write
+                AuthScope.All
             }
         },
         new()
@@ -80,15 +80,14 @@ public static class Config
             ClientName = "Back Office",
             ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{configuration["Client:BackOffice"]}/api/auth/callback/duende-identity-service" },
+            RedirectUris = { $"{configuration["Client:BackOffice"]}/api/auth/callback/duende-identityserver6" },
             PostLogoutRedirectUris = { $"{configuration["Client:BackOffice"]}" },
             AllowedCorsOrigins = { $"{configuration["Client:BackOffice"]}" },
             AllowedScopes =
             {
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
-                AuthScope.Read,
-                AuthScope.Write
+                AuthScope.All
             }
         }
     ];
