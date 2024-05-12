@@ -6,16 +6,26 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="coverlet.collector">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="coverlet.collector" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
 		<PackageReference Include="xunit" />
-		<PackageReference Include="xunit.runner.visualstudio">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="xunit.runner.visualstudio" />
+		<PackageReference Include="XunitContext" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" />
+		<PackageReference Include="AutoBogus.NSubstitute" />
+		<PackageReference Include="Polly" />
+		<PackageReference Include="Ardalis.HttpClientTestExtensions" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Testcontainers" />
+		<PackageReference Include="Testcontainers.Azurite" />
+		<PackageReference Include="Testcontainers.PostgreSql" />
+		<PackageReference Include="Testcontainers.Redis" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -32,6 +42,7 @@
 
 	<ItemGroup>
 		<Using Include="Xunit" />
+		<Using Include="FluentAssertions" />
 	</ItemGroup>
 
 	<ItemGroup>
