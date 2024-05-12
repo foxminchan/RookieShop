@@ -1,6 +1,6 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 using RookieShop.Domain.Constants;
-using Duende.IdentityServer;
 
 namespace RookieShop.IdentityService;
 
@@ -15,7 +15,7 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
     [
         new(AuthScope.Read, "Read Access to API"),
-        new(AuthScope.Write, "Write Access to API"),
+        new(AuthScope.Write, "Write Access to API")
     ];
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -36,7 +36,7 @@ public static class Config
             ClientName = "Resource Owner Client",
             AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
             ClientSecrets = { new("secret".Sha256()) },
-            AllowedScopes = { AuthScope.Read, AuthScope.Write },
+            AllowedScopes = { AuthScope.Read, AuthScope.Write }
         },
         new()
         {
