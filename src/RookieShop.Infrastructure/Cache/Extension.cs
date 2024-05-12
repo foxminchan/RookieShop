@@ -25,11 +25,18 @@ public static class Extension
 
         Guard.Against.Null(redisSettings);
 
-        builder.Services.AddStackExchangeRedisCache(options =>
+        try
         {
-            options.InstanceName = builder.Configuration[redisSettings.Prefix];
-            options.ConfigurationOptions = GetRedisConfigurationOptions(redisSettings);
-        });
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.InstanceName = builder.Configuration[redisSettings.Prefix];
+                options.ConfigurationOptions = GetRedisConfigurationOptions(redisSettings);
+            });
+        }
+        catch
+        {
+            builder.Services.AddDistributedMemoryCache();
+        }
 
         builder.Services.AddSingleton<IRedisService, RedisService>();
 
