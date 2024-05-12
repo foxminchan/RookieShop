@@ -12,7 +12,7 @@ export const ThemedLayout = ({ children }: React.PropsWithChildren) => {
       Title={({ collapsed }) => (
         <ThemedTitleV2
           collapsed={collapsed}
-          text="Refine Project"
+          text="Rookie Shop"
           icon={<AppIcon />}
         />
       )}

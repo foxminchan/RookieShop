@@ -63,7 +63,7 @@ public static class Config
             ClientName = "Store Front",
             ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{configuration["Client:StoreFront"]}/api/auth/callback/sample-identity-server" },
+            RedirectUris = { $"{configuration["Client:StoreFront"]}/api/auth/callback/duende-identity-service" },
             PostLogoutRedirectUris = { $"{configuration["Client:StoreFront"]}" },
             AllowedCorsOrigins = { $"{configuration["Client:StoreFront"]}" },
             AllowedScopes =
@@ -80,7 +80,7 @@ public static class Config
             ClientName = "Back Office",
             ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{configuration["Client:BackOffice"]}/api/auth/callback/sample-identity-server" },
+            RedirectUris = { $"{configuration["Client:BackOffice"]}/api/auth/callback/duende-identity-service" },
             PostLogoutRedirectUris = { $"{configuration["Client:BackOffice"]}" },
             AllowedCorsOrigins = { $"{configuration["Client:BackOffice"]}" },
             AllowedScopes =

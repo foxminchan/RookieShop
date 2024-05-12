@@ -1,21 +1,23 @@
 import authOptions from "@app/api/auth/[...nextauth]/options";
-import { ThemedLayout } from "@components/themed-layout";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
-import React from "react";
+import { PropsWithChildren } from "react";
 
-export default async function Layout({ children }: React.PropsWithChildren) {
+export default async function LoginLayout({
+  children,
+}: Readonly<PropsWithChildren>) {
   const data = await getData();
 
-  if (!data.session?.user) {
-    return redirect("/login");
+  if (data.session?.user) {
+    return redirect("/");
   }
 
-  return <ThemedLayout>{children}</ThemedLayout>;
+  return <>{children}</>;
 }
 
 async function getData() {
   const session = await getServerSession(authOptions);
+
   return {
     session,
   };
