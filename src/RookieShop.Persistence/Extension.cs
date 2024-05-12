@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 using RookieShop.Domain.SharedKernel;
 using RookieShop.Persistence.Interceptors;
 
@@ -24,11 +25,15 @@ public static class Extension
 
         builder.Services.AddDbContextPool<ApplicationDbContext>((sp, options) =>
         {
-            options.UseNpgsql(connectionString, sqlOptions =>
+            var npgsqlDataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+
+            npgsqlDataSourceBuilder.UseVector();
+
+            options.UseNpgsql(npgsqlDataSourceBuilder.ConnectionString, sqlOptions =>
                 {
+                    sqlOptions.UseVector();
                     sqlOptions.MigrationsAssembly(AssemblyReference.DbContextAssembly.FullName);
-                    sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30),
-                        null);
+                    sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
                 })
                 .UseExceptionProcessor()
                 .EnableServiceProviderCaching()

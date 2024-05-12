@@ -6,6 +6,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Pgvector" />
+		<PackageReference Include="Pgvector.EntityFrameworkCore" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Ardalis.SmartEnum" />
 		<PackageReference Include="Ardalis.GuardClauses" />
 		<PackageReference Include="Ardalis.Specification" />

@@ -41,6 +41,12 @@
 		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
 		<PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
 		<PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
+		<!-- Vector -->
+		<PackageVersion Include="Pgvector" Version="0.2.0" />
+		<PackageVersion Include="Pgvector.EntityFrameworkCore" Version="0.2.0" />
+		<!-- Semantic Kernel -->
+		<PackageVersion Include="Microsoft.SemanticKernel" Version="1.11.1" />
+		<PackageVersion Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.11.1" />
 		<!-- OpenTelemetry -->
 		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />

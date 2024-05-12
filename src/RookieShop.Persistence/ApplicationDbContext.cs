@@ -31,6 +31,7 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
         base.OnModelCreating(modelBuilder);
         modelBuilder.ConfigureSmartEnum();
         modelBuilder.HasPostgresExtension(UniqueType.Extension);
+        modelBuilder.HasPostgresExtension(VectorType.Extension);
         modelBuilder.ApplyConfigurationsFromAssembly(AssemblyReference.DbContextAssembly);
     }
 }

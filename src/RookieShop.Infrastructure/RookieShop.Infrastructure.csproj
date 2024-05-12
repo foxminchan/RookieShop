@@ -28,6 +28,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.SemanticKernel" />
+		<PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="AspNetCore.HealthChecks.Redis" />
 		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
 		<PackageReference Include="AspNetCore.HealthChecks.OpenIdConnectServer" />
