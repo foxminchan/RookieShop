@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Npgsql;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -46,6 +48,8 @@ public static class Extension
     {
         var useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
 
+        var otlpApiKey = builder.Configuration.GetValue<string>("Otlp:ApiKey");
+
         var resourceBuilder = ResourceBuilder
             .CreateDefault()
             .AddService(
@@ -55,10 +59,14 @@ public static class Extension
 
         if (!useOtlpExporter) return;
 
+        builder.Services.Configure<OtlpExporterOptions>(o => o.Headers = $"x-otlp-api-key={otlpApiKey}");
+
         builder.Services.Configure<OpenTelemetryLoggerOptions>(logging =>
             logging.SetResourceBuilder(resourceBuilder).AddOtlpExporter());
+
         builder.Services.ConfigureOpenTelemetryMeterProvider(metrics =>
             metrics.SetResourceBuilder(resourceBuilder).AddOtlpExporter());
+
         builder.Services.ConfigureOpenTelemetryTracerProvider(tracing =>
             tracing.SetResourceBuilder(resourceBuilder).AddOtlpExporter());
     }
