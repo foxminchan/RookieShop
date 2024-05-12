@@ -3,7 +3,7 @@ using RookieShop.Infrastructure.Cache.Redis;
 
 namespace RookieShop.ApiService.Filters;
 
-public class IdempotencyFilter(IRedisService redisService) : IEndpointFilter
+public sealed class IdempotencyFilter(IRedisService redisService) : IEndpointFilter
 {
     public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
     {
