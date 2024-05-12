@@ -18,6 +18,8 @@ RookieShop Web Application is a assignment project for training purpose. The pro
 - [Postgres](https://www.postgresql.org/)
 - [Aspire](https://learn.microsoft.com/dotnet/aspire)
 - [OpenTelemetry](https://opentelemetry.io/)
+- [OpenAI](https://openai.com/)
+- [Semantic Kernel](https://aka.ms/semantic-kernel)
 
 ## Software Architecture
 
