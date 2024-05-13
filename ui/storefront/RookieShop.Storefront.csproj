@@ -9,6 +9,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Refit.HttpClientFactory" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ContainerEnvironmentVariable Include="ASPNETCORE_HTTPS_PORTS">
 			<Value>8081</Value>
 		</ContainerEnvironmentVariable>

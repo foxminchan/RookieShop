@@ -24,4 +24,10 @@ public sealed class Category : EntityBase, IAggregateRoot
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public ICollection<Product>? Products { get; set; } = [];
+
+    public void Update(string name, string? description)
+    {
+        Name = Guard.Against.NullOrEmpty(name);
+        Description = description;
+    }
 }

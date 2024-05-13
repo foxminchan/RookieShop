@@ -15,9 +15,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentAssertions" />
-		<PackageReference Include="AutoBogus.NSubstitute" />
 		<PackageReference Include="Polly" />
+		<PackageReference Include="AutoBogus.Moq" />
+		<PackageReference Include="FluentAssertions" />
 		<PackageReference Include="Ardalis.HttpClientTestExtensions" />
 	</ItemGroup>
 
