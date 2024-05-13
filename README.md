@@ -1,6 +1,7 @@
-# RookieShop: Rookie Phase-1 Assignment Project
+<h1>RookieShop: Rookie Phase-1 Assignment Project</h1>
 
 [![Build](https://github.com/foxminchan/RookieShop/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/foxminchan/RookieShop/actions/workflows/build.yml)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=foxminchan_RookieShop&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=foxminchan_RookieShop)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <p align="justify">
@@ -8,6 +9,49 @@ RookieShop Web Application is a assignment project for training purpose. The pro
 </p>
 
 <hr/>
+
+- [Requirements](#requirements)
+- [Technical Stack](#technical-stack)
+- [Software Architecture](#software-architecture)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+    - [Windows with Visual Studio](#windows-with-visual-studio)
+    - [Mac, Linux, \& Windows without Visual Studio](#mac-linux--windows-without-visual-studio)
+  - [Setup tools and dependencies](#setup-tools-and-dependencies)
+  - [Start the infrastructure](#start-the-infrastructure)
+  - [Running the application](#running-the-application)
+- [Observability](#observability)
+- [Project References](#project-references)
+- [License](#license)
+- [Organization](#organization)
+
+## Requirements
+
+Build an e-commerce web site with minimum functionality below:
+
+**For customers:**
+
+- `Home page: category menu, features products`
+- `View products by category`
+- `View product details`
+- `Product rating`
+- Register
+- Login/Logout
+- Optional (shopping cart, ordering, IdentityServer4)
+
+**For admin:**
+
+- Login/logout
+- `Manage product categories (Name, Description)`
+- `Manage products (Name, Category, Description, Price, Images, CreatedDate, UpdatedDate)`
+- `View customers`
+
+<p align="justify">
+
+> [!NOTE]
+> The project should apply as many techniques of ASP.NET MVC Core as possible. For example: TagHelpers, Razor Pages, ViewComponents and have Unit Test. The Unit Test do not need to have a high coverage number but should demonstrate the ability to write unit test for common components: Controllers, ViewComponents, Services …
+
+</p>
 
 ## Technical Stack
 
