@@ -2,6 +2,7 @@
 using Ardalis.GuardClauses;
 using Pgvector;
 using RookieShop.Domain.Entities.CategoryAggregator;
+using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
 using RookieShop.Domain.Entities.ProductAggregator.Enums;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Domain.Entities.ProductAggregator.ValueObjects;
@@ -18,7 +19,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     {
     }
 
-    public Product(string name, string description, int quantity, decimal
+    public Product(string name, string? description, int quantity, decimal
         price, decimal priceSale)
     {
         Name = Guard.Against.NullOrEmpty(name);
@@ -38,4 +39,32 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public bool IsDeleted { get; set; }
     public Category? Category { get; set; }
     public List<ProductImage>? ProductImages { get; set; } = [];
+
+    public static class Factory
+    {
+        public static Product Create(
+            string name, 
+            string? description, 
+            int quantity,
+            decimal price,
+            decimal priceSale,
+            IEnumerable<ProductImage>? productImages,
+            CategoryId categoryId = default)
+
+        {
+            Product product = new(name, description, quantity, price, priceSale);
+
+            if (categoryId != default) product.Category!.Id = categoryId;
+
+            if (productImages is null) 
+                return product;
+
+            foreach (var productImage in productImages)
+            {
+                product.ProductImages!.Add(productImage);
+            }
+
+            return product;
+        }
+    }
 }

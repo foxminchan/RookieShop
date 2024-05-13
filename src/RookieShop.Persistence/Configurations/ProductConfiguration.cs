@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RookieShop.Domain.Constants;
 using RookieShop.Domain.Entities.ProductAggregator;
+using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Domain.Entities.ProductAggregator.ValueObjects;
 using RookieShop.Persistence.Constants;
 
@@ -20,7 +21,8 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
                 id => id.Value,
                 value => new(value)
             )
-            .HasDefaultValueSql(UniqueType.Algorithm);
+            .HasDefaultValueSql(UniqueType.Algorithm)
+            .ValueGeneratedOnAdd();
 
         builder.Property(p => p.Name)
             .HasMaxLength(DataLength.Medium)
@@ -44,9 +46,15 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
 
         builder.OwnsMany(p => p.ProductImages, e =>
         {
-            e.WithOwner().HasForeignKey(nameof(Product.Id));
+            e.WithOwner().HasForeignKey(nameof(ProductId));
 
-            e.HasKey(nameof(ProductImage.Id), nameof(Product.Id));
+            e.HasKey(nameof(ProductImage.Id), nameof(ProductId));
+
+            e.Property(p => p.Id)
+                .HasConversion(
+                    id => id.Value,
+                    value => new(value)
+                ).ValueGeneratedOnAdd();
 
             e.Property(p => p.Name)
                 .HasMaxLength(DataLength.Medium)
