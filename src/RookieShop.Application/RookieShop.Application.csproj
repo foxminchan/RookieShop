@@ -2,7 +2,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Dapper" />
-		<PackageReference Include="Ardalis.Result.AspNetCore" />
 	</ItemGroup>
 
 	<ItemGroup>

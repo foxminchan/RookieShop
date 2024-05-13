@@ -3,6 +3,8 @@ using Ardalis.GuardClauses;
 using Pgvector;
 using RookieShop.Domain.Entities.CategoryAggregator;
 using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
+using RookieShop.Domain.Entities.FeedbackAggregator;
+using RookieShop.Domain.Entities.OrderAggregator;
 using RookieShop.Domain.Entities.ProductAggregator.Enums;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Domain.Entities.ProductAggregator.ValueObjects;
@@ -36,9 +38,11 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public ProductStatus Status { get; set; } = ProductStatus.InStock;
     public ProductPrice Price { get; set; } = new();
     [JsonIgnore] public Vector? Embedding { get; set; }
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
     public Category? Category { get; set; }
-    public List<ProductImage>? ProductImages { get; set; } = [];
+    public ICollection<ProductImage>? ProductImages { get; set; } = [];
+    public ICollection<OrderDetail>? OrderDetails { get; set; } = [];
+    public IReadOnlyCollection<Feedback>? Feedbacks { get; set; } = [];
 
     public static class Factory
     {

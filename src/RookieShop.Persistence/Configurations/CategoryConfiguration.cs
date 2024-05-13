@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RookieShop.Domain.Constants;
 using RookieShop.Domain.Entities.CategoryAggregator;
-using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
 using RookieShop.Persistence.Constants;
 
 namespace RookieShop.Persistence.Configurations;

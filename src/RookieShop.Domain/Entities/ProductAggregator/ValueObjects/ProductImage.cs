@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Ardalis.Result;
 using RookieShop.Domain.Constants;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Domain.SeedWork;
@@ -12,18 +12,18 @@ public sealed class ProductImage(string? name, string? alt, bool isMain) : Value
     public string? Alt { get; set; } = alt;
     public bool IsMain { get; set; } = isMain;
 
-    public static ProductImage? Create(string? name, string? alt, bool isMain = false)
+    public static Result<ProductImage>? Create(string? name, string? alt, bool isMain = false)
     {
         if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(alt))
             return null;
 
         if (!string.IsNullOrWhiteSpace(name) && name.Length > DataLength.Medium)
-            throw new ValidationException($"File name length must be less than or equal to {DataLength.Medium}");
+            return Result.Invalid(new ValidationError($"Name length must be less than or equal to {DataLength.Medium}"));
 
         if (!string.IsNullOrWhiteSpace(alt) && alt.Length > DataLength.Medium)
-            throw new ValidationException($"Alt length must be less than or equal to {DataLength.Medium}");
+            return Result.Invalid(new ValidationError($"Alt length must be less than or equal to {DataLength.Medium}"));
 
-        return new(name, alt, isMain);
+        return new ProductImage(name, alt, isMain);
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

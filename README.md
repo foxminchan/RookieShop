@@ -101,12 +101,10 @@ dotnet tool restore
 cd RookieShop
 dotnet restore ./RookieShop.sln
 
-# Install the dependencies for the frontend
+# Install the admin-facing website dependencies
 
-cd ui/storefront
-pnpm install
 cd ../backoffice
-bun install
+pnpm install
 ```
 
 ### Start the infrastructure
@@ -147,7 +145,7 @@ dotnet run --project src/RookieShop.IdentityService/RookieShop.IdentityService.c
 2. Run the frontend for the user-facing website
 
 ```bash
-cd ui/storefront && bun dev
+dotnet run --project ui/storefront/RookieShop.Storefront.csproj
 ```
 
 3. Run the frontend for the admin-facing website
