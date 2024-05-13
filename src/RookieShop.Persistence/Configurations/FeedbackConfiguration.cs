@@ -28,5 +28,11 @@ public sealed class FeedbackConfiguration : BaseConfiguration<Feedback>
 
         builder.Property(p => p.Rating)
             .IsRequired();
+
+        builder.Navigation(p => p.Customer)
+            .AutoInclude();
+
+        builder.Navigation(p => p.Product)
+            .AutoInclude();
     }
 }

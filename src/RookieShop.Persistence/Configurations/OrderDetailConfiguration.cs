@@ -16,5 +16,8 @@ public sealed class OrderDetailConfiguration : BaseConfiguration<OrderDetail>
 
         builder.Property(p => p.Price)
             .IsRequired();
+
+        builder.Navigation(p => p.Product)
+            .AutoInclude();
     }
 }

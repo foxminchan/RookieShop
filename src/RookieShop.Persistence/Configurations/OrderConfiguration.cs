@@ -12,6 +12,10 @@ public sealed class OrderConfiguration : BaseConfiguration<Order>
     {
         base.Configure(builder);
 
+        var navigation = builder.Metadata.FindNavigation(nameof(Order.OrderDetails));
+
+        navigation?.SetPropertyAccessMode(PropertyAccessMode.Field);
+
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
@@ -36,5 +40,24 @@ public sealed class OrderConfiguration : BaseConfiguration<Order>
             e.Property(c => c.ChargeId)
                 .HasMaxLength(DataLength.Medium);
         }).UsePropertyAccessMode(PropertyAccessMode.Property);
+
+        builder.OwnsOne(p => p.ShippingAddress, e =>
+        {
+            e.WithOwner();
+
+            e.Property(c => c.Street)
+                .HasMaxLength(DataLength.Medium);
+
+            e.Property(c => c.City)
+                .HasMaxLength(DataLength.Medium);
+
+            e.Property(c => c.Province)
+                .HasMaxLength(DataLength.Medium);
+
+        }).UsePropertyAccessMode(PropertyAccessMode.Property);
+
+        builder.Navigation(e => e.Customer).AutoInclude();
+
+        builder.Navigation(e => e.OrderDetails).AutoInclude();
     }
 }
