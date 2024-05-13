@@ -18,7 +18,8 @@ public sealed class ProductImage(string? name, string? alt, bool isMain) : Value
             return null;
 
         if (!string.IsNullOrWhiteSpace(name) && name.Length > DataLength.Medium)
-            return Result.Invalid(new ValidationError($"Name length must be less than or equal to {DataLength.Medium}"));
+            return Result.Invalid(
+                new ValidationError($"Name length must be less than or equal to {DataLength.Medium}"));
 
         if (!string.IsNullOrWhiteSpace(alt) && alt.Length > DataLength.Medium)
             return Result.Invalid(new ValidationError($"Alt length must be less than or equal to {DataLength.Medium}"));

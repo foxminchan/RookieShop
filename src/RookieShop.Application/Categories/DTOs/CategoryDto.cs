@@ -1,5 +1,4 @@
-﻿using RookieShop.Domain.Entities.CategoryAggregator;
-using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
+﻿using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
 
 namespace RookieShop.Application.Categories.DTOs;
 

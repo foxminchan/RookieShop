@@ -1,11 +1,11 @@
-﻿using FluentValidation;
+﻿using System.Diagnostics;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using RookieShop.Infrastructure.Logging;
 using RookieShop.Infrastructure.Validator;
 using RookieShop.Persistence;
-using System.Diagnostics;
-using Microsoft.Extensions.Hosting;
 
 namespace RookieShop.Application;
 

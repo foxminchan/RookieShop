@@ -14,7 +14,7 @@ public sealed class GetCategoryHandler(IReadRepository<Category> repository)
     {
         CategoryBySpec spec = new(request.Id);
 
-        var category = await repository.GetByIdAsync(spec, cancellationToken);
+        var category = await repository.FirstOrDefaultAsync(spec, cancellationToken);
 
         Guard.Against.NotFound(request.Id, category);
 

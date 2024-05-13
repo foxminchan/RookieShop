@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using RookieShop.Domain.Constants;
 using RookieShop.Infrastructure.Cache.Redis;
 
 namespace RookieShop.ApiService.Filters;
@@ -10,7 +11,7 @@ public sealed class IdempotencyFilter(IRedisService redisService) : IEndpointFil
         var request = context.HttpContext.Request;
         var requestMethod = request.Method;
         var requestPath = request.Path;
-        var requestId = request.Headers["X-Idempotency-Key"].FirstOrDefault();
+        var requestId = request.Headers[HeaderName.IdempotencyKey].FirstOrDefault();
 
         if (requestMethod is not "POST" and not "PATCH")
             return await next(context);

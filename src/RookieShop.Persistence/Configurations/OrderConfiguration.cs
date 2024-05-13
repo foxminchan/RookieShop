@@ -53,7 +53,6 @@ public sealed class OrderConfiguration : BaseConfiguration<Order>
 
             e.Property(c => c.Province)
                 .HasMaxLength(DataLength.Medium);
-
         }).UsePropertyAccessMode(PropertyAccessMode.Property);
 
         builder.Navigation(e => e.Customer).AutoInclude();

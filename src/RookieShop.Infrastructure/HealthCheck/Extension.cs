@@ -52,8 +52,8 @@ public static class Extension
             {
                 [HealthStatus.Healthy] = StatusCodes.Status200OK,
                 [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
-                [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable,
-            },
+                [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+            }
         });
 
         app.MapHealthChecks("/alive", new() { Predicate = r => r.Name.Contains("self") });

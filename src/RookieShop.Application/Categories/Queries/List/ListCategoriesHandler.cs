@@ -9,17 +9,18 @@ namespace RookieShop.Application.Categories.Queries.List;
 public sealed class ListCategoriesHandler(IReadRepository<Category> repository)
     : IQueryHandler<ListCategoriesQuery, PagedResult<IEnumerable<CategoryDto>>>
 {
-    public async Task<PagedResult<IEnumerable<CategoryDto>>> Handle(ListCategoriesQuery request, CancellationToken cancellationToken)
+    public async Task<PagedResult<IEnumerable<CategoryDto>>> Handle(ListCategoriesQuery request,
+        CancellationToken cancellationToken)
     {
         CategoriesFilterSpec spec = new(request.PageIndex, request.PageSize);
 
         var categories = await repository.ListAsync(spec, cancellationToken);
 
-        var totalRecord = await repository.CountAsync(cancellationToken);
+        var totalRecords = await repository.CountAsync(cancellationToken);
 
-        var totalPages = (int)Math.Ceiling(totalRecord / (double)request.PageSize);
+        var totalPages = (int)Math.Ceiling(totalRecords / (double)request.PageSize);
 
-        var pagedInfo = new PagedInfo(request.PageIndex, request.PageSize, totalRecord, totalPages);
+        var pagedInfo = new PagedInfo(request.PageIndex, request.PageSize, totalPages, totalRecords);
 
         return new(pagedInfo, categories.ToCategoryDto());
     }

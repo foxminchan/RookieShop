@@ -38,11 +38,11 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public ProductStatus Status { get; set; } = ProductStatus.InStock;
     public ProductPrice Price { get; set; } = new();
     [JsonIgnore] public Vector? Embedding { get; set; }
-    public bool IsDeleted { get; set; } = false;
     public Category? Category { get; set; }
     public ICollection<ProductImage>? ProductImages { get; set; } = [];
     public ICollection<OrderDetail>? OrderDetails { get; set; } = [];
     public IReadOnlyCollection<Feedback>? Feedbacks { get; set; } = [];
+    public bool IsDeleted { get; set; } = false;
 
     public static class Factory
     {
@@ -63,10 +63,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
             if (productImages is null)
                 return product;
 
-            foreach (var productImage in productImages)
-            {
-                product.ProductImages!.Add(productImage);
-            }
+            foreach (var productImage in productImages) product.ProductImages!.Add(productImage);
 
             return product;
         }

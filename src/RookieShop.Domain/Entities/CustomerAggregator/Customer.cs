@@ -29,7 +29,7 @@ public sealed class Customer : EntityBase, ISoftDelete, IAggregateRoot
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
     public Gender Gender { get; set; } = Gender.Male;
-    public bool IsDeleted { get; set; } = false;
     public string? AccountId { get; set; }
     public ICollection<Order>? Orders { get; set; } = [];
+    public bool IsDeleted { get; set; } = false;
 }

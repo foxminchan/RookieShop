@@ -22,7 +22,12 @@ public sealed class ConfigureSwaggerGenOptions(IApiVersionDescriptionProvider pr
                     Title = $"Rookie Shop API {description.ApiVersion}",
                     Description = "A project developed by a rookie transitioning to an engineer at NashTech",
                     Version = description.ApiVersion.ToString(),
-                    Contact = new() { Name = "Nhan Nguyen", Email = "nguyenxuannhan407@gmail.com" },
+                    Contact = new()
+                    {
+                        Name = "Nhan Nguyen",
+                        Email = "nguyenxuannhan407@gmail.com",
+                        Url = new("https://github.com/foxminchan")
+                    },
                     License = new() { Name = "MIT", Url = new("https://opensource.org/licenses/MIT") }
                 });
         }
