@@ -12,7 +12,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_OPTIONS=--max_old_space_size=4096 refine dev --port 7050",
+    "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_OPTIONS=--max_old_space_size=4096 refine dev",
     "build": "refine build",
     "start": "refine start",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'",

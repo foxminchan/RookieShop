@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317"
       },
-      "applicationUrl": "https://localhost:7080"
+      "applicationUrl": "https://localhost:6000"
     },
     "Container (.NET SDK)": {
       "commandName": "SdkContainer",

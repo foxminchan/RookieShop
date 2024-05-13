@@ -64,14 +64,15 @@ public static class Config
             ClientName = "Store Front",
             ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{configuration["Client:StoreFront"]}/api/auth/callback/duende-identityserver6" },
-            PostLogoutRedirectUris = { $"{configuration["Client:StoreFront"]}" },
+            RedirectUris = { $"{configuration["Client:StoreFront"]}/signin-oidc" },
+            PostLogoutRedirectUris = { $"{configuration["Client:StoreFront"]}/signout-callback-oidc" },
             AllowedCorsOrigins = { $"{configuration["Client:StoreFront"]}" },
             AllowedScopes =
             {
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
-                AuthScope.All
+                AuthScope.Read,
+                AuthScope.Write
             }
         },
         new()

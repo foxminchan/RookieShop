@@ -26,7 +26,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     {
         Name = Guard.Against.NullOrEmpty(name);
         Description = description;
-        Quantity = Guard.Against.Negative(quantity);
+        Quantity = Guard.Against.OutOfRange(quantity, nameof(quantity), 0, int.MaxValue);
         Status = quantity > 0 ? ProductStatus.InStock : ProductStatus.OutOfStock;
         Price = ProductPrice.Create(price, priceSale);
     }
@@ -47,8 +47,8 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public static class Factory
     {
         public static Product Create(
-            string name, 
-            string? description, 
+            string name,
+            string? description,
             int quantity,
             decimal price,
             decimal priceSale,
@@ -60,7 +60,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
 
             if (categoryId != default) product.Category!.Id = categoryId;
 
-            if (productImages is null) 
+            if (productImages is null)
                 return product;
 
             foreach (var productImage in productImages)

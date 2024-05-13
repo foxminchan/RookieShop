@@ -12,6 +12,7 @@ import routerProvider from "@refinedev/nextjs-router";
 import { ColorModeContextProvider } from "@contexts/color-mode";
 import { dataProvider } from "@providers/data-provider";
 import { PropsWithChildren } from "react";
+import { Alert } from "@mui/material";
 
 type RefineContextProps = {
   defaultMode?: string;
@@ -101,7 +102,6 @@ const App = (props: PropsWithChildren<AppProps>) => {
 
   return (
     <>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider defaultMode={defaultMode}>
           <RefineSnackbarProvider>

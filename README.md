@@ -118,10 +118,10 @@ docker-compose --env-file .env up -d
 
 **You can access the following services:**
 
-1. `https://localhost:7080` for identity server
-2. `https://localhost:7070` for all the REST API document
-3. `https://localhost:7060` for user facing website
-4. `https://localhost:7050` for admin facing website
+1. `https://localhost:6000` for identity server
+2. `https://localhost:5000` for all the REST API document
+3. `https://localhost:4000` for user facing website
+4. `https://localhost:3000` for admin facing website
 5. `https://localhost:1888` for observability dashboard
 
 ### Running the application

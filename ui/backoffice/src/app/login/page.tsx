@@ -1,12 +1,10 @@
 "use client";
 
-import { useLogin } from "@refinedev/core";
-
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
+import { useLogin } from "@refinedev/core";
 import { ThemedTitleV2 } from "@refinedev/mui";
+import Container from "@mui/material/Container";
 
 import { AppIcon } from "@components/app-icon";
 
@@ -46,15 +44,6 @@ export default function Login() {
         >
           Sign in
         </Button>
-        <Typography align="center" color={"text.secondary"} fontSize="12px">
-          Powered by
-          <img
-            style={{ padding: "0 5px" }}
-            alt="Auth0"
-            src="https://refine.ams3.cdn.digitaloceanspaces.com/superplate-auth-icons%2Fauth0-2.svg"
-          />
-          Auth0
-        </Typography>
       </Box>
     </Container>
   );

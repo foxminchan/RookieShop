@@ -17,8 +17,8 @@ public sealed class OrderDetail : EntityBase
 
     public OrderDetail(int quantity, decimal price)
     {
-        Quantity = Guard.Against.NegativeOrZero(quantity);
-        Price = Guard.Against.Negative(price);
+        Quantity = Guard.Against.OutOfRange(quantity, nameof(quantity), 1, int.MaxValue);
+        Price = Guard.Against.OutOfRange(price, nameof(price), 0, decimal.MaxValue);
     }
 
     public ProductId ProductId { get; set; }
