@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 import { RefineContext } from "./_refine_context";
-import "./global.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Refine",
