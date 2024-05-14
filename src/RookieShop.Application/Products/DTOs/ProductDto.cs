@@ -10,5 +10,5 @@ public sealed record ProductDto(
     int Quantity,
     decimal Price,
     decimal PriceSale,
-    IEnumerable<ProductImageDto>? ProductImages,
+    string ImageUrl,
     CategoryDto? Category);

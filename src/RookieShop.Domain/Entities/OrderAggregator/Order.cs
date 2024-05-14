@@ -1,4 +1,5 @@
 ﻿using RookieShop.Domain.Entities.CustomerAggregator;
+using RookieShop.Domain.Entities.CustomerAggregator.Primitives;
 using RookieShop.Domain.Entities.OrderAggregator.Enums;
 using RookieShop.Domain.Entities.OrderAggregator.Primitives;
 using RookieShop.Domain.Entities.OrderAggregator.ValueObjects;
@@ -27,6 +28,7 @@ public sealed class Order : EntityBase, IAggregateRoot
     public Card? Card { get; set; }
     public ShippingAddress? ShippingAddress { get; set; }
     public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.Cash;
+    public CustomerId CustomerId { get; set; }
     public Customer? Customer { get; set; }
     public ICollection<OrderDetail> OrderDetails { get; set; } = [];
 }

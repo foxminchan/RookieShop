@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RookieShop.Domain.Constants;
 using RookieShop.Domain.Entities.ProductAggregator;
-using RookieShop.Domain.Entities.ProductAggregator.Primitives;
-using RookieShop.Domain.Entities.ProductAggregator.ValueObjects;
 using RookieShop.Persistence.Constants;
 
 namespace RookieShop.Persistence.Configurations;
@@ -36,6 +34,9 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
             .HasDefaultValue(0)
             .IsRequired();
 
+        builder.Property(p => p.ImageName)
+            .HasMaxLength(DataLength.Medium);
+
         builder.Property(p => p.Embedding)
             .HasColumnType(VectorType.DataType);
 
@@ -44,28 +45,15 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
             e => e.ToJson()
         );
 
-        builder.OwnsMany(p => p.ProductImages, e =>
-        {
-            e.WithOwner().HasForeignKey(nameof(ProductId));
-
-            e.HasKey(nameof(ProductImage.Id), nameof(ProductId));
-
-            e.Property(p => p.Id)
-                .HasConversion(
-                    id => id.Value,
-                    value => new(value)
-                ).ValueGeneratedOnAdd();
-
-            e.Property(p => p.Name)
-                .HasMaxLength(DataLength.Medium)
-                .IsRequired();
-
-            e.Property(p => p.Alt)
-                .HasMaxLength(DataLength.Medium)
-                .IsRequired();
-        });
+        builder.HasOne(p => p.Category)
+            .WithMany(p => p.Products)
+            .HasForeignKey(p => p.CategoryId)
+            .OnDelete(DeleteBehavior.SetNull);
 
         builder.Navigation(e => e.Category)
+            .AutoInclude();
+
+        builder.Navigation(p => p.Feedbacks)
             .AutoInclude();
 
         builder.HasQueryFilter(x => !x.IsDeleted);

@@ -36,7 +36,6 @@ public static class Extension
                     sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
                 })
                 .UseExceptionProcessor()
-                .EnableServiceProviderCaching()
                 .UseSnakeCaseNamingConvention()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 

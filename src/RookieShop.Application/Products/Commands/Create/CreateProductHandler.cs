@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using RookieShop.Domain.Entities.ProductAggregator;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
-using RookieShop.Domain.Entities.ProductAggregator.ValueObjects;
 using RookieShop.Domain.SharedKernel;
 using RookieShop.Infrastructure.GenAi.OpenAi;
 using RookieShop.Infrastructure.Storage.Azurite;
@@ -19,15 +18,15 @@ public sealed class CreateProductHandler(
 {
     public async Task<Result<ProductId>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        var productImages = await UploadProductImagesAsync(request.ProductImages, request.Name, cancellationToken);
+        var productImage = await UploadProductImagesAsync(request.ProductImages, cancellationToken);
 
-        var product = Product.Factory.Create(
+        Product product = new(
             request.Name,
             request.Description,
             request.Quantity,
             request.Price,
             request.PriceSale,
-            productImages,
+            productImage,
             request.CategoryId);
 
         product.Embedding =
@@ -41,27 +40,13 @@ public sealed class CreateProductHandler(
         return result.Id;
     }
 
-    private async Task<List<ProductImage>?> UploadProductImagesAsync(
-        IReadOnlyCollection<IFormFile>? imageFiles,
-        string productName,
-        CancellationToken cancellationToken)
+    private async Task<string?> UploadProductImagesAsync(IFormFile? imageFile, CancellationToken cancellationToken)
     {
-        if (imageFiles is null || imageFiles.Count == 0)
+        if (imageFile is null)
             return null;
 
-        var productImages = new List<ProductImage>();
+        var imageUrl = await azuriteService.UploadFileAsync(imageFile, cancellationToken);
 
-        foreach (var imageFile in imageFiles)
-        {
-            var imageUrl = await azuriteService.UploadFileAsync(imageFile, cancellationToken);
-
-            productImages.Add(
-                productImages.Count == 0
-                    ? ProductImage.Create(imageUrl, productName, true)
-                    : ProductImage.Create(imageUrl, productName)
-            );
-        }
-
-        return productImages;
+        return imageUrl;
     }
 }

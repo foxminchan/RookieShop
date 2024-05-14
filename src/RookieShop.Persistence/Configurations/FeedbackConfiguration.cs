@@ -29,10 +29,17 @@ public sealed class FeedbackConfiguration : BaseConfiguration<Feedback>
         builder.Property(p => p.Rating)
             .IsRequired();
 
-        builder.Navigation(p => p.Customer)
-            .AutoInclude();
+        builder.HasOne(p => p.Customer)
+            .WithMany(p => p.Feedbacks)
+            .HasForeignKey(p => p.CustomerId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-        builder.Navigation(p => p.Product)
+        builder.HasOne(p => p.Product)
+            .WithMany(p => p.Feedbacks)
+            .HasForeignKey(p => p.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Navigation(p => p.Customer)
             .AutoInclude();
     }
 }

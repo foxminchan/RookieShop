@@ -14,6 +14,6 @@ public sealed record UpdateProductCommand(
     int Quantity,
     decimal Price,
     decimal PriceSale,
-    IFormFileCollection? Images,
-    IEnumerable<ProductImageId>? DeleteImageIds,
-    CategoryId CategoryId = default) : ICommand<Result<ProductDto>>;
+    IFormFile? Image,
+    bool DeleteOldImage,
+    CategoryId? CategoryId) : ICommand<Result<ProductDto>>;

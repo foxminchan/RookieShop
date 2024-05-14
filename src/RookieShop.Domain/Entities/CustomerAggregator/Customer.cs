@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using RookieShop.Domain.Entities.CustomerAggregator.Enums;
 using RookieShop.Domain.Entities.CustomerAggregator.Primitives;
+using RookieShop.Domain.Entities.FeedbackAggregator;
 using RookieShop.Domain.Entities.OrderAggregator;
 using RookieShop.Domain.SeedWork;
 
@@ -31,7 +32,8 @@ public sealed class Customer : EntityBase, ISoftDelete, IAggregateRoot
     public Gender Gender { get; set; } = Gender.Male;
     public string? AccountId { get; set; }
     public ICollection<Order>? Orders { get; set; } = [];
-    public bool IsDeleted { get; set; } = false;
+    public ICollection<Feedback>? Feedbacks { get; set; } = [];
+    public bool IsDeleted { get; set; }
 
     public void Delete() => IsDeleted = true;
 

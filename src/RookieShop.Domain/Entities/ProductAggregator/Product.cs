@@ -22,13 +22,15 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     }
 
     public Product(string name, string? description, int quantity, decimal
-        price, decimal priceSale)
+        price, decimal priceSale, string? imageName, CategoryId? categoryId)
     {
         Name = Guard.Against.NullOrEmpty(name);
         Description = description;
         Quantity = Guard.Against.OutOfRange(quantity, nameof(quantity), 0, int.MaxValue);
         Status = quantity > 0 ? ProductStatus.InStock : ProductStatus.OutOfStock;
         Price = ProductPrice.Create(price, priceSale);
+        ImageName = imageName;
+        CategoryId = categoryId;
     }
 
     public ProductId Id { get; set; } = new(Guid.NewGuid());
@@ -37,9 +39,10 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public int Quantity { get; set; }
     public ProductStatus Status { get; set; } = ProductStatus.InStock;
     public ProductPrice Price { get; set; } = new();
+    public string? ImageName { get; set; }
     [JsonIgnore] public Vector? Embedding { get; set; }
+    public CategoryId? CategoryId { get; set; }
     public Category? Category { get; set; }
-    public ICollection<ProductImage>? ProductImages { get; set; } = [];
     public ICollection<OrderDetail>? OrderDetails { get; set; } = [];
     public IReadOnlyCollection<Feedback>? Feedbacks { get; set; } = [];
     public bool IsDeleted { get; set; }
@@ -47,52 +50,14 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public void Delete() => IsDeleted = true;
 
     public void Update(string name, string? description, int quantity, decimal price, decimal priceSale,
-        CategoryId categoryId = default)
+        string? imageName, CategoryId? categoryId)
     {
         Name = Guard.Against.NullOrEmpty(name);
         Description = description;
         Quantity = Guard.Against.OutOfRange(quantity, nameof(quantity), 0, int.MaxValue);
         Status = quantity > 0 ? ProductStatus.InStock : ProductStatus.OutOfStock;
         Price = ProductPrice.Create(price, priceSale);
-
-        if (categoryId != default) Category!.Id = categoryId;
-    }
-
-    public void DeleteImage(ProductImageId id) => ProductImages!.Remove(ProductImages!.First(x => x.Id == id));
-
-    public void AddImages(List<ProductImage>? productImages)
-    {
-        if (productImages is null)
-            return;
-
-        foreach (var productImage in productImages)
-        {
-            ProductImages!.Add(productImage);
-        }
-    }
-
-    public static class Factory
-    {
-        public static Product Create(
-            string name,
-            string? description,
-            int quantity,
-            decimal price,
-            decimal priceSale,
-            IEnumerable<ProductImage>? productImages,
-            CategoryId categoryId = default)
-
-        {
-            Product product = new(name, description, quantity, price, priceSale);
-
-            if (categoryId != default) product.Category!.Id = categoryId;
-
-            if (productImages is null)
-                return product;
-
-            foreach (var productImage in productImages) product.ProductImages!.Add(productImage);
-
-            return product;
-        }
+        ImageName = imageName;
+        CategoryId = categoryId;
     }
 }

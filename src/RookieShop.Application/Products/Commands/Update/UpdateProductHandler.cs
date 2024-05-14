@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using RookieShop.Application.Products.DTOs;
 using RookieShop.Domain.Entities.ProductAggregator;
-using RookieShop.Domain.Entities.ProductAggregator.Primitives;
-using RookieShop.Domain.Entities.ProductAggregator.ValueObjects;
 using RookieShop.Domain.SharedKernel;
 using RookieShop.Infrastructure.GenAi.OpenAi;
 using RookieShop.Infrastructure.Storage.Azurite;
@@ -24,23 +22,27 @@ public sealed class UpdateProductHandler(
 
         Guard.Against.NotFound(request.Id, product);
 
+        product.Embedding =
+            await aiService.GetEmbeddingAsync($"{product.Name} {product.Description}", cancellationToken);
+
+        if (request.DeleteOldImage && product.ImageName is not null)
+        {
+            await azuriteService.DeleteFileAsync(product.ImageName, cancellationToken);
+            product.ImageName = null;
+        }
+
+        var productImage = request.Image is not null
+            ? await UploadProductImagesAsync(request.Image, cancellationToken)
+            : product.ImageName;
+
         product.Update(
             request.Name,
             request.Description,
             request.Quantity,
             request.Price,
             request.PriceSale,
+            productImage,
             request.CategoryId);
-
-        product.Embedding =
-            await aiService.GetEmbeddingAsync($"{product.Name} {product.Description}", cancellationToken);
-
-        if (request.DeleteImageIds?.Any() == true && product.ProductImages?.Count != 0)
-            await DeleteProductImagesAsync(product, request.DeleteImageIds, azuriteService, cancellationToken);
-
-        var productImages = await AddProductImagesAsync(request.Images, product.Name, cancellationToken);
-
-        product.AddImages(productImages);
 
         logger.LogInformation("Updating product: {ProductId}, {ProductName}", product.Id, product.Name);
 
@@ -49,44 +51,13 @@ public sealed class UpdateProductHandler(
         return product.ToProductDto();
     }
 
-    private async Task<List<ProductImage>?> AddProductImagesAsync(
-        IReadOnlyCollection<IFormFile>? imageFiles,
-        string productName,
-        CancellationToken cancellationToken)
+    private async Task<string?> UploadProductImagesAsync(IFormFile? imageFile, CancellationToken cancellationToken)
     {
-        if (imageFiles is null || imageFiles.Count == 0)
+        if (imageFile is null)
             return null;
 
-        var productImages = new List<ProductImage>();
+        var imageUrl = await azuriteService.UploadFileAsync(imageFile, cancellationToken);
 
-        foreach (var imageFile in imageFiles)
-        {
-            var imageUrl = await azuriteService.UploadFileAsync(imageFile, cancellationToken);
-
-            productImages.Add(
-                productImages.Count == 0
-                    ? ProductImage.Create(imageUrl, productName, true)
-                    : ProductImage.Create(imageUrl, productName)
-            );
-        }
-
-        return productImages;
-    }
-
-    private static async Task DeleteProductImagesAsync(
-        Product product,
-        IEnumerable<ProductImageId> imageIdsToDelete,
-        IAzuriteService azuriteService,
-        CancellationToken cancellationToken)
-    {
-        foreach (var imageId in imageIdsToDelete)
-        {
-            var productImage = product.ProductImages?.FirstOrDefault(x => x.Id == imageId);
-
-            if (productImage?.Name is not null)
-                await azuriteService.DeleteFileAsync(productImage.Name, cancellationToken);
-
-            product.DeleteImage(imageId);
-        }
+        return imageUrl;
     }
 }

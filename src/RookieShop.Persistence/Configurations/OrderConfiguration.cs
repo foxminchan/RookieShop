@@ -55,6 +55,11 @@ public sealed class OrderConfiguration : BaseConfiguration<Order>
                 .HasMaxLength(DataLength.Medium);
         }).UsePropertyAccessMode(PropertyAccessMode.Property);
 
+        builder.HasOne(p => p.Customer)
+            .WithMany(p => p.Orders)
+            .HasForeignKey(p => p.CustomerId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.Navigation(e => e.Customer).AutoInclude();
 
         builder.Navigation(e => e.OrderDetails).AutoInclude();

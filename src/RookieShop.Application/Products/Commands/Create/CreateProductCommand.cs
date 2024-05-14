@@ -12,5 +12,5 @@ public sealed record CreateProductCommand(
     int Quantity,
     decimal Price,
     decimal PriceSale,
-    IFormFileCollection? ProductImages,
-    CategoryId CategoryId = default) : ICommand<Result<ProductId>>;
+    IFormFile? ProductImages,
+    CategoryId? CategoryId) : ICommand<Result<ProductId>>;
