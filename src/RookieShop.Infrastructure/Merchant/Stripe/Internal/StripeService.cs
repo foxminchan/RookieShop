@@ -9,7 +9,7 @@ public sealed class StripeService(
     ChargeService chargeService) : IStripeService
 {
     public async Task<CustomerResource>
-        CreateCustomer(CreateCustomerResource resource, CancellationToken cancellationToken)
+        CreateCustomerAsync(CreateCustomerResource resource, CancellationToken cancellationToken)
     {
         var tokenOptions = new TokenCreateOptions
         {
@@ -37,7 +37,7 @@ public sealed class StripeService(
         return new(customer.Id, customer.Email, customer.Name);
     }
 
-    public async Task<ChargeResource> CreateCharge(CreateChargeResource resource, CancellationToken cancellationToken)
+    public async Task<ChargeResource> CreateChargeAsync(CreateChargeResource resource, CancellationToken cancellationToken)
     {
         var chargeOptions = new ChargeCreateOptions
         {

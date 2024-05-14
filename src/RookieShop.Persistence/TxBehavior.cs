@@ -63,11 +63,11 @@ public sealed class TxBehavior<TRequest, TResponse>(
                     JsonSerializer.Serialize(domainEvent));
             });
 
-            await Task.WhenAll(tasks).ConfigureAwait(false);
+            await Task.WhenAll(tasks);
 
             await transaction.CommitAsync(cancellationToken);
 
             return response;
-        }).ConfigureAwait(false);
+        });
     }
 }

@@ -17,11 +17,7 @@ public static class Extension
         builder.Services
             .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerGenOptions>()
             .AddFluentValidationRulesToSwagger()
-            .AddSwaggerGen(c =>
-            {
-                c.SchemaFilter<StronglyTypedIdFilter>();
-                c.SchemaFilter<SmartEnumSchemaFilter>();
-            });
+            .AddSwaggerGen(c => c.SchemaFilter<StronglyTypedIdFilter>());
 
         return builder;
     }

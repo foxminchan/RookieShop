@@ -25,7 +25,7 @@ public sealed class IdempotencyFilter(IRedisService redisService) : IEndpointFil
 
         var cacheKey = $"{requestMethod}:{requestPath}:{requestId}";
 
-        var cacheValue = await redisService.GetOrSet(cacheKey, () => request.GetType().Name, TimeSpan.FromMinutes(1));
+        var cacheValue = await redisService.GetOrSetAsync(cacheKey, () => request.GetType().Name, TimeSpan.FromMinutes(1));
 
         if (string.IsNullOrEmpty(cacheValue))
             return await next(context);

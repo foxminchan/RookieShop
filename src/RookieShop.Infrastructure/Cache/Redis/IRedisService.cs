@@ -2,21 +2,21 @@
 
 public interface IRedisService
 {
-    Task<T?> Get<T>(string key);
+    Task<T?> GetAsync<T>(string key);
 
-    Task<T> GetOrSet<T>(string key, Func<T> valueFactory);
+    Task<T> GetOrSetAsync<T>(string key, Func<T> valueFactory);
 
-    Task<T> GetOrSet<T>(string key, Func<T> valueFactory, TimeSpan expiration);
+    Task<T> GetOrSetAsync<T>(string key, Func<T> valueFactory, TimeSpan expiration);
 
-    Task<T> HashGetOrSet<T>(string key, string hashKey, Func<T> valueFactory);
+    Task<T> HashGetOrSetAsync<T>(string key, string hashKey, Func<T> valueFactory);
 
-    Task<IEnumerable<string>>? GetKeys(string pattern);
+    Task<IEnumerable<string>>? GetKeysAsync(string pattern);
 
-    Task<IEnumerable<T>> GetValues<T>(string key);
+    Task<IEnumerable<T>> GetValuesAsync<T>(string key);
 
-    Task<bool> RemoveAllKeys(string pattern = "*");
+    Task<bool> RemoveAllKeysAsync(string pattern = "*");
 
-    Task Remove(string key);
+    Task RemoveAsync(string key);
 
-    Task Reset();
+    Task ResetAsync();
 }

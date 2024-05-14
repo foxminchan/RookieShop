@@ -49,11 +49,11 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
         }
     }
 
-    public async Task<T> GetOrSet<T>(string key, Func<T> valueFactory)
-        => await GetOrSet($"{_redisCacheSetting.Prefix}:{key}", valueFactory,
+    public async Task<T> GetOrSetAsync<T>(string key, Func<T> valueFactory)
+        => await GetOrSetAsync($"{_redisCacheSetting.Prefix}:{key}", valueFactory,
             TimeSpan.FromSeconds(_redisCacheSetting.RedisDefaultSlidingExpirationInSecond));
 
-    public async Task<T> GetOrSet<T>(string key, Func<T> valueFactory, TimeSpan expiration)
+    public async Task<T> GetOrSetAsync<T>(string key, Func<T> valueFactory, TimeSpan expiration)
     {
         Guard.Against.NullOrEmpty(key);
 
@@ -69,7 +69,7 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
         return newValue;
     }
 
-    public async Task<T?> Get<T>(string key)
+    public async Task<T?> GetAsync<T>(string key)
     {
         Guard.Against.NullOrEmpty(_redisCacheSetting.Prefix);
 
@@ -81,7 +81,7 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
             : default;
     }
 
-    public async Task<T> HashGetOrSet<T>(string key, string hashKey, Func<T> valueFactory)
+    public async Task<T> HashGetOrSetAsync<T>(string key, string hashKey, Func<T> valueFactory)
     {
         Guard.Against.NullOrEmpty(key);
         Guard.Against.NullOrEmpty(hashKey);
@@ -98,7 +98,7 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
         return valueFactory();
     }
 
-    public async Task<IEnumerable<string>> GetKeys(string pattern)
+    public async Task<IEnumerable<string>> GetKeysAsync(string pattern)
     {
         var keys = await Database.ScriptEvaluateAsync(GetKeysLuaScript, values: [pattern]);
 
@@ -108,25 +108,25 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
             .ToArray();
     }
 
-    public async Task<IEnumerable<T>> GetValues<T>(string key)
+    public async Task<IEnumerable<T>> GetValuesAsync<T>(string key)
     {
         var values = await Database.HashGetAllAsync($"{_redisCacheSetting.Prefix}:{key}");
         return values.Select(x => GetByteToObject<T>(x.Value)).ToArray();
     }
 
-    public async Task<bool> RemoveAllKeys(string pattern = "*")
+    public async Task<bool> RemoveAllKeysAsync(string pattern = "*")
     {
         var succeed = true;
 
-        var keys = await GetKeys($"{_redisCacheSetting.Prefix}:{pattern}");
+        var keys = await GetKeysAsync($"{_redisCacheSetting.Prefix}:{pattern}");
         foreach (var key in keys) succeed = await Database.KeyDeleteAsync(key);
 
         return succeed;
     }
 
-    public async Task Remove(string key) => await Database.KeyDeleteAsync($"{_redisCacheSetting.Prefix}:{key}");
+    public async Task RemoveAsync(string key) => await Database.KeyDeleteAsync($"{_redisCacheSetting.Prefix}:{key}");
 
-    public async Task Reset()
+    public async Task ResetAsync()
         => await Database.ScriptEvaluateAsync(
             ClearCacheLuaScript,
             values: [_redisCacheSetting.Prefix + "*"],
