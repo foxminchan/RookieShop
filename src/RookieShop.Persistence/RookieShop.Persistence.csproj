@@ -14,7 +14,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Ardalis.SmartEnum.EFCore" />
 		<PackageReference Include="Ardalis.Specification.EntityFrameworkCore" />
 	</ItemGroup>
 

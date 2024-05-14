@@ -1,13 +1,7 @@
-﻿using Ardalis.SmartEnum;
+﻿namespace RookieShop.Domain.Entities.OrderAggregator.Enums;
 
-namespace RookieShop.Domain.Entities.OrderAggregator.Enums;
-
-public sealed class PaymentMethod : SmartEnum<PaymentMethod>
+public enum PaymentMethod : byte
 {
-    public static readonly PaymentMethod Cash = new(nameof(Cash), 1);
-    public static readonly PaymentMethod Card = new(nameof(Card), 2);
-
-    private PaymentMethod(string name, int id) : base(name, id)
-    {
-    }
+    Cash = 1,
+    Card = 2
 }

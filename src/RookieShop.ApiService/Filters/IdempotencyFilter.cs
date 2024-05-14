@@ -25,12 +25,24 @@ public sealed class IdempotencyFilter(IRedisService redisService) : IEndpointFil
 
         var cacheKey = $"{requestMethod}:{requestPath}:{requestId}";
 
-        var cacheValue = await redisService.GetOrSetAsync(cacheKey, () => request.GetType().Name, TimeSpan.FromMinutes(1));
+        if (await redisService.GetAsync<Idempotent>(cacheKey) is not null)
+        {
+            context.HttpContext.Response.StatusCode = StatusCodes.Status409Conflict;
+            return TypedResults.Conflict("You have already requested this operation.");
+        }
 
-        if (string.IsNullOrEmpty(cacheValue))
-            return await next(context);
+        Idempotent idempotent = new() { Id = cacheKey, Name = request.GetType().Name };
 
-        context.HttpContext.Response.StatusCode = StatusCodes.Status409Conflict;
-        return TypedResults.Conflict();
+        await redisService.GetOrSetAsync(cacheKey, () => idempotent, TimeSpan.FromMinutes(1));
+
+        return await next(context);
+    }
+
+    internal sealed class Idempotent
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }
+

@@ -26,9 +26,9 @@ namespace RookieShop.Persistence.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 235, DateTimeKind.Utc).AddTicks(6158)),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 235, DateTimeKind.Utc).AddTicks(6410)),
-                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("f33ca7f5-2b66-440e-b22a-f15915e30b20"))
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 380, DateTimeKind.Utc).AddTicks(2209)),
+                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 380, DateTimeKind.Utc).AddTicks(2624)),
+                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("9c9c07e9-f6f5-40bc-8817-ff90ad8e82f3"))
                 },
                 constraints: table =>
                 {
@@ -43,12 +43,12 @@ namespace RookieShop.Persistence.Migrations
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    gender = table.Column<int>(type: "integer", nullable: false),
-                    is_deleted = table.Column<bool>(type: "boolean", nullable: false),
+                    gender = table.Column<byte>(type: "smallint", nullable: false),
                     account_id = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(2322)),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(2514)),
-                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("e43f0c00-f305-439a-84f4-65832febdce3"))
+                    is_deleted = table.Column<bool>(type: "boolean", nullable: false),
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 381, DateTimeKind.Utc).AddTicks(1210)),
+                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 381, DateTimeKind.Utc).AddTicks(1472)),
+                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("cd4378c8-7e52-410c-889f-5e41bada21cf"))
                 },
                 constraints: table =>
                 {
@@ -63,13 +63,13 @@ namespace RookieShop.Persistence.Migrations
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
-                    status = table.Column<int>(type: "integer", nullable: false),
+                    status = table.Column<byte>(type: "smallint", nullable: false),
                     embedding = table.Column<Vector>(type: "vector(384)", nullable: true),
-                    is_deleted = table.Column<bool>(type: "boolean", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 247, DateTimeKind.Utc).AddTicks(757)),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 247, DateTimeKind.Utc).AddTicks(1049)),
-                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("1b21a17f-35e5-49b1-b2a5-500361e922b6")),
+                    is_deleted = table.Column<bool>(type: "boolean", nullable: false),
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 387, DateTimeKind.Utc).AddTicks(3843)),
+                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 387, DateTimeKind.Utc).AddTicks(4178)),
+                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("25563ade-bca5-40a2-bd43-b5d6a4ad05c0")),
                     price = table.Column<string>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>
@@ -93,11 +93,11 @@ namespace RookieShop.Persistence.Migrations
                     shipping_address_street = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     shipping_address_city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     shipping_address_province = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    payment_method = table.Column<int>(type: "integer", nullable: false),
+                    payment_method = table.Column<byte>(type: "smallint", nullable: false),
                     customer_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 237, DateTimeKind.Utc).AddTicks(3716)),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 237, DateTimeKind.Utc).AddTicks(3899)),
-                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("588e391c-adff-4162-9467-b952413e860d"))
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 382, DateTimeKind.Utc).AddTicks(7382)),
+                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 382, DateTimeKind.Utc).AddTicks(7708)),
+                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("914ec23a-00f3-457c-87c8-3a17934dadf4"))
                 },
                 constraints: table =>
                 {
@@ -118,9 +118,9 @@ namespace RookieShop.Persistence.Migrations
                     rating = table.Column<int>(type: "integer", nullable: false),
                     customer_id = table.Column<Guid>(type: "uuid", nullable: true),
                     product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 237, DateTimeKind.Utc).AddTicks(54)),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 237, DateTimeKind.Utc).AddTicks(251)),
-                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("b17844bc-e054-4470-902b-58c8a40eed64"))
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 382, DateTimeKind.Utc).AddTicks(2055)),
+                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 382, DateTimeKind.Utc).AddTicks(2338)),
+                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("bcc02e42-15d2-426b-9fd1-3906a9e4020d"))
                 },
                 constraints: table =>
                 {
@@ -168,9 +168,9 @@ namespace RookieShop.Persistence.Migrations
                     order_id = table.Column<Guid>(type: "uuid", nullable: false),
                     price = table.Column<decimal>(type: "numeric", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 246, DateTimeKind.Utc).AddTicks(3604)),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 13, 15, 15, 52, 246, DateTimeKind.Utc).AddTicks(3897)),
-                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("92cd40f0-2d7b-4e4f-a9a3-c2dabe8ef1df"))
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 386, DateTimeKind.Utc).AddTicks(5904)),
+                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, defaultValue: new DateTime(2024, 5, 14, 7, 5, 37, 386, DateTimeKind.Utc).AddTicks(6226)),
+                    version = table.Column<Guid>(type: "uuid", nullable: false, defaultValue: new Guid("455c60a8-1f8c-4cfd-b19c-a206f694d20e"))
                 },
                 constraints: table =>
                 {
@@ -194,11 +194,11 @@ namespace RookieShop.Persistence.Migrations
                 columns: new[] { "id", "created_date", "description", "name", "version" },
                 values: new object[,]
                 {
-                    { new Guid("10631dc0-a122-4c80-a076-232dc773a19a"), new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(1120), "A book is a medium for recording information in the form of writing or images, typically composed of many pages bound together and protected by a cover.", "Book", new Guid("ecbefc65-3484-4d59-a303-c2612141cd62") },
-                    { new Guid("1371f4f9-aac4-4462-9444-683be6372bc9"), new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(1144), "Jewellery consists of small decorative items worn for personal adornment, such as brooches, rings, necklaces, earrings, pendants, bracelets, and cufflinks.", "Jewelry", new Guid("d6775d58-046d-4cdc-b28a-38e6ea630267") },
-                    { new Guid("142b1527-98f2-4b5a-bd69-67068dc602f1"), new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(1143), "Furniture refers to movable objects intended to support various human activities such as seating, eating, and sleeping.", "Furniture", new Guid("01bbe6d4-0cb0-4010-8872-78c81fd27dea") },
-                    { new Guid("739c6c2f-0b6b-4015-bea1-02a20b6f6fd0"), new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(1130), "Electronics comprises the physics, engineering, technology and applications that deal with the emission, flow and control of electrons in vacuum and matter.", "Electronics", new Guid("3f61e3a3-fa45-4dd2-a8d2-ba9c4d83d2d4") },
-                    { new Guid("ddcea197-7750-4ecc-b348-f1888e83cc8c"), new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(1128), "Clothes are items worn on the body. They are typically made of fabrics or textiles but over time have included garments made from animal skin or other thin sheets of materials put together.", "Clothes", new Guid("c9c4eb76-e145-4185-9db3-95c5253b6edc") }
+                    { new Guid("197bcf44-6ce6-40ba-a475-a86f1074fb60"), new DateTime(2024, 5, 14, 7, 5, 37, 380, DateTimeKind.Utc).AddTicks(9486), "Clothes are items worn on the body. They are typically made of fabrics or textiles but over time have included garments made from animal skin or other thin sheets of materials put together.", "Clothes", new Guid("f7562f6d-f28e-41e2-bf32-b795edb8b04e") },
+                    { new Guid("5f40e579-3ff2-4beb-9b66-2bd8a59ae707"), new DateTime(2024, 5, 14, 7, 5, 37, 380, DateTimeKind.Utc).AddTicks(9501), "Electronics comprises the physics, engineering, technology and applications that deal with the emission, flow and control of electrons in vacuum and matter.", "Electronics", new Guid("e767aeb9-8d5d-4bc7-845a-da6f05496343") },
+                    { new Guid("7684f67c-01b2-4327-9780-c2218aaaeda6"), new DateTime(2024, 5, 14, 7, 5, 37, 380, DateTimeKind.Utc).AddTicks(9474), "A book is a medium for recording information in the form of writing or images, typically composed of many pages bound together and protected by a cover.", "Book", new Guid("e93b6470-64d1-4272-a91a-67a11ec4fc67") },
+                    { new Guid("785f3e7c-e341-4679-ac64-64c2a9f8b5a2"), new DateTime(2024, 5, 14, 7, 5, 37, 380, DateTimeKind.Utc).AddTicks(9506), "Jewellery consists of small decorative items worn for personal adornment, such as brooches, rings, necklaces, earrings, pendants, bracelets, and cufflinks.", "Jewelry", new Guid("c17a06eb-d730-488d-aee1-86bdd7903083") },
+                    { new Guid("900bce1c-a11e-4ef9-bd1c-3cc9c7030664"), new DateTime(2024, 5, 14, 7, 5, 37, 380, DateTimeKind.Utc).AddTicks(9504), "Furniture refers to movable objects intended to support various human activities such as seating, eating, and sleeping.", "Furniture", new Guid("1bb7b516-82f3-414c-bc68-64bec31bd863") }
                 });
 
             migrationBuilder.InsertData(
@@ -206,10 +206,10 @@ namespace RookieShop.Persistence.Migrations
                 columns: new[] { "id", "account_id", "created_date", "email", "gender", "is_deleted", "name", "phone", "version" },
                 values: new object[,]
                 {
-                    { new Guid("137db4d3-cba5-45aa-85cd-ec742f113906"), null, new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(8933), "anna.johnson@gmail.com", 2, false, "Anna Johnson", "0123456789", new Guid("02fc2789-684a-443a-978c-dfef1151432f") },
-                    { new Guid("594ee9f8-2d68-4c92-b71d-c86e04745901"), null, new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(8931), "maria.garcia@gmail.com", 2, false, "Maria Garcia", "0123456789", new Guid("7d2c83e4-49e7-4629-82d7-aa5f17e389b2") },
-                    { new Guid("738011a0-4545-44fa-a6c5-6bacd3f7d248"), null, new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(8873), "john.doe@gmail.com", 1, false, "John Doe", "0123456789", new Guid("10ee790b-9b26-492b-a863-65dd920dc401") },
-                    { new Guid("cb69688a-23eb-4d5d-a8bd-4b71d1dd359f"), null, new DateTime(2024, 5, 13, 15, 15, 52, 236, DateTimeKind.Utc).AddTicks(8892), "william.smith@gmail.com", 1, false, "William Smith", "0123456789", new Guid("4c7e8d06-a12c-4f07-bab0-6bc04a66bb96") }
+                    { new Guid("5e350e29-0d24-4517-8129-2b0b27665fa1"), null, new DateTime(2024, 5, 14, 7, 5, 37, 382, DateTimeKind.Utc).AddTicks(454), "anna.johnson@gmail.com", (byte)2, false, "Anna Johnson", "0123456789", new Guid("19334114-d6b4-4254-8d8e-67b6e0ff458d") },
+                    { new Guid("7a0adf1a-0432-4a4f-b00c-bc578f76bd22"), null, new DateTime(2024, 5, 14, 7, 5, 37, 382, DateTimeKind.Utc).AddTicks(428), "john.doe@gmail.com", (byte)1, false, "John Doe", "0123456789", new Guid("b1bf594a-aabc-4433-a48e-8b2534516bec") },
+                    { new Guid("81f737b3-faa0-473f-8aab-4a4534c1d3f5"), null, new DateTime(2024, 5, 14, 7, 5, 37, 382, DateTimeKind.Utc).AddTicks(451), "maria.garcia@gmail.com", (byte)2, false, "Maria Garcia", "0123456789", new Guid("f5b5c01d-ab0f-4f39-b860-28eb07ff5805") },
+                    { new Guid("884dbba0-7472-4a36-bfd6-991f1b12a863"), null, new DateTime(2024, 5, 14, 7, 5, 37, 382, DateTimeKind.Utc).AddTicks(446), "william.smith@gmail.com", (byte)1, false, "William Smith", "0123456789", new Guid("e4461d51-ab65-425e-83be-22090554dc35") }
                 });
 
             migrationBuilder.CreateIndex(

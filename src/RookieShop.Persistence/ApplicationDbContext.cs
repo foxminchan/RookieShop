@@ -8,7 +8,6 @@ using RookieShop.Domain.Entities.ProductAggregator;
 using RookieShop.Domain.SeedWork;
 using RookieShop.Domain.SharedKernel;
 using RookieShop.Persistence.Constants;
-using SmartEnum.EFCore;
 
 namespace RookieShop.Persistence;
 
@@ -41,7 +40,6 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ConfigureSmartEnum();
         modelBuilder.HasPostgresExtension(UniqueType.Extension);
         modelBuilder.HasPostgresExtension(VectorType.Extension);
         modelBuilder.ApplyConfigurationsFromAssembly(AssemblyReference.DbContextAssembly);

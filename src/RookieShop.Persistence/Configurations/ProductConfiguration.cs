@@ -68,9 +68,6 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
         builder.Navigation(e => e.Category)
             .AutoInclude();
 
-        builder.Navigation(e => e.Feedbacks)
-            .AutoInclude();
-
         builder.HasQueryFilter(x => !x.IsDeleted);
     }
 }
