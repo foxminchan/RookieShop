@@ -42,7 +42,34 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public ICollection<ProductImage>? ProductImages { get; set; } = [];
     public ICollection<OrderDetail>? OrderDetails { get; set; } = [];
     public IReadOnlyCollection<Feedback>? Feedbacks { get; set; } = [];
-    public bool IsDeleted { get; set; } = false;
+    public bool IsDeleted { get; set; }
+
+    public void Delete() => IsDeleted = true;
+
+    public void Update(string name, string? description, int quantity, decimal price, decimal priceSale,
+        CategoryId categoryId = default)
+    {
+        Name = Guard.Against.NullOrEmpty(name);
+        Description = description;
+        Quantity = Guard.Against.OutOfRange(quantity, nameof(quantity), 0, int.MaxValue);
+        Status = quantity > 0 ? ProductStatus.InStock : ProductStatus.OutOfStock;
+        Price = ProductPrice.Create(price, priceSale);
+
+        if (categoryId != default) Category!.Id = categoryId;
+    }
+
+    public void DeleteImage(ProductImageId id) => ProductImages!.Remove(ProductImages!.First(x => x.Id == id));
+
+    public void AddImages(List<ProductImage>? productImages)
+    {
+        if (productImages is null)
+            return;
+
+        foreach (var productImage in productImages)
+        {
+            ProductImages!.Add(productImage);
+        }
+    }
 
     public static class Factory
     {

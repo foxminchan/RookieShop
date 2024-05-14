@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using RookieShop.Application.Categories.Commands.Delete;
 using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
@@ -15,6 +16,7 @@ public sealed class Delete(ISender sender) : IEndpoint<NoContent, DeleteCategory
             .WithTags(nameof(Categories))
             .WithName("Delete Category")
             .MapToApiVersion(new(1, 0))
+            .RequireAuthorization(JwtBearerDefaults.AuthenticationScheme)
             .RequirePerUserRateLimit();
 
     public async Task<NoContent> HandleAsync(DeleteCategoryRequest request,

@@ -20,7 +20,7 @@ public sealed class ListCategoriesHandler(IReadRepository<Category> repository)
 
         var totalPages = (int)Math.Ceiling(totalRecords / (double)request.PageSize);
 
-        var pagedInfo = new PagedInfo(request.PageIndex, request.PageSize, totalPages, totalRecords);
+        PagedInfo pagedInfo = new(request.PageIndex, request.PageSize, totalPages, totalRecords);
 
         return new(pagedInfo, categories.ToCategoryDto());
     }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using RookieShop.ApiService.ViewModels.Categories;
 using RookieShop.Application.Categories.Commands.Update;
@@ -15,6 +16,7 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<CategoryVm>, UpdateCat
             .WithTags(nameof(Categories))
             .WithName("Update Category")
             .MapToApiVersion(new(1, 0))
+            .RequireAuthorization(JwtBearerDefaults.AuthenticationScheme)
             .RequirePerUserRateLimit();
 
     public async Task<Ok<CategoryVm>> HandleAsync(UpdateCategoryRequest request,

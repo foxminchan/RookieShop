@@ -14,7 +14,9 @@ public sealed class DeleteCustomerHandler(IRepository<Customer> repository)
 
         Guard.Against.NotFound(request.Id, customer);
 
-        await repository.DeleteAsync(customer, cancellationToken);
+        customer.Delete();
+
+        await repository.UpdateAsync(customer, cancellationToken);
 
         return Result.Success();
     }

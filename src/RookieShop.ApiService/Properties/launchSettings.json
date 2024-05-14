@@ -10,7 +10,7 @@
         "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5001"
+      "applicationUrl": "http://localhost:9001"
     },
     "https": {
       "commandName": "Project",
@@ -21,7 +21,7 @@
         "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:5000"
+      "applicationUrl": "https://localhost:9000"
     },
     "Container (.NET SDK)": {
       "commandName": "SdkContainer",

@@ -33,6 +33,8 @@ public sealed class Customer : EntityBase, ISoftDelete, IAggregateRoot
     public ICollection<Order>? Orders { get; set; } = [];
     public bool IsDeleted { get; set; } = false;
 
+    public void Delete() => IsDeleted = true;
+
     public void Update(string name, string email, string phone, Gender gender, string? accountId)
     {
         Name = Guard.Against.NullOrEmpty(name);

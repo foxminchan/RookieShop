@@ -6,7 +6,6 @@ using RookieShop.IdentityService.Data;
 using RookieShop.IdentityService.Data.CompiledModels;
 using RookieShop.IdentityService.Models;
 using RookieShop.Infrastructure.DataProtection;
-using RookieShop.Infrastructure.OpenTelemetry;
 using Serilog;
 
 namespace RookieShop.IdentityService;
@@ -16,8 +15,6 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.AddRedisDataProtection();
-
-        builder.ConfigureOpenTelemetry();
 
         builder.Services.AddRazorPages();
 

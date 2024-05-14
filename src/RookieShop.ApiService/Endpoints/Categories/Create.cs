@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.ApiService.Filters;
@@ -22,6 +23,7 @@ public sealed class Create(ISender sender) : IEndpoint<Created<CreateCategoryRes
             .WithTags(nameof(Categories))
             .WithName("Create Category")
             .MapToApiVersion(new(1, 0))
+            .RequireAuthorization(JwtBearerDefaults.AuthenticationScheme)
             .RequirePerUserRateLimit();
 
     public async Task<Created<CreateCategoryResponse>> HandleAsync(CreateCategoryRequest request,
