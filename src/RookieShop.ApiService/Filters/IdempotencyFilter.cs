@@ -19,7 +19,8 @@ public sealed class IdempotencyFilter(IRedisService redisService) : IEndpointFil
         if (string.IsNullOrEmpty(requestId))
         {
             context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            throw new ValidationException("X-Idempotency-Key header is required for POST and PATCH requests.");
+            throw new ValidationException(
+                $"{HeaderName.IdempotencyKey} header is required for POST and PATCH requests.");
         }
 
         var cacheKey = $"{requestMethod}:{requestPath}:{requestId}";

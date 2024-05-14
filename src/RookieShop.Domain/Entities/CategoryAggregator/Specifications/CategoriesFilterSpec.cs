@@ -4,7 +4,7 @@ namespace RookieShop.Domain.Entities.CategoryAggregator.Specifications;
 
 public sealed class CategoriesFilterSpec : Specification<Category>
 {
-    public CategoriesFilterSpec(int pageIndex = 1, int pageSize = 0)
+    public CategoriesFilterSpec(int pageIndex, int pageSize)
     {
         if (pageSize == 0) pageSize = int.MaxValue;
 
