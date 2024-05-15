@@ -90,7 +90,7 @@ namespace RookieShop.Persistence.CompiledModels
                     (DateTime v) => v));
             createdDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
             createdDate.AddAnnotation("Relational:ColumnName", "created_date");
-            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 15, 20, 30, 596, DateTimeKind.Utc).AddTicks(9013));
+            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 115, DateTimeKind.Utc).AddTicks(4183));
 
             var customerId = runtimeEntityType.AddProperty(
                 "CustomerId",
@@ -124,6 +124,39 @@ namespace RookieShop.Persistence.CompiledModels
             customerId.SetSentinelFromProviderValue(new Guid("00000000-0000-0000-0000-000000000000"));
             customerId.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
             customerId.AddAnnotation("Relational:ColumnName", "customer_id");
+
+            var orderStatus = runtimeEntityType.AddProperty(
+                "OrderStatus",
+                typeof(OrderStatus),
+                propertyInfo: typeof(Order).GetProperty("OrderStatus", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(Order).GetField("<OrderStatus>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                propertyAccessMode: PropertyAccessMode.Property);
+            orderStatus.TypeMapping = ByteTypeMapping.Default.Clone(
+                comparer: new ValueComparer<OrderStatus>(
+                    (OrderStatus v1, OrderStatus v2) => object.Equals((object)v1, (object)v2),
+                    (OrderStatus v) => v.GetHashCode(),
+                    (OrderStatus v) => v),
+                keyComparer: new ValueComparer<OrderStatus>(
+                    (OrderStatus v1, OrderStatus v2) => object.Equals((object)v1, (object)v2),
+                    (OrderStatus v) => v.GetHashCode(),
+                    (OrderStatus v) => v),
+                providerValueComparer: new ValueComparer<byte>(
+                    (byte v1, byte v2) => v1 == v2,
+                    (byte v) => (int)v,
+                    (byte v) => v),
+                mappingInfo: new RelationalTypeMappingInfo(
+                    storeTypeName: "smallint"),
+                converter: new ValueConverter<OrderStatus, byte>(
+                    (OrderStatus value) => (byte)value,
+                    (byte value) => (OrderStatus)value),
+                jsonValueReaderWriter: new JsonConvertedValueReaderWriter<OrderStatus, byte>(
+                    JsonByteReaderWriter.Instance,
+                    new ValueConverter<OrderStatus, byte>(
+                        (OrderStatus value) => (byte)value,
+                        (byte value) => (OrderStatus)value)));
+            orderStatus.SetSentinelFromProviderValue((byte)0);
+            orderStatus.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+            orderStatus.AddAnnotation("Relational:ColumnName", "order_status");
 
             var paymentMethod = runtimeEntityType.AddProperty(
                 "PaymentMethod",
@@ -181,7 +214,7 @@ namespace RookieShop.Persistence.CompiledModels
                     (Nullable<DateTime> v) => v.HasValue ? (Nullable<DateTime>)(DateTime)v : default(Nullable<DateTime>)));
             updateDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
             updateDate.AddAnnotation("Relational:ColumnName", "update_date");
-            updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 15, 20, 30, 596, DateTimeKind.Utc).AddTicks(9393));
+            updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 115, DateTimeKind.Utc).AddTicks(4609));
 
             var version = runtimeEntityType.AddProperty(
                 "Version",
@@ -209,7 +242,7 @@ namespace RookieShop.Persistence.CompiledModels
                     storeTypeName: "uuid"));
             version.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
             version.AddAnnotation("Relational:ColumnName", "version");
-            version.AddAnnotation("Relational:DefaultValue", new Guid("cc49f575-8937-4363-a99f-cc5d789dc5b9"));
+            version.AddAnnotation("Relational:DefaultValue", new Guid("029718a0-fc52-4cc8-8da1-ed9baa661b52"));
 
             var key = runtimeEntityType.AddKey(
                 new[] { id });

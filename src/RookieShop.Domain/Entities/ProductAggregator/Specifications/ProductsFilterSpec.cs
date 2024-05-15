@@ -13,7 +13,7 @@ public sealed class ProductsFilterSpec : Specification<Product>
             Query.Where(product => product.Category!.Id == categoryId);
 
         Query
-            .Where(product => product.Category!.Id == categoryId)
+            .Where(product => product.Category!.Id == categoryId && !product.IsDeleted)
             .ApplyPaging(pageIndex, pageSize)
             .ApplyOrdering(orderBy, isDescending);
     }

@@ -37,7 +37,8 @@ public sealed class UpdateProductHandler(
             request.Price,
             request.PriceSale,
             productImage,
-            request.CategoryId);
+            request.CategoryId,
+            request.Status);
 
         logger.LogInformation("Updating product: {ProductId}, {ProductName}", product.Id, product.Name);
 

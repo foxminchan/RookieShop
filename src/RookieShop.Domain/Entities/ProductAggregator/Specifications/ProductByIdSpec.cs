@@ -5,5 +5,5 @@ namespace RookieShop.Domain.Entities.ProductAggregator.Specifications;
 
 public sealed class ProductByIdSpec : Specification<Product>
 {
-    public ProductByIdSpec(ProductId id) => Query.Where(product => product.Id == id);
+    public ProductByIdSpec(ProductId id) => Query.Where(product => product.Id == id && !product.IsDeleted);
 }

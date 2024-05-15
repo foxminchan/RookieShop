@@ -120,7 +120,7 @@ namespace RookieShop.Persistence.CompiledModels
                     (DateTime v) => v));
             createdDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
             createdDate.AddAnnotation("Relational:ColumnName", "created_date");
-            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 15, 20, 30, 605, DateTimeKind.Utc).AddTicks(8281));
+            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 120, DateTimeKind.Utc).AddTicks(9526));
 
             var description = runtimeEntityType.AddProperty(
                 "Description",
@@ -303,7 +303,7 @@ updateDate.TypeMapping = NpgsqlTimestampTzTypeMapping.Default.Clone(
         (Nullable<DateTime> v) => v.HasValue ? (Nullable<DateTime>)(DateTime)v : default(Nullable<DateTime>)));
 updateDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 updateDate.AddAnnotation("Relational:ColumnName", "update_date");
-updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 15, 20, 30, 605, DateTimeKind.Utc).AddTicks(9983));
+updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 120, DateTimeKind.Utc).AddTicks(9860));
 
 var version = runtimeEntityType.AddProperty(
     "Version",
@@ -330,7 +330,7 @@ version.TypeMapping = GuidTypeMapping.Default.Clone(
         storeTypeName: "uuid"));
 version.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 version.AddAnnotation("Relational:ColumnName", "version");
-version.AddAnnotation("Relational:DefaultValue", new Guid("f2eb55e1-d115-42eb-8483-d1cd9cb15078"));
+version.AddAnnotation("Relational:DefaultValue", new Guid("7988cad0-8c68-4fbe-8ca1-848723ec98a5"));
 
 var key = runtimeEntityType.AddKey(
     new[] { id });

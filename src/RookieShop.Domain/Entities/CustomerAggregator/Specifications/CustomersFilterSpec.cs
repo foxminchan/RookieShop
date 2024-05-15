@@ -9,6 +9,7 @@ public sealed class CustomersFilterSpec : Specification<Customer>
         if (pageSize == 0) pageSize = int.MaxValue;
 
         Query
+            .Where(x => !x.IsDeleted)
             .Skip((pageIndex - 1) * pageSize)
             .Take(pageSize)
             .OrderBy(customer => customer.Name);

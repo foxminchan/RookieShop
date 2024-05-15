@@ -1,4 +1,5 @@
-﻿using RookieShop.Application.Categories.DTOs;
+﻿using RookieShop.ApiService.ViewModels.Feedbacks;
+using RookieShop.Application.Categories.DTOs;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 
 namespace RookieShop.ApiService.ViewModels.Products;
@@ -11,4 +12,5 @@ public sealed record ProductVm(
     decimal Price,
     decimal PriceSale,
     string ImageUrl,
-    CategoryDto? Category);
+    CategoryDto? Category,
+    List<FeedbackVm>? Feedbacks);

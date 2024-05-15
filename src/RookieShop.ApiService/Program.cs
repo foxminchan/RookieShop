@@ -1,7 +1,6 @@
 using System.Text.Json;
 using Ardalis.ListStartupServices;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using RookieShop.ApiService.Filters;
 using RookieShop.ApiService.Middlewares;
 using RookieShop.Application;
 using RookieShop.Infrastructure;
@@ -27,6 +26,8 @@ builder.Services
     });
 
 builder.Services.AddAntiforgery();
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddEndpointsApiExplorer();
 

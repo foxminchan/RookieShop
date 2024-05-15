@@ -21,8 +21,8 @@ public sealed class Create(ISender sender) : IEndpoint<Created<CreateProductResp
                     [FromForm] int quantity,
                     [FromForm] decimal price,
                     [FromForm] decimal priceSale,
-                    [FromForm] IFormFile? productImages,
-                    [FromForm] CategoryId? categoryId) =>
+                    [FromForm] CategoryId? categoryId,
+                    IFormFile? productImages) =>
                 await HandleAsync(new(name, description, quantity, price, priceSale, productImages, categoryId)))
             .AddEndpointFilter<IdempotencyFilter>()
             .AddEndpointFilter<FileValidationFilter>()

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using RookieShop.Application.Products.DTOs;
 using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
+using RookieShop.Domain.Entities.ProductAggregator.Enums;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Domain.SharedKernel;
 
@@ -16,4 +17,5 @@ public sealed record UpdateProductCommand(
     decimal PriceSale,
     IFormFile? Image,
     bool DeleteOldImage,
-    CategoryId? CategoryId) : ICommand<Result<ProductDto>>;
+    CategoryId? CategoryId,
+    ProductStatus Status) : ICommand<Result<ProductDto>>;

@@ -47,7 +47,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public void Delete() => IsDeleted = true;
 
     public void Update(string name, string? description, int quantity, decimal price, decimal priceSale,
-        string? imageName, CategoryId? categoryId)
+        string? imageName, CategoryId? categoryId, ProductStatus status)
     {
         Name = Guard.Against.NullOrEmpty(name);
         Description = description;
@@ -56,5 +56,6 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
         Price = ProductPrice.Create(price, priceSale);
         ImageName = imageName;
         CategoryId = categoryId;
+        Status = Guard.Against.EnumOutOfRange(status);
     }
 }

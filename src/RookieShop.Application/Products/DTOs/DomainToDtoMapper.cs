@@ -1,4 +1,5 @@
 ﻿using RookieShop.Application.Categories.DTOs;
+using RookieShop.Application.Feedbacks.DTOs;
 using RookieShop.Domain.Constants;
 using RookieShop.Domain.Entities.ProductAggregator;
 
@@ -12,6 +13,8 @@ public static class DomainToDtoMapper
 
         var category = product.Category?.ToCategoryDto();
 
+        var feedbacks = product.Feedbacks?.ToFeedbackDto();
+
         return new(
             product.Id,
             product.Name,
@@ -20,7 +23,8 @@ public static class DomainToDtoMapper
             product.Price.Price,
             product.Price.PriceSale,
             imageUrl,
-            category);
+            category,
+            feedbacks);
     }
 
     public static IEnumerable<ProductDto> ToProductDto(this IEnumerable<Product> products) =>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RookieShop.ApiService.ViewModels.Products;
 using RookieShop.Application.Products.Commands.Update;
 using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
+using RookieShop.Domain.Entities.ProductAggregator.Enums;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Infrastructure.Endpoints.Abstractions;
 using RookieShop.Infrastructure.RateLimiter;
@@ -21,10 +22,11 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<UpdateProductResponse>
                         [FromForm] int quantity,
                         [FromForm] decimal price,
                         [FromForm] decimal priceSale,
-                        [FromForm] IFormFile? productImages,
+                        IFormFile? productImages,
+                        [FromForm] ProductStatus status,
                         [FromForm] bool isDeletedOldImage = false,
                         [FromForm] CategoryId? categoryId = null)
-                    => await HandleAsync(new(id, name, description, quantity, price, priceSale, productImages,
+                    => await HandleAsync(new(id, name, description, quantity, price, priceSale, status, productImages,
                         isDeletedOldImage, categoryId)))
             .Produces<UpdateProductResponse>()
             .WithTags(nameof(Products))
@@ -44,7 +46,8 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<UpdateProductResponse>
             request.PriceSale,
             request.ProductImages,
             request.IsDeletedOldImage,
-            request.CategoryId);
+            request.CategoryId,
+            request.Status);
 
         var result = await sender.Send(command, cancellationToken);
 

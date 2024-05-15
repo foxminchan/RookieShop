@@ -22,6 +22,7 @@ RookieShop Web Application is a assignment project for training purpose. The pro
   - [Setup tools and dependencies](#setup-tools-and-dependencies)
   - [Start the infrastructure](#start-the-infrastructure)
   - [Running the application](#running-the-application)
+- [Testing](#testing)
 - [Observability](#observability)
 - [Project References](#project-references)
 - [License](#license)
@@ -39,7 +40,7 @@ Build an e-commerce web site with minimum functionality below:
 - `Product rating`
 - Register
 - Login/Logout
-- Optional (shopping cart, ordering, IdentityServer4)
+- Optional (Shopping Cart, Ordering, IdentityServer4)
 
 **For admin:**
 
@@ -74,6 +75,8 @@ Build an e-commerce web site with minimum functionality below:
 
 - Get the latest source code: [https://github.com/foxminchan/RookieShop](https://github.com/foxminchan/RookieShop)
 - Install & start Docker Desktop: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+- Install Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+- Install bun: [https://bun.sh/](https://bun.sh/)
 
 #### Windows with Visual Studio
 
@@ -102,7 +105,7 @@ dotnet restore ./RookieShop.sln
 # Install the admin-facing website dependencies
 
 cd ../backoffice
-pnpm install
+bun install
 ```
 
 ### Start the infrastructure
@@ -150,6 +153,16 @@ dotnet run --project ui/storefront/RookieShop.Storefront.csproj
 
 ```bash
 cd ui/backoffice && pnpm run dev
+```
+
+## Testing
+
+<p align="justify">
+In the project, we use xUnit for unit testing and Moq for mocking. For integration testing, we use the <code>TestContainer</code> for running the test in the Docker container. I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>test</code> folder. I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
+</p>
+
+```bash
+dotnet test RookieShop.sln
 ```
 
 ## Observability

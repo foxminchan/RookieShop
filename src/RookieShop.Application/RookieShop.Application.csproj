@@ -16,12 +16,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Feedbacks\Command\" />
-		<Folder Include="Feedbacks\DTOs\" />
-		<Folder Include="Feedbacks\Queries\" />
-		<Folder Include="Orders\Command\" />
+		<Folder Include="Orders\Command\Create\" />
+		<Folder Include="Orders\Command\Delete\" />
+		<Folder Include="Orders\Command\Update\" />
 		<Folder Include="Orders\DTOs\" />
-		<Folder Include="Orders\Queries\" />
+		<Folder Include="Orders\Queries\Get\" />
+		<Folder Include="Orders\Queries\List\" />
 		<Folder Include="Reports\DTOs\" />
 		<Folder Include="Reports\Queries\" />
 	</ItemGroup>

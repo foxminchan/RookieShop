@@ -40,7 +40,7 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListProductsResponse>, L
         ListProductsResponse response = new()
         {
             PagedInfo = result.PagedInfo,
-            Products = result.Value.ToProductVmList()
+            Products = result.Value.ToProductVm()
         };
 
         return TypedResults.Ok(response);

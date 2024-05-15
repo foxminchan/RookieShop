@@ -75,5 +75,23 @@ public sealed class CustomerConfiguration : BaseConfiguration<Customer>
             Gender = Gender.Female,
             AccountId = null
         };
+
+        yield return new()
+        {
+            Name = "Nhan Nguyen",
+            Email = "nguyenxuannhan407@gmail.com",
+            Phone = "0123456789",
+            Gender = Gender.Male,
+            AccountId = new("7055bbfe-25c6-4b33-98cd-fc2b9fb4bb1a")
+        };
+
+        yield return new()
+        {
+            Name = "Fox Min Chan",
+            Email = "nguyenxuannhan.dev@gmail.com",
+            Phone = "0123456789",
+            Gender = Gender.Male,
+            AccountId = new("e5255692-c91f-43ba-937c-059895fd67a2")
+        };
     }
 }

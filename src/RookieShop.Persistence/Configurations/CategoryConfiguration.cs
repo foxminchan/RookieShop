@@ -67,7 +67,21 @@ public sealed class CategoryConfiguration : BaseConfiguration<Category>
         {
             Name = "Jewelry",
             Description =
-                "Jewellery consists of small decorative items worn for personal adornment, such as brooches, rings, necklaces, earrings, pendants, bracelets, and cufflinks."
+                "Jewellery consists of small decorative items worn for personal adornment, such as brooches, rings, necklaces, earrings, pendants, bracelets, and cuff-links."
+        };
+
+        yield return new()
+        {
+            Name = "Shoes",
+            Description =
+                "A shoe is an item of footwear intended to protect and comfort the human foot. Shoes"
+        };
+
+        yield return new()
+        {
+            Name = "Sport",
+            Description =
+                "Sport includes all forms of competitive physical activity or games which, through casual or organized participation, at least in part aim to use, maintain or improve physical ability and skills while providing enjoyment to participants, and in some cases, entertainment for spectators."
         };
     }
 }

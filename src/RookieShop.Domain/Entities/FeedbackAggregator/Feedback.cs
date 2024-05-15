@@ -17,10 +17,12 @@ public sealed class Feedback : EntityBase, IAggregateRoot
     {
     }
 
-    public Feedback(string? content, int rating)
+    public Feedback(string? content, int rating, ProductId productId, CustomerId? customerId)
     {
         Content = content;
         Rating = Guard.Against.OutOfRange(rating, nameof(rating), 1, 5);
+        ProductId = Guard.Against.Null(productId);
+        CustomerId = customerId;
     }
 
     public FeedbackId Id { get; set; } = new(Guid.NewGuid());
@@ -30,4 +32,12 @@ public sealed class Feedback : EntityBase, IAggregateRoot
     public Customer? Customer { get; set; }
     public ProductId ProductId { get; set; }
     public Product Product { get; set; } = new();
+
+    public void Update(string? content, int rating, ProductId productId, CustomerId? customerId)
+    {
+        Content = content;
+        Rating = Guard.Against.OutOfRange(rating, nameof(rating), 1, 5);
+        ProductId = Guard.Against.Null(productId);
+        CustomerId = customerId;
+    }
 }

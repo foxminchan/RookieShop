@@ -48,7 +48,7 @@ namespace RookieShop.Persistence.CompiledModels
             ProductPriceEntityType.CreateAnnotations(productPrice);
 
             AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-            AddAnnotation("ProductVersion", "8.0.4");
+            AddAnnotation("ProductVersion", "8.0.5");
             AddAnnotation("Relational:MaxIdentifierLength", 63);
             AddRuntimeAnnotation("Relational:RelationalModel", CreateRelationalModel());
         }
@@ -336,6 +336,8 @@ namespace RookieShop.Persistence.CompiledModels
             rookieShopDomainEntitiesOrderAggregatorOrderTableBase.Columns.Add("customer_id", customer_idColumnBase0);
             var idColumnBase2 = new ColumnBase<ColumnMappingBase>("id", "uuid", rookieShopDomainEntitiesOrderAggregatorOrderTableBase);
             rookieShopDomainEntitiesOrderAggregatorOrderTableBase.Columns.Add("id", idColumnBase2);
+            var order_statusColumnBase = new ColumnBase<ColumnMappingBase>("order_status", "smallint", rookieShopDomainEntitiesOrderAggregatorOrderTableBase);
+            rookieShopDomainEntitiesOrderAggregatorOrderTableBase.Columns.Add("order_status", order_statusColumnBase);
             var payment_methodColumnBase = new ColumnBase<ColumnMappingBase>("payment_method", "smallint", rookieShopDomainEntitiesOrderAggregatorOrderTableBase);
             rookieShopDomainEntitiesOrderAggregatorOrderTableBase.Columns.Add("payment_method", payment_methodColumnBase);
             var update_dateColumnBase2 = new ColumnBase<ColumnMappingBase>("update_date", "timestamp with time zone", rookieShopDomainEntitiesOrderAggregatorOrderTableBase)
@@ -352,6 +354,7 @@ namespace RookieShop.Persistence.CompiledModels
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)idColumnBase2, order.FindProperty("Id")!, rookieShopDomainEntitiesOrderAggregatorOrderMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)created_dateColumnBase2, order.FindProperty("CreatedDate")!, rookieShopDomainEntitiesOrderAggregatorOrderMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)customer_idColumnBase0, order.FindProperty("CustomerId")!, rookieShopDomainEntitiesOrderAggregatorOrderMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)order_statusColumnBase, order.FindProperty("OrderStatus")!, rookieShopDomainEntitiesOrderAggregatorOrderMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)payment_methodColumnBase, order.FindProperty("PaymentMethod")!, rookieShopDomainEntitiesOrderAggregatorOrderMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)update_dateColumnBase2, order.FindProperty("UpdateDate")!, rookieShopDomainEntitiesOrderAggregatorOrderMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)versionColumnBase2, order.FindProperty("Version")!, rookieShopDomainEntitiesOrderAggregatorOrderMappingBase);
@@ -380,6 +383,8 @@ namespace RookieShop.Persistence.CompiledModels
             ordersTable.Columns.Add("created_date", created_dateColumn2);
             var customer_idColumn0 = new Column("customer_id", "uuid", ordersTable);
             ordersTable.Columns.Add("customer_id", customer_idColumn0);
+            var order_statusColumn = new Column("order_status", "smallint", ordersTable);
+            ordersTable.Columns.Add("order_status", order_statusColumn);
             var payment_methodColumn = new Column("payment_method", "smallint", ordersTable);
             ordersTable.Columns.Add("payment_method", payment_methodColumn);
             var shipping_address_cityColumn = new Column("shipping_address_city", "character varying(50)", ordersTable)
@@ -440,6 +445,7 @@ namespace RookieShop.Persistence.CompiledModels
             RelationalModel.CreateColumnMapping(idColumn2, order.FindProperty("Id")!, ordersTableMapping);
             RelationalModel.CreateColumnMapping(created_dateColumn2, order.FindProperty("CreatedDate")!, ordersTableMapping);
             RelationalModel.CreateColumnMapping(customer_idColumn0, order.FindProperty("CustomerId")!, ordersTableMapping);
+            RelationalModel.CreateColumnMapping(order_statusColumn, order.FindProperty("OrderStatus")!, ordersTableMapping);
             RelationalModel.CreateColumnMapping(payment_methodColumn, order.FindProperty("PaymentMethod")!, ordersTableMapping);
             RelationalModel.CreateColumnMapping(update_dateColumn2, order.FindProperty("UpdateDate")!, ordersTableMapping);
             RelationalModel.CreateColumnMapping(versionColumn2, order.FindProperty("Version")!, ordersTableMapping);
