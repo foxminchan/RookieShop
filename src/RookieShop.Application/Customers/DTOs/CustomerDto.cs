@@ -9,4 +9,4 @@ public sealed record CustomerDto(
     string Email,
     string Phone,
     Gender Gender,
-    string? AccountId);
+    Guid? AccountId);

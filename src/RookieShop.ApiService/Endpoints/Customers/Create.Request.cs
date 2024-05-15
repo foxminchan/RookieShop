@@ -8,5 +8,5 @@ public sealed class CreateCustomerRequest
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
     public Gender Gender { get; set; } = Gender.Male;
-    public string? AccountId { get; set; }
+    public Guid? AccountId { get; set; }
 }

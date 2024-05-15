@@ -16,7 +16,7 @@ public sealed class Customer : EntityBase, ISoftDelete, IAggregateRoot
     {
     }
 
-    public Customer(string name, string email, string phone, Gender gender, string? accountId)
+    public Customer(string name, string email, string phone, Gender gender, Guid? accountId)
     {
         Name = Guard.Against.NullOrEmpty(name);
         Email = Guard.Against.NullOrEmpty(email);
@@ -30,14 +30,14 @@ public sealed class Customer : EntityBase, ISoftDelete, IAggregateRoot
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
     public Gender Gender { get; set; } = Gender.Male;
-    public string? AccountId { get; set; }
+    public Guid? AccountId { get; set; }
     public ICollection<Order>? Orders { get; set; } = [];
     public ICollection<Feedback>? Feedbacks { get; set; } = [];
     public bool IsDeleted { get; set; }
 
     public void Delete() => IsDeleted = true;
 
-    public void Update(string name, string email, string phone, Gender gender, string? accountId)
+    public void Update(string name, string email, string phone, Gender gender, Guid? accountId)
     {
         Name = Guard.Against.NullOrEmpty(name);
         Email = Guard.Against.NullOrEmpty(email);

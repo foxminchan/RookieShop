@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using RookieShop.Domain.Constants;
 
 namespace RookieShop.Application.Baskets.Command.Create;
 
@@ -8,8 +7,7 @@ public sealed class CreateBasketValidator : AbstractValidator<CreateBasketComman
     public CreateBasketValidator()
     {
         RuleFor(x => x.AccountId)
-            .NotEmpty()
-            .MaximumLength(DataLength.Medium);
+            .NotEmpty();
 
         RuleFor(x => x.BasketDetails)
             .ForEach(d =>

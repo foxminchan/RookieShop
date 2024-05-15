@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using RookieShop.Domain.Constants;
 
 namespace RookieShop.Application.Baskets.Command.Update;
 
@@ -8,8 +7,7 @@ public sealed class UpdateBasketValidator : AbstractValidator<UpdateBasketComman
     public UpdateBasketValidator()
     {
         RuleFor(x => x.AccountId)
-            .NotEmpty()
-            .MaximumLength(DataLength.Medium);
+            .NotEmpty();
 
         RuleFor(x => x.BasketDetails)
             .ForEach(d =>

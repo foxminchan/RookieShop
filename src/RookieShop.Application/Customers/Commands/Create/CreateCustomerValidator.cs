@@ -22,8 +22,5 @@ public sealed class CreateCustomerValidator : AbstractValidator<CreateCustomerCo
 
         RuleFor(x => x.Gender)
             .IsInEnum();
-
-        RuleFor(x => x.AccountId)
-            .MaximumLength(DataLength.Medium);
     }
 }

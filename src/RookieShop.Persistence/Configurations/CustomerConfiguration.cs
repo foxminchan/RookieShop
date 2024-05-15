@@ -35,9 +35,6 @@ public sealed class CustomerConfiguration : BaseConfiguration<Customer>
             .HasMaxLength(DataLength.Small)
             .IsRequired();
 
-        builder.Property(p => p.AccountId)
-            .HasMaxLength(DataLength.Medium);
-
         builder.HasData(GetSampleData());
     }
 

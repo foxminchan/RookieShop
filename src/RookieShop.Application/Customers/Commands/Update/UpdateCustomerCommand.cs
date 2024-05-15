@@ -12,4 +12,4 @@ public sealed record UpdateCustomerCommand(
     string Email,
     string Phone,
     Gender Gender,
-    string? AccountId) : ICommand<Result<CustomerDto>>;
+    Guid? AccountId) : ICommand<Result<CustomerDto>>;

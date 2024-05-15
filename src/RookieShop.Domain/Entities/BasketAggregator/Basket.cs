@@ -1,15 +1,15 @@
 ﻿namespace RookieShop.Domain.Entities.BasketAggregator;
 
-public sealed class Basket(string accountId)
+public sealed class Basket(Guid accountId)
 {
-    public string AccountId { get; set; } = accountId;
+    public Guid AccountId { get; set; } = accountId;
     public ICollection<BasketDetail> BasketDetails { get; set; } = [];
 
     public void AddItems(BasketDetail basketDetail) => BasketDetails.Add(basketDetail);
 
     public static class Factory
     {
-        public static Basket Create(string accountId, List<BasketDetail> basketDetails)
+        public static Basket Create(Guid accountId, List<BasketDetail> basketDetails)
         {
             Basket basket = new(accountId);
 

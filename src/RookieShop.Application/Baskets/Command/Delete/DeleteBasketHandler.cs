@@ -10,11 +10,11 @@ public sealed class DeleteBasketHandler(IRedisService redisService) : ICommandHa
 {
     public async Task<Result> Handle(DeleteBasketCommand request, CancellationToken cancellationToken)
     {
-        var basket = await redisService.GetAsync<Basket>(request.AccountId);
+        var basket = await redisService.GetAsync<Basket>(request.AccountId.ToString());
 
         Guard.Against.NotFound(request.AccountId, basket);
 
-        await redisService.HashRemoveAsync(nameof(Basket), basket.AccountId);
+        await redisService.HashRemoveAsync(nameof(Basket), basket.AccountId.ToString());
 
         return Result.Success();
     }

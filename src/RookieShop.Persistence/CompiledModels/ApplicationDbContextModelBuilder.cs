@@ -130,7 +130,7 @@ namespace RookieShop.Persistence.CompiledModels
             var defaultTableMappings0 = new List<TableMappingBase<ColumnMappingBase>>();
             customer.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings0);
             var rookieShopDomainEntitiesCustomerAggregatorCustomerTableBase = new TableBase("RookieShop.Domain.Entities.CustomerAggregator.Customer", null, relationalModel);
-            var account_idColumnBase = new ColumnBase<ColumnMappingBase>("account_id", "character varying(50)", rookieShopDomainEntitiesCustomerAggregatorCustomerTableBase)
+            var account_idColumnBase = new ColumnBase<ColumnMappingBase>("account_id", "uuid", rookieShopDomainEntitiesCustomerAggregatorCustomerTableBase)
             {
                 IsNullable = true
             };
@@ -176,7 +176,7 @@ namespace RookieShop.Persistence.CompiledModels
             var customersTable = new Table("customers", null, relationalModel);
             var idColumn0 = new Column("id", "uuid", customersTable);
             customersTable.Columns.Add("id", idColumn0);
-            var account_idColumn = new Column("account_id", "character varying(50)", customersTable)
+            var account_idColumn = new Column("account_id", "uuid", customersTable)
             {
                 IsNullable = true
             };

@@ -5,5 +5,5 @@ using RookieShop.Domain.SharedKernel;
 
 namespace RookieShop.Application.Customers.Commands.Create;
 
-public sealed record CreateCustomerCommand(string Name, string Email, string Phone, Gender Gender, string? AccountId)
+public sealed record CreateCustomerCommand(string Name, string Email, string Phone, Gender Gender, Guid? AccountId)
     : ICommand<Result<CustomerId>>;

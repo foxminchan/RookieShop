@@ -64,12 +64,59 @@ namespace RookieShop.Persistence.CompiledModels
 
             var accountId = runtimeEntityType.AddProperty(
                 "AccountId",
-                typeof(string),
+                typeof(Guid?),
                 propertyInfo: typeof(Customer).GetProperty("AccountId", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(Customer).GetField("<AccountId>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                nullable: true,
+                nullable: true);
+            accountId.TypeMapping = GuidTypeMapping.Default.Clone(
+                comparer: new ValueComparer<Guid?>(
+                    (Nullable<Guid> v1, Nullable<Guid> v2) => v1.HasValue && v2.HasValue && (Guid)v1 == (Guid)v2 || !v1.HasValue && !v2.HasValue,
+                    (Nullable<Guid> v) => v.HasValue ? ((Guid)v).GetHashCode() : 0,
+                    (Nullable<Guid> v) => v.HasValue ? (Nullable<Guid>)(Guid)v : default(Nullable<Guid>)),
+                keyComparer: new ValueComparer<Guid?>(
+                    (Nullable<Guid> v1, Nullable<Guid> v2) => v1.HasValue && v2.HasValue && (Guid)v1 == (Guid)v2 || !v1.HasValue && !v2.HasValue,
+                    (Nullable<Guid> v) => v.HasValue ? ((Guid)v).GetHashCode() : 0,
+                    (Nullable<Guid> v) => v.HasValue ? (Nullable<Guid>)(Guid)v : default(Nullable<Guid>)),
+                providerValueComparer: new ValueComparer<Guid?>(
+                    (Nullable<Guid> v1, Nullable<Guid> v2) => v1.HasValue && v2.HasValue && (Guid)v1 == (Guid)v2 || !v1.HasValue && !v2.HasValue,
+                    (Nullable<Guid> v) => v.HasValue ? ((Guid)v).GetHashCode() : 0,
+                    (Nullable<Guid> v) => v.HasValue ? (Nullable<Guid>)(Guid)v : default(Nullable<Guid>)),
+                mappingInfo: new RelationalTypeMappingInfo(
+                    storeTypeName: "uuid"));
+            accountId.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+            accountId.AddAnnotation("Relational:ColumnName", "account_id");
+
+            var createdDate = runtimeEntityType.AddProperty(
+                "CreatedDate",
+                typeof(DateTime),
+                propertyInfo: typeof(EntityBase).GetProperty("CreatedDate", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(EntityBase).GetField("<CreatedDate>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                valueGenerated: ValueGenerated.OnAdd,
+                sentinel: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+            createdDate.TypeMapping = NpgsqlTimestampTzTypeMapping.Default.Clone(
+                comparer: new ValueComparer<DateTime>(
+                    (DateTime v1, DateTime v2) => v1.Equals(v2),
+                    (DateTime v) => v.GetHashCode(),
+                    (DateTime v) => v),
+                keyComparer: new ValueComparer<DateTime>(
+                    (DateTime v1, DateTime v2) => v1.Equals(v2),
+                    (DateTime v) => v.GetHashCode(),
+                    (DateTime v) => v),
+                providerValueComparer: new ValueComparer<DateTime>(
+                    (DateTime v1, DateTime v2) => v1.Equals(v2),
+                    (DateTime v) => v.GetHashCode(),
+                    (DateTime v) => v));
+            createdDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+            createdDate.AddAnnotation("Relational:ColumnName", "created_date");
+            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 15, 20, 30, 593, DateTimeKind.Utc).AddTicks(540));
+
+            var email = runtimeEntityType.AddProperty(
+                "Email",
+                typeof(string),
+                propertyInfo: typeof(Customer).GetProperty("Email", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(Customer).GetField("<Email>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 maxLength: 50);
-            accountId.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
+            email.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
                 comparer: new ValueComparer<string>(
                     (string v1, string v2) => v1 == v2,
                     (string v) => v.GetHashCode(),
@@ -85,41 +132,71 @@ namespace RookieShop.Persistence.CompiledModels
                 mappingInfo: new RelationalTypeMappingInfo(
                     storeTypeName: "character varying(50)",
                     size: 50));
-            accountId.TypeMapping = ((NpgsqlStringTypeMapping)accountId.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
-        accountId.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
-        accountId.AddAnnotation("Relational:ColumnName", "account_id");
+            email.TypeMapping = ((NpgsqlStringTypeMapping)email.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
+        email.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+        email.AddAnnotation("Relational:ColumnName", "email");
 
-        var createdDate = runtimeEntityType.AddProperty(
-            "CreatedDate",
-            typeof(DateTime),
-            propertyInfo: typeof(EntityBase).GetProperty("CreatedDate", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-            fieldInfo: typeof(EntityBase).GetField("<CreatedDate>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-            valueGenerated: ValueGenerated.OnAdd,
-            sentinel: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-        createdDate.TypeMapping = NpgsqlTimestampTzTypeMapping.Default.Clone(
-            comparer: new ValueComparer<DateTime>(
-                (DateTime v1, DateTime v2) => v1.Equals(v2),
-                (DateTime v) => v.GetHashCode(),
-                (DateTime v) => v),
-            keyComparer: new ValueComparer<DateTime>(
-                (DateTime v1, DateTime v2) => v1.Equals(v2),
-                (DateTime v) => v.GetHashCode(),
-                (DateTime v) => v),
-            providerValueComparer: new ValueComparer<DateTime>(
-                (DateTime v1, DateTime v2) => v1.Equals(v2),
-                (DateTime v) => v.GetHashCode(),
-                (DateTime v) => v));
-        createdDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
-        createdDate.AddAnnotation("Relational:ColumnName", "created_date");
-        createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 7, 14, 30, 162, DateTimeKind.Utc).AddTicks(9102));
+        var gender = runtimeEntityType.AddProperty(
+            "Gender",
+            typeof(Gender),
+            propertyInfo: typeof(Customer).GetProperty("Gender", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+            fieldInfo: typeof(Customer).GetField("<Gender>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+        gender.TypeMapping = ByteTypeMapping.Default.Clone(
+            comparer: new ValueComparer<Gender>(
+                (Gender v1, Gender v2) => object.Equals((object)v1, (object)v2),
+                (Gender v) => v.GetHashCode(),
+                (Gender v) => v),
+            keyComparer: new ValueComparer<Gender>(
+                (Gender v1, Gender v2) => object.Equals((object)v1, (object)v2),
+                (Gender v) => v.GetHashCode(),
+                (Gender v) => v),
+            providerValueComparer: new ValueComparer<byte>(
+                (byte v1, byte v2) => v1 == v2,
+                (byte v) => (int)v,
+                (byte v) => v),
+            mappingInfo: new RelationalTypeMappingInfo(
+                storeTypeName: "smallint"),
+            converter: new ValueConverter<Gender, byte>(
+                (Gender value) => (byte)value,
+                (byte value) => (Gender)value),
+            jsonValueReaderWriter: new JsonConvertedValueReaderWriter<Gender, byte>(
+                JsonByteReaderWriter.Instance,
+                new ValueConverter<Gender, byte>(
+                    (Gender value) => (byte)value,
+                    (byte value) => (Gender)value)));
+        gender.SetSentinelFromProviderValue((byte)0);
+        gender.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+        gender.AddAnnotation("Relational:ColumnName", "gender");
 
-        var email = runtimeEntityType.AddProperty(
-            "Email",
+        var isDeleted = runtimeEntityType.AddProperty(
+            "IsDeleted",
+            typeof(bool),
+            propertyInfo: typeof(Customer).GetProperty("IsDeleted", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+            fieldInfo: typeof(Customer).GetField("<IsDeleted>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+            sentinel: false);
+        isDeleted.TypeMapping = NpgsqlBoolTypeMapping.Default.Clone(
+            comparer: new ValueComparer<bool>(
+                (bool v1, bool v2) => v1 == v2,
+                (bool v) => v.GetHashCode(),
+                (bool v) => v),
+            keyComparer: new ValueComparer<bool>(
+                (bool v1, bool v2) => v1 == v2,
+                (bool v) => v.GetHashCode(),
+                (bool v) => v),
+            providerValueComparer: new ValueComparer<bool>(
+                (bool v1, bool v2) => v1 == v2,
+                (bool v) => v.GetHashCode(),
+                (bool v) => v));
+        isDeleted.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+        isDeleted.AddAnnotation("Relational:ColumnName", "is_deleted");
+
+        var name = runtimeEntityType.AddProperty(
+            "Name",
             typeof(string),
-            propertyInfo: typeof(Customer).GetProperty("Email", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-            fieldInfo: typeof(Customer).GetField("<Email>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+            propertyInfo: typeof(Customer).GetProperty("Name", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+            fieldInfo: typeof(Customer).GetField("<Name>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
             maxLength: 50);
-        email.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
+        name.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
             comparer: new ValueComparer<string>(
                 (string v1, string v2) => v1 == v2,
                 (string v) => v.GetHashCode(),
@@ -135,71 +212,17 @@ namespace RookieShop.Persistence.CompiledModels
             mappingInfo: new RelationalTypeMappingInfo(
                 storeTypeName: "character varying(50)",
                 size: 50));
-        email.TypeMapping = ((NpgsqlStringTypeMapping)email.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
-    email.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
-    email.AddAnnotation("Relational:ColumnName", "email");
+        name.TypeMapping = ((NpgsqlStringTypeMapping)name.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
+    name.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+    name.AddAnnotation("Relational:ColumnName", "name");
 
-    var gender = runtimeEntityType.AddProperty(
-        "Gender",
-        typeof(Gender),
-        propertyInfo: typeof(Customer).GetProperty("Gender", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        fieldInfo: typeof(Customer).GetField("<Gender>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-    gender.TypeMapping = ByteTypeMapping.Default.Clone(
-        comparer: new ValueComparer<Gender>(
-            (Gender v1, Gender v2) => object.Equals((object)v1, (object)v2),
-            (Gender v) => v.GetHashCode(),
-            (Gender v) => v),
-        keyComparer: new ValueComparer<Gender>(
-            (Gender v1, Gender v2) => object.Equals((object)v1, (object)v2),
-            (Gender v) => v.GetHashCode(),
-            (Gender v) => v),
-        providerValueComparer: new ValueComparer<byte>(
-            (byte v1, byte v2) => v1 == v2,
-            (byte v) => (int)v,
-            (byte v) => v),
-        mappingInfo: new RelationalTypeMappingInfo(
-            storeTypeName: "smallint"),
-        converter: new ValueConverter<Gender, byte>(
-            (Gender value) => (byte)value,
-            (byte value) => (Gender)value),
-        jsonValueReaderWriter: new JsonConvertedValueReaderWriter<Gender, byte>(
-            JsonByteReaderWriter.Instance,
-            new ValueConverter<Gender, byte>(
-                (Gender value) => (byte)value,
-                (byte value) => (Gender)value)));
-    gender.SetSentinelFromProviderValue((byte)0);
-    gender.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
-    gender.AddAnnotation("Relational:ColumnName", "gender");
-
-    var isDeleted = runtimeEntityType.AddProperty(
-        "IsDeleted",
-        typeof(bool),
-        propertyInfo: typeof(Customer).GetProperty("IsDeleted", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        fieldInfo: typeof(Customer).GetField("<IsDeleted>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        sentinel: false);
-    isDeleted.TypeMapping = NpgsqlBoolTypeMapping.Default.Clone(
-        comparer: new ValueComparer<bool>(
-            (bool v1, bool v2) => v1 == v2,
-            (bool v) => v.GetHashCode(),
-            (bool v) => v),
-        keyComparer: new ValueComparer<bool>(
-            (bool v1, bool v2) => v1 == v2,
-            (bool v) => v.GetHashCode(),
-            (bool v) => v),
-        providerValueComparer: new ValueComparer<bool>(
-            (bool v1, bool v2) => v1 == v2,
-            (bool v) => v.GetHashCode(),
-            (bool v) => v));
-    isDeleted.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
-    isDeleted.AddAnnotation("Relational:ColumnName", "is_deleted");
-
-    var name = runtimeEntityType.AddProperty(
-        "Name",
+    var phone = runtimeEntityType.AddProperty(
+        "Phone",
         typeof(string),
-        propertyInfo: typeof(Customer).GetProperty("Name", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        fieldInfo: typeof(Customer).GetField("<Name>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        maxLength: 50);
-    name.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
+        propertyInfo: typeof(Customer).GetProperty("Phone", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+        fieldInfo: typeof(Customer).GetField("<Phone>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+        maxLength: 20);
+    phone.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
         comparer: new ValueComparer<string>(
             (string v1, string v2) => v1 == v2,
             (string v) => v.GetHashCode(),
@@ -213,35 +236,9 @@ namespace RookieShop.Persistence.CompiledModels
             (string v) => v.GetHashCode(),
             (string v) => v),
         mappingInfo: new RelationalTypeMappingInfo(
-            storeTypeName: "character varying(50)",
-            size: 50));
-    name.TypeMapping = ((NpgsqlStringTypeMapping)name.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
-name.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
-name.AddAnnotation("Relational:ColumnName", "name");
-
-var phone = runtimeEntityType.AddProperty(
-    "Phone",
-    typeof(string),
-    propertyInfo: typeof(Customer).GetProperty("Phone", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-    fieldInfo: typeof(Customer).GetField("<Phone>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-    maxLength: 20);
-phone.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
-    comparer: new ValueComparer<string>(
-        (string v1, string v2) => v1 == v2,
-        (string v) => v.GetHashCode(),
-        (string v) => v),
-    keyComparer: new ValueComparer<string>(
-        (string v1, string v2) => v1 == v2,
-        (string v) => v.GetHashCode(),
-        (string v) => v),
-    providerValueComparer: new ValueComparer<string>(
-        (string v1, string v2) => v1 == v2,
-        (string v) => v.GetHashCode(),
-        (string v) => v),
-    mappingInfo: new RelationalTypeMappingInfo(
-        storeTypeName: "character varying(20)",
-        size: 20));
-phone.TypeMapping = ((NpgsqlStringTypeMapping)phone.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
+            storeTypeName: "character varying(20)",
+            size: 20));
+    phone.TypeMapping = ((NpgsqlStringTypeMapping)phone.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
 phone.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 phone.AddAnnotation("Relational:ColumnName", "phone");
 
@@ -267,7 +264,7 @@ updateDate.TypeMapping = NpgsqlTimestampTzTypeMapping.Default.Clone(
         (Nullable<DateTime> v) => v.HasValue ? (Nullable<DateTime>)(DateTime)v : default(Nullable<DateTime>)));
 updateDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 updateDate.AddAnnotation("Relational:ColumnName", "update_date");
-updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 7, 14, 30, 162, DateTimeKind.Utc).AddTicks(9389));
+updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 15, 20, 30, 593, DateTimeKind.Utc).AddTicks(976));
 
 var version = runtimeEntityType.AddProperty(
     "Version",
@@ -294,7 +291,7 @@ version.TypeMapping = GuidTypeMapping.Default.Clone(
         storeTypeName: "uuid"));
 version.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 version.AddAnnotation("Relational:ColumnName", "version");
-version.AddAnnotation("Relational:DefaultValue", new Guid("57dac060-c14e-45d5-aa5c-d2c05167088c"));
+version.AddAnnotation("Relational:DefaultValue", new Guid("d4103dc8-fde4-4cb8-8317-3394d39fb26b"));
 
 var key = runtimeEntityType.AddKey(
     new[] { id });
