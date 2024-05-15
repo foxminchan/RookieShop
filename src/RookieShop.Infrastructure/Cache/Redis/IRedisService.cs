@@ -16,6 +16,8 @@ public interface IRedisService
 
     Task<bool> RemoveAllKeysAsync(string pattern = "*");
 
+    Task HashRemoveAsync(string key, string hashKey);
+
     Task RemoveAsync(string key);
 
     Task ResetAsync();

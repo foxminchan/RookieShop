@@ -124,6 +124,9 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
         return succeed;
     }
 
+    public async Task HashRemoveAsync(string key, string hashKey)
+        => await Database.HashDeleteAsync($"{_redisCacheSetting.Prefix}:{key}", hashKey.ToLower());
+
     public async Task RemoveAsync(string key) => await Database.KeyDeleteAsync($"{_redisCacheSetting.Prefix}:{key}");
 
     public async Task ResetAsync()
