@@ -38,8 +38,6 @@ public sealed class CustomerConfiguration : BaseConfiguration<Customer>
         builder.Property(p => p.AccountId)
             .HasMaxLength(DataLength.Medium);
 
-        builder.HasQueryFilter(e => !e.IsDeleted);
-
         builder.HasData(GetSampleData());
     }
 

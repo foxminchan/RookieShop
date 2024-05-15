@@ -12,7 +12,12 @@ public sealed class ListProductsHandler(IReadRepository<Product> repository)
     public async Task<PagedResult<IEnumerable<ProductDto>>> Handle(ListProductsQuery request,
         CancellationToken cancellationToken)
     {
-        ProductsFilterSpec spec = new(request.PageIndex, request.PageSize, request.OrderBy, request.IsDescending);
+        ProductsFilterSpec spec = new(
+            request.PageIndex,
+            request.PageSize,
+            request.OrderBy,
+            request.IsDescending,
+            request.CategoryId);
 
         var products = await repository.ListAsync(spec, cancellationToken);
 

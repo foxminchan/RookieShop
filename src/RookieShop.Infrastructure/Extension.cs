@@ -7,7 +7,6 @@ using RookieShop.Domain.Constants;
 using RookieShop.Infrastructure.Cache;
 using RookieShop.Infrastructure.DataProtection;
 using RookieShop.Infrastructure.Email;
-using RookieShop.Infrastructure.GenAi;
 using RookieShop.Infrastructure.HealthCheck;
 using RookieShop.Infrastructure.Lock;
 using RookieShop.Infrastructure.Merchant;
@@ -83,7 +82,6 @@ public static class Extension
             .AddEmail()
             .AddHealthCheck()
             .AddStripeService()
-            .AddGenAi()
             .ConfigureOpenTelemetry();
 
         return builder;

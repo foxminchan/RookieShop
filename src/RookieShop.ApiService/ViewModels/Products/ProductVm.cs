@@ -1,3 +1,14 @@
-﻿namespace RookieShop.ApiService.ViewModels.Products;
+﻿using RookieShop.Application.Categories.DTOs;
+using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 
-public record ProductVm();
+namespace RookieShop.ApiService.ViewModels.Products;
+
+public sealed record ProductVm(
+    ProductId Id,
+    string Name,
+    string? Description,
+    int Quantity,
+    decimal Price,
+    decimal PriceSale,
+    string ImageUrl,
+    CategoryDto? Category);

@@ -15,4 +15,18 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Baskets\Command\" />
+	  <Folder Include="Baskets\DTOs\" />
+	  <Folder Include="Baskets\Queries\" />
+	  <Folder Include="Feedbacks\Command\" />
+	  <Folder Include="Feedbacks\DTOs\" />
+	  <Folder Include="Feedbacks\Queries\" />
+	  <Folder Include="Orders\Command\" />
+	  <Folder Include="Orders\DTOs\" />
+	  <Folder Include="Orders\Queries\" />
+	  <Folder Include="Reports\DTOs\" />
+	  <Folder Include="Reports\Queries\" />
+	</ItemGroup>
+
 </Project>

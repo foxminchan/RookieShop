@@ -37,7 +37,8 @@ public sealed class ApplicationFactory<TProgram>
         Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(WithCacheContainer)}");
         _containers.Add(new RedisBuilder()
             .WithName($"test_cache_{Guid.NewGuid()}")
-            .WithImage("redis:alpine")
+            .WithImage("redis/redis-stack-server:7.2.0-v10")
+            .WithCommand("redis-server --requirepass NashTech@2024")
             .WithCleanUp(true)
             .Build());
 
@@ -49,9 +50,9 @@ public sealed class ApplicationFactory<TProgram>
         Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(WithDbContainer)}");
         _containers.Add(new PostgreSqlBuilder()
             .WithDatabase($"test_db_{Guid.NewGuid()}")
-            .WithUsername("postgres")
-            .WithPassword("postgres")
-            .WithImage("postgres:alpine")
+            .WithUsername("root")
+            .WithPassword("NashTech@2024")
+            .WithImage("postgres:16.2-alpine3.19")
             .WithCleanUp(true)
             .Build());
 

@@ -37,9 +37,6 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
         builder.Property(p => p.ImageName)
             .HasMaxLength(DataLength.Medium);
 
-        builder.Property(p => p.Embedding)
-            .HasColumnType(VectorType.DataType);
-
         builder.OwnsOne(
             p => p.Price,
             e => e.ToJson()
@@ -55,7 +52,5 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
 
         builder.Navigation(p => p.Feedbacks)
             .AutoInclude();
-
-        builder.HasQueryFilter(x => !x.IsDeleted);
     }
 }

@@ -7,7 +7,7 @@ x-default-logging: &logging
 
 services:
   rookie.db:
-    image: ankane/pgvector:v0.5.1
+    image: postgres:16.2-alpine3.19
     container_name: rookie.db
     restart: unless-stopped
     ports:
@@ -29,7 +29,7 @@ services:
       - rookie-network
 
   rookie.cache:
-    image: redis/redis-stack:7.2.0-v10
+    image: redis/redis-stack-server:7.2.0-v10
     container_name: rookie.cache
     restart: unless-stopped
     ports:

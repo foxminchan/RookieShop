@@ -63,8 +63,6 @@ Build an e-commerce web site with minimum functionality below:
 - [Postgres](https://www.postgresql.org/)
 - [Aspire](https://learn.microsoft.com/dotnet/aspire)
 - [OpenTelemetry](https://opentelemetry.io/)
-- [OpenAI](https://openai.com/)
-- [Semantic Kernel](https://aka.ms/semantic-kernel)
 
 ## Software Architecture
 

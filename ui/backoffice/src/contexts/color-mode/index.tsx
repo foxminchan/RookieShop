@@ -60,7 +60,6 @@ export const ColorModeContextProvider: React.FC<
       }}
     >
       <ThemeProvider
-        // you can change the theme colors here. example: mode === "light" ? RefineThemes.Magenta : RefineThemes.MagentaDark
         theme={mode === "light" ? RefineThemes.Red : RefineThemes.RedDark}
       >
         <CssBaseline />

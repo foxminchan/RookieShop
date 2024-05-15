@@ -6,11 +6,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Pgvector" />
-		<PackageReference Include="Pgvector.EntityFrameworkCore" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Ardalis.GuardClauses" />
 		<PackageReference Include="Ardalis.Specification" />
 		<PackageReference Include="Ardalis.Result.AspNetCore" />

@@ -5,14 +5,12 @@ using Microsoft.Extensions.Logging;
 using RookieShop.Application.Products.DTOs;
 using RookieShop.Domain.Entities.ProductAggregator;
 using RookieShop.Domain.SharedKernel;
-using RookieShop.Infrastructure.GenAi.OpenAi;
 using RookieShop.Infrastructure.Storage.Azurite;
 
 namespace RookieShop.Application.Products.Commands.Update;
 
 public sealed class UpdateProductHandler(
     IRepository<Product> repository,
-    IOpenAiService aiService,
     IAzuriteService azuriteService,
     ILogger<UpdateProductHandler> logger) : ICommandHandler<UpdateProductCommand, Result<ProductDto>>
 {
@@ -21,9 +19,6 @@ public sealed class UpdateProductHandler(
         var product = await repository.GetByIdAsync(request.Id, cancellationToken);
 
         Guard.Against.NotFound(request.Id, product);
-
-        product.Embedding =
-            await aiService.GetEmbeddingAsync($"{product.Name} {product.Description}", cancellationToken);
 
         if (request.DeleteOldImage && product.ImageName is not null)
         {

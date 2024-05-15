@@ -5,14 +5,12 @@ using Microsoft.Extensions.Logging;
 using RookieShop.Domain.Entities.ProductAggregator;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Domain.SharedKernel;
-using RookieShop.Infrastructure.GenAi.OpenAi;
 using RookieShop.Infrastructure.Storage.Azurite;
 
 namespace RookieShop.Application.Products.Commands.Create;
 
 public sealed class CreateProductHandler(
     IRepository<Product> repository,
-    IOpenAiService aiService,
     IAzuriteService azuriteService,
     ILogger<CreateProductHandler> logger) : ICommandHandler<CreateProductCommand, Result<ProductId>>
 {
@@ -28,9 +26,6 @@ public sealed class CreateProductHandler(
             request.PriceSale,
             productImage,
             request.CategoryId);
-
-        product.Embedding =
-            await aiService.GetEmbeddingAsync($"{product.Name} {product.Description}", cancellationToken);
 
         logger.LogInformation("[{Command}] - Creating product {@Product}", nameof(CreateProductCommand),
             JsonSerializer.Serialize(product));

@@ -5,8 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Npgsql;
 using RookieShop.Domain.SharedKernel;
+using RookieShop.Persistence.CompiledModels;
 using RookieShop.Persistence.Interceptors;
 
 namespace RookieShop.Persistence;
@@ -25,18 +25,14 @@ public static class Extension
 
         builder.Services.AddDbContextPool<ApplicationDbContext>((sp, options) =>
         {
-            var npgsqlDataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
-
-            npgsqlDataSourceBuilder.UseVector();
-
-            options.UseNpgsql(npgsqlDataSourceBuilder.ConnectionString, sqlOptions =>
+            options.UseNpgsql(connectionString, optionsBuilder =>
                 {
-                    sqlOptions.UseVector();
-                    sqlOptions.MigrationsAssembly(AssemblyReference.DbContextAssembly.FullName);
-                    sqlOptions.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
+                    optionsBuilder.MigrationsAssembly(AssemblyReference.DbContextAssembly.FullName);
+                    optionsBuilder.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
                 })
                 .UseExceptionProcessor()
                 .UseSnakeCaseNamingConvention()
+                .UseModel(ApplicationDbContextModel.Instance)
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             options.AddInterceptors(sp.GetRequiredService<AuditableEntityInterceptor>());

@@ -16,16 +16,17 @@ export default function CategoryList() {
   const columns = React.useMemo<GridColDef[]>(
     () => [
       {
-        field: "id",
-        headerName: "ID",
-        type: "number",
-        minWidth: 50,
+        // categories
+        field: "name",
+        flex: 1,
+        headerName: "Name",
+        minWidth: 200,
       },
       {
-        field: "title",
+        field: "description",
         flex: 1,
-        headerName: "Title",
-        minWidth: 200,
+        headerName: "Description",
+        minWidth: 500,
       },
       {
         field: "actions",

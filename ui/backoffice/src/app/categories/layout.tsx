@@ -2,9 +2,9 @@ import authOptions from "@app/api/auth/[...nextauth]/options";
 import { ThemedLayout } from "@components/themed-layout";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
-export default async function Layout({ children }: React.PropsWithChildren) {
+export default async function Layout({ children }: Readonly<PropsWithChildren>) {
   const data = await getData();
 
   if (!data.session?.user) {
