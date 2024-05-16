@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RookieShop.Application.Orders.Services;
+using RookieShop.Application.Products.Services;
 using RookieShop.Infrastructure.Logging;
 using RookieShop.Infrastructure.Validator;
 using RookieShop.Persistence;
@@ -15,14 +16,14 @@ public static class Extension
     [DebuggerStepThrough]
     public static IHostApplicationBuilder AddApplication(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddValidatorsFromAssemblies([AssemblyReference.Executing]);
-
         var assemblies = new[]
         {
             AssemblyReference.Executing,
             Persistence.AssemblyReference.Executing,
             Domain.AssemblyReference.Executing
         };
+
+        builder.Services.AddValidatorsFromAssemblies([AssemblyReference.Executing]);
 
         builder.Services.AddHttpContextAccessor()
             .AddMediatR(cfg =>
@@ -36,7 +37,9 @@ public static class Extension
                     ServiceLifetime.Scoped);
             });
 
-        builder.Services.AddScoped<IOrderPaymentService, OrderPaymentService>();
+        builder.Services.AddScoped<IOrderService, OrderService>();
+
+        builder.Services.AddScoped<IProductService, ProductService>();
 
         return builder;
     }

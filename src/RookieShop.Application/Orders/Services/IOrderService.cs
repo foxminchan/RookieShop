@@ -5,7 +5,7 @@ using RookieShop.Infrastructure.Merchant.Stripe.Abstractions;
 
 namespace RookieShop.Application.Orders.Services;
 
-public interface IOrderPaymentService
+public interface IOrderService
 {
     Task<ChargeResource> ProcessPaymentAsync(CreateOrderCommand request, Customer customer, Basket basket, CancellationToken cancellationToken);
 }

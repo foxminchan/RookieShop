@@ -50,6 +50,12 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
 
     public int GetTotalFeedback() => Feedbacks?.Count ?? 0;
 
+    public void RemoveStock(int quantityDesired)
+    {
+        Quantity -= Guard.Against.OutOfRange(quantityDesired, nameof(quantityDesired), 0, int.MaxValue);
+        if (Status == ProductStatus.InStock && Quantity == 0) Status = ProductStatus.OutOfStock;
+    }
+
     public void Update(string name, string? description, int quantity, decimal price, decimal priceSale,
         string? imageName, CategoryId? categoryId, ProductStatus status)
     {

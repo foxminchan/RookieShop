@@ -4,6 +4,7 @@ using Ardalis.Result;
 using Medallion.Threading;
 using Microsoft.Extensions.Logging;
 using RookieShop.Application.Orders.Services;
+using RookieShop.Application.Products.Services;
 using RookieShop.Domain.Entities.BasketAggregator;
 using RookieShop.Domain.Entities.CustomerAggregator;
 using RookieShop.Domain.Entities.OrderAggregator;
@@ -16,7 +17,8 @@ namespace RookieShop.Application.Orders.Command.Create;
 
 public sealed class CreateOrderHandler(
     IRedisService redisService,
-    IOrderPaymentService orderPaymentService,
+    IOrderService orderPaymentService,
+    IProductService productRepository,
     IRepository<Order> orderRepository,
     IReadRepository<Customer> customerRepository,
     IDistributedLockProvider distributedLockProvider,
@@ -25,14 +27,12 @@ public sealed class CreateOrderHandler(
     public async Task<Result<OrderId>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         var customer = await customerRepository.GetByIdAsync(request.AccountId, cancellationToken);
-
         Guard.Against.NotFound(request.AccountId, customer);
 
         var basket = await redisService.HashGetOrSetAsync<Basket>(
             nameof(Basket),
             request.AccountId.ToString(),
             () => null!);
-
         Guard.Against.NotFound(request.AccountId, basket);
 
         var orderDetails = basket.BasketDetails
@@ -43,6 +43,8 @@ public sealed class CreateOrderHandler(
         await using (await distributedLockProvider.TryAcquireLockAsync(request.AccountId.ToString(),
                          cancellationToken: cancellationToken))
         {
+            await productRepository.StockValidationAsync(orderDetails, cancellationToken);
+
             var newOrder = await CreateOrder(request, customer, orderDetails, basket, cancellationToken);
 
             logger.LogInformation(

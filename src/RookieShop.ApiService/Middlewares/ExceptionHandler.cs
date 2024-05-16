@@ -75,7 +75,7 @@ public sealed class ExceptionHandler(ILogger<ExceptionHandler> logger) : IExcept
 
         httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
 
-        await httpContext.Response.WriteAsJsonAsync(TypedResults.NotFound(notFoundErrorModel.Errors[0]),
+        await httpContext.Response.WriteAsJsonAsync(TypedResults.NotFound(notFoundErrorModel.Errors),
             cancellationToken);
 
         return true;

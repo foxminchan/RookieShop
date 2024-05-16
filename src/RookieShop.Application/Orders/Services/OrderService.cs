@@ -6,7 +6,7 @@ using RookieShop.Infrastructure.Merchant.Stripe.Abstractions;
 
 namespace RookieShop.Application.Orders.Services;
 
-public sealed class OrderPaymentService(IStripeService stripeService) : IOrderPaymentService
+public sealed class OrderService(IStripeService stripeService) : IOrderService
 {
     public async Task<ChargeResource> ProcessPaymentAsync(CreateOrderCommand request, Customer customer, Basket basket,
         CancellationToken cancellationToken)
@@ -16,8 +16,7 @@ public sealed class OrderPaymentService(IStripeService stripeService) : IOrderPa
             request.Number!,
             request.ExpiryYear!,
             request.ExpiryMonth!,
-            request.Cvc!
-        );
+            request.Cvc!);
 
         CreateCustomerResource resource = new(customer.Email, customer.Name, card);
 
