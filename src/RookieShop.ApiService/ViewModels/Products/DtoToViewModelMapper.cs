@@ -7,9 +7,10 @@ public static class DtoToViewModelMapper
 {
     public static ProductVm ToProductVm(this ProductDto product)
     {
-        var feedbacks = product.Feedbacks?.ToFeedbackVm();
+        var feedbacks = product.Feedbacks?.ToProductFeedbackVm();
 
-        return new(product.Id,
+        return new(
+            product.Id,
             product.Name,
             product.Description,
             product.Quantity,
@@ -17,9 +18,20 @@ public static class DtoToViewModelMapper
             product.PriceSale,
             product.ImageUrl,
             product.Category,
+            product.AverageRating,
+            product.TotalFeedback,
             feedbacks);
     }
 
     public static List<ProductVm> ToProductVm(this IEnumerable<ProductDto> products) =>
         products.Select(ToProductVm).ToList();
+
+    public static ProductFeedbackVm ToProductFeedbackVm(this ProductFeedbackDto feedback) =>
+        new(feedback.Id,
+            feedback.Rating,
+            feedback.Content,
+            feedback.CustomerId);
+
+    public static List<ProductFeedbackVm> ToProductFeedbackVm(this IEnumerable<ProductFeedbackDto> feedbacks) =>
+        feedbacks.Select(ToProductFeedbackVm).ToList();
 }

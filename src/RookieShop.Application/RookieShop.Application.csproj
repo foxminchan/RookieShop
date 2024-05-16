@@ -16,12 +16,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Orders\Command\Create\" />
-		<Folder Include="Orders\Command\Delete\" />
-		<Folder Include="Orders\Command\Update\" />
-		<Folder Include="Orders\DTOs\" />
-		<Folder Include="Orders\Queries\Get\" />
-		<Folder Include="Orders\Queries\List\" />
 		<Folder Include="Reports\DTOs\" />
 		<Folder Include="Reports\Queries\" />
 	</ItemGroup>

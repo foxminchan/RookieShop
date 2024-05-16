@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
+using RookieShop.ApiService.ViewModels.Baskets;
 using RookieShop.Application.Baskets.Command.Update;
-using RookieShop.Domain.Entities.BasketAggregator;
 using RookieShop.Infrastructure.Endpoints.Abstractions;
 using RookieShop.Infrastructure.RateLimiter;
 
@@ -24,9 +24,9 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<UpdateBasketResponse>,
     {
         UpdateBasketCommand command = new(request.AccountId, request.BasketDetails);
 
-        Basket basket = await sender.Send(command, cancellationToken);
+        var basket = await sender.Send(command, cancellationToken);
 
-        UpdateBasketResponse response = new(basket);
+        UpdateBasketResponse response = new(basket.Value.ToBasketVm());
 
         return TypedResults.Ok(response);
     }

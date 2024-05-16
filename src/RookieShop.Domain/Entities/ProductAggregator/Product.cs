@@ -46,6 +46,10 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
 
     public void Delete() => IsDeleted = true;
 
+    public double GetAverageRating() => Feedbacks?.Average(f => f.Rating) ?? 0;
+
+    public int GetTotalFeedback() => Feedbacks?.Count ?? 0;
+
     public void Update(string name, string? description, int quantity, decimal price, decimal priceSale,
         string? imageName, CategoryId? categoryId, ProductStatus status)
     {

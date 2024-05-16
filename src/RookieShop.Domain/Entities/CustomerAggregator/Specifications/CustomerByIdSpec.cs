@@ -7,4 +7,7 @@ public sealed class CustomerByIdSpec : Specification<Customer>
 {
     public CustomerByIdSpec(CustomerId customerId) =>
         Query.Where(customer => customer.Id == customerId && !customer.IsDeleted);
+
+    public CustomerByIdSpec(Guid accountId) =>
+        Query.Where(customer => customer.AccountId == accountId && !customer.IsDeleted);
 }

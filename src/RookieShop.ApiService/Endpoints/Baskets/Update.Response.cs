@@ -1,5 +1,5 @@
-﻿using RookieShop.Domain.Entities.BasketAggregator;
+﻿using RookieShop.ApiService.ViewModels.Baskets;
 
 namespace RookieShop.ApiService.Endpoints.Baskets;
 
-public sealed record UpdateBasketResponse(Basket Basket);
+public sealed record UpdateBasketResponse(BasketVm Basket);

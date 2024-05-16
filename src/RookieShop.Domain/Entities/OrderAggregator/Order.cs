@@ -2,6 +2,7 @@
 using RookieShop.Domain.Entities.CustomerAggregator;
 using RookieShop.Domain.Entities.CustomerAggregator.Primitives;
 using RookieShop.Domain.Entities.OrderAggregator.Enums;
+using RookieShop.Domain.Entities.OrderAggregator.Events;
 using RookieShop.Domain.Entities.OrderAggregator.Primitives;
 using RookieShop.Domain.Entities.OrderAggregator.ValueObjects;
 using RookieShop.Domain.SeedWork;
@@ -35,4 +36,41 @@ public sealed class Order : EntityBase, IAggregateRoot
     public CustomerId CustomerId { get; set; }
     public Customer? Customer { get; set; }
     public ICollection<OrderDetail> OrderDetails { get; set; } = [];
+
+    public void AddOrderDetail(Guid? accountId, OrderId orderId)
+    {
+        Guard.Against.Null(orderId);
+
+        RegisterDomainEvent(new CreatedOrderEvent(accountId, orderId));
+    }
+
+    public decimal GetTotalPrice() => OrderDetails.Sum(x => x.ToPrice());
+
+    private void AddOrderDetail(OrderDetail orderDetail) => OrderDetails.Add(orderDetail);
+
+    public static class Factory
+    {
+        public static Order Create(
+            PaymentMethod paymentMethod,
+            string? last4,
+            string? brand,
+            string? chargeId,
+            string? street,
+            string? city,
+            string? province,
+            CustomerId customerId,
+            OrderStatus orderStatus,
+            List<OrderDetail> orderDetails)
+
+        {
+            Order order = new(paymentMethod, last4, brand, chargeId, street, city, province, customerId, orderStatus);
+
+            foreach (var orderDetail in orderDetails)
+            {
+                order.AddOrderDetail(orderDetail);
+            }
+
+            return order;
+        }
+    }
 }

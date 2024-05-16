@@ -2,6 +2,7 @@
 using Ardalis.GuardClauses;
 using Ardalis.Result;
 using Microsoft.Extensions.Logging;
+using RookieShop.Application.Baskets.DTOs;
 using RookieShop.Domain.Entities.BasketAggregator;
 using RookieShop.Domain.SharedKernel;
 using RookieShop.Infrastructure.Cache.Redis;
@@ -9,9 +10,9 @@ using RookieShop.Infrastructure.Cache.Redis;
 namespace RookieShop.Application.Baskets.Command.Update;
 
 public sealed class UpdateBasketHandler(IRedisService redisService, ILogger<UpdateBasketHandler> logger)
-    : ICommandHandler<UpdateBasketCommand, Result<Basket>>
+    : ICommandHandler<UpdateBasketCommand, Result<BasketDto>>
 {
-    public async Task<Result<Basket>> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
+    public async Task<Result<BasketDto>> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
     {
         var basket = await redisService.GetAsync<Basket>(request.AccountId.ToString());
 
@@ -30,6 +31,6 @@ public sealed class UpdateBasketHandler(IRedisService redisService, ILogger<Upda
             basket.AccountId.ToString(),
             () => basket);
 
-        return result;
+        return result.ToBasketDto();
     }
 }

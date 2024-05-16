@@ -1,6 +1,6 @@
 ﻿using RookieShop.Application.Categories.DTOs;
-using RookieShop.Application.Feedbacks.DTOs;
 using RookieShop.Domain.Constants;
+using RookieShop.Domain.Entities.FeedbackAggregator;
 using RookieShop.Domain.Entities.ProductAggregator;
 
 namespace RookieShop.Application.Products.DTOs;
@@ -13,7 +13,7 @@ public static class DomainToDtoMapper
 
         var category = product.Category?.ToCategoryDto();
 
-        var feedbacks = product.Feedbacks?.ToFeedbackDto();
+        var feedbacks = product.Feedbacks?.ToProductFeedbackDto();
 
         return new(
             product.Id,
@@ -24,9 +24,20 @@ public static class DomainToDtoMapper
             product.Price.PriceSale,
             imageUrl,
             category,
+            product.GetAverageRating(),
+            product.GetTotalFeedback(),
             feedbacks);
     }
 
     public static IEnumerable<ProductDto> ToProductDto(this IEnumerable<Product> products) =>
         products.Select(ToProductDto);
+
+    public static ProductFeedbackDto ToProductFeedbackDto(this Feedback feedback) =>
+        new(feedback.Id,
+            feedback.Rating,
+            feedback.Content,
+            feedback.CustomerId);
+
+    public static IEnumerable<ProductFeedbackDto> ToProductFeedbackDto(this IEnumerable<Feedback> feedbacks) =>
+        feedbacks.Select(ToProductFeedbackDto);
 }

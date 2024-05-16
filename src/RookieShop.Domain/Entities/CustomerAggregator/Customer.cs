@@ -21,7 +21,7 @@ public sealed class Customer : EntityBase, ISoftDelete, IAggregateRoot
         Name = Guard.Against.NullOrEmpty(name);
         Email = Guard.Against.NullOrEmpty(email);
         Phone = Guard.Against.NullOrEmpty(phone);
-        Gender = gender;
+        Gender = Guard.Against.EnumOutOfRange(gender);
         AccountId = accountId;
     }
 
@@ -42,7 +42,7 @@ public sealed class Customer : EntityBase, ISoftDelete, IAggregateRoot
         Name = Guard.Against.NullOrEmpty(name);
         Email = Guard.Against.NullOrEmpty(email);
         Phone = Guard.Against.NullOrEmpty(phone);
-        Gender = gender;
+        Gender = Guard.Against.EnumOutOfRange(gender);
         AccountId = accountId;
     }
 }
