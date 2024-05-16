@@ -158,7 +158,7 @@ cd ui/backoffice && pnpm run dev
 ## Testing
 
 <p align="justify">
-In the project, we use xUnit for unit testing and Moq for mocking. For integration testing, we use the <code>TestContainer</code> for running the test in the Docker container. I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>test</code> folder. I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
+In the project, we use xUnit for unit testing and Moq for mocking. For integration testing, we use the <code>TestContainers</code> for running the test in the Docker container. I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>test</code> folder. I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
 </p>
 
 ```bash
