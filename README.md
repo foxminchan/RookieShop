@@ -152,7 +152,7 @@ dotnet run --project ui/storefront/RookieShop.Storefront.csproj
 3. Run the frontend for the admin-facing website
 
 ```bash
-cd ui/backoffice && pnpm run dev
+cd ui/backoffice && bun dev
 ```
 
 ## Testing
