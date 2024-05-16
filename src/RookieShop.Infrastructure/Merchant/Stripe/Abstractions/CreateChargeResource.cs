@@ -1,8 +1,8 @@
 ﻿namespace RookieShop.Infrastructure.Merchant.Stripe.Abstractions;
 
 public sealed record CreateChargeResource(
-    string Currency,
-    long Amount,
+    decimal Amount,
     string CustomerId,
     string ReceiptEmail,
-    string Description);
+    string Description,
+    string? Currency = null);

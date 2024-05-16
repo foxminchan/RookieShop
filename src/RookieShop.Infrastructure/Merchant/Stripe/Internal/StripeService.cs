@@ -1,4 +1,5 @@
-﻿using RookieShop.Infrastructure.Merchant.Stripe.Abstractions;
+﻿using Ardalis.GuardClauses;
+using RookieShop.Infrastructure.Merchant.Stripe.Abstractions;
 using Stripe;
 
 namespace RookieShop.Infrastructure.Merchant.Stripe.Internal;
@@ -15,11 +16,11 @@ public sealed class StripeService(
         {
             Card = new TokenCardOptions
             {
-                Name = resource.Card.Name,
-                Number = resource.Card.Number,
-                ExpYear = resource.Card.ExpiryYear,
-                ExpMonth = resource.Card.ExpiryMonth,
-                Cvc = resource.Card.Cvc
+                Name = Guard.Against.NullOrEmpty(resource.Card.Name),
+                Number = Guard.Against.NullOrEmpty(resource.Card.Number),
+                ExpYear = Guard.Against.NullOrEmpty(resource.Card.ExpiryYear),
+                ExpMonth = Guard.Against.NullOrEmpty(resource.Card.ExpiryMonth),
+                Cvc = Guard.Against.NullOrEmpty(resource.Card.Cvc)
             }
         };
 
@@ -27,8 +28,8 @@ public sealed class StripeService(
 
         var customerOptions = new CustomerCreateOptions
         {
-            Email = resource.Email,
-            Name = resource.Name,
+            Email = Guard.Against.NullOrEmpty(resource.Email),
+            Name = Guard.Against.NullOrEmpty(resource.Name),
             Source = token.Id
         };
 
@@ -41,8 +42,8 @@ public sealed class StripeService(
     {
         var chargeOptions = new ChargeCreateOptions
         {
-            Currency = resource.Currency,
-            Amount = resource.Amount,
+            Currency = resource.Currency ?? "USD",
+            Amount = decimal.ToInt64(resource.Amount),
             ReceiptEmail = resource.ReceiptEmail,
             Customer = resource.CustomerId,
             Description = resource.Description

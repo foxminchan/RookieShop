@@ -1,3 +1,9 @@
-﻿namespace RookieShop.Application.Orders.Command.Update;
+﻿using Ardalis.Result;
+using RookieShop.Application.Orders.DTOs;
+using RookieShop.Domain.Entities.OrderAggregator.Enums;
+using RookieShop.Domain.Entities.OrderAggregator.Primitives;
+using RookieShop.Domain.SharedKernel;
 
-public record UpdateOrderCommand();
+namespace RookieShop.Application.Orders.Command.Update;
+
+public sealed record UpdateOrderCommand(OrderId Id, OrderStatus OrderStatus) : ICommand<Result<OrderDto>>;

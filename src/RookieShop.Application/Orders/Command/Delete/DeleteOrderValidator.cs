@@ -1,6 +1,8 @@
-﻿namespace RookieShop.Application.Orders.Command.Delete;
+﻿using FluentValidation;
 
-public class DeleteOrderValidator
+namespace RookieShop.Application.Orders.Command.Delete;
+
+public sealed class DeleteOrderValidator : AbstractValidator<DeleteOrderCommand>
 {
-    
+    public DeleteOrderValidator() => RuleFor(x => x.Id).NotEmpty();
 }

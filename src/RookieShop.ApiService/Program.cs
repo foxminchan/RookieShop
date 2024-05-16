@@ -27,8 +27,6 @@ builder.Services
 
 builder.Services.AddAntiforgery();
 
-builder.Services.AddHttpContextAccessor();
-
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddExceptionHandler<ExceptionHandler>();

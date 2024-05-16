@@ -97,7 +97,7 @@ public sealed class ExceptionHandler(ILogger<ExceptionHandler> logger) : IExcept
 
         httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-        await httpContext.Response.WriteAsJsonAsync(details, cancellationToken);
+        await httpContext.Response.WriteAsJsonAsync(TypedResults.Problem(details), cancellationToken);
 
         return true;
     }

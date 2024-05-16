@@ -9,6 +9,7 @@ public static class DomainToDtoMapper
         var orderDetails = order.OrderDetails.ToOrderItemsDto();
 
         return new(
+            order.Id,
             order.PaymentMethod,
             order.Card?.Last4Digits,
             order.Card?.BrandName,
@@ -16,12 +17,13 @@ public static class DomainToDtoMapper
             order.ShippingAddress?.Street,
             order.ShippingAddress?.City,
             order.ShippingAddress?.Province,
+            order.TotalPrice(),
             order.CustomerId,
             order.OrderStatus,
             orderDetails);
     }
 
-    private static IEnumerable<OrderDto> ToOrderDto(this IEnumerable<Order> orders) =>
+    public static IEnumerable<OrderDto> ToOrderDto(this IEnumerable<Order> orders) =>
         orders.Select(x => x.ToOrderDto());
 
     public static OrderItemsDto ToOrderItemsDto(this OrderDetail orderDetail) =>

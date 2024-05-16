@@ -37,16 +37,25 @@ public sealed class Order : EntityBase, IAggregateRoot
     public Customer? Customer { get; set; }
     public ICollection<OrderDetail> OrderDetails { get; set; } = [];
 
-    public void AddOrderDetail(Guid? accountId, OrderId orderId)
+    public void AddOrderDetail(Guid accountId, Order order, string email)
     {
-        Guard.Against.Null(orderId);
+        Guard.Against.Null(order);
 
-        RegisterDomainEvent(new CreatedOrderEvent(accountId, orderId));
+        RegisterDomainEvent(new CreatedOrderEvent(accountId, order, email));
     }
 
-    public decimal GetTotalPrice() => OrderDetails.Sum(x => x.ToPrice());
+    public void UpdateOrderStatus(Order order)
+    {
+        Guard.Against.Null(order);
+
+        RegisterDomainEvent(new UpdatedOrderEvent(order));
+    }
+
+    public decimal TotalPrice() => OrderDetails.Sum(x => x.ToPrice());
 
     private void AddOrderDetail(OrderDetail orderDetail) => OrderDetails.Add(orderDetail);
+
+    public void Update(OrderStatus status) => OrderStatus = Guard.Against.EnumOutOfRange(status);
 
     public static class Factory
     {
