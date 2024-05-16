@@ -1,0 +1,23 @@
+{
+  "name": "storefront",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Nhan Nguyen",
+    "email": "nguyenxuannhan407@gmail.com"
+  },
+  "description": "A project developed by a rookie transitioning to an engineer at NashTech",
+  "type": "module",
+  "scripts": {
+    "css:build": "bun run tailwind -i ./wwwroot/css/site.css -o ./wwwroot/css/output.css"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
