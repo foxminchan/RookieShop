@@ -2,9 +2,9 @@
 using RookieShop.Domain.Entities.OrderAggregator.Enums;
 using RookieShop.Domain.Entities.OrderAggregator.Primitives;
 
-namespace RookieShop.Application.Orders.DTOs;
+namespace RookieShop.ApiService.ViewModels.Orders;
 
-public sealed record OrderDto(
+public sealed record OrderVm(
     OrderId Id,
     PaymentMethod PaymentMethod,
     string? Last4,
@@ -16,4 +16,4 @@ public sealed record OrderDto(
     decimal TotalPrice,
     CustomerId CustomerId,
     OrderStatus OrderStatus,
-    IEnumerable<OrderItemDto> OrderItems);
+    List<OrderItemVm> Items);

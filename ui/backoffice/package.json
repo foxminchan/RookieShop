@@ -13,7 +13,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ssl": "dotnet dev-certs https -ep ./certificates/aspnet_https.crt --format PEM"
+    "ssl": "dotnet dev-certs https -ep ./certificates/aspnet_https.crt --format PEM",
+    "format": "bun prettier . --write"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

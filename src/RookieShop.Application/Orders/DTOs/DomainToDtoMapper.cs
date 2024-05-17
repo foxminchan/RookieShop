@@ -6,7 +6,7 @@ public static class DomainToDtoMapper
 {
     public static OrderDto ToOrderDto(this Order order)
     {
-        var orderDetails = order.OrderDetails.ToOrderItemsDto();
+        var orderDetails = order.OrderDetails.ToOrderItemDto();
 
         return new(
             order.Id,
@@ -26,9 +26,9 @@ public static class DomainToDtoMapper
     public static IEnumerable<OrderDto> ToOrderDto(this IEnumerable<Order> orders) =>
         orders.Select(x => x.ToOrderDto());
 
-    public static OrderItemsDto ToOrderItemsDto(this OrderDetail orderDetail) =>
+    public static OrderItemDto ToOrderItemDto(this OrderDetail orderDetail) =>
         new(orderDetail.ProductId, orderDetail.Quantity, orderDetail.Price);
 
-    public static IEnumerable<OrderItemsDto> ToOrderItemsDto(this IEnumerable<OrderDetail> orderDetails) =>
-        orderDetails.Select(x => x.ToOrderItemsDto());
+    public static IEnumerable<OrderItemDto> ToOrderItemDto(this IEnumerable<OrderDetail> orderDetails) =>
+        orderDetails.Select(x => x.ToOrderItemDto());
 }

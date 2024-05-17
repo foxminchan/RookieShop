@@ -2,4 +2,4 @@
 
 namespace RookieShop.Application.Orders.DTOs;
 
-public sealed record OrderItemsDto(ProductId Id, int Quantity, decimal Price);
+public sealed record OrderItemDto(ProductId Id, int Quantity, decimal Price);
