@@ -17,6 +17,17 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.Use(async (ctx, next) =>
+{
+    await next();
+
+    if (ctx.Response is { StatusCode: 404, HasStarted: false })
+    {
+        ctx.Request.Path = "/Error/PageNotFound";
+        await next();
+    }
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
