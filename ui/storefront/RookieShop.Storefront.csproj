@@ -26,6 +26,10 @@
 		<UpToDateCheckBuilt Include="tailwind.config.js" Set="Css" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\imgs\" />
+	</ItemGroup>
+
 	<Target Name="Tailwind" BeforeTargets="Build">
 		<Exec Command="bun run css:build" />
 	</Target>
