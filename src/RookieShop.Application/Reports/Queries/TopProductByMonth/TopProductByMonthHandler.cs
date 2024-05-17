@@ -19,8 +19,8 @@ public sealed class TopProductByMonthHandler(IDatabaseFactory factory)
                            FROM products AS p
                                INNER JOIN order_details AS od ON p.id = od.product_id
                                INNER JOIN orders AS o ON od.order_id = o.id
-                           WHERE EXTRACT(YEAR FROM o.created_date) = @Year
-                               AND EXTRACT(MONTH FROM o.created_date) = @Month
+                           WHERE o.created_date >= DATE_TRUNC('month', make_date(@Year, @Month, 1))
+                               AND o.created_date < DATE_TRUNC('month', make_date(@Year, @Month, 1) + INTERVAL '1 month')
                            GROUP BY p.Id, p.Name
                            ORDER BY TotalQuantity DESC
                            LIMIT @Limit;

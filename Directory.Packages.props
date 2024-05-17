@@ -1,98 +1,99 @@
 <Project>
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <AspnetVersion>8.0.5</AspnetVersion>
-    <ApiVersioningVersion>8.1.0</ApiVersioningVersion>
-    <EfVersion>8.0.5</EfVersion>
-    <TestcontainersVersion>3.8.0</TestcontainersVersion>
-    <MicrosoftExtensionsVersion>8.5.0</MicrosoftExtensionsVersion>
-    <XabarilVersion>8.0.1</XabarilVersion>
-    <PollyVersion>8.4.0</PollyVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <!-- Ardalis -->
-    <PackageVersion Include="Ardalis.GuardClauses" Version="4.5.0" />
-    <PackageVersion Include="Ardalis.Result.AspNetCore" Version="9.0.0" />
-    <PackageVersion Include="Ardalis.Specification" Version="8.0.0" />
-    <PackageVersion Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0" />
-    <PackageVersion Include="Ardalis.ListStartupServices" Version="1.1.4" />
-    <PackageVersion Include="Ardalis.HttpClientTestExtensions" Version="4.2.0" />
-    <!-- ASP.NET Core -->
-    <PackageVersion Include="Asp.Versioning.Http" Version="$(ApiVersioningVersion)" />
-    <PackageVersion Include="Asp.Versioning.Mvc" Version="$(ApiVersioningVersion)" />
-    <PackageVersion Include="Asp.Versioning.Mvc.ApiExplorer" Version="$(ApiVersioningVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Identity.UI" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Authentication.Google" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="$(AspnetVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="$(MicrosoftExtensionsVersion)" />
-    <!-- Entity Framework Core -->
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfVersion)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfVersion)" />
-    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
-    <PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
-    <PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
-    <!-- OpenTelemetry -->
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
-    <PackageVersion Include="Npgsql.OpenTelemetry" Version="8.0.3" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.8.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.14" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.0.0-beta.10" />
-    <!-- Xabaril -->
-    <PackageVersion Include="AspNetCore.HealthChecks.UI" Version="$(XabarilVersion)" />
-    <PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="$(XabarilVersion)" />
-    <PackageVersion Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(XabarilVersion)" />
-    <PackageVersion Include="AspNetCore.HealthChecks.Redis" Version="$(XabarilVersion)" />
-    <PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="$(XabarilVersion)" />
-    <PackageVersion Include="AspNetCore.HealthChecks.OpenIdConnectServer" Version="$(XabarilVersion)" />
-    <!-- VS Test -->
-    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-    <!-- xUnit -->
-    <PackageVersion Include="xunit" Version="2.8.0" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.0" />
-    <PackageVersion Include="XunitContext" Version="3.3.2" />
-    <!-- TestContainers -->
-    <PackageVersion Include="Testcontainers" Version="$(TestcontainersVersion)" />
-    <PackageVersion Include="Testcontainers.Redis" Version="$(TestcontainersVersion)" />
-    <PackageVersion Include="Testcontainers.Azurite" Version="$(TestcontainersVersion)" />
-    <PackageVersion Include="Testcontainers.PostgreSql" Version="$(TestcontainersVersion)" />
-    <!-- Testkits -->
-    <PackageVersion Include="AutoBogus.Moq" Version="2.13.1" />
-    <PackageVersion Include="ReportGenerator" Version="5.3.0" />
-    <PackageVersion Include="FluentAssertions" Version="6.12.0" />
-    <PackageVersion Include="NetArchTest.Rules" Version="1.3.2" />
-    <!-- FluentEmail -->
-    <PackageVersion Include="FluentEmail.Razor" Version="3.0.2" />
-    <PackageVersion Include="FluentEmail.Mailtrap" Version="2.7.0" />
-    <!-- Polly -->
-    <PackageVersion Include="Polly" Version="$(PollyVersion)" />
-    <PackageVersion Include="Polly.Extensions" Version="$(PollyVersion)" />
-    <!-- Miscellaneous -->
-    <PackageVersion Include="Dapper" Version="2.1.35" />
-    <PackageVersion Include="Scrutor" Version="4.2.2" />
-    <PackageVersion Include="MediatR" Version="12.2.0" />
-    <PackageVersion Include="Stripe.net" Version="44.7.0" />
-    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
-    <PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
-    <PackageVersion Include="StronglyTypedId" Version="1.0.0-beta07" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.1" />
-    <PackageVersion Include="Refit.HttpClientFactory" Version="7.0.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.25.0.90414" />
-    <PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageVersion Include="Azure.Storage.Blobs" Version="12.20.0" />
-    <PackageVersion Include="Duende.IdentityServer.AspNetIdentity" Version="7.0.4" />
-    <PackageVersion Include="MicroElements.Swashbuckle.FluentValidation" Version="6.0.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+		<AspnetVersion>8.0.5</AspnetVersion>
+		<ApiVersioningVersion>8.1.0</ApiVersioningVersion>
+		<EfVersion>8.0.5</EfVersion>
+		<TestcontainersVersion>3.8.0</TestcontainersVersion>
+		<MicrosoftExtensionsVersion>8.5.0</MicrosoftExtensionsVersion>
+		<XabarilVersion>8.0.1</XabarilVersion>
+		<PollyVersion>8.4.0</PollyVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- Ardalis -->
+		<PackageVersion Include="Ardalis.GuardClauses" Version="4.5.0" />
+		<PackageVersion Include="Ardalis.Result.AspNetCore" Version="9.0.0" />
+		<PackageVersion Include="Ardalis.Specification" Version="8.0.0" />
+		<PackageVersion Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0" />
+		<PackageVersion Include="Ardalis.ListStartupServices" Version="1.1.4" />
+		<PackageVersion Include="Ardalis.HttpClientTestExtensions" Version="4.2.0" />
+		<!-- ASP.NET Core -->
+		<PackageVersion Include="Asp.Versioning.Http" Version="$(ApiVersioningVersion)" />
+		<PackageVersion Include="Asp.Versioning.Mvc" Version="$(ApiVersioningVersion)" />
+		<PackageVersion Include="Asp.Versioning.Mvc.ApiExplorer" Version="$(ApiVersioningVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.Identity.UI" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.Authentication.Google" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="$(AspnetVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="$(MicrosoftExtensionsVersion)" />
+		<!-- Entity Framework Core -->
+		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfVersion)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfVersion)" />
+		<PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="5.4.4" />
+		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+		<PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
+		<PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
+		<!-- OpenTelemetry -->
+		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
+		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
+		<PackageVersion Include="Npgsql.OpenTelemetry" Version="8.0.3" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.8.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.14" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.0.0-beta.10" />
+		<!-- Xabaril -->
+		<PackageVersion Include="AspNetCore.HealthChecks.UI" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.Redis" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.OpenIdConnectServer" Version="$(XabarilVersion)" />
+		<!-- VS Test -->
+		<PackageVersion Include="coverlet.collector" Version="6.0.2" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+		<!-- xUnit -->
+		<PackageVersion Include="xunit" Version="2.8.0" />
+		<PackageVersion Include="xunit.runner.visualstudio" Version="2.8.0" />
+		<PackageVersion Include="XunitContext" Version="3.3.2" />
+		<!-- TestContainers -->
+		<PackageVersion Include="Testcontainers" Version="$(TestcontainersVersion)" />
+		<PackageVersion Include="Testcontainers.Redis" Version="$(TestcontainersVersion)" />
+		<PackageVersion Include="Testcontainers.Azurite" Version="$(TestcontainersVersion)" />
+		<PackageVersion Include="Testcontainers.PostgreSql" Version="$(TestcontainersVersion)" />
+		<!-- Testkits -->
+		<PackageVersion Include="AutoBogus.Moq" Version="2.13.1" />
+		<PackageVersion Include="ReportGenerator" Version="5.3.0" />
+		<PackageVersion Include="FluentAssertions" Version="6.12.0" />
+		<PackageVersion Include="NetArchTest.Rules" Version="1.3.2" />
+		<!-- FluentEmail -->
+		<PackageVersion Include="FluentEmail.Razor" Version="3.0.2" />
+		<PackageVersion Include="FluentEmail.Mailtrap" Version="2.7.0" />
+		<!-- Polly -->
+		<PackageVersion Include="Polly" Version="$(PollyVersion)" />
+		<PackageVersion Include="Polly.Extensions" Version="$(PollyVersion)" />
+		<!-- Miscellaneous -->
+		<PackageVersion Include="Dapper" Version="2.1.35" />
+		<PackageVersion Include="Scrutor" Version="4.2.2" />
+		<PackageVersion Include="MediatR" Version="12.2.0" />
+		<PackageVersion Include="Stripe.net" Version="44.8.0" />
+		<PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
+		<PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
+		<PackageVersion Include="StronglyTypedId" Version="1.0.0-beta07" />
+		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.1" />
+		<PackageVersion Include="Refit.HttpClientFactory" Version="7.0.0" />
+		<PackageVersion Include="SonarAnalyzer.CSharp" Version="9.25.0.90414" />
+		<PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageVersion Include="Azure.Storage.Blobs" Version="12.20.0" />
+		<PackageVersion Include="Duende.IdentityServer.AspNetIdentity" Version="7.0.4" />
+		<PackageVersion Include="MicroElements.Swashbuckle.FluentValidation" Version="6.0.0" />
+	</ItemGroup>
 </Project>

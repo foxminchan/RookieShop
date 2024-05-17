@@ -11,6 +11,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Refit.HttpClientFactory" />
+		<PackageReference Include="Microsoft.TypeScript.MSBuild" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
 	</ItemGroup>
 
@@ -21,13 +22,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<UpToDateCheckBuilt Include="wwwroot/css/site.css" Set="Css" />
-		<UpToDateCheckBuilt Include="postcss.config.js" Set="Css" />
-		<UpToDateCheckBuilt Include="tailwind.config.js" Set="Css" />
+		<ProjectReference Include="..\..\src\RookieShop.Infrastructure\RookieShop.Infrastructure.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="wwwroot\imgs\" />
+		<UpToDateCheckBuilt Include="wwwroot/css/site.css" Set="Css" />
+		<UpToDateCheckBuilt Include="postcss.config.js" Set="Css" />
+		<UpToDateCheckBuilt Include="tailwind.config.js" Set="Css" />
 	</ItemGroup>
 
 	<Target Name="Tailwind" BeforeTargets="Build">
