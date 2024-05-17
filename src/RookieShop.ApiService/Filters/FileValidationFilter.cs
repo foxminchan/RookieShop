@@ -20,18 +20,14 @@ public sealed class FileValidationFilter : IEndpointFilter
             switch (file.Length)
             {
                 case 0:
-                    context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                     throw new ValidationException("File is empty.");
                 case > MaxFileSize:
-                    context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                     throw new ValidationException($"File size is too large. Max file size is {MaxFileSize / 1024} KB.");
             }
 
             List<string> allowedContentTypes = ["image/jpeg", "image/png", "image/jpg"];
 
             if (allowedContentTypes.Contains(file.ContentType)) continue;
-
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
 
             throw new ValidationException(
                 $"File type is not allowed. Allowed file types are {string.Join(", ", allowedContentTypes)}.");
