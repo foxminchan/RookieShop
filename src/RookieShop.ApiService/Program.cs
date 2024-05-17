@@ -33,8 +33,6 @@ builder.Services.AddExceptionHandler<ExceptionHandler>();
 
 builder.Services.AddProblemDetails();
 
-builder.Services.ConfigureHttpClientDefaults(http => http.AddStandardResilienceHandler());
-
 builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
 
 builder.AddInfrastructure().AddPersistence().AddApplication();
