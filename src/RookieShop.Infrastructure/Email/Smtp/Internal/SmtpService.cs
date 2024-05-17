@@ -1,19 +1,17 @@
 ﻿using FluentEmail.Core;
-using Polly;
-using Polly.Retry;
+using Polly.Registry;
 using RookieShop.Infrastructure.Email.Smtp.Abstractions;
 
 namespace RookieShop.Infrastructure.Email.Smtp.Internal;
 
-public sealed class SmtpService<T>(IFluentEmailFactory fluentEmailFactory) : ISmtpService<T>
+public sealed class SmtpService<T>(
+    IFluentEmailFactory factory, 
+    ResiliencePipelineProvider<string> pipeline) : ISmtpService<T>
     where T : notnull
 {
-    private readonly AsyncRetryPolicy _policy = Policy.Handle<Exception>()
-        .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
-
     public async Task SendEmailAsync(EmailMetadata<T> emailMetadata, CancellationToken cancellationToken = default)
     {
-        var email = fluentEmailFactory.Create();
+        var email = factory.Create();
 
         email = email
             .To(emailMetadata.To)
@@ -24,6 +22,8 @@ public sealed class SmtpService<T>(IFluentEmailFactory fluentEmailFactory) : ISm
 
         if (!string.IsNullOrWhiteSpace(emailMetadata.Cc)) email = email.CC(emailMetadata.Cc);
 
-        await _policy.ExecuteAsync(async token => await email.SendAsync(token), cancellationToken);
+        var policy = pipeline.GetPipeline(nameof(Smtp));
+
+        await policy.ExecuteAsync(async token => await email.SendAsync(token), cancellationToken);
     }
 }
