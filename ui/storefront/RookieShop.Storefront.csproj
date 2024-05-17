@@ -6,6 +6,7 @@
 		<UserSecretsId>2816ffad-0c30-4339-987f-2d1e4b155da2</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..</DockerfileContext>
+		<TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
