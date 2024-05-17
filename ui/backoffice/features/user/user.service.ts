@@ -9,6 +9,10 @@ import {
 } from "./user.types";
 
 class UserApiService extends HttpService {
+  constructor() {
+    super();
+  }
+
   register(data: RegisterRequest) {
     return this.post<AuthUserResponse>("/users/register", data);
   }
