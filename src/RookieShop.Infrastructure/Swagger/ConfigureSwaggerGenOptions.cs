@@ -1,9 +1,11 @@
-﻿using Asp.Versioning.ApiExplorer;
+﻿using Ardalis.GuardClauses;
+using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using RookieShop.Domain.Constants;
+using RookieShop.Infrastructure.Identity.Settings;
 using RookieShop.Infrastructure.Swagger.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -32,7 +34,9 @@ public sealed class ConfigureSwaggerGenOptions(IApiVersionDescriptionProvider pr
                 });
         }
 
-        var urlExternal = config.GetValue<string>("OAuth:Authority");
+        var openIdSettings = config.GetSection(nameof(OpenIdSettings)).Get<OpenIdSettings>();
+
+        Guard.Against.Null(openIdSettings);
 
         options.AddSecurityDefinition("oauth2",
             new()
@@ -42,8 +46,8 @@ public sealed class ConfigureSwaggerGenOptions(IApiVersionDescriptionProvider pr
                 {
                     AuthorizationCode = new()
                     {
-                        TokenUrl = new($"{urlExternal}/connect/token"),
-                        AuthorizationUrl = new($"{urlExternal}/connect/authorize"),
+                        TokenUrl = new($"{openIdSettings.Authority}/connect/token"),
+                        AuthorizationUrl = new($"{openIdSettings.Authority}/connect/authorize"),
                         Scopes = new Dictionary<string, string>
                         {
                             { AuthScope.Read, "Read Access to API" },

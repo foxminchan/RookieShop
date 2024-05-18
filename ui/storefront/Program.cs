@@ -1,7 +1,10 @@
 using Ardalis.ListStartupServices;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using RookieShop.Infrastructure.OpenTelemetry;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.ConfigureOpenTelemetry();
 
 builder.Services.AddControllersWithViews();
 

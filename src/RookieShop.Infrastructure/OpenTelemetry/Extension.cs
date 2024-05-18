@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Npgsql;
@@ -48,7 +47,7 @@ public static class Extension
     {
         var useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
 
-        var otlpApiKey = builder.Configuration.GetValue<string>("Otlp:ApiKey");
+        var otlpApiKey = builder.Configuration["OTEL_EXPORTER_OTLP_API_KEY"];
 
         var resourceBuilder = ResourceBuilder
             .CreateDefault()

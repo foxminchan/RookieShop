@@ -2,9 +2,11 @@
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using RookieShop.Infrastructure.Identity.Settings;
 using RookieShop.Infrastructure.Swagger.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -55,9 +57,13 @@ public static class Extension
                 .ToList()
                 .ForEach(endpoint => c.SwaggerEndpoint(endpoint.url, endpoint.name));
 
+            var openIdSettings = app.Configuration.GetSection(nameof(OpenIdSettings)).Get<OpenIdSettings>();
+
+            Guard.Against.Null(openIdSettings);
+
             c.DocumentTitle = appName;
-            c.OAuthClientId(app.Configuration["OAuth:ClientId"]);
-            c.OAuthClientSecret(app.Configuration["OAuth:ClientSecret"]);
+            c.OAuthClientId(openIdSettings.ClientId);
+            c.OAuthClientSecret(openIdSettings.ClientSecret);
             c.OAuthAppName(appName);
             c.OAuthUsePkce();
             c.DisplayRequestDuration();
