@@ -5,7 +5,7 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <p align="justify">
-RookieShop Web Application is a assignment project for training purpose. The project is a web application make the best practices of .NET Core in Clean Architecture and Domain-Driven Design and contain multiple design-patterns and principles. It demonstrates how to build a modern web application using .NET Core with Aspire Dashboard and Next.js.
+RookieShop Web Application is a assignment project for training purpose. The project is a web application make the best practices of .NET Core in Clean Architecture and Domain-Driven Design and contain multiple design-patterns and principles. It demonstrates how to build a modern web application using .NET Core with Aspire Dashboard and Next.js with Bun.
 </p>
 
 <hr/>
@@ -164,6 +164,13 @@ In the project, we use xUnit for unit testing and Moq for mocking. For integrati
 ```bash
 dotnet test RookieShop.sln
 ```
+
+> [!NOTE]
+> For performance testing, we use the <code>K6</code> tool to simulate the load on the application. To run the performance test, you can use the following:
+>
+> ```bash
+> k6 run ./k6/performance-test.js
+> ```
 
 ## Observability
 

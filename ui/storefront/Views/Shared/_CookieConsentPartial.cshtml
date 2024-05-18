@@ -9,10 +9,10 @@
 @if (showBanner)
 {
     <div id="cookieConsent" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-100 text-blue-800 p-4 rounded-md flex justify-between items-center"> 
-        <p class="text-sm">
+        <p class="text-sm pr-10">
             We use cookies to enhance your experience. <a asp-controller="Home" asp-action="Privacy">Learn More</a>.
         </p>
-        <button type="button" class="accept-policy bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none" data-cookie-string="@cookieString">
+        <button type="button" class="accept-policy bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none" data-bs-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
             Accept
         </button>
     </div>
