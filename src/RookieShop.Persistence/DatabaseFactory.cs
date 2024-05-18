@@ -11,15 +11,10 @@ public sealed class DatabaseFactory : IDatabaseFactory
 
     public DatabaseFactory(IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
-        Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
+        var connectionString = configuration.GetConnectionString("Postgres");
+        Guard.Against.Null(connectionString, message: "Connection string 'Postgres' not found.");
         _connectionString = connectionString;
     }
 
-    public IDbConnection GetOpenConnection()
-    {
-        var connection = new NpgsqlConnection(_connectionString);
-        connection.Open();
-        return connection;
-    }
+    public IDbConnection GetOpenConnection() => new NpgsqlConnection(_connectionString);
 }

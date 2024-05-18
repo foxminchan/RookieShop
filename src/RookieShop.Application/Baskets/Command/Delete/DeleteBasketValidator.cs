@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using RookieShop.Domain.Constants;
 
 namespace RookieShop.Application.Baskets.Command.Delete;
 

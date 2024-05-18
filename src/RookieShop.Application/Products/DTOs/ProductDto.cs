@@ -1,5 +1,4 @@
 ﻿using RookieShop.Application.Categories.DTOs;
-using RookieShop.Application.Feedbacks.DTOs;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 
 namespace RookieShop.Application.Products.DTOs;
@@ -11,7 +10,7 @@ public sealed record ProductDto(
     int Quantity,
     decimal Price,
     decimal PriceSale,
-    string ImageUrl,
+    string? ImageUrl,
     CategoryDto? Category,
     double AverageRating,
     int TotalFeedback,

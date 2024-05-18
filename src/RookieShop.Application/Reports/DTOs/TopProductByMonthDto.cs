@@ -2,7 +2,7 @@
 
 namespace RookieShop.Application.Reports.DTOs;
 
-public sealed record TopProductByMonthVm(
+public sealed record TopProductByMonthDto(
     ProductId Id,
     string Name,
     int TotalSoldQuantity);

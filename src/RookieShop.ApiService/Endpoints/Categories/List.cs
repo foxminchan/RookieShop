@@ -16,7 +16,7 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListCategoriesResponse>,
             .WithTags(nameof(Categories))
             .WithName("List Categories")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<ListCategoriesResponse>> HandleAsync(ListCategoriesRequest request,
         CancellationToken cancellationToken = default)

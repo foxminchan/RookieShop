@@ -23,7 +23,7 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListProductsResponse>, L
             .WithTags(nameof(Products))
             .WithName("List Products")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<ListProductsResponse>> HandleAsync(ListProductsRequest request,
         CancellationToken cancellationToken = default)

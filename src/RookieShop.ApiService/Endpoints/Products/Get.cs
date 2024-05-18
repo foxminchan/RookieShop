@@ -16,7 +16,7 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<ProductVm>, GetProductReq
             .WithTags(nameof(Products))
             .WithName("Get Product")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<ProductVm>> HandleAsync(GetProductRequest request,
         CancellationToken cancellationToken = default)

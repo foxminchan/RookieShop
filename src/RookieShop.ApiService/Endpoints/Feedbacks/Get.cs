@@ -16,7 +16,7 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<FeedbackVm>, GetFeedbackR
             .WithTags(nameof(Feedbacks))
             .WithName("Get Feedback")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<FeedbackVm>> HandleAsync(GetFeedbackRequest request,
         CancellationToken cancellationToken = default)

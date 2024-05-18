@@ -7,5 +7,6 @@ namespace RookieShop.Application.Orders.Services;
 
 public interface IOrderService
 {
-    Task<ChargeResource> ProcessPaymentAsync(CreateOrderCommand request, Customer customer, Basket basket, CancellationToken cancellationToken);
+    Task<ChargeResource> ProcessPaymentAsync(CreateOrderCommand request, Customer customer, Basket basket,
+        CancellationToken cancellationToken);
 }

@@ -11,6 +11,18 @@ updates:
       interval: monthly
     open-pull-requests-limit: 5
 
+  - package-ecosystem: "npm"
+    directory: "/ui/backoffice"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 25
+
+  - package-ecosystem: "npm"
+    directory: "/ui/storefront"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+
   - package-ecosystem: nuget
     directory: "/"
     schedule:

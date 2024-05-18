@@ -25,7 +25,7 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListFeedbackResponse>, L
             .WithTags(nameof(Feedbacks))
             .WithName("List Feedbacks")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<ListFeedbackResponse>> HandleAsync(ListFeedbackRequest request,
         CancellationToken cancellationToken = default)

@@ -17,10 +17,8 @@ public sealed class ProductService(IRepository<Product> repository) : IProductSe
             Guard.Against.NotFound(orderDetail.ProductId, product);
 
             if (product.Quantity < orderDetail.Quantity)
-            {
                 throw new ValidationException(
                     $"Product {product.Name} has only {product.Quantity} left in stock.");
-            }
 
             product.RemoveStock(orderDetail.Quantity);
         }

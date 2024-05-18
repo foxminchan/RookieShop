@@ -8,7 +8,9 @@ namespace RookieShop.Infrastructure.RateLimiter;
 
 public static class RateLimitExtensions
 {
-    private const string Policy = "PerUserRatelimit";
+    private const string PerIpPolicy = "PerIpRatelimit";
+
+    private const string PerUserPolicy = "PerUserRatelimit";
 
     public static IHostApplicationBuilder AddRateLimiting(this IHostApplicationBuilder builder)
     {
@@ -16,7 +18,17 @@ public static class RateLimitExtensions
         {
             options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 
-            options.AddPolicy(Policy, context =>
+            options.AddPolicy(PerIpPolicy, httpContext =>
+                RateLimitPartition.GetFixedWindowLimiter(
+                    httpContext.Connection.RemoteIpAddress?.ToString() ?? string.Empty,
+                    _ => new()
+                    {
+                        PermitLimit = 60,
+                        Window = TimeSpan.FromMinutes(1)
+                    }
+                ));
+
+            options.AddPolicy(PerUserPolicy, context =>
             {
                 var username = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -36,5 +48,8 @@ public static class RateLimitExtensions
     }
 
     public static IEndpointConventionBuilder RequirePerUserRateLimit(this IEndpointConventionBuilder builder)
-        => builder.RequireRateLimiting(Policy);
+        => builder.RequireRateLimiting(PerUserPolicy);
+
+    public static IEndpointConventionBuilder RequirePerIpRateLimit(this IEndpointConventionBuilder builder)
+        => builder.RequireRateLimiting(PerIpPolicy);
 }

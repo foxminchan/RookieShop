@@ -63,14 +63,12 @@ public sealed class CreateOrderHandler(
         Basket basket, CancellationToken cancellationToken)
     {
         if (request.PaymentMethod == PaymentMethod.Cash)
-        {
             return Order.Factory.Create(
                 request.PaymentMethod,
                 null, null, null,
                 request.Street, request.City, request.Province,
                 customer.Id, OrderStatus.Pending,
                 orderDetails);
-        }
 
         var charge = await orderPaymentService.ProcessPaymentAsync(request, customer, basket, cancellationToken);
 

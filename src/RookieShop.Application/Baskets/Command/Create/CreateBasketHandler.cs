@@ -18,8 +18,8 @@ public sealed class CreateBasketHandler(IRedisService redisService, ILogger<Crea
             nameof(CreateBasketCommand), request.AccountId, JsonSerializer.Serialize(basket));
 
         var result = await redisService.HashGetOrSetAsync(
-            nameof(Basket), 
-            basket.AccountId.ToString(), 
+            nameof(Basket),
+            basket.AccountId.ToString(),
             () => basket);
 
         return result.AccountId;

@@ -17,7 +17,7 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<CategoryVm>, GetCategoryR
             .WithTags(nameof(Categories))
             .WithName("Get Category")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<CategoryVm>> HandleAsync(GetCategoryRequest request,
         CancellationToken cancellationToken = default)

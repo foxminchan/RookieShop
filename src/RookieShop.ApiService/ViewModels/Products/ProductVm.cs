@@ -10,7 +10,7 @@ public sealed record ProductVm(
     int Quantity,
     decimal Price,
     decimal PriceSale,
-    string ImageUrl,
+    string? ImageUrl,
     CategoryDto? Category,
     double AverageRating,
     int TotalFeedback,
