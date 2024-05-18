@@ -85,7 +85,7 @@
 		<PackageVersion Include="Stripe.net" Version="44.8.0" />
 		<PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
 		<PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
-		<PackageVersion Include="StronglyTypedId" Version="1.0.0-beta07" />
+		<PackageVersion Include="StronglyTypedId" Version="1.0.0-beta08" />
 		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.1" />
 		<PackageVersion Include="Refit.HttpClientFactory" Version="7.0.0" />
 		<PackageVersion Include="SonarAnalyzer.CSharp" Version="9.25.0.90414" />
