@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.Result;
+using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.ApiService.Filters;
@@ -17,6 +18,7 @@ public sealed class Create(ISender sender) : IEndpoint<Created<CreateCustomerRes
                 string key, CreateCustomerRequest request) => await HandleAsync(request))
             .AddEndpointFilter<IdempotencyFilter>()
             .Produces<Created<CreateCustomerResponse>>(StatusCodes.Status201Created)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Customers))
             .WithName("Create Customer")
             .MapToApiVersion(new(1, 0))

@@ -19,7 +19,7 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListProductsResponse>, L
                         bool isDescending = false,
                         CategoryId? categoryId = null) =>
                     await HandleAsync(new(pageNumber, pageSize, orderBy, isDescending, categoryId)))
-            .Produces<ListProductsResponse>()
+            .Produces<Ok<ListProductsResponse>>()
             .WithTags(nameof(Products))
             .WithName("List Products")
             .MapToApiVersion(new(1, 0))

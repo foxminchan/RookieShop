@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.Result;
+using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.ApiService.Filters;
@@ -28,6 +29,7 @@ public sealed class Create(ISender sender) : IEndpoint<Created<CreateProductResp
             .AddEndpointFilter<FileValidationFilter>()
             .DisableAntiforgery()
             .Produces<Created<CreateProductResponse>>(StatusCodes.Status201Created)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Products))
             .WithName("Create Product")
             .MapToApiVersion(new(1, 0))

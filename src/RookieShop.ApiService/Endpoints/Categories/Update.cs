@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.Result;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using RookieShop.ApiService.ViewModels.Categories;
@@ -13,6 +14,8 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<CategoryVm>, UpdateCat
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapPut("/categories", async (UpdateCategoryRequest request) => await HandleAsync(request))
             .Produces<Ok<CategoryVm>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Categories))
             .WithName("Update Category")
             .MapToApiVersion(new(1, 0))

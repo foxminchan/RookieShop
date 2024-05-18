@@ -14,6 +14,7 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<CategoryVm>, GetCategoryR
         app.MapGet("/categories/{id}",
                 async (CategoryId id) => await HandleAsync(new(id)))
             .Produces<Ok<CategoryVm>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Categories))
             .WithName("Get Category")
             .MapToApiVersion(new(1, 0))

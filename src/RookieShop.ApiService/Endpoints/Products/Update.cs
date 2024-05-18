@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.Result;
+using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.ApiService.ViewModels.Products;
@@ -28,7 +29,9 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<UpdateProductResponse>
                         [FromForm] CategoryId? categoryId = null)
                     => await HandleAsync(new(id, name, description, quantity, price, priceSale, status, productImages,
                         isDeletedOldImage, categoryId)))
-            .Produces<UpdateProductResponse>()
+            .Produces<Ok<UpdateProductResponse>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Products))
             .WithName("Update Product")
             .MapToApiVersion(new(1, 0))

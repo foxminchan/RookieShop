@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.Result;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,8 @@ public sealed class Create(ISender sender) : IEndpoint<Created<CreateBasketRespo
                 async ([FromHeader(Name = HeaderName.IdempotencyKey)] string key, CreateBasketRequest request) =>
                 await HandleAsync(request))
             .AddEndpointFilter<IdempotencyFilter>()
-            .Produces<CreateBasketResponse>(StatusCodes.Status201Created)
+            .Produces<Created<CreateBasketResponse>>(StatusCodes.Status201Created)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Baskets))
             .WithName("Create Basket")
             .MapToApiVersion(new(1, 0))

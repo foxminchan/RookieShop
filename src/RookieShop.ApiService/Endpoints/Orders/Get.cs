@@ -13,13 +13,13 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<OrderVm>, GetOrderRequest
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/orders/{id}", async (OrderId id) => await HandleAsync(new(id)))
             .Produces<Ok<OrderVm>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Orders))
             .WithName("Get Order")
             .MapToApiVersion(new(1, 0))
             .RequirePerUserRateLimit();
 
-    public async Task<Ok<OrderVm>>
-        HandleAsync(GetOrderRequest request, CancellationToken cancellationToken = default)
+    public async Task<Ok<OrderVm>> HandleAsync(GetOrderRequest request, CancellationToken cancellationToken = default)
     {
         GetOrderQuery query = new(request.Id);
 

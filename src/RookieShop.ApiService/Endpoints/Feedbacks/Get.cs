@@ -13,6 +13,7 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<FeedbackVm>, GetFeedbackR
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/feedbacks/{id}", async (FeedbackId id) => await HandleAsync(new(id)))
             .Produces<Ok<FeedbackVm>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Feedbacks))
             .WithName("Get Feedback")
             .MapToApiVersion(new(1, 0))

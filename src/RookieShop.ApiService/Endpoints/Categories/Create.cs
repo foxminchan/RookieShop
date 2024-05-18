@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.Result;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,7 @@ public sealed class Create(ISender sender) : IEndpoint<Created<CreateCategoryRes
                     CreateCategoryRequest request) => await HandleAsync(request))
             .AddEndpointFilter<IdempotencyFilter>()
             .Produces<Created<CreateCategoryResponse>>(StatusCodes.Status201Created)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Categories))
             .WithName("Create Category")
             .MapToApiVersion(new(1, 0))

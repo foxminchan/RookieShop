@@ -12,6 +12,7 @@ public sealed class Delete(ISender sender) : IEndpoint<NoContent, DeleteBasketRe
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapDelete("/baskets/{id:guid}", async (Guid id) => await HandleAsync(new(id)))
             .Produces<NoContent>(StatusCodes.Status204NoContent)
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Baskets))
             .WithName("Delete Basket")
             .MapToApiVersion(new(1, 0))

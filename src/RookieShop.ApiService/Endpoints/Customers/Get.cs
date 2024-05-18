@@ -13,6 +13,7 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<CustomerVm>, GetCustomerR
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/customers/{id}", async (CustomerId id) => await HandleAsync(new(id)))
             .Produces<Ok<CustomerVm>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Customers))
             .WithName("Get Customer")
             .MapToApiVersion(new(1, 0))

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.Result;
+using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using RookieShop.ApiService.ViewModels.Customers;
 using RookieShop.Application.Customers.Commands.Update;
@@ -12,6 +13,8 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<CustomerVm>, UpdateCus
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapPut("/customers", async (UpdateCustomerRequest request) => await HandleAsync(request))
             .Produces<Ok<CustomerVm>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Customers))
             .WithName("Update Customer")
             .MapToApiVersion(new(1, 0))

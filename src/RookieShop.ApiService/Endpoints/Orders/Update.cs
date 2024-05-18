@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.Result;
+using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.ApiService.Filters;
@@ -18,6 +19,8 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<UpdateOrderResponse>, 
                 await HandleAsync(request))
             .AddEndpointFilter<IdempotencyFilter>()
             .Produces<Ok<UpdateOrderResponse>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Orders))
             .WithName("Update Order")
             .MapToApiVersion(new(1, 0))

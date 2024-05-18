@@ -13,6 +13,7 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<BasketVm>, GetBasketReque
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/baskets/{id:guid}", async (Guid id) => await HandleAsync(new(id)))
             .Produces<Ok<BasketVm>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Baskets))
             .WithName("Get Basket")
             .MapToApiVersion(new(1, 0))

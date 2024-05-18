@@ -12,6 +12,7 @@ public sealed class Delete(ISender sender) : IEndpoint<NoContent, DeleteCustomer
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapDelete("/customers/{id}", async (CustomerId id) => await HandleAsync(new(id)))
             .Produces<NoContent>(StatusCodes.Status204NoContent)
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Customers))
             .WithName("Delete Customer")
             .MapToApiVersion(new(1, 0))

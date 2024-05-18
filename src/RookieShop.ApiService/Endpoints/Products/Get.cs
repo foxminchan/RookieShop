@@ -12,7 +12,8 @@ public sealed class Get(ISender sender) : IEndpoint<Ok<ProductVm>, GetProductReq
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/products/{id}", async (ProductId id) => await HandleAsync(new(id)))
-            .Produces<ProductVm>()
+            .Produces<Ok<ProductVm>>()
+            .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Products))
             .WithName("Get Product")
             .MapToApiVersion(new(1, 0))
