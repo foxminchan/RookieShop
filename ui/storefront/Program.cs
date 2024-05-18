@@ -1,6 +1,13 @@
+using Ardalis.ListStartupServices;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
 
 var app = builder.Build();
 

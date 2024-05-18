@@ -11,6 +11,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Refit.HttpClientFactory" />
+		<PackageReference Include="Ardalis.ListStartupServices" />
 		<PackageReference Include="Microsoft.TypeScript.MSBuild" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
 	</ItemGroup>

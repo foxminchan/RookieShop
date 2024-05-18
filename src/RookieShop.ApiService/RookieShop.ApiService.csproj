@@ -10,7 +10,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Ardalis.ListStartupServices" />
-		<PackageReference Include="Microsoft.Extensions.Http.Resilience" />
 	</ItemGroup>
 
 	<ItemGroup>

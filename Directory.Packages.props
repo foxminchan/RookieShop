@@ -6,7 +6,6 @@
 		<ApiVersioningVersion>8.1.0</ApiVersioningVersion>
 		<EfVersion>8.0.5</EfVersion>
 		<TestcontainersVersion>3.8.0</TestcontainersVersion>
-		<MicrosoftExtensionsVersion>8.5.0</MicrosoftExtensionsVersion>
 		<XabarilVersion>8.0.1</XabarilVersion>
 		<PollyVersion>8.4.0</PollyVersion>
 	</PropertyGroup>
@@ -32,7 +31,6 @@
 		<PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(AspnetVersion)" />
 		<PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(AspnetVersion)" />
 		<PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="$(AspnetVersion)" />
-		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="$(MicrosoftExtensionsVersion)" />
 		<!-- Entity Framework Core -->
 		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
