@@ -12,6 +12,4 @@ public sealed record ProductDto(
     decimal PriceSale,
     string? ImageUrl,
     CategoryDto? Category,
-    double AverageRating,
-    int TotalFeedback,
     IEnumerable<ProductFeedbackDto>? Feedbacks);

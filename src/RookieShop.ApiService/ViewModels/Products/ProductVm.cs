@@ -12,6 +12,4 @@ public sealed record ProductVm(
     decimal PriceSale,
     string? ImageUrl,
     CategoryDto? Category,
-    double AverageRating,
-    int TotalFeedback,
     List<ProductFeedbackVm>? Feedbacks);

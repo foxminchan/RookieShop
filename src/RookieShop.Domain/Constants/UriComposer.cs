@@ -2,5 +2,5 @@
 
 public static class UriComposer
 {
-    public const string BaseAzUrl = "https://localhost:10000/devstoreaccount1/rookie-shop/";
+    public const string BaseAzUrl = "http://localhost:10000/devstoreaccount1/rookieshop/";
 }

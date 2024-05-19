@@ -24,8 +24,6 @@ public static class DomainToDtoMapper
             product.Price.PriceSale,
             imageUrl,
             category,
-            product.GetAverageRating(),
-            product.GetTotalFeedback(),
             feedbacks);
     }
 

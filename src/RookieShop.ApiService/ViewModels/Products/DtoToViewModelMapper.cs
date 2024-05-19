@@ -18,8 +18,6 @@ public static class DtoToViewModelMapper
             product.PriceSale,
             product.ImageUrl,
             product.Category,
-            product.AverageRating,
-            product.TotalFeedback,
             feedbacks);
     }
 

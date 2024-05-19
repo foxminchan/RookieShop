@@ -21,9 +21,8 @@ public abstract class ValueObject : IEquatable<ValueObject>
     public static bool operator !=(ValueObject? a, ValueObject? b) => !(a == b);
 
     public override int GetHashCode()
-        => GetEqualityComponents().Aggregate(
-            default(int), (hashcode, value) => HashCode.Combine(hashcode, value.GetHashCode())
-        );
+        => GetEqualityComponents()
+            .Aggregate(default(int), (hashcode, value) => HashCode.Combine(hashcode, value.GetHashCode()));
 
     private bool ValuesAreEqual(ValueObject valueObject)
         => GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());

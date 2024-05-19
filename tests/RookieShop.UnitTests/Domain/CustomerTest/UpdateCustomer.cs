@@ -30,7 +30,7 @@ public sealed class UpdateCustomer
     }
 
     [Fact]
-    public void GivenFullInformation_ShouldUpdateCustomer()
+    public void GivenValidaData_ShouldUpdateCustomer()
     {
         // Arrange
         var customer = new Customer(TestName, TestEmail, TestPhone, TestGender, null);

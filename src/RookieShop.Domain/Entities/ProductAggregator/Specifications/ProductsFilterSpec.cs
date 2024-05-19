@@ -10,10 +10,10 @@ public sealed class ProductsFilterSpec : Specification<Product>
         if (pageSize == 0) pageSize = int.MaxValue;
 
         if (categoryId is not null)
-            Query.Where(product => product.Category!.Id == categoryId);
+            Query.Where(product => product.CategoryId == categoryId);
 
         Query
-            .Where(product => product.Category!.Id == categoryId && !product.IsDeleted)
+            .Where(product => !product.IsDeleted)
             .ApplyPaging(pageIndex, pageSize)
             .ApplyOrdering(orderBy, isDescending);
     }

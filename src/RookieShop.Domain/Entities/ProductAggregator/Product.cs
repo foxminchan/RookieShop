@@ -46,10 +46,6 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
 
     public void Delete() => IsDeleted = true;
 
-    public double GetAverageRating() => Feedbacks?.Average(f => f.Rating) ?? 0;
-
-    public int GetTotalFeedback() => Feedbacks?.Count ?? 0;
-
     public void RemoveStock(int quantityDesired)
     {
         Quantity -= Guard.Against.OutOfRange(quantityDesired, nameof(quantityDesired), 0, int.MaxValue);
@@ -62,7 +58,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
         Name = Guard.Against.NullOrEmpty(name);
         Description = description;
         Quantity = Guard.Against.OutOfRange(quantity, nameof(quantity), 0, int.MaxValue);
-        Status = quantity > 0 ? ProductStatus.InStock : ProductStatus.OutOfStock;
+        Status = status;
         Price = ProductPrice.Create(price, priceSale);
         ImageName = imageName;
         CategoryId = categoryId;
