@@ -6,11 +6,11 @@ public sealed class ShippingAddressBuilder
 {
     private ShippingAddress _shippingAddress;
 
+    public ShippingAddressBuilder() => _shippingAddress = WithDefaultValues();
+
     public static string TestStreet => "364 Cong Hoa Street";
     public static string TestCity => "Tan Binh District";
     public static string TestProvince => "Ho Chi Minh City";
-
-    public ShippingAddressBuilder() => _shippingAddress = WithDefaultValues();
 
     public ShippingAddress Build() => _shippingAddress;
 

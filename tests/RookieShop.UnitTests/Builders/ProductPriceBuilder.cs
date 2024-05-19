@@ -6,10 +6,10 @@ public sealed class ProductPriceBuilder
 {
     private ProductPrice _productPrice;
 
+    public ProductPriceBuilder() => _productPrice = WithDefaultValues();
+
     public static decimal TestPrice => 100;
     public static decimal TestPriceSale => 90;
-
-    public ProductPriceBuilder() => _productPrice = WithDefaultValues();
 
     public ProductPrice Build() => _productPrice;
 

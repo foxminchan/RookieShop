@@ -1,5 +1,4 @@
 ﻿using Ardalis.GuardClauses;
-using RookieShop.Application.Products.DTOs;
 using RookieShop.Application.Products.Queries.Get;
 using RookieShop.Domain.Entities.ProductAggregator;
 using RookieShop.Domain.Entities.ProductAggregator.Specifications;

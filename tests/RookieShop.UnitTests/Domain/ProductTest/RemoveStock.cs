@@ -35,7 +35,8 @@ public sealed class RemoveStock
     [Theory]
     [InlineData(-9)]
     [InlineData(unchecked(int.MaxValue + 1))]
-    public void GivenQuantityDesiredLessThanZero_OrGreaterThanMaxValue_ShouldThrowArgumentOutOfRangeException(int quantityDesired)
+    public void GivenQuantityDesiredLessThanZero_OrGreaterThanMaxValue_ShouldThrowArgumentOutOfRangeException(
+        int quantityDesired)
     {
         // Arrange
         var product = new Product(TestName, TestDescription, TestQuantity, ProductPriceBuilder.TestPrice,

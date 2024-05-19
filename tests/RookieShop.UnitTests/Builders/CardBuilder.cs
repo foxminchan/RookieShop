@@ -6,11 +6,11 @@ public sealed class CardBuilder
 {
     private Card _card;
 
+    public CardBuilder() => _card = WithDefaultValues();
+
     public static string TestBrandName => "Visa";
     public static string TestLast4Digits => "xxxx";
     public static string TestChargeId => "some-charge-id";
-
-    public CardBuilder() => _card = WithDefaultValues();
 
     public Card Build() => _card;
 
