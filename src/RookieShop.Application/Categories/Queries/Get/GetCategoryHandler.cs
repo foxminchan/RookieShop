@@ -12,7 +12,7 @@ public sealed class GetCategoryHandler(IReadRepository<Category> repository)
 {
     public async Task<Result<CategoryDto>> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
-        CategoryBySpec spec = new(request.Id);
+        CategoryByIdSpec spec = new(request.Id);
 
         var category = await repository.FirstOrDefaultAsync(spec, cancellationToken);
 

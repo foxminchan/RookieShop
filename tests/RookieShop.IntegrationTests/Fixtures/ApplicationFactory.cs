@@ -94,7 +94,7 @@ public sealed class ApplicationFactory<TProgram>
                         break;
 
                     case AzuriteContainer storageContainer:
-                        builder.UseSetting("ConnectionStrings:Azurite", storageContainer.GetConnectionString());
+                        builder.UseSetting("Azurite:ConnectionString", storageContainer.GetConnectionString());
                         break;
                 }
             }));

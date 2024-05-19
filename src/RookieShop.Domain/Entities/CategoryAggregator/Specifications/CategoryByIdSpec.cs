@@ -3,7 +3,7 @@ using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
 
 namespace RookieShop.Domain.Entities.CategoryAggregator.Specifications;
 
-public sealed class CategoryBySpec : Specification<Category>
+public sealed class CategoryByIdSpec : Specification<Category>
 {
-    public CategoryBySpec(CategoryId id) => Query.Where(x => x.Id == id);
+    public CategoryByIdSpec(CategoryId id) => Query.Where(x => x.Id == id);
 }
