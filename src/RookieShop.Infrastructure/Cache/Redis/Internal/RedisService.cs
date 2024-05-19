@@ -1,13 +1,12 @@
 ﻿using System.Text;
 using System.Text.Json;
 using Ardalis.GuardClauses;
-using Microsoft.Extensions.Options;
 using RookieShop.Infrastructure.Cache.Redis.Settings;
 using StackExchange.Redis;
 
 namespace RookieShop.Infrastructure.Cache.Redis.Internal;
 
-public sealed class RedisService(IOptions<RedisSettings> options) : IRedisService
+public sealed class RedisService(RedisSettings redisSettings) : IRedisService
 {
     private const string GetKeysLuaScript = """
                                                 local pattern = ARGV[1]
@@ -25,10 +24,8 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
     private readonly SemaphoreSlim _connectionLock = new(1, 1);
 
     private readonly Lazy<ConnectionMultiplexer> _connectionMultiplexer = new(
-        () => ConnectionMultiplexer.Connect(options.Value.GetConnectionString())
+        () => ConnectionMultiplexer.Connect(redisSettings.GetConnectionString())
     );
-
-    private readonly RedisSettings _redisCacheSetting = options.Value;
 
     private ConnectionMultiplexer ConnectionMultiplexer => _connectionMultiplexer.Value;
 
@@ -50,14 +47,14 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
     }
 
     public async Task<T> GetOrSetAsync<T>(string key, Func<T> valueFactory)
-        => await GetOrSetAsync($"{_redisCacheSetting.Prefix}:{key}", valueFactory,
-            TimeSpan.FromSeconds(_redisCacheSetting.RedisDefaultSlidingExpirationInSecond));
+        => await GetOrSetAsync($"{redisSettings.Prefix}:{key}", valueFactory,
+            TimeSpan.FromSeconds(redisSettings.RedisDefaultSlidingExpirationInSecond));
 
     public async Task<T> GetOrSetAsync<T>(string key, Func<T> valueFactory, TimeSpan expiration)
     {
         Guard.Against.NullOrEmpty(key);
 
-        var keyWithPrefix = $"{_redisCacheSetting.Prefix}:{key}";
+        var keyWithPrefix = $"{redisSettings.Prefix}:{key}";
 
         var cachedValue = await Database.StringGetAsync(keyWithPrefix);
         if (!string.IsNullOrEmpty(cachedValue)) return GetByteToObject<T>(cachedValue);
@@ -71,9 +68,9 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
 
     public async Task<T?> GetAsync<T>(string key)
     {
-        Guard.Against.NullOrEmpty(_redisCacheSetting.Prefix);
+        Guard.Against.NullOrEmpty(redisSettings.Prefix);
 
-        var keyWithPrefix = $"{_redisCacheSetting.Prefix}:{key}";
+        var keyWithPrefix = $"{redisSettings.Prefix}:{key}";
 
         var cachedValue = await Database.StringGetAsync(keyWithPrefix);
         return !string.IsNullOrEmpty(cachedValue)
@@ -86,7 +83,7 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
         Guard.Against.NullOrEmpty(key);
         Guard.Against.NullOrEmpty(hashKey);
 
-        var keyWithPrefix = $"{_redisCacheSetting.Prefix}:{key}";
+        var keyWithPrefix = $"{redisSettings.Prefix}:{key}";
         var value = await Database.HashGetAsync(keyWithPrefix, hashKey.ToLower());
 
         if (!string.IsNullOrEmpty(value)) return GetByteToObject<T>(value);
@@ -103,14 +100,14 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
         var keys = await Database.ScriptEvaluateAsync(GetKeysLuaScript, values: [pattern]);
 
         return ((RedisResult[])keys!)
-            .Where(x => x.ToString().StartsWith(_redisCacheSetting.Prefix))
+            .Where(x => x.ToString().StartsWith(redisSettings.Prefix))
             .Select(x => x.ToString())
             .ToArray();
     }
 
     public async Task<IEnumerable<T>> GetValuesAsync<T>(string key)
     {
-        var values = await Database.HashGetAllAsync($"{_redisCacheSetting.Prefix}:{key}");
+        var values = await Database.HashGetAllAsync($"{redisSettings.Prefix}:{key}");
         return values.Select(x => GetByteToObject<T>(x.Value)).ToArray();
     }
 
@@ -118,21 +115,21 @@ public sealed class RedisService(IOptions<RedisSettings> options) : IRedisServic
     {
         var succeed = true;
 
-        var keys = await GetKeysAsync($"{_redisCacheSetting.Prefix}:{pattern}");
+        var keys = await GetKeysAsync($"{redisSettings.Prefix}:{pattern}");
         foreach (var key in keys) succeed = await Database.KeyDeleteAsync(key);
 
         return succeed;
     }
 
     public async Task HashRemoveAsync(string key, string hashKey)
-        => await Database.HashDeleteAsync($"{_redisCacheSetting.Prefix}:{key}", hashKey.ToLower());
+        => await Database.HashDeleteAsync($"{redisSettings.Prefix}:{key}", hashKey.ToLower());
 
-    public async Task RemoveAsync(string key) => await Database.KeyDeleteAsync($"{_redisCacheSetting.Prefix}:{key}");
+    public async Task RemoveAsync(string key) => await Database.KeyDeleteAsync($"{redisSettings.Prefix}:{key}");
 
     public async Task ResetAsync()
         => await Database.ScriptEvaluateAsync(
             ClearCacheLuaScript,
-            values: [_redisCacheSetting.Prefix + "*"],
+            values: [redisSettings.Prefix + "*"],
             flags: CommandFlags.FireAndForget);
 
     private static T GetByteToObject<T>(RedisValue value)

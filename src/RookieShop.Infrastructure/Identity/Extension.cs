@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,7 +38,12 @@ public static class Extension
             .AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
                 policy.RequireAuthenticatedUser()
                     .RequireClaim("scope", AuthScope.Read)
-                    .RequireClaim("scope", AuthScope.Write));
+                    .RequireClaim("scope", AuthScope.Write))
+            .SetDefaultPolicy(new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                .RequireAuthenticatedUser()
+                .RequireClaim("scope", AuthScope.Read)
+                .RequireClaim("scope", AuthScope.Write)
+                .Build());
 
         return builder;
     }

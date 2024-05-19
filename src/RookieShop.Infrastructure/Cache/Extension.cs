@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using RookieShop.Infrastructure.Cache.Redis;
 using RookieShop.Infrastructure.Cache.Redis.Internal;
 using RookieShop.Infrastructure.Cache.Redis.Settings;
@@ -37,6 +38,8 @@ public static class Extension
         {
             builder.Services.AddDistributedMemoryCache();
         }
+
+        builder.Services.AddSingleton(options => options.GetRequiredService<IOptions<RedisSettings>>().Value);
 
         builder.Services.AddSingleton<IRedisService, RedisService>();
 
