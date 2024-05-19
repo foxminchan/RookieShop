@@ -22,9 +22,9 @@ public sealed class Order : EntityBase, IAggregateRoot
         string? city, string? province, CustomerId customerId, OrderStatus orderStatus)
     {
         PaymentMethod = Guard.Against.EnumOutOfRange(paymentMethod);
-        Card = Card.Create(last4, brand, chargeId);
+        Card = Card.Create( brand, last4, chargeId);
         ShippingAddress = ShippingAddress.Create(street, city, province);
-        CustomerId = Guard.Against.Null(customerId);
+        CustomerId = Guard.Against.Default(customerId);
         OrderStatus = Guard.Against.EnumOutOfRange(orderStatus);
     }
 
@@ -73,6 +73,8 @@ public sealed class Order : EntityBase, IAggregateRoot
 
         {
             Order order = new(paymentMethod, last4, brand, chargeId, street, city, province, customerId, orderStatus);
+
+            Guard.Against.NullOrEmpty(orderDetails);
 
             foreach (var orderDetail in orderDetails)
             {

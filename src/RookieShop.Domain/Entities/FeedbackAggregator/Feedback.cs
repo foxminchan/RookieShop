@@ -21,7 +21,7 @@ public sealed class Feedback : EntityBase, IAggregateRoot
     {
         Content = content;
         Rating = Guard.Against.OutOfRange(rating, nameof(rating), 1, 5);
-        ProductId = Guard.Against.Null(productId);
+        ProductId = Guard.Against.Default(productId);
         CustomerId = customerId;
     }
 
@@ -37,7 +37,7 @@ public sealed class Feedback : EntityBase, IAggregateRoot
     {
         Content = content;
         Rating = Guard.Against.OutOfRange(rating, nameof(rating), 1, 5);
-        ProductId = Guard.Against.Null(productId);
+        ProductId = Guard.Against.Default(productId);
         CustomerId = customerId;
     }
 }
