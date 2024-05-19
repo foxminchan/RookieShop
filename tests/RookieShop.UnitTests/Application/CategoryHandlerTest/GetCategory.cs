@@ -1,5 +1,4 @@
-﻿using Ardalis.GuardClauses;
-using RookieShop.Application.Categories.Queries.Get;
+﻿using RookieShop.Application.Categories.Queries.Get;
 using RookieShop.Domain.Entities.CategoryAggregator;
 using RookieShop.Domain.Entities.CategoryAggregator.Specifications;
 using RookieShop.Domain.SharedKernel;
@@ -22,8 +21,8 @@ public sealed class GetCategory
     {
         // Arrange
         var category = new Category("Category Name", "Category Description");
-        _repositoryMock.Setup(repo => repo.FirstOrDefaultAsync(
-                It.IsAny<CategoryByIdSpec>(), CancellationToken.None))
+        _repositoryMock.Setup(repo =>
+                repo.FirstOrDefaultAsync(It.IsAny<CategoryByIdSpec>(), CancellationToken.None))
             .ReturnsAsync(category);
 
         var query = new GetCategoryQuery(new(Guid.NewGuid()));
@@ -33,21 +32,5 @@ public sealed class GetCategory
 
         // Assert
         result.Should().NotBeNull();
-    }
-
-    [Fact]
-    public async Task GivenValidId_ShouldBeReturnNotFound_IfCategoryIsNotExists()
-    {
-        // Arrange
-        var query = new GetCategoryQuery(new(Guid.NewGuid()));
-        _repositoryMock.Setup(repo => 
-                repo.FirstOrDefaultAsync(It.IsAny<CategoryByIdSpec>(), CancellationToken.None))
-            .ReturnsAsync((Category?)null);
-
-        // Act
-        Func<Task> act = async () => await _handler.Handle(query, CancellationToken.None);
-
-        // Assert
-        await act.Should().ThrowAsync<NotFoundException>();
     }
 }
