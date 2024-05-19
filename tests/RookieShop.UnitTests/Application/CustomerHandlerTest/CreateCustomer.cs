@@ -36,6 +36,8 @@ public sealed class CreateCustomer
 
         // Assert
         result.IsSuccess.Should().BeTrue();
+        _repositoryMock.Verify(repo =>
+            repo.AddAsync(It.IsAny<Customer>(), CancellationToken.None), Times.Once);
     }
 
     [Theory]
@@ -54,5 +56,7 @@ public sealed class CreateCustomer
 
         // Assert
         await act.Should().ThrowAsync<ArgumentException>();
+        _repositoryMock.Verify(repo =>
+            repo.AddAsync(It.IsAny<Customer>(), CancellationToken.None), Times.Never);
     }
 }

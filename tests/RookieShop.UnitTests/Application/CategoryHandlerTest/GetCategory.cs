@@ -33,6 +33,8 @@ public sealed class GetCategory
 
         // Assert
         result.Should().NotBeNull();
+        _repositoryMock.Verify(repo =>
+            repo.FirstOrDefaultAsync(It.IsAny<CategoryByIdSpec>(), CancellationToken.None), Times.Once);
     }
 
     [Fact]
@@ -41,7 +43,7 @@ public sealed class GetCategory
         // Arrange
         var query = new GetCategoryQuery(new(Guid.NewGuid()));
         _repositoryMock.Setup(repo =>
-                           repo.FirstOrDefaultAsync(It.IsAny<CategoryByIdSpec>(), CancellationToken.None))
+                repo.FirstOrDefaultAsync(It.IsAny<CategoryByIdSpec>(), CancellationToken.None))
             .ReturnsAsync((Category?)null);
 
         // Act
@@ -49,5 +51,7 @@ public sealed class GetCategory
 
         // Assert
         await act.Should().ThrowAsync<NotFoundException>();
+        _repositoryMock.Verify(repo =>
+            repo.FirstOrDefaultAsync(It.IsAny<CategoryByIdSpec>(), CancellationToken.None), Times.Once);
     }
 }

@@ -55,5 +55,8 @@ public sealed class DeleteCustomer
 
         // Assert
         await act.Should().ThrowAsync<NotFoundException>();
+        _repositoryMock.Verify(repo => repo.GetByIdAsync(It.IsAny<CustomerId>(), CancellationToken.None), Times.Once);
+        _repositoryMock.Verify(repo =>
+            repo.UpdateAsync(It.IsAny<Customer>(), CancellationToken.None), Times.Never);
     }
 }

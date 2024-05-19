@@ -50,5 +50,7 @@ public class CreateCategory
 
         // Assert
         await act.Should().ThrowAsync<ArgumentNullException>();
+        _repositoryMock.Verify(repo =>
+            repo.AddAsync(It.IsAny<Category>(), CancellationToken.None), Times.Never);
     }
 }

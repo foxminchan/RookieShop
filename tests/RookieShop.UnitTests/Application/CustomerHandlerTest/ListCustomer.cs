@@ -38,6 +38,8 @@ public sealed class ListCustomer
 
         // Assert
         result.Value.Should().NotBeEmpty().And.HaveCount(3);
+        _repositoryMock.Verify(repo =>
+            repo.ListAsync(It.IsAny<CustomersFilterSpec>(), CancellationToken.None), Times.Once);
     }
 
     [Fact]
@@ -54,5 +56,7 @@ public sealed class ListCustomer
 
         // Assert
         result.Value.Should().BeEmpty();
+        _repositoryMock.Verify(repo =>
+            repo.ListAsync(It.IsAny<CustomersFilterSpec>(), CancellationToken.None), Times.Once);
     }
 }

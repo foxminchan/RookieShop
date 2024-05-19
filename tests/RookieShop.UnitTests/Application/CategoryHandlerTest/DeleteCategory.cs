@@ -51,5 +51,8 @@ public sealed class DeleteCategory
 
         // Assert
         await act.Should().ThrowAsync<NotFoundException>();
+        _repositoryMock.Verify(repo => repo.GetByIdAsync(It.IsAny<CategoryId>(), CancellationToken.None), Times.Once);
+        _repositoryMock.Verify(repo =>
+            repo.DeleteAsync(It.IsAny<Category>(), CancellationToken.None), Times.Never);
     }
 }

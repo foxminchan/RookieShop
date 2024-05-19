@@ -35,6 +35,8 @@ public sealed class GetCustomer
 
         // Assert
         result.Should().NotBeNull();
+        _repositoryMock.Verify(repo =>
+            repo.FirstOrDefaultAsync(It.IsAny<CustomerByIdSpec>(), CancellationToken.None), Times.Once);
     }
 
     [Fact]
@@ -51,5 +53,7 @@ public sealed class GetCustomer
 
         // Assert
         await act.Should().ThrowAsync<NotFoundException>();
+        _repositoryMock.Verify(repo =>
+            repo.FirstOrDefaultAsync(It.IsAny<CustomerByIdSpec>(), CancellationToken.None), Times.Once);
     }
 }

@@ -40,6 +40,8 @@ public sealed class UpdateCustomer
         result.Value.Name.Should().Be("Customer Name");
         result.Value.Email.Should().Be("customer@gmail.com");
         result.Value.Phone.Should().Be("0123456789");
+        _repositoryMock.Verify(repo =>
+            repo.UpdateAsync(It.IsAny<Customer>(), CancellationToken.None), Times.Once);
     }
 
     [Fact]
@@ -57,6 +59,9 @@ public sealed class UpdateCustomer
 
         // Assert
         await act.Should().ThrowAsync<NotFoundException>();
+        _repositoryMock.Verify(repo => repo.GetByIdAsync(It.IsAny<CustomerId>(), CancellationToken.None), Times.Once);
+        _repositoryMock.Verify(repo =>
+            repo.UpdateAsync(It.IsAny<Customer>(), CancellationToken.None), Times.Never);
     }
 
     [Theory]
@@ -79,5 +84,9 @@ public sealed class UpdateCustomer
 
         // Assert
         await act.Should().ThrowAsync<ArgumentException>();
+        _repositoryMock.Verify(repo =>
+            repo.GetByIdAsync(It.IsAny<CustomerId>(), CancellationToken.None), Times.Once);
+        _repositoryMock.Verify(repo =>
+            repo.UpdateAsync(It.IsAny<Customer>(), CancellationToken.None), Times.Never);
     }
 }
