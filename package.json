@@ -17,5 +17,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "lint-staged": {
+    "*.cs": "dotnet format --include"
   }
 }

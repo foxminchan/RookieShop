@@ -9,6 +9,8 @@ using RookieShop.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseDefaultServiceProvider(config => config.ValidateOnBuild = true);
+
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.AddServerHeader = false;

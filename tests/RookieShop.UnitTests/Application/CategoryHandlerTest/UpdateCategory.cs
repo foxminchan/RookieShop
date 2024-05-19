@@ -1,6 +1,4 @@
 ﻿using Ardalis.GuardClauses;
-using Ardalis.Result;
-using MediatR;
 using Microsoft.Extensions.Logging;
 using RookieShop.Application.Categories.Commands.Update;
 using RookieShop.Domain.Entities.CategoryAggregator;
@@ -36,7 +34,8 @@ public sealed class UpdateCategory
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        result.Status.Should().Be(ResultStatus.Ok);
+        result.Value.Name.Should().Be("Category Name");
+        result.Value.Description.Should().Be("Category Description");
     }
 
     [Fact]

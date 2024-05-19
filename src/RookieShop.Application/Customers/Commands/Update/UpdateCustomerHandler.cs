@@ -2,14 +2,13 @@
 using Ardalis.GuardClauses;
 using Ardalis.Result;
 using Microsoft.Extensions.Logging;
-using RookieShop.Application.Customers.Commands.Create;
 using RookieShop.Application.Customers.DTOs;
 using RookieShop.Domain.Entities.CustomerAggregator;
 using RookieShop.Domain.SharedKernel;
 
 namespace RookieShop.Application.Customers.Commands.Update;
 
-public sealed class UpdateCustomerHandler(IRepository<Customer> repository, ILogger<CreateCustomerHandler> logger)
+public sealed class UpdateCustomerHandler(IRepository<Customer> repository, ILogger<UpdateCustomerHandler> logger)
     : ICommandHandler<UpdateCustomerCommand, Result<CustomerDto>>
 {
     public async Task<Result<CustomerDto>> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
