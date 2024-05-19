@@ -47,12 +47,12 @@ services:
       - rookie-network
 
   rookie.storage:
-    image: mcr.microsoft.com/azure-storage/azurite:3.9.0
+    image: mcr.microsoft.com/azure-storage/azurite:3.30.0
     container_name: rookie.storage
     restart: unless-stopped
     ports:
       - 10000-10002:10000-10002
-    command: azurite-blob --blobHost 0.0.0.0 --loose /data
+    command: "azurite-blob --blobHost 0.0.0.0 -l /data --silent"
     volumes:
       - ./mnt/azurite:/data
     logging: *logging

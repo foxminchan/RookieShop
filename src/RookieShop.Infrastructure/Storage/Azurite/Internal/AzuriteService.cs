@@ -2,43 +2,39 @@
 using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Http;
 using Polly;
-using Polly.Registry;
+using Polly.Retry;
+using RookieShop.Infrastructure.Storage.Azurite.Settings;
 
 namespace RookieShop.Infrastructure.Storage.Azurite.Internal;
 
-public sealed class AzuriteService(
-    BlobServiceClient blobServiceClient,
-    ResiliencePipelineProvider<string> pipelineProvider) : IAzuriteService
+public sealed class AzuriteService(AzuriteSettings option) : IAzuriteService
 {
-    private const string ContainerName = "rookieshop";
+    private readonly AsyncRetryPolicy _policy = Policy
+        .Handle<Exception>()
+        .WaitAndRetryAsync(3, attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)));
 
-    private readonly ResiliencePipeline _policy = pipelineProvider.GetPipeline(nameof(Azurite));
+    private readonly BlobContainerClient _container = new(option.ConnectionString, option.ContainerName);
 
     public async Task<string> UploadFileAsync(IFormFile file, CancellationToken cancellationToken = default)
     {
-        var uniqueFileName = Guid.NewGuid().ToString();
+        await _container.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
 
-        var blobClient = blobServiceClient.GetBlobContainerClient(ContainerName)
-            .GetBlobClient(uniqueFileName);
+        var blobName = Guid.NewGuid().ToString();
 
-        await _policy.ExecuteAsync(
-            async token => await blobClient.UploadAsync(
-                file.OpenReadStream(),
-                new BlobHttpHeaders() { ContentType = file.ContentType },
-                cancellationToken: token),
-            cancellationToken);
+        var blobClient = _container.GetBlobClient(blobName);
 
-        return uniqueFileName;
+        await _policy.ExecuteAsync(async () => await blobClient.UploadAsync(file.OpenReadStream(),
+            new BlobHttpHeaders() { ContentType = file.ContentType }, cancellationToken: cancellationToken));
+
+        return blobName;
     }
 
     public async Task DeleteFileAsync(string fileName, CancellationToken cancellationToken = default)
     {
-        var blobClient = blobServiceClient.GetBlobContainerClient(ContainerName)
-            .GetBlobClient(fileName);
+        var blobClient = _container.GetBlobClient(fileName);
 
         await _policy.ExecuteAsync(
-            async token =>
-                await blobClient.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots, cancellationToken: token),
-            cancellationToken);
+            async () => await blobClient.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots,
+                cancellationToken: cancellationToken));
     }
 }
