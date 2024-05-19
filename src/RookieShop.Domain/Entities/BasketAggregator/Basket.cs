@@ -13,6 +13,8 @@ public sealed class Basket(Guid accountId)
 
     public void UpdateBasketDetails(BasketDetail basketDetails)
     {
+        Guard.Against.Null(basketDetails);
+
         var basketDetail = BasketDetails.FirstOrDefault(x => x.Id == basketDetails.Id);
 
         basketDetail?.Update(basketDetails.Quantity, basketDetails.Price);
@@ -23,6 +25,8 @@ public sealed class Basket(Guid accountId)
         public static Basket Create(Guid accountId, List<BasketDetail> basketDetails)
         {
             Basket basket = new(accountId);
+
+            Guard.Against.NullOrEmpty(basketDetails);
 
             foreach (var basketDetail in basketDetails.Select(item => new BasketDetail(item.Id, item.Quantity, item.Price)))
             {
