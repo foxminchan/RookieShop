@@ -19,7 +19,7 @@ public sealed class InfrastructureLayerTest
             .GetResult();
 
         // Assert
-        Assert.True(result.IsSuccessful);
+        result.IsSuccessful.Should().BeTrue();
     }
 
     [Fact]
@@ -37,6 +37,6 @@ public sealed class InfrastructureLayerTest
             .GetResult();
 
         // Assert
-        Assert.True(result.IsSuccessful);
+        result.IsSuccessful.Should().BeTrue();
     }
 }

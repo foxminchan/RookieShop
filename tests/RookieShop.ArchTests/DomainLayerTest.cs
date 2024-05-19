@@ -23,7 +23,7 @@ public sealed class DomainLayerTest
             .GetResult();
 
         // Assert
-        Assert.True(result.IsSuccessful);
+        result.IsSuccessful.Should().BeTrue();
     }
 
     [Fact]

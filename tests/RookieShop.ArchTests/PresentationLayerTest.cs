@@ -19,7 +19,7 @@ public sealed class PresentationLayerTest
             .GetResult();
 
         // Assert
-        Assert.True(result.IsSuccessful);
+        result.IsSuccessful.Should().BeTrue();
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public sealed class PresentationLayerTest
             .GetResult();
 
         // Assert
-        Assert.True(result.IsSuccessful);
+        result.IsSuccessful.Should().BeTrue();
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public sealed class PresentationLayerTest
             .GetResult();
 
         // Assert
-        Assert.True(result.IsSuccessful);
+        result.IsSuccessful.Should().BeTrue();
     }
 
     [Fact]
@@ -73,6 +73,6 @@ public sealed class PresentationLayerTest
             .GetResult();
 
         // Assert
-        Assert.True(result.IsSuccessful);
+        result.IsSuccessful.Should().BeTrue();
     }
 }
