@@ -28,8 +28,8 @@ public sealed class RemoveStock
         product.RemoveStock(quantityDesired);
 
         // Assert
-        Assert.Equal(expectedQuantity, product.Quantity);
-        Assert.Equal(expectedStatus, product.Status);
+        product.Quantity.Should().Be(expectedQuantity);
+        product.Status.Should().Be(expectedStatus);
     }
 
     [Theory]
@@ -43,6 +43,9 @@ public sealed class RemoveStock
             _testCategoryId);
 
         // Act
-        Assert.Throws<ArgumentOutOfRangeException>(() => product.RemoveStock(quantityDesired));
+        var act = () => product.RemoveStock(quantityDesired);
+
+        // Assert
+        act.Should().Throw<ArgumentOutOfRangeException>();
     }
 }

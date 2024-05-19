@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using RookieShop.Domain.Entities.CustomerAggregator.Primitives;
+﻿using RookieShop.Domain.Entities.CustomerAggregator.Primitives;
 using RookieShop.Domain.Entities.OrderAggregator;
 using RookieShop.Domain.Entities.OrderAggregator.Enums;
 using RookieShop.UnitTests.Builders;
@@ -33,7 +32,7 @@ public sealed class CreateOrder
             ]);
 
         // Assert
-        Assert.NotNull(order);
+        order.Should().NotBeNull();
         order.PaymentMethod.Should().Be(PaymentMethod.Card);
         order.Card!.Last4Digits.Should().Be(CardBuilder.TestLast4Digits);
     }

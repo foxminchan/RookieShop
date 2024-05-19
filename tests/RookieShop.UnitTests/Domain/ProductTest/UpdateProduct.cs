@@ -33,14 +33,14 @@ public sealed class UpdateProduct
             ProductStatus.InStock);
 
         // Assert
-        Assert.Equal(newName, product.Name);
-        Assert.Equal(newDescription, product.Description);
-        Assert.Equal(newQuantity, product.Quantity);
-        Assert.Equal(ProductStatus.InStock, product.Status);
-        Assert.Equal(newPrice, product.Price.Price);
-        Assert.Equal(newPriceSale, product.Price.PriceSale);
-        Assert.Equal(newImageName, product.ImageName);
-        Assert.Equal(newCategoryId, product.CategoryId);
+        product.Name.Should().Be(newName);
+        product.Description.Should().Be(newDescription);
+        product.Quantity.Should().Be(newQuantity);
+        product.Status.Should().Be(ProductStatus.InStock);
+        product.Price.Price.Should().Be(newPrice);
+        product.Price.PriceSale.Should().Be(newPriceSale);
+        product.ImageName.Should().Be(newImageName);
+        product.CategoryId.Should().Be(newCategoryId);
     }
 
     [Fact]
@@ -51,23 +51,28 @@ public sealed class UpdateProduct
             _testCategoryId);
 
         // Act
-        Assert.Throws<ArgumentNullException>(() =>
-            product.Update(null!, TestDescription, TestQuantity, TestPrice, TestPriceSale, _testImageName,
-                _testCategoryId, ProductStatus.InStock));
+        var act = () => product.Update(null!, TestDescription, TestQuantity, TestPrice, TestPriceSale, _testImageName,
+            _testCategoryId, ProductStatus.InStock);
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>();
     }
 
     [Theory]
     [InlineData(-9)]
     [InlineData(unchecked(int.MaxValue + 1))]
-    public void GivenQuantityDesiredLessThanZero_OrGreaterThanMaxValue_ShouldThrowArgumentOutOfRangeException(int quantity)
+    public void GivenQuantityDesiredLessThanZero_OrGreaterThanMaxValue_ShouldThrowArgumentOutOfRangeException(
+        int quantity)
     {
         // Arrange
         var product = new Product(TestName, TestDescription, TestQuantity, TestPrice, TestPriceSale, _testImageName,
             _testCategoryId);
 
         // Act
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-            product.Update(TestName, TestDescription, quantity, TestPrice, TestPriceSale, _testImageName,
-                _testCategoryId, ProductStatus.InStock));
+        var act = () => product.Update(TestName, TestDescription, quantity, TestPrice, TestPriceSale, _testImageName,
+            _testCategoryId, ProductStatus.InStock);
+
+        // Assert
+        act.Should().Throw<ArgumentOutOfRangeException>();
     }
 }

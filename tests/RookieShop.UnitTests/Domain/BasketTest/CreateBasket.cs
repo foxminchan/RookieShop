@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using RookieShop.Domain.Entities.BasketAggregator;
+﻿using RookieShop.Domain.Entities.BasketAggregator;
 
 namespace RookieShop.UnitTests.Domain.BasketTest;
 
@@ -20,10 +19,10 @@ public sealed class CreateBasket
         var basket = Basket.Factory.Create(accountId, basketDetails);
 
         // Assert
-        Assert.NotNull(basket);
-        Assert.Equal(accountId, basket.AccountId);
-        Assert.Equal(2, basket.BasketDetails.Count);
-        Assert.Equal(500, basket.TotalPrice());
+        basket.Should().NotBeNull();
+        basket.AccountId.Should().Be(accountId);
+        basket.BasketDetails.Should().HaveCount(2);
+        basket.TotalPrice().Should().Be(500);
     }
 
     [Fact]

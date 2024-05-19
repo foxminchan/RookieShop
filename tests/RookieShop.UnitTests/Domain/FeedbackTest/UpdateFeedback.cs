@@ -19,8 +19,8 @@ public sealed class UpdateFeedback
         feedback.Update(newContent, newRating, new(Guid.NewGuid()), new(Guid.NewGuid()));
 
         // Assert
-        Assert.Equal(newContent, feedback.Content);
-        Assert.Equal(newRating, feedback.Rating);
+        feedback.Content.Should().Be(newContent);
+        feedback.Rating.Should().Be(newRating);
     }
 
     [Theory]
@@ -31,8 +31,10 @@ public sealed class UpdateFeedback
         // Arrange
         var feedback = new Feedback(TestContent, TestRating, new(Guid.NewGuid()), new(Guid.NewGuid()));
 
+        // Act
+        var act = () => feedback.Update(TestContent, rating, new(Guid.NewGuid()), new(Guid.NewGuid()));
+
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-            feedback.Update(TestContent, rating, new(Guid.NewGuid()), new(Guid.NewGuid())));
+        act.Should().Throw<ArgumentOutOfRangeException>();
     }
 }

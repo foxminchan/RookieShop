@@ -17,10 +17,10 @@ public sealed class CreateBasketItem
         var basketDetail = new BasketDetail(productId, quantity, price);
 
         // Assert
-        Assert.NotNull(basketDetail);
-        Assert.Equal(productId, basketDetail.Id);
-        Assert.Equal(quantity, basketDetail.Quantity);
-        Assert.Equal(price, basketDetail.Price);
+        basketDetail.Should().NotBeNull();
+        basketDetail.Id.Should().Be(productId);
+        basketDetail.Quantity.Should().Be(quantity);
+        basketDetail.Price.Should().Be(price);
     }
 
     [Theory]
@@ -31,13 +31,19 @@ public sealed class CreateBasketItem
     public void GivenInvalidQuantityAndPrice_ShouldThrowArgumentOutOfRangeException(int quantity, decimal price)
     {
         // Act
-        Assert.Throws<ArgumentOutOfRangeException>(() => new BasketDetail(new(Guid.NewGuid()), quantity, price));
+        Func<BasketDetail> act = () => new(new(Guid.NewGuid()), quantity, price);
+
+        // Assert
+        act.Should().Throw<ArgumentOutOfRangeException>();
     }
 
     [Fact]
-    public void GivenDefaultProductId_ShouldThrowArgumentNullException()
+    public void GivenDefaultProductId_ShouldThrowArgumentException()
     {
         // Act
-        Assert.Throws<ArgumentException>(() => new BasketDetail(default, 1, 100));
+        Func<BasketDetail> act = () => new(default, 1, 100);
+
+        // Assert
+        act.Should().Throw<ArgumentException>();
     }
 }

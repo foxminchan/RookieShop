@@ -43,10 +43,12 @@ public class CreateCategory
     public async Task GivenNullData_ShouldThrowArgumentNullException(string? name, string? description)
     {
         // Arrange
-        var command = new CreateCategoryCommand(name!, description);
+        var command = new CreateCategoryCommand(name!, description); // Note: name! is used to tell the compiler that it will never be null at this point
+
+        // Act
+        Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await _handler.Handle(command, CancellationToken.None));
+        await act.Should().ThrowAsync<ArgumentNullException>();
     }
 }

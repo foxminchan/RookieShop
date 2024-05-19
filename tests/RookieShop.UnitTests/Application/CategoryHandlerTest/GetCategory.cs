@@ -32,7 +32,7 @@ public sealed class GetCategory
         var result = await _handler.Handle(query, CancellationToken.None);
 
         // Assert
-        Assert.NotNull(result);
+        result.Should().NotBeNull();
     }
 
     [Fact]
@@ -44,7 +44,10 @@ public sealed class GetCategory
                 repo.FirstOrDefaultAsync(It.IsAny<CategoryByIdSpec>(), CancellationToken.None))
             .ReturnsAsync((Category?)null);
 
+        // Act
+        Func<Task> act = async () => await _handler.Handle(query, CancellationToken.None);
+
         // Assert
-        await Assert.ThrowsAsync<NotFoundException>(async () => await _handler.Handle(query, CancellationToken.None));
+        await act.Should().ThrowAsync<NotFoundException>();
     }
 }

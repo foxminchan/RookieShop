@@ -42,9 +42,9 @@ public sealed class UpdateCustomer
         customer.Update(newName, newEmail, newPhone, TestGender, null);
 
         // Assert
-        Assert.Equal(newName, customer.Name);
-        Assert.Equal(newEmail, customer.Email);
-        Assert.Equal(newPhone, customer.Phone);
+        customer.Name.Should().Be(newName);
+        customer.Email.Should().Be(newEmail);
+        customer.Phone.Should().Be(newPhone);
     }
 
     [Theory]
@@ -55,7 +55,9 @@ public sealed class UpdateCustomer
         var customer = new Customer(TestName, TestEmail, TestPhone, TestGender, null);
 
         // Act
-        Assert.Throws<ArgumentNullException>(() =>
-            customer.Update(data.Name, data.Email, data.Phone, data.Gender, data.AccountId));
+        var act = () => customer.Update(data.Name, data.Email, data.Phone, data.Gender, data.AccountId);
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>();
     }
 }

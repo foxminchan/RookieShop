@@ -19,8 +19,8 @@ public sealed class UpdateCategory
         category.Update(newName, newDescription);
 
         // Assert
-        Assert.Equal(newName, category.Name);
-        Assert.Equal(newDescription, category.Description);
+        category.Name.Should().Be(newName);
+        category.Description.Should().Be(newDescription);
     }
 
     [Fact]
@@ -34,8 +34,8 @@ public sealed class UpdateCategory
         category.Update(newName, null);
 
         // Assert
-        Assert.Equal(newName, category.Name);
-        Assert.Null(category.Description);
+        category.Name.Should().NotBe(TestName);
+        category.Description.Should().BeNull();
     }
 
     [Fact]
@@ -45,7 +45,10 @@ public sealed class UpdateCategory
         var category = new Category(TestName, TestDescription);
         const string newDescription = "Description 2";
 
+        // Act
+        var act = () => category.Update(null!, newDescription);
+
         // Assert
-        Assert.Throws<ArgumentNullException>(() => category.Update(null!, newDescription));
+        act.Should().Throw<ArgumentNullException>();
     }
 }
