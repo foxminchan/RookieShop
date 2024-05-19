@@ -1,5 +1,6 @@
 <h1>RookieShop: Rookie Phase-1 Assignment Project</h1>
 
+[![Issue](https://img.shields.io/github/issues/foxminchan/RookieShop?label=Issue)](https://github.com/foxminchan/RookieShop/issues)
 [![Build](https://github.com/foxminchan/RookieShop/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/foxminchan/RookieShop/actions/workflows/build.yml)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=foxminchan_RookieShop&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=foxminchan_RookieShop)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -64,6 +65,7 @@ Build an e-commerce web site with minimum functionality below:
 - [Postgres](https://www.postgresql.org/)
 - [Aspire](https://learn.microsoft.com/dotnet/aspire)
 - [OpenTelemetry](https://opentelemetry.io/)
+- [TestContainers](https://www.testcontainers.org/)
 
 ## Software Architecture
 
@@ -183,6 +185,7 @@ The project uses OpenTelemetry to collect the telemetry data from the applicatio
 ## Project References
 
 - https://github.com/dotnet/eShop
+- https://github.com/dotnet-architecture/eShopOnWeb
 - https://github.com/ardalis/CleanArchitecture
 - https://github.com/thangchung/clean-architecture-dotnet
 - https://github.com/phongnguyend/Practical.CleanArchitecture
