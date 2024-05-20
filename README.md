@@ -71,6 +71,16 @@ Build an e-commerce web site with minimum functionality below:
 
 <img loading="lazy" src="./img/system-design.png" alt="System Design" width="100%" height="100%">
 
+| No  | Name            | Usecase                                                                                              |
+| --- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| 1   | identity server | An authentication server that provides authentication and authorization services for the application |
+| 2   | store front     | A user-facing website that allows customers to view, rate, and purchase products                     |
+| 3   | back office     | An admin-facing website that allows administrators to manage products, categories, and customers     |
+| 4   | dashboard       | An observability dashboard that provides insights into the application's performance and behavior    |
+| 5   | web api         | A REST API that provides data to the user-facing and admin-facing websites                           |
+| 6   | redis           | A distributed lock manager, cache and cart storage                                                   |
+| 7   | postgres        | A relational database that stores the application's data                                             |
+
 ## Getting Started
 
 ### Prerequisites
@@ -113,7 +123,7 @@ bun install
 ### Start the infrastructure
 
 ```bash
-docker-compose --env-file .env up -d
+docker-compose --env-file .env up -d1
 ```
 
 > [!IMPORTANT]
