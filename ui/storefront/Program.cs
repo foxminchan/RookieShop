@@ -24,7 +24,9 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
-builder.AddWebServices(appSettings.ApiEndpoint);
+builder.AddAuthenticationService(appSettings.OpenIdSettings);
+
+builder.AddHttpServices(appSettings.ApiEndpoint);
 
 var app = builder.Build();
 
@@ -53,6 +55,23 @@ app.Use(async (ctx, next) =>
         ctx.Request.Path = "/Error/PageNotFound";
         await next();
     }
+});
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/robots.txt"))
+    {
+        var robotsTxtPath = Path.Combine(app.Environment.ContentRootPath, "robots.txt");
+        var output = "User-agent: *  \nDisallow: /";
+        if (File.Exists(robotsTxtPath))
+        {
+            output = await File.ReadAllTextAsync(robotsTxtPath);
+        }
+
+        context.Response.ContentType = "text/plain";
+        await context.Response.WriteAsync(output);
+    }
+    else await next();
 });
 
 app.MapControllerRoute(

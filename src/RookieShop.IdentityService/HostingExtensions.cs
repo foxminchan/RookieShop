@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using RookieShop.IdentityService.Data;
 using RookieShop.IdentityService.Data.CompiledModels;
 using RookieShop.IdentityService.Models;
+using RookieShop.IdentityService.Options;
 using RookieShop.Infrastructure.DataProtection;
 using RookieShop.Infrastructure.OpenTelemetry;
 using Serilog;
@@ -15,6 +16,10 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        var appSettings = new AppSettings();
+
+        builder.Configuration.Bind(appSettings);
+
         builder.AddRedisDataProtection();
 
         builder.ConfigureOpenTelemetry();
@@ -46,7 +51,7 @@ internal static class HostingExtensions
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryApiResources(Config.ApiResources)
-            .AddInMemoryClients(Config.Clients(builder.Configuration))
+            .AddInMemoryClients(Config.Clients(appSettings.Client))
             .AddAspNetIdentity<ApplicationUser>();
 
         // not recommended for production - you need to store your key material somewhere secure
@@ -60,10 +65,8 @@ internal static class HostingExtensions
                 // register your IdentityServer with Google at https://console.developers.google.com
                 // enable the Google+ API
                 // set the redirect URI to https://localhost:5001/signin-google
-                options.ClientId = builder.Configuration.GetValue<string>("Provider:Google:ClientId") ??
-                                   throw new InvalidOperationException();
-                options.ClientSecret = builder.Configuration.GetValue<string>("Provider:Google:ClientSecret") ??
-                                       throw new InvalidOperationException();
+                options.ClientId = appSettings.Provider.Google.ClientId;
+                options.ClientSecret = appSettings.Provider.Google.ClientSecret;
             });
 
         return builder.Build();

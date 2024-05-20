@@ -741,10 +741,6 @@ video {
   margin-left: auto;
 }
 
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -1505,6 +1501,11 @@ video {
 .text-indigo-600 {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+
+.text-red-900 {
+  --tw-text-opacity: 1;
+  color: rgb(127 29 29 / var(--tw-text-opacity));
 }
 
 .text-white {

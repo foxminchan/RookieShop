@@ -5,9 +5,9 @@ using RookieShop.Storefront.Services;
 
 namespace RookieShop.Storefront.Configurations;
 
-public static class ConfigureWebServices
+public static class ConfigureHttpServices
 {
-    public static IHostApplicationBuilder AddWebServices(this IHostApplicationBuilder builder, string apiEndpoint)
+    public static IHostApplicationBuilder AddHttpServices(this IHostApplicationBuilder builder, string apiEndpoint)
     {
         builder.Services.TryAddTransient<RetryDelegate>();
 
@@ -17,7 +17,8 @@ public static class ConfigureWebServices
 
         Type[] types =
         [
-            typeof(ICategoryService)
+            typeof(ICategoryService),
+            typeof(IProductService)
         ];
 
         foreach (var type in types)

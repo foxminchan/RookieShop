@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RookieShop.Infrastructure.Cache;
 using RookieShop.Infrastructure.DataProtection;
@@ -20,34 +18,11 @@ namespace RookieShop.Infrastructure;
 
 public static class Extension
 {
-    private static IHostApplicationBuilder AddCustomCors(this IHostApplicationBuilder builder, string corsName = "api")
-    {
-        var clientEndpoints = new[]
-        {
-            builder.Configuration.GetValue<string>("Client:StoreFront") ?? string.Empty,
-            builder.Configuration.GetValue<string>("Client:BackOffice") ?? string.Empty
-        };
-
-        builder.Services.AddCors(options => options.AddPolicy(corsName,
-            policy => policy
-                .WithOrigins(clientEndpoints)
-                .SetIsOriginAllowedToAllowWildcardSubdomains()
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-        ));
-
-        return builder;
-    }
-
-    private static IApplicationBuilder UseCustomCors(this IApplicationBuilder app, string corsName = "api")
-        => app.UseCors(corsName);
-
     public static IHostApplicationBuilder AddInfrastructure(this IHostApplicationBuilder builder)
     {
         builder
             .AddValidator()
             .AddVersioning()
-            .AddCustomCors()
             .AddRateLimiting()
             .AddIdentity()
             .AddOpenApi()
@@ -65,9 +40,7 @@ public static class Extension
 
     public static IApplicationBuilder MapInfrastructure(this WebApplication app)
     {
-        app
-            .UseCustomCors()
-            .UseRateLimiter()
+        app.UseRateLimiter()
             .UseAuthentication()
             .UseAuthorization();
 

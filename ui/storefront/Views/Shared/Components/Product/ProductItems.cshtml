@@ -1,10 +1,12 @@
-﻿@model RookieShop.Storefront.Models.Products.ListProductsViewModel
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model RookieShop.Storefront.Models.Products.ListProductsViewModel
 
 @foreach (var product in Model.Products)
 {
     <div class="group relative">
         <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-            <img loading="lazy" src="@product.ImageUrl" alt="@product.Name" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+            <img loading="lazy" src="@product.ImageUrl" alt="@product.Name" class="h-full w-full lg:h-full lg:w-full">
         </div>
         <div class="mt-4 flex justify-between">
             <div>
@@ -18,8 +20,13 @@
             <div class="flex flex-col items-end">
                 @if (product.Quantity > 0)
                 {
-                    <p class="text-sm font-medium text-gray-500 line-through">@product.Price</p>
-                    <p class="text-sm font-medium text-gray-900">@product.PriceSale</p>
+                    <p class="text-sm font-medium text-gray-500 line-through">
+                        @($"{product.Price.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}")
+                    </p>
+
+                    <p class="text-sm font-medium text-gray-900">
+                        @($"{product.PriceSale.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}")
+                    </p>
                 }
                 else
                 {

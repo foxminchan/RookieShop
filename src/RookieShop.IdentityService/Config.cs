@@ -1,6 +1,7 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 using RookieShop.Domain.Constants;
+using RookieShop.IdentityService.Options;
 
 namespace RookieShop.IdentityService;
 
@@ -29,7 +30,7 @@ public static class Config
         }
     ];
 
-    public static IEnumerable<Client> Clients(IConfiguration configuration) =>
+    public static IEnumerable<Client> Clients(ClientSettings client) =>
     [
         new()
         {
@@ -47,9 +48,9 @@ public static class Config
             AllowedGrantTypes = GrantTypes.Code,
             RequireConsent = false,
             RequirePkce = true,
-            RedirectUris = { $"{configuration["Client:Swagger"]}/swagger/oauth2-redirect.html" },
-            PostLogoutRedirectUris = { $"{configuration["ClientUrl:Swagger"]}/swagger/oauth2-redirect.html" },
-            AllowedCorsOrigins = { configuration["Client:Swagger"] ?? throw new InvalidOperationException() },
+            RedirectUris = { $"{client.Swagger}/swagger/oauth2-redirect.html" },
+            PostLogoutRedirectUris = { $"{client.Swagger}/swagger/oauth2-redirect.html" },
+            AllowedCorsOrigins = { client.Swagger },
             AllowedScopes =
             {
                 IdentityServerConstants.StandardScopes.OpenId,
@@ -64,9 +65,9 @@ public static class Config
             ClientName = "Store Front",
             ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{configuration["Client:StoreFront"]}/signin-oidc" },
-            PostLogoutRedirectUris = { $"{configuration["Client:StoreFront"]}/signout-callback-oidc" },
-            AllowedCorsOrigins = { $"{configuration["Client:StoreFront"]}" },
+            RedirectUris = { $"{client.StoreFront}/signin-oidc" },
+            PostLogoutRedirectUris = { $"{client.StoreFront}/signout-callback-oidc" },
+            AllowedCorsOrigins = { $"{client.StoreFront}" },
             AllowedScopes =
             {
                 IdentityServerConstants.StandardScopes.OpenId,
@@ -81,9 +82,9 @@ public static class Config
             ClientName = "Back Office",
             ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{configuration["Client:BackOffice"]}/api/auth/callback/duende-identityserver6" },
-            PostLogoutRedirectUris = { $"{configuration["Client:BackOffice"]}" },
-            AllowedCorsOrigins = { $"{configuration["Client:BackOffice"]}" },
+            RedirectUris = { $"{client.Backoffice}/api/auth/callback/duende-identityserver6" },
+            PostLogoutRedirectUris = { $"{client.Backoffice}" },
+            AllowedCorsOrigins = { $"{client.Backoffice}" },
             AllowedScopes =
             {
                 IdentityServerConstants.StandardScopes.OpenId,

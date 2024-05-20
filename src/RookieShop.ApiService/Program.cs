@@ -2,12 +2,17 @@ using System.Text.Json;
 using Ardalis.ListStartupServices;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using RookieShop.ApiService.Middlewares;
+using RookieShop.ApiService.Options;
 using RookieShop.Application;
 using RookieShop.Infrastructure;
 using RookieShop.Infrastructure.Endpoints;
 using RookieShop.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var appSettings = new AppSettings();
+
+builder.Configuration.Bind(appSettings);
 
 builder.Host.UseDefaultServiceProvider(config => config.ValidateOnBuild = true);
 
@@ -27,6 +32,13 @@ builder.Services
         PropertyNameCaseInsensitive = true
     });
 
+builder.Services.AddCors(options => options.AddPolicy(nameof(RookieShop),
+    policy => policy
+        .WithOrigins(appSettings.CorsSettings.AllowedOrigins)
+        .SetIsOriginAllowedToAllowWildcardSubdomains()
+        .AllowAnyHeader()
+        .AllowAnyMethod()));
+
 builder.Services.AddAntiforgery();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -42,6 +54,8 @@ builder.AddInfrastructure().AddPersistence().AddApplication();
 builder.AddEndpoints(typeof(Program));
 
 var app = builder.Build();
+
+app.UseCors(nameof(RookieShop));
 
 if (app.Environment.IsDevelopment())
 {
