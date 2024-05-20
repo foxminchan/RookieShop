@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using DotNet.Testcontainers.Containers;
+﻿using DotNet.Testcontainers.Containers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using RookieShop.IntegrationTests.Extensions;
@@ -18,23 +17,17 @@ public sealed class ApplicationFactory<TProgram>
 
     public Task InitializeAsync()
     {
-        Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(InitializeAsync)}");
         var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Test";
         Instance = WithWebHostBuilder(builder => builder.UseEnvironment(env));
         return Task.CompletedTask;
     }
 
-    public new Task DisposeAsync()
-    {
-        Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(DisposeAsync)}");
-        return Task
-            .WhenAll(_containers.Select(container => container.DisposeAsync().AsTask()))
+    public new Task DisposeAsync() =>
+        Task.WhenAll(_containers.Select(container => container.DisposeAsync().AsTask()))
             .ContinueWith(async _ => await base.DisposeAsync());
-    }
 
     public ApplicationFactory<TProgram> WithCacheContainer()
     {
-        Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(WithCacheContainer)}");
         _containers.Add(new RedisBuilder()
             .WithName($"test_cache_{Guid.NewGuid()}")
             .WithImage("redis/redis-stack-server:7.2.0-v10")
@@ -47,7 +40,6 @@ public sealed class ApplicationFactory<TProgram>
 
     public ApplicationFactory<TProgram> WithDbContainer()
     {
-        Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(WithDbContainer)}");
         _containers.Add(new PostgreSqlBuilder()
             .WithDatabase($"test_db_{Guid.NewGuid()}")
             .WithUsername("root")
@@ -61,7 +53,6 @@ public sealed class ApplicationFactory<TProgram>
 
     public ApplicationFactory<TProgram> WithStorageContainer()
     {
-        Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(WithStorageContainer)}");
         _storageContainer = new AzuriteBuilder()
             .WithPortBinding(10000, true)
             .Build();
@@ -71,8 +62,6 @@ public sealed class ApplicationFactory<TProgram>
 
     public async Task StartContainersAsync(CancellationToken cancellationToken = default)
     {
-        Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(StartContainersAsync)}");
-
         await _storageContainer.StartWithWaitAndRetryAsync(cancellationToken: cancellationToken);
 
         if (_containers.Count == 0) return;
@@ -104,8 +93,6 @@ public sealed class ApplicationFactory<TProgram>
 
     public async Task StopContainersAsync()
     {
-        Debug.WriteLine($"{nameof(ApplicationFactory<TProgram>)} called {nameof(StopContainersAsync)}");
-
         if (_containers.Count == 0) return;
 
         await Task.WhenAll(_containers.Select(container => container.DisposeAsync().AsTask()))

@@ -1,4 +1,4 @@
-﻿namespace RookieShop.Infrastructure.Merchant.Settings;
+﻿namespace RookieShop.Infrastructure.Merchant.Stripe.Settings;
 
 public sealed class StripeSettings
 {

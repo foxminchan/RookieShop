@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RookieShop.Infrastructure.Merchant.Settings;
 using RookieShop.Infrastructure.Merchant.Stripe;
 using RookieShop.Infrastructure.Merchant.Stripe.Internal;
+using RookieShop.Infrastructure.Merchant.Stripe.Settings;
 using RookieShop.Infrastructure.Validator;
 using Stripe;
 
