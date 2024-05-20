@@ -14,7 +14,10 @@ public sealed class UpdateBasketHandler(IRedisService redisService, ILogger<Upda
 {
     public async Task<Result<BasketDto>> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
     {
-        var basket = await redisService.GetAsync<Basket>(request.AccountId.ToString());
+        var basket = await redisService.HashGetOrSetAsync<Basket>(
+            nameof(Basket),
+            request.AccountId.ToString(),
+            () => null!);
 
         Guard.Against.NotFound(request.AccountId, basket);
 

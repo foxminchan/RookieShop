@@ -16,7 +16,6 @@ public sealed class ListFeedback
         _handler = new(_repositoryMock.Object);
     }
 
-
     [Fact]
     public async Task GivenValidRequest_ShouldReturnFeedbackList()
     {
