@@ -7,6 +7,7 @@ using RookieShop.Storefront.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 var appSettings = new AppSettings();
+
 builder.Configuration.Bind(appSettings);
 
 builder.ConfigureOpenTelemetry();

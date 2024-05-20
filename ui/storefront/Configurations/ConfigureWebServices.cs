@@ -1,4 +1,5 @@
-﻿using Refit;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using Refit;
 using RookieShop.Storefront.Delegates;
 using RookieShop.Storefront.Services;
 
@@ -8,9 +9,11 @@ public static class ConfigureWebServices
 {
     public static IHostApplicationBuilder AddWebServices(this IHostApplicationBuilder builder, string apiEndpoint)
     {
-        builder.Services.AddTransient<RetryDelegate>();
+        builder.Services.TryAddTransient<RetryDelegate>();
 
-        builder.Services.AddTransient<LoggingDelegate>();
+        builder.Services.TryAddTransient<LoggingDelegate>();
+
+        builder.Services.TryAddTransient<AuthorizeDelegate>();
 
         Type[] types =
         [
@@ -19,10 +22,14 @@ public static class ConfigureWebServices
 
         foreach (var type in types)
         {
-            builder.Services.AddRefitClient(type)
+            builder.Services.AddRefitClient(type, new()
+                {
+                    CollectionFormat = CollectionFormat.Multi
+                })
                 .ConfigureHttpClient(c => c.BaseAddress = new(apiEndpoint))
                 .AddHttpMessageHandler<RetryDelegate>()
-                .AddHttpMessageHandler<LoggingDelegate>();
+                .AddHttpMessageHandler<LoggingDelegate>()
+                .AddHttpMessageHandler<AuthorizeDelegate>();
         }
 
         return builder;

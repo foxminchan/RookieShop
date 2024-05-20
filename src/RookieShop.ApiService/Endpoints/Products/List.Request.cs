@@ -7,4 +7,4 @@ public sealed record ListProductsRequest(
     int PageSize,
     string? OrderBy = null,
     bool IsDescending = false,
-    CategoryId? CategoryId = null);
+    CategoryId?[]? CategoryIds = null);

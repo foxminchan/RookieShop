@@ -1,23 +1,18 @@
-﻿@model RookieShop.Storefront.Models.Categories.ListCategoriesViewModel
+﻿@model ProductCategoryViewModel
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-
 <div class="bg-white">
     <div>
-
-        <partial name="Components/Product/CategoryFiltersMobile" model="Model"/>
-
+        <partial name="Components/Product/CategoryFiltersMobile" model="Model.Categories"/>
         <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900">All Products</h1>
-
                 <partial name="Components/Product/FilterSection"/>
             </div>
-
             <section aria-labelledby="products-heading" class="pb-24 pt-6">
                 <h2 id="products-heading" class="sr-only">Products</h2>
                 <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
@@ -38,11 +33,11 @@
                             </h3>
                             <div class="pt-6" id="filter-section-1">
                                 <div class="space-y-4">
-                                    @foreach (var category in Model.Categories)
+                                    @foreach (var category in Model.Categories.Categories)
                                     {
                                         <div class="flex items-center">
-                                            <input id="@("filter-category-" + category.Id)" name="id" value="@category.Id" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                            <label for="@("filter-category-" + category.Id)" class="ml-3 text-sm text-gray-600">@category.Name</label>
+                                            <input id="@(string.Concat("filter-category-", category.Id))" name="id" value="@category.Id" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                            <label for="@(string.Concat("filter-category-", category.Id))" class="ml-3 text-sm text-gray-600">@category.Name</label>
                                         </div>
                                     }
                                 </div>
@@ -50,7 +45,16 @@
                         </div>
                     </form>
                     <div class="lg:col-span-3">
-                        <!-- Your content -->
+                        <div class="bg-white">
+                            <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                                <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                                    <partial name="Components/Product/ProductItems" model="Model.Products"/>"
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                            <partial name="Components/Product/Pagination" model="Model.Products.PagedInfo"/>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -59,37 +63,5 @@
 </div>
 
 @section Scripts {
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            const sortBtn = $('#sort-btn');
-            const sortCategoryDropdown = $('#sort-category-dropdown');
-            sortBtn.on('click', function() {
-                const expanded = sortBtn.attr('aria-expanded') === 'true' || false;
-                sortBtn.attr('aria-expanded', !expanded);
-                sortCategoryDropdown.toggleClass('hidden');
-            });
-            $(document).on('click', function(event) {
-                if (!sortBtn.is(event.target) && sortBtn.has(event.target).length === 0) {
-                    sortBtn.attr('aria-expanded', false);
-                    sortCategoryDropdown.addClass('hidden');
-                }
-            });
-
-            const showCategoryFilter = $('#show-category-filter');
-            const hideCategoryFilter = $('#hide-category-filter');
-
-            showCategoryFilter.on('click', function() {
-                $('#filter-section-1').removeClass('hidden');
-                showCategoryFilter.addClass('hidden');
-                hideCategoryFilter.removeClass('hidden');
-            });
-
-            hideCategoryFilter.on('click', function() {
-                $('#filter-section-1').addClass('hidden');
-                showCategoryFilter.removeClass('hidden');
-                hideCategoryFilter.addClass('hidden');
-            });
-        });
-    </script>
+    <script type="text/javascript" src="js/category-filter.js" asp-append-version="true"></script>
 }

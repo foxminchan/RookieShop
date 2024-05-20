@@ -10,4 +10,4 @@ public sealed record ListProductsQuery(
     int PageSize,
     string? OrderBy,
     bool IsDescending,
-    CategoryId? CategoryId) : IQuery<PagedResult<IEnumerable<ProductDto>>>;
+    CategoryId?[]? CategoryIds) : IQuery<PagedResult<IEnumerable<ProductDto>>>;
