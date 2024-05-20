@@ -1,8 +1,13 @@
 using Ardalis.ListStartupServices;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using RookieShop.Infrastructure.OpenTelemetry;
+using RookieShop.Storefront.Configurations;
+using RookieShop.Storefront.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var appSettings = new AppSettings();
+builder.Configuration.Bind(appSettings);
 
 builder.ConfigureOpenTelemetry();
 
@@ -17,6 +22,8 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.CheckConsentNeeded = _ => true;
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
+
+builder.AddWebServices(appSettings.ApiEndpoint);
 
 var app = builder.Build();
 

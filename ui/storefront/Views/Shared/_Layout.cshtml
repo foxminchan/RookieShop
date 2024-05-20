@@ -43,7 +43,7 @@
                         <a asp-controller="Home" class="block py-2 px-3 bg-blue-700 rounded md:bg-transparent md:p-0 @(ViewContext.RouteData.Values["controller"]!.Equals("Home") ? "text-blue-700" : "text-gray-900")" aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 @(ViewContext.RouteData.Values["controller"]!.Equals("Product") ? "text-blue-700" : "text-gray-900")">Products</a>
+                        <a asp-controller="Product" class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 @(ViewContext.RouteData.Values["controller"]!.Equals("Product") ? "text-blue-700" : "text-gray-900")">Products</a>
                     </li>
                     <li>
                         <a asp-controller="About" class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 @(ViewContext.RouteData.Values["controller"]!.Equals("About") ? "text-blue-700" : "text-gray-900")">About</a>
