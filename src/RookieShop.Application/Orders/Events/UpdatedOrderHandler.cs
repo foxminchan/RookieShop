@@ -6,13 +6,13 @@ using RookieShop.Infrastructure.Email.Smtp.Abstractions;
 
 namespace RookieShop.Application.Orders.Events;
 
-public sealed class UpdatedOrderHandler(ISmtpService<OrderDto> smtpService) : INotificationHandler<UpdatedOrderEvent>
+public sealed class UpdatedOrderHandler(ISmtpService smtpService) : INotificationHandler<UpdatedOrderEvent>
 {
     public async Task Handle(UpdatedOrderEvent notification, CancellationToken cancellationToken)
     {
         var order = notification.Order.ToOrderDto();
 
-        EmailMetadata<OrderDto> metadata = new(
+        EmailMetadata metadata = new(
             order,
             "Order Status ",
             $"{Directory.GetCurrentDirectory()}/Templates/Order.cshtml",

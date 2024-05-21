@@ -39,6 +39,7 @@
 		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
 		<PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
 		<PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
+		<PackageVersion Include="Marten" Version="7.14.0" />
 		<!-- OpenTelemetry -->
 		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
@@ -46,6 +47,7 @@
 		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.8.0" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Quartz" Version="1.0.0-beta.2" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.14" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.0.0-beta.11" />
 		<!-- Xabaril -->
@@ -85,13 +87,14 @@
 		<PackageVersion Include="MediatR" Version="12.2.0" />
 		<PackageVersion Include="Stripe.net" Version="44.8.0" />
 		<PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
+		<PackageVersion Include="Azure.Storage.Blobs" Version="12.20.0" />
 		<PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
 		<PackageVersion Include="StronglyTypedId" Version="1.0.0-beta08" />
 		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.1" />
 		<PackageVersion Include="Refit.HttpClientFactory" Version="7.0.0" />
+		<PackageVersion Include="Quartz.Extensions.Hosting" Version="3.9.0" />
 		<PackageVersion Include="SonarAnalyzer.CSharp" Version="9.25.0.90414" />
 		<PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
-		<PackageVersion Include="Azure.Storage.Blobs" Version="12.20.0" />
 		<PackageVersion Include="Duende.IdentityServer.AspNetIdentity" Version="7.0.4" />
 		<PackageVersion Include="MicroElements.Swashbuckle.FluentValidation" Version="6.0.0" />
 	</ItemGroup>

@@ -8,14 +8,14 @@ using RookieShop.Infrastructure.Email.Smtp.Abstractions;
 
 namespace RookieShop.Application.Orders.Events;
 
-public sealed class CreatedOrderHandler(IRedisService redisService, ISmtpService<OrderDto> smtpService)
+public sealed class CreatedOrderHandler(IRedisService redisService, ISmtpService smtpService)
     : INotificationHandler<CreatedOrderEvent>
 {
     public async Task Handle(CreatedOrderEvent notification, CancellationToken cancellationToken)
     {
         var order = notification.Order.ToOrderDto();
 
-        EmailMetadata<OrderDto> metadata = new(
+        EmailMetadata metadata = new(
             order,
             "Order Confirmation",
             $"{Directory.GetCurrentDirectory()}/Templates/Order.cshtml",

@@ -4,12 +4,11 @@ using RookieShop.Infrastructure.Email.Smtp.Abstractions;
 
 namespace RookieShop.Infrastructure.Email.Smtp.Internal;
 
-public sealed class SmtpService<T>(
-    IFluentEmailFactory factory, 
-    ResiliencePipelineProvider<string> pipeline) : ISmtpService<T>
-    where T : notnull
+public sealed class SmtpService(
+    IFluentEmailFactory factory,
+    ResiliencePipelineProvider<string> pipeline) : ISmtpService
 {
-    public async Task SendEmailAsync(EmailMetadata<T> emailMetadata, CancellationToken cancellationToken = default)
+    public async Task SendEmailAsync(EmailMetadata emailMetadata, CancellationToken cancellationToken = default)
     {
         var email = factory.Create();
 

@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,6 +8,7 @@ using RookieShop.Infrastructure.Email.Smtp;
 using RookieShop.Infrastructure.Email.Smtp.Internal;
 using RookieShop.Infrastructure.Email.Smtp.Settings;
 using RookieShop.Infrastructure.Validator;
+using Weasel.Core;
 
 namespace RookieShop.Infrastructure.Email;
 
@@ -36,7 +38,19 @@ public static class Extension
             })
             .AddTimeout(TimeSpan.FromSeconds(10)));
 
-        builder.Services.AddScoped(typeof(ISmtpService<>), typeof(SmtpService<>));
+        var conn = builder.Configuration.GetConnectionString("Postgres");
+
+        Guard.Against.NullOrEmpty(conn);
+
+        builder.Services.AddMarten(options =>
+        {
+            options.Connection(conn);
+            options.AutoCreateSchemaObjects = AutoCreate.All;
+        });
+
+        builder.Services.AddScoped<ISmtpService, SmtpService>();
+
+        builder.Services.Decorate<ISmtpService, SmtpOutboxDecorator>();
 
         return builder;
     }

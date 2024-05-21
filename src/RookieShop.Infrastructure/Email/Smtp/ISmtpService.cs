@@ -2,7 +2,7 @@
 
 namespace RookieShop.Infrastructure.Email.Smtp;
 
-public interface ISmtpService<T> where T : notnull
+public interface ISmtpService
 {
-    Task SendEmailAsync(EmailMetadata<T> emailMetadata, CancellationToken cancellationToken = default);
+    Task SendEmailAsync(EmailMetadata emailMetadata, CancellationToken cancellationToken = default);
 }

@@ -18,11 +18,14 @@
 		<PackageReference Include="OpenTelemetry.Instrumentation.StackExchangeRedis" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Quartz" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Http" />
 		<PackageReference Include="Npgsql.OpenTelemetry" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Polly" />
+		<PackageReference Include="Polly.Extensions" />
 		<PackageReference Include="FluentEmail.Razor" />
 		<PackageReference Include="FluentEmail.Mailtrap" />
 	</ItemGroup>
@@ -37,14 +40,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Polly" />
-		<PackageReference Include="Polly.Extensions" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<PackageReference Include="Marten" />
 		<PackageReference Include="Scrutor" />
 		<PackageReference Include="Stripe.net" />
 		<PackageReference Include="Azure.Storage.Blobs" />
+		<PackageReference Include="Quartz.Extensions.Hosting" />
 	</ItemGroup>
 
 	<ItemGroup>
