@@ -1,0 +1,102 @@
+﻿@model RookieShop.Storefront.Models.Feedbacks.ListFeedbackViewModel
+
+<h2 class="font-manrope font-bold text-3xl sm:text-4xl leading-10 text-black mb-8 text-center">
+    Customer reviews &
+    rating
+</h2>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-4 pb-11 border-b border-gray-100 max-xl:max-w-2xl max-xl:mx-auto">
+    <div class="p-2 rounded-3xl flex items-center justify-center flex-col">
+        <h2 class="font-manrope font-bold text-5xl text-amber-400 mb-6">
+            @* @rating.ToString("0.0") *@
+        </h2>
+        <div class="flex items-center justify-center gap-2 sm:gap-6 mb-4">
+@*             @{
+                rating = rating % 1 >= 0.5 ? Math.Ceiling(rating) : Math.Floor(rating);
+
+                for (var star = 1; star <= 5; star++)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="30" height="30" class="w-5 h-5 @(star <= rating ? "text-amber-500" : "text-gray-300")"
+                         fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                    </svg>
+                }
+            } *@
+        </div>
+        <p class="font-medium text-xl leading-8 text-gray-900 text-center">@(Model.Feedbacks?.Count ?? 0) reviews</p>
+    </div>
+    <div class="p-2 rounded-3xl">
+        <form class="max-w-md mx-auto mt-16 p-4 bg-white shadow rounded">
+            <h2 class="text-2xl font-bold mb-4">Feedback Form</h2>
+            <div class="mb-4">
+                <label for="name" class="block mb-1">Name</label>
+                <input type="text" id="name" class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label class="block mb-1">Rating</label>
+                <div class="flex items-center space-x-2">
+                    <input type="radio" name="rating" id="rating1" value="1" class="focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="rating1">1</label>
+                    <input type="radio" name="rating" id="rating2" value="2" class="focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="rating2">2</label>
+                    <input type="radio" name="rating" id="rating3" value="3" class="focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="rating3">3</label>
+                    <input type="radio" name="rating" id="rating4" value="4" class="focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="rating4">4</label>
+                    <input type="radio" name="rating" id="rating5" value="5" class="focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="rating5">5</label>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="message" class="block mb-1">Message</label>
+                <textarea id="message" class="w-full py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+            <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit</button>
+        </form>
+    </div>
+</div>
+@if (Model.Feedbacks is not null && Model.Feedbacks.Any())
+{
+    <div class="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
+        <h4 class="font-manrope font-semibold text-3xl leading-10 text-black mb-6">
+            Most helpful positive
+            review
+        </h4>
+        <div class="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
+            <div class="flex items-center gap-3">
+                @for (var star = 1; star <= 5; star++)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="30" height="30" class="w-5 h-5 text-amber-500"
+                         fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                    </svg>
+                }
+            </div>
+            <div class="flex items-center gap-3">
+                <h6 class="font-semibold text-lg leading-8 text-black">@@john.doe</h6>
+                <p class="font-medium text-base leading-7 text-gray-400">Nov 01, 2023</p>
+            </div>
+        </div>
+
+        <p class="font-normal text-lg leading-8 text-gray-500 ">
+            I recently had the opportunity to explore Pagedone's UI design system, and it left a lasting
+            impression on my workflow. The system seamlessly blends user-friendly features with a robust set
+            of design components, making it a go-to for creating visually stunning and consistent
+            interfaces.
+        </p>
+    </div>
+}
+else
+{
+    <div class="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
+        <h4 class="font-manrope font-semibold text-3xl leading-10 text-black mb-6">
+            Most helpful positive
+            review
+        </h4>
+        <p class="font-normal text-lg leading-8 text-gray-500 ">
+            No reviews yet.
+        </p>
+    </div>
+}

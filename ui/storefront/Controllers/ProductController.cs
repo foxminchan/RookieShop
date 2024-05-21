@@ -20,5 +20,9 @@ public class ProductController(
         return View(model);
     }
 
-    public IActionResult Detail(Guid ProductId) => throw new NotImplementedException();
+    public async Task<IActionResult> Detail(string id)
+    {
+        var product = await productService.GetProductByIdAsync(new(id));
+        return View(product);
+    }
 }

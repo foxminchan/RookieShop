@@ -1,6 +1,8 @@
-﻿namespace RookieShop.Storefront.Models.Products;
+﻿using Refit;
+
+namespace RookieShop.Storefront.Models.Products;
 
 public sealed class ProductFilterParams : FilterParams
 {
-    public Guid[]? CategoryIds { get; set; } = [];
+    [AliasAs("categoryIds")] public Guid[]? CategoryIds { get; set; } = [];
 }

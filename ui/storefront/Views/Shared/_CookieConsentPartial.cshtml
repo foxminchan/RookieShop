@@ -8,11 +8,12 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-100 text-blue-800 p-4 rounded-md flex justify-between items-center"> 
-        <p class="text-sm pr-10">
-            We use cookies to enhance your experience. <a asp-controller="Home" asp-action="Privacy">Learn More</a>.
+    <div id="cookieConsent" class="flex justify-between items-center gap-2 bg-gray-100 px-4 py-2 fixed bottom-0 left-0 w-full z-50">
+        <p class="text-sm text-gray-700">
+            We use cookies to ensure you get the best experience on our website. Learn more
+            <a asp-controller="Home" asp-action="Privacy" class="text-blue-700">here</a>.
         </p>
-        <button type="button" class="accept-policy bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none" data-bs-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+        <button type="button" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" data-bs-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
             Accept
         </button>
     </div>
