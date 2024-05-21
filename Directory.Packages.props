@@ -52,6 +52,7 @@
 		<PackageVersion Include="AspNetCore.HealthChecks.UI" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(XabarilVersion)" />
+		<PackageVersion Include="AspNetCore.HealthChecks.Uris" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.Redis" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.OpenIdConnectServer" Version="$(XabarilVersion)" />

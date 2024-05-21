@@ -16,17 +16,19 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
-
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     options.CheckConsentNeeded = _ => true;
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
+builder.AddHealthCheck(appSettings);
+
 builder.AddAuthenticationService(appSettings.OpenIdSettings);
 
 builder.AddHttpServices(appSettings.ApiEndpoint);
+
+builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
 
 var app = builder.Build();
 
@@ -35,6 +37,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+app.MapHealthCheck();
 
 app.UseHttpsRedirection();
 
