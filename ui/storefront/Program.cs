@@ -79,6 +79,16 @@ app.Use(async (context, next) =>
 });
 
 app.MapControllerRoute(
+    name: "User",
+    pattern: "User/{controller=Home}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "Order",
+    pattern: "Order/{controller=Home}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 

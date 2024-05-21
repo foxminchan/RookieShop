@@ -13,7 +13,11 @@
 		<PackageReference Include="Refit.HttpClientFactory" />
 		<PackageReference Include="Ardalis.ListStartupServices" />
 		<PackageReference Include="AspNetCore.HealthChecks.Uris" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.TypeScript.MSBuild" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
 	</ItemGroup>
 

@@ -35,7 +35,6 @@
 		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfVersion)" />
-		<PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="5.4.4" />
 		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
 		<PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
 		<PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
@@ -61,6 +60,9 @@
 		<!-- VS Test -->
 		<PackageVersion Include="coverlet.collector" Version="6.0.2" />
 		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+		<!-- Scaffolding -->
+		<PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="5.4.4" />
+		<PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
 		<!-- xUnit -->
 		<PackageVersion Include="xunit" Version="2.8.0" />
 		<PackageVersion Include="xunit.runner.visualstudio" Version="2.8.0" />
