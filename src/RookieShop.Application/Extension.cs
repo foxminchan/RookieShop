@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RookieShop.Application.Orders.Services;
 using RookieShop.Application.Products.Services;
+using RookieShop.Application.Workers;
 using RookieShop.Infrastructure.Logging;
 using RookieShop.Infrastructure.Validator;
 using RookieShop.Persistence;
@@ -40,6 +41,8 @@ public static class Extension
         builder.Services.AddScoped<IOrderService, OrderService>();
 
         builder.Services.AddScoped<IProductService, ProductService>();
+
+        builder.Services.AddHostedService<CalculateRatingWorker>();
 
         return builder;
     }

@@ -29,6 +29,7 @@ public static class Extension
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddEntityFrameworkCoreInstrumentation(b => b.SetDbStatementForText = true)
+                    .AddQuartzInstrumentation()
                     .AddRedisInstrumentation()
                     .AddNpgsql();
             })
