@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using RookieShop.Infrastructure.Email.Smtp.Abstractions;
 
-namespace RookieShop.Infrastructure.Email.Smtp.Internal;
+namespace RookieShop.Infrastructure.Email.Smtp.Decorator;
 
 public sealed class SmtpOutboxDecorator(
     ISmtpService smtpService,

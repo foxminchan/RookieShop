@@ -39,6 +39,12 @@ builder.Services.AddCors(options => options.AddPolicy(nameof(RookieShop),
         .AllowAnyHeader()
         .AllowAnyMethod()));
 
+builder.Services.Configure<HostOptions>(options =>
+{
+    options.ServicesStartConcurrently = true;
+    options.ServicesStopConcurrently = true;
+});
+
 builder.Services.AddAntiforgery();
 
 builder.Services.AddEndpointsApiExplorer();

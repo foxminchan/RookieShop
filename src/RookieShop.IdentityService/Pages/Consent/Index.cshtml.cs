@@ -41,7 +41,7 @@ public sealed class Index(
     {
         // validate return url is still valid
         var request = await interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
-        if (request == null) return RedirectToPage("/Home/Error/Index");
+        if (request is null) return RedirectToPage("/Home/Error/Index");
 
         ConsentResponse? grantedConsent = null;
 
@@ -91,7 +91,7 @@ public sealed class Index(
                 break;
         }
 
-        if (grantedConsent != null)
+        if (grantedConsent is not null)
         {
             ArgumentNullException.ThrowIfNull(Input.ReturnUrl);
 
@@ -117,7 +117,7 @@ public sealed class Index(
         ArgumentNullException.ThrowIfNull(returnUrl);
 
         var request = await interaction.GetAuthorizationContextAsync(returnUrl);
-        if (request != null)
+        if (request is not null)
         {
             View = CreateConsentViewModel(request);
             return true;
@@ -152,7 +152,7 @@ public sealed class Index(
             var apiScope = request.ValidatedResources.Resources.FindApiScope(parsedScope.ParsedName);
             if (apiScope is null) continue;
             var scopeVm = CreateScopeViewModel(parsedScope, apiScope,
-                Input == null || Input.ScopesConsented.Contains(parsedScope.RawValue));
+                Input is null || Input.ScopesConsented.Contains(parsedScope.RawValue));
             scopeVm.Resources = apiResources.Where(x => x.Scopes.Contains(parsedScope.ParsedName))
                 .Select(x => new ResourceViewModel
                 {
@@ -163,7 +163,7 @@ public sealed class Index(
         }
 
         if (ConsentOptions.EnableOfflineAccess && request.ValidatedResources.Resources.OfflineAccess)
-            apiScopes.Add(CreateOfflineAccessScope(Input == null ||
+            apiScopes.Add(CreateOfflineAccessScope(Input is null ||
                                                    Input.ScopesConsented.Contains(IdentityServerConstants.StandardScopes
                                                        .OfflineAccess)));
         vm.ApiScopes = apiScopes;

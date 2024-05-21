@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Polly;
 using RookieShop.Infrastructure.Email.Smtp;
+using RookieShop.Infrastructure.Email.Smtp.Decorator;
 using RookieShop.Infrastructure.Email.Smtp.Internal;
 using RookieShop.Infrastructure.Email.Smtp.Settings;
 using RookieShop.Infrastructure.Validator;

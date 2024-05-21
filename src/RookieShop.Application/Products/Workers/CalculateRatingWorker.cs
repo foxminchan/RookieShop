@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using RookieShop.Infrastructure.HostedServices;
 using RookieShop.Persistence;
 
-namespace RookieShop.Application.Workers;
+namespace RookieShop.Application.Products.Workers;
 
 public sealed class CalculateRatingWorker : CronJobBackgroundService
 {
@@ -23,6 +23,7 @@ public sealed class CalculateRatingWorker : CronJobBackgroundService
         try
         {
             using var scope = _serviceProvider.CreateScope();
+
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
             _logger.LogInformation("[{Worker}] Calculate rating worker running at: {Time}",
@@ -39,15 +40,23 @@ public sealed class CalculateRatingWorker : CronJobBackgroundService
                 })
                 .ToListAsync(stoppingToken);
 
-            foreach (var rating in productRatings)
+            var allProductIds = await dbContext.Products
+                .Select(p => p.Id)
+                .ToListAsync(stoppingToken);
+
+            foreach (var productId in allProductIds)
             {
-                var product = await dbContext.Products.FindAsync([rating.ProductId], stoppingToken);
+                var productRating =
+                    productRatings.Find(r => r.ProductId == productId);
+
+                var product =
+                    await dbContext.Products.FindAsync([productId, stoppingToken], cancellationToken: stoppingToken);
 
                 if (product is null) continue;
 
-                product.AverageRating = rating.AverageRating;
+                product.AverageRating = productRating?.AverageRating ?? 0;
 
-                product.TotalReviews = rating.TotalReviews;
+                product.TotalReviews = productRating?.TotalReviews ?? 0;
 
                 dbContext.Products.Update(product);
             }

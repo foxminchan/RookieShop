@@ -44,7 +44,7 @@ public sealed class Consent(
 #pragma warning disable S3928
                                                                throw new ArgumentNullException(nameof(Input.Id)));
 #pragma warning restore S3928
-        if (request == null || request.Subject.GetSubjectId() != User.GetSubjectId())
+        if (request is null || request.Subject.GetSubjectId() != User.GetSubjectId())
         {
             logger.InvalidId(Input.Id);
             return RedirectToPage("/Home/Error/Index");
@@ -147,7 +147,7 @@ public sealed class Consent(
             var apiScope = request.ValidatedResources.Resources.FindApiScope(parsedScope.ParsedName);
             if (apiScope is null) continue;
             var scopeVm = CreateScopeViewModel(parsedScope, apiScope,
-                Input == null || Input.ScopesConsented.Contains(parsedScope.RawValue));
+                Input is null || Input.ScopesConsented.Contains(parsedScope.RawValue));
             scopeVm.Resources = apiResources.Where(x => x.Scopes.Contains(parsedScope.ParsedName))
                 .Select(x => new ResourceViewModel
                 {
@@ -158,7 +158,7 @@ public sealed class Consent(
         }
 
         if (ConsentOptions.EnableOfflineAccess && request.ValidatedResources.Resources.OfflineAccess)
-            apiScopes.Add(GetOfflineAccessScope(Input == null ||
+            apiScopes.Add(GetOfflineAccessScope(Input is null ||
                                                 Input.ScopesConsented.Contains(IdentityServerConstants.StandardScopes
                                                     .OfflineAccess)));
         vm.ApiScopes = apiScopes;

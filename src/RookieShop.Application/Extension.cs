@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RookieShop.Application.Orders.Services;
 using RookieShop.Application.Products.Services;
-using RookieShop.Application.Workers;
+using RookieShop.Application.Products.Workers;
 using RookieShop.Infrastructure.Logging;
 using RookieShop.Infrastructure.Validator;
 using RookieShop.Persistence;

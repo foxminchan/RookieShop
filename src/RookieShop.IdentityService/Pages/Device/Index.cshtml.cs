@@ -57,7 +57,7 @@ public sealed class Index(
 #pragma warning disable S3928
                                                            throw new ArgumentNullException(nameof(Input.UserCode)));
 #pragma warning restore S3928
-        if (request == null) return RedirectToPage("/Home/Error/Index");
+        if (request is null) return RedirectToPage("/Home/Error/Index");
 
         ConsentResponse? grantedConsent = null;
 
@@ -159,12 +159,12 @@ public sealed class Index(
             var apiScope = request.ValidatedResources.Resources.FindApiScope(parsedScope.ParsedName);
             if (apiScope is null) continue;
             var scopeVm = CreateScopeViewModel(parsedScope, apiScope,
-                Input == null || Input.ScopesConsented.Contains(parsedScope.RawValue));
+                Input is null || Input.ScopesConsented.Contains(parsedScope.RawValue));
             apiScopes.Add(scopeVm);
         }
 
         if (DeviceOptions.EnableOfflineAccess && request.ValidatedResources.Resources.OfflineAccess)
-            apiScopes.Add(GetOfflineAccessScope(Input == null ||
+            apiScopes.Add(GetOfflineAccessScope(Input is null ||
                                                 Input.ScopesConsented.Contains(IdentityServerConstants.StandardScopes
                                                     .OfflineAccess)));
         vm.ApiScopes = apiScopes;

@@ -51,7 +51,7 @@ public sealed class Index(
         // the user clicked the "cancel" button
         if (Input.Button != "login")
         {
-            if (context == null) return Redirect("~/");
+            if (context is null) return Redirect("~/");
             // This "can't happen", because if the ReturnUrl was null, then the context would be null
             ArgumentNullException.ThrowIfNull(Input.ReturnUrl);
 
