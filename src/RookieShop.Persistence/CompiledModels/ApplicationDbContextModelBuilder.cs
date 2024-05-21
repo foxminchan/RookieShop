@@ -635,6 +635,8 @@ namespace RookieShop.Persistence.CompiledModels
             var defaultTableMappings6 = new List<TableMappingBase<ColumnMappingBase>>();
             product.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings6);
             var rookieShopDomainEntitiesProductAggregatorProductTableBase = new TableBase("RookieShop.Domain.Entities.ProductAggregator.Product", null, relationalModel);
+            var average_ratingColumnBase = new ColumnBase<ColumnMappingBase>("average_rating", "double precision", rookieShopDomainEntitiesProductAggregatorProductTableBase);
+            rookieShopDomainEntitiesProductAggregatorProductTableBase.Columns.Add("average_rating", average_ratingColumnBase);
             var category_idColumnBase = new ColumnBase<ColumnMappingBase>("category_id", "uuid", rookieShopDomainEntitiesProductAggregatorProductTableBase)
             {
                 IsNullable = true
@@ -659,6 +661,8 @@ namespace RookieShop.Persistence.CompiledModels
             rookieShopDomainEntitiesProductAggregatorProductTableBase.Columns.Add("quantity", quantityColumnBase0);
             var statusColumnBase = new ColumnBase<ColumnMappingBase>("status", "smallint", rookieShopDomainEntitiesProductAggregatorProductTableBase);
             rookieShopDomainEntitiesProductAggregatorProductTableBase.Columns.Add("status", statusColumnBase);
+            var total_reviewsColumnBase = new ColumnBase<ColumnMappingBase>("total_reviews", "integer", rookieShopDomainEntitiesProductAggregatorProductTableBase);
+            rookieShopDomainEntitiesProductAggregatorProductTableBase.Columns.Add("total_reviews", total_reviewsColumnBase);
             var update_dateColumnBase4 = new ColumnBase<ColumnMappingBase>("update_date", "timestamp with time zone", rookieShopDomainEntitiesProductAggregatorProductTableBase)
             {
                 IsNullable = true
@@ -671,6 +675,7 @@ namespace RookieShop.Persistence.CompiledModels
             rookieShopDomainEntitiesProductAggregatorProductTableBase.AddTypeMapping(rookieShopDomainEntitiesProductAggregatorProductMappingBase, false);
             defaultTableMappings6.Add(rookieShopDomainEntitiesProductAggregatorProductMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)idColumnBase5, product.FindProperty("Id")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)average_ratingColumnBase, product.FindProperty("AverageRating")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)category_idColumnBase, product.FindProperty("CategoryId")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)created_dateColumnBase4, product.FindProperty("CreatedDate")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)descriptionColumnBase0, product.FindProperty("Description")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
@@ -679,6 +684,7 @@ namespace RookieShop.Persistence.CompiledModels
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)nameColumnBase1, product.FindProperty("Name")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)quantityColumnBase0, product.FindProperty("Quantity")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)statusColumnBase, product.FindProperty("Status")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)total_reviewsColumnBase, product.FindProperty("TotalReviews")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)update_dateColumnBase4, product.FindProperty("UpdateDate")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)versionColumnBase4, product.FindProperty("Version")!, rookieShopDomainEntitiesProductAggregatorProductMappingBase);
 
@@ -687,6 +693,8 @@ namespace RookieShop.Persistence.CompiledModels
             var productsTable = new Table("products", null, relationalModel);
             var idColumn3 = new Column("id", "uuid", productsTable);
             productsTable.Columns.Add("id", idColumn3);
+            var average_ratingColumn = new Column("average_rating", "double precision", productsTable);
+            productsTable.Columns.Add("average_rating", average_ratingColumn);
             var category_idColumn = new Column("category_id", "uuid", productsTable)
             {
                 IsNullable = true
@@ -711,6 +719,8 @@ namespace RookieShop.Persistence.CompiledModels
             productsTable.Columns.Add("quantity", quantityColumn0);
             var statusColumn = new Column("status", "smallint", productsTable);
             productsTable.Columns.Add("status", statusColumn);
+            var total_reviewsColumn = new Column("total_reviews", "integer", productsTable);
+            productsTable.Columns.Add("total_reviews", total_reviewsColumn);
             var update_dateColumn4 = new Column("update_date", "timestamp with time zone", productsTable)
             {
                 IsNullable = true
@@ -742,6 +752,7 @@ namespace RookieShop.Persistence.CompiledModels
             productsTable.AddTypeMapping(productsTableMapping, false);
             tableMappings6.Add(productsTableMapping);
             RelationalModel.CreateColumnMapping(idColumn3, product.FindProperty("Id")!, productsTableMapping);
+            RelationalModel.CreateColumnMapping(average_ratingColumn, product.FindProperty("AverageRating")!, productsTableMapping);
             RelationalModel.CreateColumnMapping(category_idColumn, product.FindProperty("CategoryId")!, productsTableMapping);
             RelationalModel.CreateColumnMapping(created_dateColumn4, product.FindProperty("CreatedDate")!, productsTableMapping);
             RelationalModel.CreateColumnMapping(descriptionColumn0, product.FindProperty("Description")!, productsTableMapping);
@@ -750,6 +761,7 @@ namespace RookieShop.Persistence.CompiledModels
             RelationalModel.CreateColumnMapping(nameColumn1, product.FindProperty("Name")!, productsTableMapping);
             RelationalModel.CreateColumnMapping(quantityColumn0, product.FindProperty("Quantity")!, productsTableMapping);
             RelationalModel.CreateColumnMapping(statusColumn, product.FindProperty("Status")!, productsTableMapping);
+            RelationalModel.CreateColumnMapping(total_reviewsColumn, product.FindProperty("TotalReviews")!, productsTableMapping);
             RelationalModel.CreateColumnMapping(update_dateColumn4, product.FindProperty("UpdateDate")!, productsTableMapping);
             RelationalModel.CreateColumnMapping(versionColumn4, product.FindProperty("Version")!, productsTableMapping);
 

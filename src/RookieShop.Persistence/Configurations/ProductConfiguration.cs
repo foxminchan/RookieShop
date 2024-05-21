@@ -42,6 +42,12 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
             e => e.ToJson()
         );
 
+        builder.Property(p => p.AverageRating)
+            .HasDefaultValue(0.0);
+
+        builder.Property(p => p.TotalReviews)
+            .HasDefaultValue(0);
+
         builder.HasOne(p => p.Category)
             .WithMany(p => p.Products)
             .HasForeignKey(p => p.CategoryId)

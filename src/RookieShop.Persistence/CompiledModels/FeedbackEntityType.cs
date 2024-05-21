@@ -115,7 +115,7 @@ namespace RookieShop.Persistence.CompiledModels
                 (DateTime v) => v));
         createdDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
         createdDate.AddAnnotation("Relational:ColumnName", "created_date");
-        createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 113, DateTimeKind.Utc).AddTicks(6411));
+        createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 21, 15, 24, 37, 69, DateTimeKind.Utc).AddTicks(1669));
 
         var customerId = runtimeEntityType.AddProperty(
             "CustomerId",
@@ -227,7 +227,7 @@ namespace RookieShop.Persistence.CompiledModels
                 (Nullable<DateTime> v) => v.HasValue ? (Nullable<DateTime>)(DateTime)v : default(Nullable<DateTime>)));
         updateDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
         updateDate.AddAnnotation("Relational:ColumnName", "update_date");
-        updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 113, DateTimeKind.Utc).AddTicks(6830));
+        updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 21, 15, 24, 37, 69, DateTimeKind.Utc).AddTicks(2148));
 
         var version = runtimeEntityType.AddProperty(
             "Version",
@@ -254,7 +254,7 @@ namespace RookieShop.Persistence.CompiledModels
                 storeTypeName: "uuid"));
         version.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
         version.AddAnnotation("Relational:ColumnName", "version");
-        version.AddAnnotation("Relational:DefaultValue", new Guid("d4a45ced-3272-425c-ab4c-e0456a24eb82"));
+        version.AddAnnotation("Relational:DefaultValue", new Guid("a54943c8-4a9d-48a0-b551-fe75a31773f7"));
 
         var key = runtimeEntityType.AddKey(
             new[] { id });

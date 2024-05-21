@@ -28,16 +28,13 @@ public static class Extension
             .AddSmtpSender(smtpSettings.Host, smtpSettings.Port, smtpSettings.Email, smtpSettings.Secret)
             .AddRazorRenderer();
 
-        builder.Services.AddResiliencePipeline(nameof(Smtp), resiliencePipelineBuilder => resiliencePipelineBuilder
-            .AddRetry(new()
-            {
-                ShouldHandle = new PredicateBuilder().Handle<Exception>(),
-                Delay = TimeSpan.FromSeconds(2),
-                MaxRetryAttempts = 3,
-                BackoffType = DelayBackoffType.Constant
-            })
-            .AddTimeout(TimeSpan.FromSeconds(10)));
+        builder.ConfigureEmailService();
 
+        return builder;
+    }
+
+    private static void ConfigureEmailService(this IHostApplicationBuilder builder)
+    {
         var conn = builder.Configuration.GetConnectionString("Postgres");
 
         Guard.Against.NullOrEmpty(conn);
@@ -48,10 +45,18 @@ public static class Extension
             options.AutoCreateSchemaObjects = AutoCreate.All;
         });
 
+        builder.Services.AddResiliencePipeline(nameof(Smtp), resiliencePipelineBuilder => resiliencePipelineBuilder
+            .AddRetry(new()
+            {
+                ShouldHandle = new PredicateBuilder().Handle<Exception>(),
+                Delay = TimeSpan.FromSeconds(2),
+                MaxRetryAttempts = 3,
+                BackoffType = DelayBackoffType.Constant
+            })
+            .AddTimeout(TimeSpan.FromSeconds(10)));
+
         builder.Services.AddScoped<ISmtpService, SmtpService>();
 
         builder.Services.Decorate<ISmtpService, SmtpOutboxDecorator>();
-
-        return builder;
     }
 }

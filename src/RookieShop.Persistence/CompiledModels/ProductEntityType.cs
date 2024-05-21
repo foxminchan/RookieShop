@@ -66,6 +66,30 @@ namespace RookieShop.Persistence.CompiledModels
             id.AddAnnotation("Relational:ColumnName", "id");
             id.AddAnnotation("Relational:DefaultValueSql", "uuid_generate_v4()");
 
+            var averageRating = runtimeEntityType.AddProperty(
+                "AverageRating",
+                typeof(double),
+                propertyInfo: typeof(Product).GetProperty("AverageRating", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(Product).GetField("<AverageRating>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                valueGenerated: ValueGenerated.OnAdd,
+                sentinel: 0.0);
+            averageRating.TypeMapping = NpgsqlDoubleTypeMapping.Default.Clone(
+                comparer: new ValueComparer<double>(
+                    (double v1, double v2) => v1.Equals(v2),
+                    (double v) => v.GetHashCode(),
+                    (double v) => v),
+                keyComparer: new ValueComparer<double>(
+                    (double v1, double v2) => v1.Equals(v2),
+                    (double v) => v.GetHashCode(),
+                    (double v) => v),
+                providerValueComparer: new ValueComparer<double>(
+                    (double v1, double v2) => v1.Equals(v2),
+                    (double v) => v.GetHashCode(),
+                    (double v) => v));
+            averageRating.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+            averageRating.AddAnnotation("Relational:ColumnName", "average_rating");
+            averageRating.AddAnnotation("Relational:DefaultValue", 0.0);
+
             var categoryId = runtimeEntityType.AddProperty(
                 "CategoryId",
                 typeof(CategoryId?),
@@ -120,7 +144,7 @@ namespace RookieShop.Persistence.CompiledModels
                     (DateTime v) => v));
             createdDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
             createdDate.AddAnnotation("Relational:ColumnName", "created_date");
-            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 120, DateTimeKind.Utc).AddTicks(9526));
+            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 21, 15, 24, 37, 94, DateTimeKind.Utc).AddTicks(530));
 
             var description = runtimeEntityType.AddProperty(
                 "Description",
@@ -281,6 +305,32 @@ status.SetSentinelFromProviderValue((byte)0);
 status.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 status.AddAnnotation("Relational:ColumnName", "status");
 
+var totalReviews = runtimeEntityType.AddProperty(
+    "TotalReviews",
+    typeof(int),
+    propertyInfo: typeof(Product).GetProperty("TotalReviews", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+    fieldInfo: typeof(Product).GetField("<TotalReviews>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+    valueGenerated: ValueGenerated.OnAdd,
+    sentinel: 0);
+totalReviews.TypeMapping = IntTypeMapping.Default.Clone(
+    comparer: new ValueComparer<int>(
+        (int v1, int v2) => v1 == v2,
+        (int v) => v,
+        (int v) => v),
+    keyComparer: new ValueComparer<int>(
+        (int v1, int v2) => v1 == v2,
+        (int v) => v,
+        (int v) => v),
+    providerValueComparer: new ValueComparer<int>(
+        (int v1, int v2) => v1 == v2,
+        (int v) => v,
+        (int v) => v),
+    mappingInfo: new RelationalTypeMappingInfo(
+        storeTypeName: "integer"));
+totalReviews.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+totalReviews.AddAnnotation("Relational:ColumnName", "total_reviews");
+totalReviews.AddAnnotation("Relational:DefaultValue", 0);
+
 var updateDate = runtimeEntityType.AddProperty(
     "UpdateDate",
     typeof(DateTime?),
@@ -303,7 +353,7 @@ updateDate.TypeMapping = NpgsqlTimestampTzTypeMapping.Default.Clone(
         (Nullable<DateTime> v) => v.HasValue ? (Nullable<DateTime>)(DateTime)v : default(Nullable<DateTime>)));
 updateDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 updateDate.AddAnnotation("Relational:ColumnName", "update_date");
-updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 120, DateTimeKind.Utc).AddTicks(9860));
+updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 21, 15, 24, 37, 94, DateTimeKind.Utc).AddTicks(1125));
 
 var version = runtimeEntityType.AddProperty(
     "Version",
@@ -330,7 +380,7 @@ version.TypeMapping = GuidTypeMapping.Default.Clone(
         storeTypeName: "uuid"));
 version.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 version.AddAnnotation("Relational:ColumnName", "version");
-version.AddAnnotation("Relational:DefaultValue", new Guid("7988cad0-8c68-4fbe-8ca1-848723ec98a5"));
+version.AddAnnotation("Relational:DefaultValue", new Guid("7a3ffef4-4c3f-4499-942f-28ad6bf55aeb"));
 
 var key = runtimeEntityType.AddKey(
     new[] { id });

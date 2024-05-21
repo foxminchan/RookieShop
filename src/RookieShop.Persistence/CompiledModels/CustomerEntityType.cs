@@ -108,7 +108,7 @@ namespace RookieShop.Persistence.CompiledModels
                     (DateTime v) => v));
             createdDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
             createdDate.AddAnnotation("Relational:ColumnName", "created_date");
-            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 112, DateTimeKind.Utc).AddTicks(2391));
+            createdDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 21, 15, 24, 37, 66, DateTimeKind.Utc).AddTicks(8783));
 
             var email = runtimeEntityType.AddProperty(
                 "Email",
@@ -264,7 +264,7 @@ updateDate.TypeMapping = NpgsqlTimestampTzTypeMapping.Default.Clone(
         (Nullable<DateTime> v) => v.HasValue ? (Nullable<DateTime>)(DateTime)v : default(Nullable<DateTime>)));
 updateDate.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 updateDate.AddAnnotation("Relational:ColumnName", "update_date");
-updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 15, 17, 49, 26, 112, DateTimeKind.Utc).AddTicks(2826));
+updateDate.AddAnnotation("Relational:DefaultValue", new DateTime(2024, 5, 21, 15, 24, 37, 66, DateTimeKind.Utc).AddTicks(9242));
 
 var version = runtimeEntityType.AddProperty(
     "Version",
@@ -291,7 +291,7 @@ version.TypeMapping = GuidTypeMapping.Default.Clone(
         storeTypeName: "uuid"));
 version.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 version.AddAnnotation("Relational:ColumnName", "version");
-version.AddAnnotation("Relational:DefaultValue", new Guid("2e32fd10-05d7-4594-9d62-4ea80e62fd33"));
+version.AddAnnotation("Relational:DefaultValue", new Guid("718cef19-b979-4a24-b8b2-5becdc7fd91c"));
 
 var key = runtimeEntityType.AddKey(
     new[] { id });
