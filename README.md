@@ -6,7 +6,7 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <p align="justify">
-RookieShop Web Application is a assignment project for training purpose. The project is a web application make the best practices of .NET Core in Clean Architecture and Domain-Driven Design and contain multiple design-patterns and principles. It demonstrates how to build a modern web application using .NET Core with Aspire Dashboard and Next.js with Bun.
+RookieShop is a .NET Core web application training project demonstrating Clean Architecture, Domain-Driven Design, and modern web development with Aspire and Next.js. The project is part of the Rookie Phase-1 Assignment at NashTech.
 </p>
 
 <hr/>
@@ -168,6 +168,8 @@ The project uses OpenTelemetry to collect the telemetry data from the applicatio
 </p>
 
 <img loading="lazy" src="./img/aspire-dashboard.png" alt="Aspire Dashboard" width="100%" height="100%">
+
+<img loading="lazy" src="./img/aspire-dashboard-trace.png" alt="Aspire Dashboard" width="100%" height="100%">
 
 ## Project References
 
