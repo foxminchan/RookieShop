@@ -7,7 +7,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="DistributedLock.Redis" />
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
+		<PackageReference Include="Aspire.StackExchange.Redis" />
 		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
 	</ItemGroup>
 
@@ -15,7 +15,6 @@
 		<PackageReference Include="OpenTelemetry.Extensions.Hosting" />
 		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" />
-		<PackageReference Include="OpenTelemetry.Instrumentation.StackExchangeRedis" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Quartz" />
@@ -31,7 +30,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AspNetCore.HealthChecks.Redis" />
 		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
 		<PackageReference Include="AspNetCore.HealthChecks.OpenIdConnectServer" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI" />

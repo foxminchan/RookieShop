@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
-using RookieShop.Infrastructure.Cache.Redis.Settings;
 using RookieShop.Infrastructure.Identity.Settings;
 
 namespace RookieShop.Infrastructure.HealthCheck;
@@ -19,16 +18,16 @@ public static class Extension
         var dbConn = builder.Configuration.GetConnectionString("Postgres");
         Guard.Against.Null(dbConn);
 
-        var cache = builder.Configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>();
-        Guard.Against.Null(cache);
-
         var openIdSettings = builder.Configuration.GetSection(nameof(OpenIdSettings)).Get<OpenIdSettings>();
         Guard.Against.Null(openIdSettings);
+
+        var redisConn = builder.Configuration.GetConnectionString("Redis");
+        Guard.Against.Null(redisConn);
 
         builder.Services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
             .AddNpgSql(dbConn, name: "Postgres", tags: ["database"])
-            .AddRedis(cache.GetConnectionString(), "Redis", tags: ["redis"])
+            .AddRedis(redisConn, "Redis", tags: ["redis"])
             .AddIdentityServer(new Uri(openIdSettings.Authority), name: "Identity Server", tags: ["identity-server"]);
 
         builder.Services

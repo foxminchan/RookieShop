@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Npgsql;
-using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -30,7 +29,6 @@ public static class Extension
                     .AddHttpClientInstrumentation()
                     .AddEntityFrameworkCoreInstrumentation(b => b.SetDbStatementForText = true)
                     .AddQuartzInstrumentation()
-                    .AddRedisInstrumentation()
                     .AddNpgsql();
             })
             .WithMetrics(metrics =>
@@ -48,8 +46,6 @@ public static class Extension
     {
         var useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
 
-        var otlpApiKey = builder.Configuration["OTEL_EXPORTER_OTLP_API_KEY"];
-
         var resourceBuilder = ResourceBuilder
             .CreateDefault()
             .AddService(
@@ -58,8 +54,6 @@ public static class Extension
                 serviceInstanceId: Environment.MachineName);
 
         if (!useOtlpExporter) return;
-
-        builder.Services.Configure<OtlpExporterOptions>(o => o.Headers = $"x-otlp-api-key={otlpApiKey}");
 
         builder.Services.Configure<OpenTelemetryLoggerOptions>(logging =>
             logging.SetResourceBuilder(resourceBuilder).AddOtlpExporter());

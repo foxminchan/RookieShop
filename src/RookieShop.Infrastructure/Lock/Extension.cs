@@ -4,7 +4,6 @@ using Medallion.Threading.Redis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RookieShop.Infrastructure.Cache.Redis.Settings;
 using StackExchange.Redis;
 
 namespace RookieShop.Infrastructure.Lock;
@@ -13,13 +12,7 @@ public static class Extension
 {
     public static IHostApplicationBuilder AddRedisDistributedLock(this IHostApplicationBuilder builder)
     {
-        var redis = builder.Configuration
-            .GetSection(nameof(RedisSettings))
-            .Get<RedisSettings>();
-
-        Guard.Against.Null(redis);
-
-        var conn = redis.GetConnectionString();
+        var conn = builder.Configuration.GetConnectionString("redis");
 
         Guard.Against.Null(conn, message: "Redis Url not found.");
 

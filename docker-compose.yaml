@@ -28,24 +28,6 @@ services:
     networks:
       - rookie-network
 
-  rookie.cache:
-    image: redis/redis-stack-server:7.2.0-v10
-    container_name: rookie.cache
-    restart: unless-stopped
-    ports:
-      - 6379:6379
-    command: redis-server --requirepass ${DB_PASSWORD}
-    volumes:
-      - ./mnt/redis:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    logging: *logging
-    networks:
-      - rookie-network
-
   rookie.storage:
     image: mcr.microsoft.com/azure-storage/azurite:3.30.0
     container_name: rookie.storage
