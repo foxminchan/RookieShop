@@ -1,4 +1,4 @@
-﻿@model RookieShop.Storefront.Areas.Product.Models.ProductCategoryViewModel
+﻿@model RookieShop.Storefront.Areas.Product.Models.Categories.ListCategoriesViewModel
 
 @{
     ViewBag.Title = "Products";
@@ -7,11 +7,10 @@
 
 <div class="bg-white">
     <div>
-        <partial name="Components/Product/CategoryFiltersMobile" model="Model.Categories"/>
         <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900">All Products</h1>
-                <partial name="Components/Product/FilterSection"/>
+                <partial name="_FilterPartial"/>
             </div>
             <section aria-labelledby="products-heading" class="pb-24 pt-6">
                 <h2 id="products-heading" class="sr-only">Products</h2>
@@ -22,40 +21,32 @@
                                 <button type="button" class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-1" aria-expanded="false">
                                     <span class="font-medium text-gray-900">Category</span>
                                     <span class="ml-6 flex items-center">
-                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" id="hide-category-filter">
-                                            <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/>
-                                        </svg>
-                                        <svg class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" id="show-category-filter">
-                                            <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd"/>
-                                        </svg>
+                                        <img loading="lazy" src="~/imgs/product/plus.svg" class="h-5 w-5" alt="plus"/>
+                                        <img loading="lazy" src="~/imgs/product/minus.svg" class="h-5 w-5 hidden" alt="minus"/>
                                     </span>
                                 </button>
                             </h3>
                             <div class="pt-6" id="filter-section-1">
                                 <div class="space-y-4">
-                                    @foreach (var category in Model.Categories.Categories)
+                                    @foreach (var category in Model.Categories)
                                     {
                                         <div class="flex items-center">
-                                            <input id="@(string.Concat("filter-category-", category.Id))" name="id" value="@category.Id" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                            <label for="@(string.Concat("filter-category-", category.Id))" class="ml-3 text-sm text-gray-600">@category.Name</label>
+                                            <input id="@(string.Concat("filter-category-", category.Id))"
+                                                   name="id"
+                                                   value="@category.Id"
+                                                   type="checkbox"
+                                                   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                            <label for="@(string.Concat("filter-category-", category.Id))"
+                                                   class="ml-3 text-sm text-gray-600">
+                                                @category.Name
+                                            </label>
                                         </div>
                                     }
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <div class="lg:col-span-3">
-                        <div class="bg-white">
-                            <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                                <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                                    <partial name="Components/Product/ProductItems" model="Model.Products"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                            <partial name="Components/Product/Pagination" model="Model.Products.PagedInfo"/>
-                        </div>
-                    </div>
+                    @await Component.InvokeAsync("ProductItems", Context.Request.Query)
                 </div>
             </section>
         </main>
@@ -63,5 +54,5 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" src="js/category-filter.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/category-filter.js" asp-append-version="true"></script>
 }

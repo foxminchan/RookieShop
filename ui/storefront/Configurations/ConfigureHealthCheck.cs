@@ -10,7 +10,7 @@ public static class ConfigureHealthCheck
 {
     public static IHostApplicationBuilder AddHealthCheck(this IHostApplicationBuilder builder, AppSettings appSettings)
     {
-        Uri url = new(string.Concat(builder.Configuration["BaseApiEndpoint"], "/categories"));
+        Uri url = new(string.Concat(appSettings.BaseApiEndpoint, "/categories"));
 
         builder.Services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())

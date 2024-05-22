@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RookieShop.Storefront.Areas.Product.Models;
 using RookieShop.Storefront.Areas.Product.Services;
 
 namespace RookieShop.Storefront.Areas.Product.Controllers;
@@ -12,18 +11,12 @@ public class ProductController(
     public async Task<IActionResult> Index()
     {
         var categories = await categoryService.ListCategoriesAsync();
-        var products = await productService.ListProductsAsync(new());
-        var model = new ProductCategoryViewModel
-        {
-            Products = products,
-            Categories = categories
-        };
-        return View(model);
+        return View(categories);
     }
 
     public async Task<IActionResult> Detail(string id)
     {
         var product = await productService.GetProductByIdAsync(new(id));
-        return View(product);
+        return ModelState.IsValid ? View(product) : BadRequest(ModelState);
     }
 }

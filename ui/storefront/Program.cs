@@ -1,4 +1,3 @@
-using Ardalis.ListStartupServices;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using RookieShop.ServiceDefaults;
 using RookieShop.Storefront.Configurations;
@@ -28,7 +27,7 @@ builder.AddHealthCheck(appSettings);
 
 builder.AddAuthenticationService(appSettings.OpenIdSettings);
 
-builder.AddHttpServices(builder.Configuration["BaseApiEndpoint"]);
+builder.AddHttpServices(appSettings.BaseApiEndpoint);
 
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
@@ -52,16 +51,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.Use(async (ctx, next) =>
-{
-    await next();
-
-    if (ctx.Response is { StatusCode: 404, HasStarted: false })
-    {
-        ctx.Request.Path = "/Error/PageNotFound";
-        await next();
-    }
-});
+app.UseStatusCodePages();
 
 app.Use(async (context, next) =>
 {
