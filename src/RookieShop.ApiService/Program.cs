@@ -7,6 +7,7 @@ using RookieShop.Application;
 using RookieShop.Infrastructure;
 using RookieShop.Infrastructure.Endpoints;
 using RookieShop.Persistence;
+using RookieShop.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,11 +54,11 @@ builder.Services.AddExceptionHandler<ExceptionHandler>();
 
 builder.Services.AddProblemDetails();
 
-builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
-
 builder.AddInfrastructure().AddPersistence().AddApplication();
 
 builder.AddEndpoints(typeof(Program));
+
+builder.AddServiceDefaults();
 
 var app = builder.Build();
 

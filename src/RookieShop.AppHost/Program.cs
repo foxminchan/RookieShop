@@ -24,6 +24,7 @@ builder.AddNpmApp("backoffice", "../../ui/backoffice", "dev")
 
 builder.AddProject<RookieShop_Storefront>("storefront")
     .WithExternalHttpEndpoints()
+    .WithReference(redis)
     .WithReference(apiService)
     .WithReference(identityService)
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))

@@ -14,9 +14,7 @@ public static class ConfigureHealthCheck
 
         builder.Services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
-            .AddUrlGroup(url, "api-check", tags: ["api"])
-            .AddIdentityServer(new Uri(appSettings.OpenIdSettings.Authority), name: "Identity Server",
-                tags: ["identity-server"]);
+            .AddUrlGroup(url, "api-check", tags: ["api"]);
 
         return builder;
     }

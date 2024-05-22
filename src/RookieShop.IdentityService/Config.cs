@@ -1,6 +1,6 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
-using RookieShop.Domain.Constants;
+using RookieShop.IdentityService.Constants;
 using RookieShop.IdentityService.Options;
 
 namespace RookieShop.IdentityService;

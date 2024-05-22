@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Redis;
 
-namespace RookieShop.Infrastructure.DataProtection;
+namespace RookieShop.ServiceDefaults;
 
-public static class Extension
+public static class RedisDataProtection
 {
     public static IHostApplicationBuilder AddRedisDataProtection(this IHostApplicationBuilder builder)
     {
@@ -18,7 +18,7 @@ public static class Extension
         builder.Services.AddDataProtection()
             .SetDefaultKeyLifetime(TimeSpan.FromDays(14))
             .SetApplicationName(nameof(RookieShop))
-            .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(conn), nameof(DataProtection));
+            .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(conn), nameof(RedisDataProtection));
 
         return builder;
     }

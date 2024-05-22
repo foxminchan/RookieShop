@@ -1,7 +1,7 @@
 ﻿using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RookieShop.Domain.Constants;
+using RookieShop.IdentityService.Constants;
 using RookieShop.IdentityService.Data;
 using RookieShop.IdentityService.Exceptions;
 using RookieShop.IdentityService.Models;

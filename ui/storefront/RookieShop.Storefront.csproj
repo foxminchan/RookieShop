@@ -10,9 +10,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Polly" />
+		<PackageReference Include="Polly.Extensions" />
 		<PackageReference Include="Refit.HttpClientFactory" />
-		<PackageReference Include="Ardalis.ListStartupServices" />
 		<PackageReference Include="AspNetCore.HealthChecks.Uris" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ardalis.Result.AspNetCore" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -28,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\RookieShop.Infrastructure\RookieShop.Infrastructure.csproj" />
+		<ProjectReference Include="..\..\src\RookieShop.ServiceDefaults\RookieShop.ServiceDefaults.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

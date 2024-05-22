@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using RookieShop.Domain.Constants;
+using RookieShop.Storefront.Constants;
 using RookieShop.Storefront.Options;
 
 namespace RookieShop.Storefront.Configurations;

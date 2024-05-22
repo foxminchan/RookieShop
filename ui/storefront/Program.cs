@@ -1,6 +1,6 @@
 using Ardalis.ListStartupServices;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using RookieShop.Infrastructure.OpenTelemetry;
+using RookieShop.ServiceDefaults;
 using RookieShop.Storefront.Configurations;
 using RookieShop.Storefront.Options;
 
@@ -10,7 +10,7 @@ var appSettings = new AppSettings();
 
 builder.Configuration.Bind(appSettings);
 
-builder.ConfigureOpenTelemetry();
+builder.AddServiceDefaults();
 
 builder.Services.AddRazorPages();
 
@@ -31,8 +31,6 @@ builder.AddAuthenticationService(appSettings.OpenIdSettings);
 builder.AddHttpServices(builder.Configuration["BaseApiEndpoint"]);
 
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
-
-builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
 
 var app = builder.Build();
 

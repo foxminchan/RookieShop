@@ -16,6 +16,8 @@
 		<PackageVersion Include="Aspire.Hosting.NodeJs" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspireVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.5.0" />
+		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="8.0.1" />
 		<!-- Ardalis -->
 		<PackageVersion Include="Ardalis.GuardClauses" Version="4.5.0" />
 		<PackageVersion Include="Ardalis.Result.AspNetCore" Version="9.0.0" />

@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RookieShop.Infrastructure\RookieShop.Infrastructure.csproj" />
+		<ProjectReference Include="..\RookieShop.ServiceDefaults\RookieShop.ServiceDefaults.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
