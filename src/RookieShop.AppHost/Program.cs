@@ -13,7 +13,8 @@ var apiService = builder
     .AddProject<RookieShop_ApiService>("api-service")
     .WithReference(redis)
     .WithReference(identityService)
-    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"));
+    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
+    .WithReplicas(2);
 
 builder.AddNpmApp("backoffice", "../../ui/backoffice", "dev")
     .WithEnvironment("BROWSER", "none")
