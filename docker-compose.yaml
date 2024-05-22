@@ -59,20 +59,6 @@ services:
     networks:
       - rookie-network
 
-  rookie.observability:
-    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.6
-    container_name: rookie.observability
-    restart: unless-stopped
-    environment:
-      - DASHBOARD__OTLP__AUTHMODE=ApiKey
-      - DASHBOARD__OTLP__PRIMARYAPIKEY=${OTEL_API_KEY}
-    ports:
-      - "18888:18888"
-      - "4317:18889"
-    logging: *logging
-    networks:
-      - rookie-network
-
 networks:
   rookie-network:
     name: rookie-network

@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RookieShop.Storefront", "ui\storefront\RookieShop.Storefront.csproj", "{7B4F1C8B-6387-42DD-B821-CAA4BFBC7A32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RookieShop.AppHost", "src\RookieShop.AppHost\RookieShop.AppHost.csproj", "{10628648-06E4-423A-ADEE-546E78B93C54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{7B4F1C8B-6387-42DD-B821-CAA4BFBC7A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B4F1C8B-6387-42DD-B821-CAA4BFBC7A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B4F1C8B-6387-42DD-B821-CAA4BFBC7A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10628648-06E4-423A-ADEE-546E78B93C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10628648-06E4-423A-ADEE-546E78B93C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10628648-06E4-423A-ADEE-546E78B93C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10628648-06E4-423A-ADEE-546E78B93C54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,6 +104,7 @@ Global
 		{A2D61EA7-F4F7-4172-895D-EFADE3497BF1} = {380DFF7B-1954-4E01-9492-81C1D2F6A81B}
 		{A54EB848-5D0A-43F9-B2D0-B5294812B40B} = {24EA753A-992E-446B-85FD-9FED19F11D07}
 		{7B4F1C8B-6387-42DD-B821-CAA4BFBC7A32} = {24EA753A-992E-446B-85FD-9FED19F11D07}
+		{10628648-06E4-423A-ADEE-546E78B93C54} = {24EA753A-992E-446B-85FD-9FED19F11D07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72C306FE-AEB3-4169-B515-760DEB0E3994}
