@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.Storefront.Models;
-using System.Diagnostics;
 
 namespace RookieShop.Storefront.Controllers;
 

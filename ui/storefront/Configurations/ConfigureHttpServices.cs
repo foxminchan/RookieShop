@@ -1,14 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Ardalis.GuardClauses;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
+using RookieShop.Storefront.Areas.Product.Services;
 using RookieShop.Storefront.Delegates;
-using RookieShop.Storefront.Services;
 
 namespace RookieShop.Storefront.Configurations;
 
 public static class ConfigureHttpServices
 {
-    public static IHostApplicationBuilder AddHttpServices(this IHostApplicationBuilder builder, string apiEndpoint)
+    public static IHostApplicationBuilder AddHttpServices(this IHostApplicationBuilder builder, string? apiEndpoint)
     {
+        Guard.Against.NullOrEmpty(apiEndpoint);
+
         builder.Services.TryAddTransient<RetryDelegate>();
 
         builder.Services.TryAddTransient<LoggingDelegate>();

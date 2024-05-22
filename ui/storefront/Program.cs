@@ -12,6 +12,8 @@ builder.Configuration.Bind(appSettings);
 
 builder.ConfigureOpenTelemetry();
 
+builder.Services.AddRazorPages();
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -26,7 +28,9 @@ builder.AddHealthCheck(appSettings);
 
 builder.AddAuthenticationService(appSettings.OpenIdSettings);
 
-builder.AddHttpServices(appSettings.ApiEndpoint);
+builder.AddHttpServices(builder.Configuration["BaseApiEndpoint"]);
+
+builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
 builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
 
@@ -67,29 +71,31 @@ app.Use(async (context, next) =>
     {
         var robotsTxtPath = Path.Combine(app.Environment.ContentRootPath, "robots.txt");
         var output = "User-agent: *  \nDisallow: /";
-        if (File.Exists(robotsTxtPath))
-        {
-            output = await File.ReadAllTextAsync(robotsTxtPath);
-        }
+        if (File.Exists(robotsTxtPath)) output = await File.ReadAllTextAsync(robotsTxtPath);
 
         context.Response.ContentType = "text/plain";
         await context.Response.WriteAsync(output);
     }
-    else await next();
+    else
+    {
+        await next();
+    }
 });
 
 app.MapControllerRoute(
-    name: "User",
-    pattern: "User/{controller=Home}/{action=Index}/{id?}"
-);
+    "Product",
+    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
-    name: "Order",
-    pattern: "Order/{controller=Home}/{action=Index}/{id?}"
-);
+    "User",
+    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    "Order",
+    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    "default",
+    "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

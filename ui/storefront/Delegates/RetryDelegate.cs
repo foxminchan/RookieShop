@@ -1,5 +1,5 @@
-﻿using Polly.Retry;
-using Polly;
+﻿using Polly;
+using Polly.Retry;
 
 namespace RookieShop.Storefront.Delegates;
 

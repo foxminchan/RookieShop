@@ -10,11 +10,11 @@ public static class ConfigureHealthCheck
 {
     public static IHostApplicationBuilder AddHealthCheck(this IHostApplicationBuilder builder, AppSettings appSettings)
     {
-        Uri url = new(string.Concat(appSettings.ApiEndpoint, "/categories"));
+        Uri url = new(string.Concat(builder.Configuration["BaseApiEndpoint"], "/categories"));
 
         builder.Services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
-            .AddUrlGroup(url, name: "api-check", tags: ["api"])
+            .AddUrlGroup(url, "api-check", tags: ["api"])
             .AddIdentityServer(new Uri(appSettings.OpenIdSettings.Authority), name: "Identity Server",
                 tags: ["identity-server"]);
 

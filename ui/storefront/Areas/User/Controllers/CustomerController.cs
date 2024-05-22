@@ -3,7 +3,7 @@
 namespace RookieShop.Storefront.Areas.User.Controllers;
 
 [Area("User")]
-public class UserController : Controller
+public class CustomerController : Controller
 {
     public IActionResult Index() => View();
 }
