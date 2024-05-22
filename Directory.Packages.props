@@ -84,7 +84,8 @@
 		<PackageVersion Include="Polly" Version="$(PollyVersion)" />
 		<PackageVersion Include="Polly.Extensions" Version="$(PollyVersion)" />
 		<!-- Aspire -->
-		<PackageVersion Include="Aspire.Hosting.AppHost" Version="8.0.0" />
+		<PackageVersion Include="Aspire.Hosting.NodeJs" Version="8.0.1" />
+		<PackageVersion Include="Aspire.Hosting.AppHost" Version="8.0.1" />
 		<!-- Miscellaneous -->
 		<PackageVersion Include="Dapper" Version="2.1.35" />
 		<PackageVersion Include="Scrutor" Version="4.2.2" />

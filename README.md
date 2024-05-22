@@ -109,12 +109,12 @@ Build an e-commerce web site with minimum functionality below:
 bun install
 dotnet tool restore
 
-# Install the dependencies for the backend
+# Install the dependencies for the .NET Core projects
 
 cd RookieShop
 dotnet restore ./RookieShop.sln
 
-# Install the admin-facing website dependencies
+# Install the dependencies for the Next.js projects
 
 cd ../backoffice
 bun install
@@ -129,42 +129,19 @@ docker-compose --env-file .env up -d1
 > [!IMPORTANT]
 > Create a `.env` file in the root directory and set the environment variables.
 
-**You can access the following services:**
-
-1. `https://localhost:9000` for all the REST API document
-2. `https://localhost:5001` for identity server
-3. `https://localhost:4000` for user facing website
-4. `https://localhost:3000` for admin facing website
-5. `https://localhost:1888` for observability dashboard
-
 ### Running the application
 
 > [!WARNING]
 > Remember to ensure that Docker is started
 
-1. Run the backend
-
 - (Windows only) Run the application from Visual Studio:
 - Open the `RookieShop.sln` solution file in Visual Studio
-- Ensure `RookieShop.ApiService` and `RookieShop.IdentityService` are set as the startup projects
+- Ensure `RookieShop.AppHost` are set as the startup projects
 - Hit `F5` to run the application
 - Or run the application from your terminal:
 
 ```bash
-dotnet run --project src/RookieShop.ApiService/RookieShop.ApiService.csproj
-dotnet run --project src/RookieShop.IdentityService/RookieShop.IdentityService.csproj
-```
-
-2. Run the frontend for the user-facing website
-
-```bash
-dotnet run --project ui/storefront/RookieShop.Storefront.csproj
-```
-
-3. Run the frontend for the admin-facing website
-
-```bash
-cd ui/backoffice && bun dev
+dotnet run --project src/RookieShop.AppHost/RookieShop.AppHost.csproj
 ```
 
 ## Testing

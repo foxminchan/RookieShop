@@ -9,7 +9,8 @@
   "description": "A project developed by a rookie transitioning to an engineer at NashTech",
   "private": true,
   "scripts": {
-    "dev": "NODE_EXTRA_CA_CERTS=./certificates/aspnet_https.crt next dev",
+    "dev": "next dev",
+    "dev-ca": "NODE_EXTRA_CA_CERTS=./certificates/aspnet_https.crt next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
