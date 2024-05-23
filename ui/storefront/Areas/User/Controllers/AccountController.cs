@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.Storefront.Areas.User.Services;
-using System.Security.Claims;
-using System.Text.Json;
 using RookieShop.Storefront.Areas.User.Models;
 
 namespace RookieShop.Storefront.Areas.User.Controllers;
@@ -27,7 +25,7 @@ public class AccountController(ICustomerService customerService) : Controller
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-        Response.Redirect(Url.Content("~/"));
+        Response.Redirect(Url.Content("/"));
     }
 
     public async Task<IActionResult> Index()

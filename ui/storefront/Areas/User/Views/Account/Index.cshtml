@@ -23,20 +23,20 @@
                                type="text"
                                value="@Model.Name"
                                class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
-                               placeholder="Your Name">
-                        <span asp-validation-for="Name"></span>
+                               placeholder="Your Name" required>
+                        <span asp-validation-for="Name" class="text-red-900"></span>
                     </div>
                     <div class="mb-2 sm:mb-6">
                         <label asp-for="Email"class="block mb-2 text-sm font-medium text-indigo-900">Your email</label>
                         <input type="email"asp-for="Email"value="@Model.Email"
                                class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="your.email@mail.com" required>
-                        <span asp-validation-for="Email"></span>
+                        <span asp-validation-for="Email" class="text-red-900"></span>
                     </div>
                     <div class="mb-2 sm:mb-6">
                         <label asp-for="Phone"class="block mb-2 text-sm font-medium text-indigo-900">Your phone number</label>
                         <input asp-for="Phone" type="tel" value="@Model.Phone"
                                class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 " placeholder="0123456789" required>
-                        <span asp-validation-for="Phone"></span>
+                        <span asp-validation-for="Phone" class="text-red-900"></span>
                     </div>
                     <div class="mb-6">
                         <label asp-for="Gender" class="block mb-2 text-sm font-medium text-indigo-900">Gender</label>

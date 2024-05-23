@@ -9,7 +9,7 @@ public sealed class RetryDelegate : DelegatingHandler
     private readonly AsyncRetryPolicy<HttpResponseMessage> _retryPolicy
         = Policy<HttpResponseMessage>
             .HandleResult(response => response.StatusCode == HttpStatusCode.InternalServerError)
-            .RetryAsync(3);
+            .RetryAsync(2);
 
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,

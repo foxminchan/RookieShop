@@ -1,19 +1,46 @@
 ﻿@model Ardalis.Result.PagedInfo
 
 <div class="flex items-center gap-4 justify-center">
-    <a class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+    <a asp-route-page="@(Model.PageNumber == 1 ? 1 : Model.PageNumber - 1)"
+       class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none @(Model.PageNumber == 1 ? "pointer-events-none opacity-50" : "")"
+       type="button">
         <img loading="lazy" class="w-4 h-4" src="/imgs/filter/previous.svg" alt="Previous" asp-append-version="true"/>
         Previous
     </a>
-    @for (var pageNumber = 1; pageNumber <= Model.TotalPages; pageNumber++)
+    @if (Model.PageNumber >= 6)
     {
-        <button class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase transition-all @(pageNumber == Model.PageNumber ? "hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-900 text-white shadow-md shadow-gray-900/10" : "hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-gray-900")" type="button">
+        <a asp-route-page="1"
+           class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase transition-all @(1 == Model.PageNumber ? "hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-900 text-white shadow-md shadow-gray-900/10" : "hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-gray-900")" type="button">
             <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                @pageNumber
+                1
             </span>
-        </button>
+        </a>
+        <span class="font-sans text-xs font-medium text-gray-900">...</span>
+        @for (var pageNumber = Model.PageNumber - 2; pageNumber <= Model.PageNumber + 2; pageNumber++)
+        {
+            <a asp-route-page="@pageNumber"
+               class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase transition-all @(pageNumber == Model.PageNumber ? "hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-900 text-white shadow-md shadow-gray-900/10" : "hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-gray-900")" type="button">
+                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                    @pageNumber
+                </span>
+            </a>
+        }
     }
-    <a class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+    else
+    {
+        @for (var pageNumber = 1; pageNumber <= Model.TotalPages; pageNumber++)
+        {
+            <a asp-route-page="@pageNumber"
+               class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase transition-all @(pageNumber == Model.PageNumber ? "hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-900 text-white shadow-md shadow-gray-900/10" : "hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none text-gray-900")" type="button">
+                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                    @pageNumber
+                </span>
+            </a>
+        }
+    }
+    <a asp-route-page="@(Model.PageNumber == Model.TotalPages ? Model.TotalPages : Model.PageNumber + 1)"
+       class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-full select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none @(Model.PageNumber == Model.TotalPages ? "pointer-events-none opacity-50" : "")"
+       type="button">
         Next
         <img loading="lazy" class="w-4 h-4" src="/imgs/filter/next.svg" alt="Next" asp-append-version="true"/>
     </a>
