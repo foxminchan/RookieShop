@@ -11,7 +11,7 @@
     <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
         <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
             <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                <img class="w-full" loading="lazy" src="@(Model.ImageUrl ?? "/imgs/product/default-image.png")" alt="@Model.Name"/>
+                <img asp-append-version="true" class="w-full" loading="lazy" src="@(Model.ImageUrl ?? "~/imgs/product/default-image.png")" alt="@Model.Name"/>
             </div>
             <div class="mt-6 sm:mt-8 lg:mt-0">
                 <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">
@@ -33,7 +33,7 @@
                             href="#"
                             class="text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center"
                             role="button">
-                            <img loading="lazy" class="w-5 h-5 -ms-2 me-2" src="/imgs/product/cart.svg" alt="cart"/>
+                            <img asp-append-version="true" loading="lazy" class="w-5 h-5 -ms-2 me-2" src="~/imgs/product/cart.svg" alt="cart"/>
                             Add to cart
                         </a>
                     </div>
