@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
+using RookieShop.Storefront.Areas.Basket.Services;
 using RookieShop.Storefront.Areas.Product.Services;
 using RookieShop.Storefront.Delegates;
 
@@ -22,7 +23,8 @@ public static class ConfigureHttpServices
         [
             typeof(ICategoryService),
             typeof(IProductService),
-            typeof(IFeedbackService)
+            typeof(IFeedbackService),
+            typeof(IBasketService)
         ];
 
         foreach (var type in types)

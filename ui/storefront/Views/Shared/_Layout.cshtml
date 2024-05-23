@@ -18,21 +18,7 @@
                 @if (User.Identity!.IsAuthenticated)
                 {
                     <ul class="list-none flex space-x-4 items-center">
-                        <li>
-                            <a>
-                                <img loading="lazy" src="/imgs/home/account.svg" class="h-6 w-6" alt="Account"/>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="flex items-center space-x-2 justify-center py-4 pr-2">
-                                <div class="relative">
-                                    <div class="t-0 absolute left-4">
-                                        <p class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">3</p>
-                                    </div>
-                                    <img loading="lazy" class="mt-2 h-6 w-6" src="imgs/home/cart.svg" alt="Cart"/>
-                                </div>
-                            </a>
-                        </li>
+                        @await Component.InvokeAsync("BasketButton")
                         <li>
                             <a asp-area="User" asp-controller="Account" asp-action="Logout" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Log Out</a>
                         </li>
@@ -83,7 +69,7 @@
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">
             <a asp-page="" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                <img loading="lazy" src="/imgs/logo.png" class="h-8" alt="Rookie Shop"/>
+                <img loading="lazy" src="~/imgs/logo.png" class="h-8" alt="Rookie Shop"/>
                 <span class="self-center text-2xl font-semibold whitespace-nowrap">Rookie Shop</span>
             </a>
         </div>
