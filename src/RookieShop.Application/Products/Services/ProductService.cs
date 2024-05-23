@@ -21,6 +21,8 @@ public sealed class ProductService(IRepository<Product> repository) : IProductSe
                     $"Product {product.Name} has only {product.Quantity} left in stock.");
 
             product.RemoveStock(orderDetail.Quantity);
+
+            await repository.UpdateAsync(product, cancellationToken);
         }
     }
 }

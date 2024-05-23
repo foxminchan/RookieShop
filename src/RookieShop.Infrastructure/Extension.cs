@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
+using RookieShop.Infrastructure.Bus;
 using RookieShop.Infrastructure.Cache;
 using RookieShop.Infrastructure.Email;
 using RookieShop.Infrastructure.HealthCheck;
@@ -29,7 +30,8 @@ public static class Extension
             .AddStorage()
             .AddEmail()
             .AddHealthCheck()
-            .AddStripeService();
+            .AddStripeService()
+            .AddEventBus();
 
         return builder;
     }

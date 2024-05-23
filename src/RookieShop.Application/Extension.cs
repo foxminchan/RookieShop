@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RookieShop.Application.Orders.Services;
+using RookieShop.Application.Orders.Worker;
 using RookieShop.Application.Products.Services;
 using RookieShop.Application.Products.Workers;
 using RookieShop.Infrastructure.Logging;
@@ -43,6 +44,8 @@ public static class Extension
         builder.Services.AddScoped<IProductService, ProductService>();
 
         builder.Services.AddHostedService<CalculateRatingWorker>();
+
+        builder.Services.AddHostedService<SendEmailWorker>();
 
         return builder;
     }

@@ -19,18 +19,16 @@ public sealed class CreateOrderValidator : AbstractValidator<CreateOrderCommand>
         RuleFor(x => x.ExpiryMonth)
             .Must(month =>
             {
+                if (string.IsNullOrEmpty(month))
+                    return true;
+
                 if (!int.TryParse(month, out var monthNumber))
                     return false;
                 return monthNumber is >= 1 and <= 12;
             });
 
         RuleFor(x => x.Cvc)
-            .Must(cvc =>
-            {
-                if (!int.TryParse(cvc, out var cvcNumber))
-                    return false;
-                return cvcNumber is 3 or 4;
-            });
+            .MaximumLength(DataLength.Micro - 1);
 
         RuleFor(x => x.Street)
             .MaximumLength(DataLength.Medium);

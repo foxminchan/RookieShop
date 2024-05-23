@@ -7,6 +7,7 @@ using RookieShop.Application.Orders.Services;
 using RookieShop.Application.Products.Services;
 using RookieShop.Domain.Entities.BasketAggregator;
 using RookieShop.Domain.Entities.CustomerAggregator;
+using RookieShop.Domain.Entities.CustomerAggregator.Specifications;
 using RookieShop.Domain.Entities.OrderAggregator;
 using RookieShop.Domain.Entities.OrderAggregator.Enums;
 using RookieShop.Domain.Entities.OrderAggregator.Primitives;
@@ -26,7 +27,8 @@ public sealed class CreateOrderHandler(
 {
     public async Task<Result<OrderId>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var customer = await customerRepository.GetByIdAsync(request.AccountId, cancellationToken);
+        CustomerByIdSpec spec = new(request.AccountId);
+        var customer = await customerRepository.FirstOrDefaultAsync(spec, cancellationToken);
         Guard.Against.NotFound(request.AccountId, customer);
 
         var basket = await redisService.HashGetOrSetAsync<Basket>(
