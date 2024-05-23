@@ -14,6 +14,7 @@ RookieShop is a .NET Core web application training project demonstrating Clean A
 <h2>Table of Contents</h2>
 
 - [Requirements](#requirements)
+- [Project Progress Report](#project-progress-report)
 - [Technical Stack](#technical-stack)
 - [Software Architecture](#software-architecture)
 - [Getting Started](#getting-started)
@@ -55,6 +56,12 @@ Build an e-commerce web site with minimum functionality below:
 > <p align="justify">
 > The project should apply as many techniques of ASP.NET MVC Core as possible. For example: TagHelpers, Razor Pages, ViewComponents and have Unit Test. The Unit Test do not need to have a high coverage number but should demonstrate the ability to write unit test for common components: Controllers, ViewComponents, Services …
 > </p>
+
+## Project Progress Report
+
+| Checkpoint | Demo video | Report | Presentation |
+| ---------- | ---------- | ------ | ------------ |
+| 1          |            |        |              |
 
 ## Technical Stack
 
@@ -123,7 +130,7 @@ bun install
 ### Start the infrastructure
 
 ```bash
-docker-compose --env-file .env up -d1
+docker-compose --env-file .env up -d
 ```
 
 > [!IMPORTANT]
