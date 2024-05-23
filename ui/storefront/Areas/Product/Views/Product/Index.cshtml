@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </form>
-                    @await Component.InvokeAsync("ProductItems", Context.Request.Query)
+                    @await Component.InvokeAsync("ListProducts", Context.Request.Query)
                 </div>
             </section>
         </main>
@@ -54,5 +54,5 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" src="~/js/category-filter.js" asp-append-version="true"></script>
+    <script src="~/js/category-filter.js" asp-append-version="true"></script>
 }

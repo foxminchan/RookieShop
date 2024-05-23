@@ -19,7 +19,9 @@ public sealed class ProductViewModel
 
     [JsonPropertyName("imageUrl")] public string? ImageUrl { get; set; }
 
-    [JsonPropertyName("category")] public CategoryViewModel? Category { get; set; }
+    [JsonPropertyName("averageRating")] public double AverageRating { get; set; }
 
-    [JsonPropertyName("feedbacks")] public List<ProductFeedbackViewModel>? Feedbacks { get; set; }
+    [JsonPropertyName("totalReviews")] public int TotalReviews { get; set; }
+
+    [JsonPropertyName("category")] public CategoryViewModel? Category { get; set; }
 }

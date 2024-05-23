@@ -2,6 +2,7 @@
 using RookieShop.Domain.Entities.ProductAggregator;
 using RookieShop.Domain.Entities.ProductAggregator.Specifications;
 using RookieShop.Domain.SharedKernel;
+using RookieShop.Infrastructure.Storage.Azurite;
 using RookieShop.UnitTests.Builders;
 
 namespace RookieShop.UnitTests.Application.ProductHandlerTest;
@@ -13,8 +14,9 @@ public sealed class ListProduct
 
     public ListProduct()
     {
+        Mock<IAzuriteService> azuriteServiceMock = new();
         _repositoryMock = new();
-        _handler = new(_repositoryMock.Object);
+        _handler = new(_repositoryMock.Object, azuriteServiceMock.Object);
     }
 
     [Fact]

@@ -10,8 +10,6 @@ public static class DomainToDtoMapper
     {
         var category = product.Category?.ToCategoryDto();
 
-        var feedbacks = product.Feedbacks?.ToProductFeedbackDto();
-
         return new(
             product.Id,
             product.Name,
@@ -20,19 +18,11 @@ public static class DomainToDtoMapper
             product.Price.Price,
             product.Price.PriceSale,
             product.ImageName,
-            category,
-            feedbacks);
+            product.AverageRating,
+            product.TotalReviews,
+            category);
     }
 
     public static IEnumerable<ProductDto> ToProductDto(this IEnumerable<Product> products) =>
         products.Select(ToProductDto);
-
-    public static ProductFeedbackDto ToProductFeedbackDto(this Feedback feedback) =>
-        new(feedback.Id,
-            feedback.Rating,
-            feedback.Content,
-            feedback.CustomerId);
-
-    public static IEnumerable<ProductFeedbackDto> ToProductFeedbackDto(this IEnumerable<Feedback> feedbacks) =>
-        feedbacks.Select(ToProductFeedbackDto);
 }
