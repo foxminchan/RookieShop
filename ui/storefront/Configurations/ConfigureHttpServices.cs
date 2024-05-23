@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
 using RookieShop.Storefront.Areas.Basket.Services;
 using RookieShop.Storefront.Areas.Product.Services;
+using RookieShop.Storefront.Areas.User.Services;
 using RookieShop.Storefront.Delegates;
 
 namespace RookieShop.Storefront.Configurations;
@@ -24,7 +25,8 @@ public static class ConfigureHttpServices
             typeof(ICategoryService),
             typeof(IProductService),
             typeof(IFeedbackService),
-            typeof(IBasketService)
+            typeof(IBasketService),
+            typeof(ICustomerService)
         ];
 
         foreach (var type in types)

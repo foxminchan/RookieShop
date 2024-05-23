@@ -12,9 +12,18 @@ public sealed class BasketButtonViewComponent(IBasketService basketService, IHtt
     {
         var userId = httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        var basket = await basketService.GetBasketAsync(Guid.Parse(userId!));
+        int count;
 
-        var count = basket.BasketDetails.Count;
+        try
+        {
+            var basket = await basketService.GetBasketAsync(Guid.Parse(userId!));
+
+            count = basket.BasketDetails.Count;
+        }
+        catch (HttpRequestException)
+        {
+            count = 0;
+        }
 
         return View(count);
     }

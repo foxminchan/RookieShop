@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using RookieShop.ServiceDefaults;
 using RookieShop.Storefront.Configurations;
+using RookieShop.Storefront.Middlewares;
 using RookieShop.Storefront.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+app.UseMiddleware<CustomerInfoMiddleware>();
 
 app.MapHealthCheck();
 

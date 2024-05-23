@@ -1,4 +1,5 @@
-﻿using Polly;
+﻿using System.Net;
+using Polly;
 using Polly.Retry;
 
 namespace RookieShop.Storefront.Delegates;
@@ -7,7 +8,7 @@ public sealed class RetryDelegate : DelegatingHandler
 {
     private readonly AsyncRetryPolicy<HttpResponseMessage> _retryPolicy
         = Policy<HttpResponseMessage>
-            .Handle<HttpRequestException>()
+            .HandleResult(response => response.StatusCode == HttpStatusCode.InternalServerError)
             .RetryAsync(3);
 
     protected override async Task<HttpResponseMessage> SendAsync(

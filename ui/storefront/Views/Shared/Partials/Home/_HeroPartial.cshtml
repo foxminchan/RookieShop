@@ -40,7 +40,9 @@
                             </div>
                         </div>
                     </div>
-                    <a asp-controller="Product" class="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700">Shop Now</a>
+                    <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-page="1" class="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700">
+                        Shop Now
+                    </a>
                 </div>
             </div>
         </div>
