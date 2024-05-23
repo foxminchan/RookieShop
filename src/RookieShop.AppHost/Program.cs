@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Hosting;
 using Projects;
 using RookieShop.AppHost;
 
@@ -8,6 +9,15 @@ builder.AddForwardedHeaders();
 var redis = builder.AddRedis("redis", 6379)
     .WithDataBindMount("../../mnt/redis");
 
+var storage = builder.AddAzureStorage("storage");
+
+if (builder.Environment.IsDevelopment())
+{
+    storage.RunAsEmulator(config => config.WithDataBindMount("../../mnt/azurite"));
+}
+
+var blobs = storage.AddBlobs("blobs");
+
 var identityService = builder
     .AddProject<RookieShop_IdentityService>("identity-service")
     .WithReference(redis);
@@ -15,8 +25,8 @@ var identityService = builder
 var apiService = builder
     .AddProject<RookieShop_ApiService>("api-service")
     .WithReference(redis)
-    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
-    .WithReplicas(2);
+    .WithEnvironment("AzuriteSettings__ConnectionString", blobs.WithEndpoint())
+    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"));
 
 var backoffice = builder.AddNpmApp("backoffice", "../../ui/backoffice", "dev")
     .WithEnvironment("BROWSER", "none")

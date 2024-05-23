@@ -10,6 +10,7 @@
 		<PackageReference Include="Aspire.Hosting.Redis" />
 		<PackageReference Include="Aspire.Hosting.NodeJs" />
 		<PackageReference Include="Aspire.Hosting.AppHost" />
+		<PackageReference Include="Aspire.Hosting.Azure.Storage" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -25,7 +26,7 @@
 		<Message Importance="Normal"
 		         Text="Installing node packages for %(PackageJsons.RelativeDir)"
 		         Condition="!Exists('%(PackageJsons.RootDir)%(PackageJsons.Directory)/node_modules')" />
-		<Exec Command="bun install" 
+		<Exec Command="bun install"
 		      WorkingDirectory="%(PackageJsons.RootDir)%(PackageJsons.Directory)"
 		      Condition="!Exists('%(PackageJsons.RootDir)%(PackageJsons.Directory)/node_modules')" />
 	</Target>

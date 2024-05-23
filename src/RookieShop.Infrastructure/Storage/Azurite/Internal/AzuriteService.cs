@@ -42,4 +42,14 @@ public sealed class AzuriteService(AzuriteSettings azuriteSettings, ResiliencePi
                 await blobClient.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots, cancellationToken: token),
             cancellationToken);
     }
+
+    public string GetFileUrl(string? fileName)
+    {
+        if (string.IsNullOrWhiteSpace(fileName))
+            return string.Empty;
+
+        var blobClient = _container.GetBlobClient(fileName);
+
+        return blobClient.Uri.ToString();
+    }
 }

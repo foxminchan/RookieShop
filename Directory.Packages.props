@@ -15,8 +15,9 @@
 		<PackageVersion Include="Aspire.Hosting.Redis" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Hosting.NodeJs" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
+		<PackageVersion Include="Aspire.Hosting.Azure.Storage" Version="$(AspireVersion)" />
+		<PackageVersion Include="Aspire.Azure.Storage.Blobs" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspireVersion)" />
-		<PackageVersion Include="Aspire.Hosting.Testing" Version="$(AspireVersion)" />
 		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.5.0" />
 		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="8.0.1" />
 		<!-- Ardalis -->
@@ -97,7 +98,6 @@
 		<PackageVersion Include="MediatR" Version="12.2.0" />
 		<PackageVersion Include="Stripe.net" Version="44.8.0" />
 		<PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
-		<PackageVersion Include="Azure.Storage.Blobs" Version="12.20.0" />
 		<PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
 		<PackageVersion Include="StronglyTypedId" Version="1.0.0-beta08" />
 		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.2" />

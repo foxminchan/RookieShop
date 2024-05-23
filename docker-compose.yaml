@@ -6,6 +6,7 @@ x-default-logging: &logging
     max-file: "2"
 
 services:
+  # TODO: Migrate to Aspire when Aspire.Hosting.PostgreSQL issues are resolved
   rookie.db:
     image: postgres:16.2-alpine3.19
     container_name: rookie.db
@@ -24,19 +25,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    logging: *logging
-    networks:
-      - rookie-network
-
-  rookie.storage:
-    image: mcr.microsoft.com/azure-storage/azurite:3.30.0
-    container_name: rookie.storage
-    restart: unless-stopped
-    ports:
-      - 10000-10002:10000-10002
-    command: "azurite-blob --blobHost 0.0.0.0 -l /data --silent"
-    volumes:
-      - ./mnt/azurite:/data
     logging: *logging
     networks:
       - rookie-network

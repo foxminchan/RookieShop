@@ -1,5 +1,4 @@
 ﻿using RookieShop.Application.Categories.DTOs;
-using RookieShop.Domain.Constants;
 using RookieShop.Domain.Entities.FeedbackAggregator;
 using RookieShop.Domain.Entities.ProductAggregator;
 
@@ -9,8 +8,6 @@ public static class DomainToDtoMapper
 {
     public static ProductDto ToProductDto(this Product product)
     {
-        var imageUrl = string.Concat(UriComposer.BaseAzUrl, product.ImageName);
-
         var category = product.Category?.ToCategoryDto();
 
         var feedbacks = product.Feedbacks?.ToProductFeedbackDto();
@@ -22,7 +19,7 @@ public static class DomainToDtoMapper
             product.Quantity,
             product.Price.Price,
             product.Price.PriceSale,
-            imageUrl,
+            product.ImageName,
             category,
             feedbacks);
     }
