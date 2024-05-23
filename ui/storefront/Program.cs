@@ -30,6 +30,10 @@ builder.AddAuthenticationService(appSettings.OpenIdSettings);
 
 builder.AddHttpServices(appSettings.BaseApiEndpoint);
 
+builder.Services.AddTransient<CustomerInfoMiddleware>();
+
+builder.Services.AddTransient<RobotMiddleware>();
+
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
 var app = builder.Build();
@@ -41,6 +45,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<CustomerInfoMiddleware>();
+
+app.UseMiddleware<RobotMiddleware>();
 
 app.MapHealthCheck();
 
@@ -55,23 +61,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseStatusCodePages();
-
-app.Use(async (context, next) =>
-{
-    if (context.Request.Path.StartsWithSegments("/robots.txt"))
-    {
-        var robotsTxtPath = Path.Combine(app.Environment.ContentRootPath, "robots.txt");
-        var output = "User-agent: *  \nDisallow: /";
-        if (File.Exists(robotsTxtPath)) output = await File.ReadAllTextAsync(robotsTxtPath);
-
-        context.Response.ContentType = "text/plain";
-        await context.Response.WriteAsync(output);
-    }
-    else
-    {
-        await next();
-    }
-});
 
 app.MapControllerRoute(
     "Product",

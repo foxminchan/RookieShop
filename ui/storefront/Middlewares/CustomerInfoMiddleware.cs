@@ -3,16 +3,14 @@ using RookieShop.Storefront.Areas.User.Services;
 
 namespace RookieShop.Storefront.Middlewares;
 
-public sealed class CustomerInfoMiddleware(
-    RequestDelegate next,
-    IHttpContextAccessor httpContextAccessor,
-    ICustomerService customerService)
+public sealed class CustomerInfoMiddleware(IHttpContextAccessor httpContextAccessor, ICustomerService customerService)
+    : IMiddleware
 {
-    public async Task InvokeAsync(HttpContext httpContext)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
-        if (!httpContext.User.Identity!.IsAuthenticated)
+        if (!context.User.Identity!.IsAuthenticated)
         {
-            await next(httpContext);
+            await next(context);
             return;
         }
 
@@ -20,14 +18,14 @@ public sealed class CustomerInfoMiddleware(
 
         if (string.IsNullOrEmpty(userId))
         {
-            await next(httpContext);
+            await next(context);
             return;
         }
 
         var customer = await customerService.GetCustomerByAccountAsync(Guid.Parse(userId));
 
-        if (customer is null) httpContext.Response.Redirect("/User/Customer");
+        if (customer is null) context.Response.Redirect("/User/Customer");
 
-        await next(httpContext);
+        await next(context);
     }
 }
