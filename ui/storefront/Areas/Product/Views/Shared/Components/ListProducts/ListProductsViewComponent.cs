@@ -8,7 +8,7 @@ public sealed class ListProductsViewComponent(IProductService productService) : 
 {
     public async Task<IViewComponentResult> InvokeAsync(IQueryCollection query)
     {
-        var page = int.Parse(query["page"]!);
+        var page = !query.ContainsKey("page") ? 1 : int.Parse(query["page"]!);
 
         var product = await productService.ListProductsAsync(new()
         {

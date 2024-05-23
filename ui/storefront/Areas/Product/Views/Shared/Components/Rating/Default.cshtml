@@ -1,6 +1,6 @@
-﻿@* @model RookieShop.Storefront.Areas.Product.Models.Feedbacks.ListFeedbackViewModel *@
+﻿@model RookieShop.Storefront.Areas.Product.Models.Feedbacks.ListFeedbackViewModel
 
-@* @if (Model.Feedbacks.Any())
+@if (Model.Feedbacks.Any())
 {
     foreach (var feedback in Model.Feedbacks)
     {
@@ -13,16 +13,21 @@
                 <div class="flex items-center gap-3">
                     @for (var star = 1; star <= 5; star++)
                     {
-                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="30" height="30" class="w-5 h-5 text-amber-500"
-                             fill="currentColor" viewBox="0 0 20 20">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             aria-hidden="true"
+                             width="30" height="30"
+                             class="w-5 h-5 @(star <= feedback.Rating ? "text-amber-500" : "text-gray-300")"
+                             fill="currentColor"
+                             viewBox="0 0 20 20">
+                            fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                             </path>
                         </svg>
                     }
                 </div>
                 <div class="flex items-center gap-3">
-                    <h6 class="font-semibold text-lg leading-8 text-black">@@john.doe</h6>
-                    <p class="font-medium text-base leading-7 text-gray-400">Nov 01, 2023</p>
+                    <h6 class="font-semibold text-lg leading-8 text-black">@feedback.Customer?.Name</h6>
+                    <p class="font-medium text-base leading-7 text-gray-400">@feedback.UpdatedDate.ToString("dd/MM/yyyy")</p>
                 </div>
             </div>
 
@@ -31,10 +36,9 @@
             </p>
         </div>
     }
-
-} *@
-@* else
-{ *@
+}
+else
+{
     <div class="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
         <h4 class="font-manrope font-semibold text-3xl leading-10 text-black mb-6">
             Most helpful positive
@@ -44,4 +48,4 @@
             No reviews yet.
         </p>
     </div>
-@* } *@
+}

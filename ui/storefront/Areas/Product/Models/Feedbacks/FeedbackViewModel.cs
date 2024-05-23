@@ -12,5 +12,7 @@ public sealed class FeedbackViewModel
 
     [JsonPropertyName("content")] public string? Content { get; set; }
 
-    [JsonPropertyName("customerId")] public Guid CustomerId { get; set; }
+    [JsonPropertyName("updatedDate")] public DateTime UpdatedDate { get; set; }
+
+    [JsonPropertyName("customer")] public FeedbackCustomerViewModel? Customer { get; set; }
 }

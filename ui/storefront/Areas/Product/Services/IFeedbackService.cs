@@ -6,5 +6,5 @@ namespace RookieShop.Storefront.Areas.Product.Services;
 public interface IFeedbackService
 {
     [Get("/feedbacks")]
-    Task<ListFeedbackViewModel> GetFeedbacksAsync([Query] FeedbackFilterParams filterParams);
+    Task<ListFeedbackViewModel> ListFeedbacksAsync([Query] FeedbackFilterParams filterParams);
 }

@@ -1,5 +1,4 @@
-﻿using RookieShop.Domain.Entities.CustomerAggregator.Primitives;
-using RookieShop.Domain.Entities.FeedbackAggregator.Primitives;
+﻿using RookieShop.Domain.Entities.FeedbackAggregator.Primitives;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 
 namespace RookieShop.Application.Feedbacks.DTOs;
@@ -9,4 +8,5 @@ public sealed record FeedbackDto(
     ProductId ProductId,
     int Rating,
     string? Content,
-    CustomerId? CustomerId);
+    DateTime? UpdatedDate,
+    FeedbackCustomerDto? Customer);

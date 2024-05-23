@@ -26,7 +26,7 @@
                     </p>
                 </div>
 
-                @if(Model.Quantity > 0)
+                @if (Model.Quantity > 0)
                 {
                     <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
                         <a
@@ -86,10 +86,10 @@
                     <div class="mb-4">
                         <label class="block mb-1">Rating</label>
                         <div class="flex justify-center">
-                            @foreach (var star in Enumerable.Range(1, 5))
+                            @for (var star = 1; star <= 5; star++)
                             {
                                 <div class="flex items-center me-4">
-                                    <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-primary-300 focus:ring-2" type="radio" name="rating" id="@star" value="@star" />
+                                    <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-primary-300 focus:ring-2" type="radio" name="rating" id="@star" value="@star"/>
                                     <label class="ms-2 text-sm font-medium text-gray-900" for="@star">
                                         @star
                                     </label>
@@ -105,6 +105,6 @@
                 </form>
             </div>
         </div>
-        @await Component.InvokeAsync("Rating")
+        @await Component.InvokeAsync("Rating", new { Context.Request.Query, ProductId = Model.Id })
     </div>
 </section>

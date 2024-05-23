@@ -9,4 +9,5 @@ public sealed record FeedbackVm(
     ProductId ProductId,
     int Rating,
     string? Content,
-    CustomerId? CustomerId);
+    DateTime? UpdatedDate,
+    FeedbackCustomerVm? Customer);

@@ -21,7 +21,8 @@ public static class ConfigureHttpServices
         Type[] types =
         [
             typeof(ICategoryService),
-            typeof(IProductService)
+            typeof(IProductService),
+            typeof(IFeedbackService)
         ];
 
         foreach (var type in types)
