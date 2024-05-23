@@ -1,94 +1,61 @@
-﻿@model RookieShop.Storefront.Areas.User.Models.CustomerViewModel
+﻿@using RookieShop.Storefront.Areas.User.Models
+@model RookieShop.Storefront.Areas.User.Models.CustomerViewModel
 
 @{
     ViewBag.Title = "My Account";
     Layout = "_Layout";
 }
 
-@if (User.Identity!.IsAuthenticated)
-{
-    <div class="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-        <aside class="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
-            <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
-                <h2 class="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
-                <a asp-controller="Account" asp-action="Index" class="flex items-center px-3 py-2.5 font-bold bg-white text-indigo-900 border rounded-full">
-                    Account Settings
-                </a>
-                <a href="#"
-                   class="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full  ">
-                    Billing
-                </a>
-            </div>
-        </aside>
-        <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
-            <div class="p-2 md:p-4">
-                <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
-                    <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
-                    <div class="grid max-w-2xl mx-auto">
-                        <div class="items-center mt-8 sm:mt-14 text-[#202142]">
-                            <input type="hidden" asp-for="Id" value="@Model.Id" />
-                            <input type="hidden" asp-for="AccountId" value="@Model.AccountId" />
-                            <div class="mb-2 sm:mb-6">
-                                <label asp-for="Name"
-                                       class="block mb-2 text-sm font-medium text-indigo-900">
-                                    Your
-                                    name
-                                </label>
-                                <input asp-for="Name"
-                                       type="text"
-                                       value="@Model.Name"
-                                       class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
-                                       placeholder="Your Name" required>
-                            </div>
+<partial name="_ValidationScriptsPartial"/>
 
-                            <div class="mb-2 sm:mb-6">
-                                <label for="email"
-                                       class="block mb-2 text-sm font-medium text-indigo-900">
-                                    Your
-                                    email
-                                </label>
-                                <input type="email" id="email"
-                                       value="@Model.Email"
-                                       class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                       placeholder="your.email@mail.com" required>
-                            </div>
-
-                            <div class="mb-2 sm:mb-6">
-                                <label asp-for="Phone"
-                                       class="block mb-2 text-sm font-medium text-indigo-900">Your phone number</label>
-                                <input asp-for="Phone"
-                                       type="tel"
-                                       value="@Model.Phone"
-                                       class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                       placeholder="0123456789" required>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="gender"
-                                       class="block mb-2 text-sm font-medium text-indigo-900">Gender</label>
-                                <select id="gender"
-                                        class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                        required>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-
-                            <div class="flex justify-end">
-                                <button type="submit"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
+<div class="p-2 md:p-4">
+    <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+        <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
+        <div class="grid max-w-2xl mx-auto">
+            <form asp-area="User" asp-controller="Account" asp-action="Update" asp-antiforgery="true">
+                <div class="items-center mt-8 sm:mt-14 text-[#202142]">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <input type="hidden" asp-for="Id" value="@Model.Id"/>
+                    <input type="hidden" asp-for="AccountId" value="@Model.AccountId"/>
+                    <div class="mb-2 sm:mb-6">
+                        <label asp-for="Name"class="block mb-2 text-sm font-medium text-indigo-900">Your name</label>
+                        <input asp-for="Name"
+                               type="text"
+                               value="@Model.Name"
+                               class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                               placeholder="Your Name">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="mb-2 sm:mb-6">
+                        <label asp-for="Email"class="block mb-2 text-sm font-medium text-indigo-900">Your email</label>
+                        <input type="email"asp-for="Email"value="@Model.Email"
+                               class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="your.email@mail.com" required>
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div class="mb-2 sm:mb-6">
+                        <label asp-for="Phone"class="block mb-2 text-sm font-medium text-indigo-900">Your phone number</label>
+                        <input asp-for="Phone" type="tel" value="@Model.Phone"
+                               class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 " placeholder="0123456789" required>
+                        <span asp-validation-for="Phone"></span>
+                    </div>
+                    <div class="mb-6">
+                        <label asp-for="Gender" class="block mb-2 text-sm font-medium text-indigo-900">Gender</label>
+                        <select asp-for="Gender"
+                                class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                                required>
+                            <option value="@Gender.Male">@Gender.Male</option>
+                            <option value="@Gender.Female">@Gender.Female</option>
+                            <option value="@Gender.Other">@Gender.Other</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                            Save
+                        </button>
                     </div>
                 </div>
-            </div>
-        </main>
+            </form>
+        </div>
     </div>
-}
-else
-{
-    Context.Response.Redirect("/");
-}
+</div>

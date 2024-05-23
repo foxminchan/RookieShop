@@ -26,6 +26,8 @@ public sealed class CustomerInfoMiddleware(IHttpContextAccessor httpContextAcces
 
         if (customer is null) context.Response.Redirect("/User/Customer");
 
+        context.Items["Customer"] = customer;
+
         await next(context);
     }
 }

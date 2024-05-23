@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.Storefront.Areas.User.Services;
 using System.Security.Claims;
+using System.Text.Json;
+using RookieShop.Storefront.Areas.User.Models;
 
 namespace RookieShop.Storefront.Areas.User.Controllers;
 
 [Area("User")]
-public class AccountController(ICustomerService customerService, IHttpContextAccessor httpContextAccessor) : Controller
+public class AccountController(ICustomerService customerService) : Controller
 {
     public async Task Login()
     {
@@ -30,13 +32,20 @@ public class AccountController(ICustomerService customerService, IHttpContextAcc
 
     public async Task<IActionResult> Index()
     {
-        var userId = httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        if (string.IsNullOrEmpty(userId))
-            return RedirectToAction("Login");
-
-        var customer = await customerService.GetCustomerByAccountAsync(Guid.Parse(userId));
+        var customer= HttpContext.Items["Customer"] as CustomerViewModel;
 
         return View(customer);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(CustomerViewModel customer)
+    {
+        if (!ModelState.IsValid) 
+            return View("Index", customer);
+
+        await customerService.UpdateCustomerAsync(customer);
+
+        return RedirectToAction("Index");
     }
 }

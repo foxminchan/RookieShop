@@ -10,4 +10,7 @@ public interface ICustomerService
 
     [Get("/customers/account/{accountId}")]
     Task<CustomerViewModel?> GetCustomerByAccountAsync(Guid accountId);
+
+    [Put("/customers")]
+    Task UpdateCustomerAsync(CustomerViewModel customer);
 }
