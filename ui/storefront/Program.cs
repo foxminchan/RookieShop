@@ -30,9 +30,7 @@ builder.AddAuthenticationService(appSettings.OpenIdSettings);
 
 builder.AddHttpServices(appSettings.BaseApiEndpoint);
 
-builder.Services.AddTransient<CustomerInfoMiddleware>();
-
-builder.Services.AddTransient<RobotMiddleware>();
+builder.Services.AddScoped<CustomerInfoMiddleware>();
 
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
@@ -45,8 +43,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<CustomerInfoMiddleware>();
-
-app.UseMiddleware<RobotMiddleware>();
 
 app.MapHealthCheck();
 

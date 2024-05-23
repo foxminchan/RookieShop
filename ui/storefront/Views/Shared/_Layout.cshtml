@@ -18,6 +18,11 @@
                 @if (User.Identity!.IsAuthenticated)
                 {
                     <ul class="list-none flex space-x-4 items-center">
+                        <li>
+                            <a asp-area="User" asp-controller="Account" asp-action="Index" class="flex items-center space-x-2 justify-center py-4 pr-2">
+                                <img loading="lazy" src="~/imgs/home/account.svg" class="h-6 w-6" alt="Account" asp-append-version="true"/>
+                            </a>
+                        </li>
                         @await Component.InvokeAsync("BasketButton")
                         <li>
                             <a asp-area="User" asp-controller="Account" asp-action="Logout" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Log Out</a>
@@ -30,9 +35,7 @@
                 }
                 <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-sticky" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                    </svg>
+                    <img loading="lazy" class="w-5 h-5" src="~/imgs/toggle.svg" alt="Toggle" asp-append-version="true"/>
                 </button>
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
