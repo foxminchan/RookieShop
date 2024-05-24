@@ -27,7 +27,6 @@
 		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Quartz" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Http" />
-		<PackageReference Include="Npgsql.OpenTelemetry" />
 	</ItemGroup>
 
 </Project>

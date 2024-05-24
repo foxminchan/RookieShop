@@ -6,6 +6,17 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 builder.AddForwardedHeaders();
 
+var postgresUser = builder.AddParameter("SqlUser", secret: true);
+
+var postgresPassword = builder.AddParameter("SqlPassword", secret: true);
+
+var db = builder.AddPostgres("db", postgresUser, postgresPassword, 5432)
+    .WithDataBindMount("../../mnt/postgres");
+
+var shopDb = db.AddDatabase("shopdb");
+
+var userDb = db.AddDatabase("userdb");
+
 var redis = builder.AddRedis("redis", 6379)
     .WithDataBindMount("../../mnt/redis");
 
@@ -20,15 +31,18 @@ var blobs = storage.AddBlobs("blobs");
 
 var identityService = builder
     .AddProject<RookieShop_IdentityService>("identity-service")
-    .WithReference(redis);
+    .WithReference(redis)
+    .WithReference(userDb);
 
 var apiService = builder
     .AddProject<RookieShop_ApiService>("api-service")
     .WithReference(redis)
+    .WithReference(shopDb)
     .WithEnvironment("AzuriteSettings__ConnectionString", blobs.WithEndpoint())
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"));
 
-var backoffice = builder.AddNpmApp("backoffice", "../../ui/backoffice", "dev")
+var backoffice = builder
+    .AddNpmApp("backoffice", "../../ui/backoffice", "dev")
     .WithHttpEndpoint(env: "PORT")
     .WithEnvironment("BROWSER", "none")
     .WithEnvironment("BASE_API", $"{apiService.GetEndpoint("https")}/api/v1")

@@ -17,8 +17,11 @@
 		<PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Hosting.Azure.Storage" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Hosting.Testing" Version="$(AspireVersion)" />
+		<PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Azure.Storage.Blobs" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspireVersion)" />
+		<PackageVersion Include="Aspire.Npgsql" Version="$(AspireVersion)" />
+		<PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(AspireVersion)" />
 		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.5.0" />
 		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="8.0.1" />
 		<!-- Ardalis -->
@@ -45,26 +48,21 @@
 		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfVersion)" />
-		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
 		<PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
 		<PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
 		<!-- OpenTelemetry -->
 		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
-		<PackageVersion Include="Npgsql.OpenTelemetry" Version="8.0.3" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.Quartz" Version="1.0.0-beta.2" />
-		<PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.14" />
 		<PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.0.0-beta.11" />
 		<!-- Xabaril -->
 		<PackageVersion Include="AspNetCore.HealthChecks.UI" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.Uris" Version="$(XabarilVersion)" />
-		<PackageVersion Include="AspNetCore.HealthChecks.Redis" Version="$(XabarilVersion)" />
-		<PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="$(XabarilVersion)" />
 		<PackageVersion Include="AspNetCore.HealthChecks.OpenIdConnectServer" Version="$(XabarilVersion)" />
 		<!-- VS Test -->
 		<PackageVersion Include="coverlet.collector" Version="6.0.2" />

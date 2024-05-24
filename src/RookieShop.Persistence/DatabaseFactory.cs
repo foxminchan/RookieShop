@@ -11,7 +11,7 @@ public sealed class DatabaseFactory : IDatabaseFactory
 
     public DatabaseFactory(IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Postgres");
+        var connectionString = configuration.GetConnectionString("shopdb");
         Guard.Against.Null(connectionString, message: "Connection string 'Postgres' not found.");
         _connectionString = connectionString;
     }

@@ -15,19 +15,11 @@ public static class Extension
 {
     public static IHostApplicationBuilder AddHealthCheck(this IHostApplicationBuilder builder)
     {
-        var dbConn = builder.Configuration.GetConnectionString("Postgres");
-        Guard.Against.Null(dbConn);
-
         var openIdSettings = builder.Configuration.GetSection(nameof(OpenIdSettings)).Get<OpenIdSettings>();
         Guard.Against.Null(openIdSettings);
 
-        var redisConn = builder.Configuration.GetConnectionString("Redis");
-        Guard.Against.Null(redisConn);
-
         builder.Services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
-            .AddNpgSql(dbConn, name: "Postgres", tags: ["database"])
-            .AddRedis(redisConn, "Redis", tags: ["redis"])
             .AddIdentityServer(new Uri(openIdSettings.Authority), name: "Identity Server", tags: ["identity-server"]);
 
         builder.Services

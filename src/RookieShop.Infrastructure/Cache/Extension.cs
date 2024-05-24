@@ -12,7 +12,7 @@ public static class Extension
         if (builder.Services.Contains(ServiceDescriptor.Singleton<IRedisService, RedisService>()))
             return builder;
 
-        builder.AddRedisClient("redis");
+        builder.AddRedisClient("redis", settings => settings.DisableHealthChecks = true);
 
         builder.Services.AddSingleton<IRedisService, RedisService>();
 

@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ServiceDiscovery;
-using Npgsql;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
@@ -56,8 +55,7 @@ public static class Extensions
                 tracing.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddEntityFrameworkCoreInstrumentation(b => b.SetDbStatementForText = true)
-                    .AddQuartzInstrumentation()
-                    .AddNpgsql();
+                    .AddQuartzInstrumentation();
             });
 
         builder.AddOpenTelemetryExporters();

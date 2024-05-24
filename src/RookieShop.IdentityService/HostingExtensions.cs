@@ -23,12 +23,21 @@ internal static class HostingExtensions
 
         builder.Services.AddRazorPages();
 
-        builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
-            options
-                .UseNpgsql(builder.Configuration.GetConnectionString("Postgres"))
-                .UseExceptionProcessor()
-                .UseModel(ApplicationDbContextModel.Instance)
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+        builder.AddNpgsqlDbContext<ApplicationDbContext>("userdb",
+            static settings => settings.DisableHealthChecks = true,
+            configureDbContextOptions: dbContextOptionsBuilder =>
+            {
+                dbContextOptionsBuilder.UseNpgsql()
+                    .UseExceptionProcessor()
+                    .UseModel(ApplicationDbContextModel.Instance)
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+                if (builder.Environment.IsDevelopment())
+                    dbContextOptionsBuilder
+                        .LogTo(Console.WriteLine, LogLevel.Information)
+                        .EnableDetailedErrors()
+                        .EnableSensitiveDataLogging();
+            });
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()

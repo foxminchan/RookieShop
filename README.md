@@ -22,7 +22,6 @@ RookieShop is a .NET Core web application training project demonstrating Clean A
     - [Windows with Visual Studio](#windows-with-visual-studio)
     - [Mac, Linux, \& Windows without Visual Studio](#mac-linux--windows-without-visual-studio)
   - [Setup tools and dependencies](#setup-tools-and-dependencies)
-  - [Start the infrastructure](#start-the-infrastructure)
   - [Running the application](#running-the-application)
 - [Testing](#testing)
 - [Observability](#observability)
@@ -120,21 +119,7 @@ dotnet tool restore
 
 cd RookieShop
 dotnet restore ./RookieShop.sln
-
-# Install the dependencies for the Next.js projects
-
-cd ../backoffice
-bun install
 ```
-
-### Start the infrastructure
-
-```bash
-docker-compose --env-file .env up -d
-```
-
-> [!IMPORTANT]
-> Create a `.env` file in the root directory and set the environment variables.
 
 ### Running the application
 
@@ -174,9 +159,9 @@ dotnet test RookieShop.sln
 The project uses OpenTelemetry to collect the telemetry data from the application. The data is sent to the OpenTelemetry Collector and exported to the Aspire Dashboard. The Aspire Dashboard is a monitoring and observability tool that provides insights into the application's performance and behavior. It helps developers to identify and troubleshoot issues in the application.
 </p>
 
-<img loading="lazy" src="./img/aspire-dashboard.png" alt="Aspire Dashboard" width="100%" height="100%">
+<img loading="lazy" src="./img/aspire-dashboard-overview.png" alt="Aspire Dashboard Overview" width="100%" height="100%">
 
-<img loading="lazy" src="./img/aspire-dashboard-trace.png" alt="Aspire Dashboard" width="100%" height="100%">
+<img loading="lazy" src="./img/aspire-dashboard-trace.png" alt="Aspire Dashboard Trace" width="100%" height="100%">
 
 ## Project References
 
