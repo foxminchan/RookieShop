@@ -15,7 +15,10 @@
     "start": "next start",
     "lint": "next lint",
     "ssl": "dotnet dev-certs https -ep ./certificates/aspnet_https.crt --format PEM",
-    "format": "bun prettier . --write"
+    "format": "bun prettier . --write",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -75,12 +78,17 @@
     "zod": "^3.22.5"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.7",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint-config-next": "14.2.3",
+    "cypress": "^13.10.0",
     "eslint": "^9",
+    "eslint-config-next": "14.2.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
     "prettier": "3.2.5",
     "tailwindcss": "^3.4.1",

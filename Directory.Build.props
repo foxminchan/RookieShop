@@ -5,6 +5,11 @@
 		<Nullable>enable</Nullable>
 		<InvariantGlobalization>false</InvariantGlobalization>
 		<NoWarn>1591,CS0168,CS1998,BL9993,CS0649,CS0436,0436</NoWarn>
+		<Authors>Nhan Nguyen</Authors>
+		<PackageProjectUrl>https://github.com/foxminchan/RookieShop</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/foxminchan/RookieShop.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Copyright>Copyright © Nhan Nguyen - 2024</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="SonarAnalyzer.CSharp">

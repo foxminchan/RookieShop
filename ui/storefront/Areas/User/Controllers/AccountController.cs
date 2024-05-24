@@ -23,14 +23,19 @@ public class AccountController(ICustomerService customerService) : Controller
 
     public async Task Logout()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-        Response.Redirect(Url.Content("/"));
+        if (HttpContext.User.Identity is not null && HttpContext.User.Identity.IsAuthenticated)
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+            Response.Redirect(Url.Content("/"));
+        }
+        else
+            Response.Redirect(Url.Content("/"));
     }
 
     public async Task<IActionResult> Index()
     {
-        var customer= HttpContext.Items["Customer"] as CustomerViewModel;
+        var customer = HttpContext.Items["Customer"] as CustomerViewModel;
 
         return View(customer);
     }
@@ -39,7 +44,7 @@ public class AccountController(ICustomerService customerService) : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(CustomerViewModel customer)
     {
-        if (!ModelState.IsValid) 
+        if (!ModelState.IsValid)
             return View("Index", customer);
 
         await customerService.UpdateCustomerAsync(customer);
