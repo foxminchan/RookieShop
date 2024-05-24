@@ -30,8 +30,7 @@ public sealed class ApplicationFactory<TProgram>
     {
         _containers.Add(new RedisBuilder()
             .WithName($"test_cache_{Guid.NewGuid()}")
-            .WithImage("redis/redis-stack-server:7.2.0-v10")
-            .WithCommand("redis-server --requirepass NashTech@2024")
+            .WithImage("redis:alpine")
             .WithCleanUp(true)
             .Build());
 
@@ -44,7 +43,7 @@ public sealed class ApplicationFactory<TProgram>
             .WithDatabase($"test_db_{Guid.NewGuid()}")
             .WithUsername("root")
             .WithPassword("NashTech@2024")
-            .WithImage("postgres:16.2-alpine3.19")
+            .WithImage("postgres:alpine")
             .WithCleanUp(true)
             .Build());
 
@@ -79,7 +78,7 @@ public sealed class ApplicationFactory<TProgram>
                         break;
 
                     case RedisContainer cacheContainer:
-                        builder.UseSetting("Redis:Url", cacheContainer.GetConnectionString());
+                        builder.UseSetting("ConnectionStrings:Redis", cacheContainer.GetConnectionString());
                         break;
 
                     case AzuriteContainer storageContainer:

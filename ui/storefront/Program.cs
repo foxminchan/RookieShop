@@ -71,6 +71,10 @@ app.MapControllerRoute(
     "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
+    "Basket",
+    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     "default",
     "{controller=Home}/{action=Index}/{id?}");
 

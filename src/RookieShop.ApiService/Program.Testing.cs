@@ -3,7 +3,7 @@
 /// <summary>
 ///     Test class for <see cref="Program" />.
 /// </summary>
-public class Program
+public partial class Program
 {
     protected Program()
     {
