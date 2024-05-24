@@ -29,15 +29,16 @@ var apiService = builder
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"));
 
 var backoffice = builder.AddNpmApp("backoffice", "../../ui/backoffice", "dev")
-    .WithEnvironment("BROWSER", "none")
     .WithHttpEndpoint(env: "PORT")
+    .WithEnvironment("BROWSER", "none")
     .WithEnvironment("BASE_API", $"{apiService.GetEndpoint("https")}/api/v1")
     .WithEnvironment("AUTH_DUENDE_IDENTITY_SERVER6_ISSUER", identityService.GetEndpoint("https"))
     .PublishAsDockerFile();
 
-var storefront = builder.AddProject<RookieShop_Storefront>("storefront")
-    .WithExternalHttpEndpoints()
+var storefront = builder
+    .AddProject<RookieShop_Storefront>("storefront")
     .WithReference(redis)
+    .WithExternalHttpEndpoints()
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint("https")}/api/v1");
 
