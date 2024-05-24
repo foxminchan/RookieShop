@@ -1,5 +1,5 @@
-﻿using Marten;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using RookieShop.Infrastructure.Cache.Redis;
 using RookieShop.Infrastructure.Email.Smtp.Abstractions;
 
 namespace RookieShop.Infrastructure.Email.Smtp.Decorator;
@@ -7,7 +7,7 @@ namespace RookieShop.Infrastructure.Email.Smtp.Decorator;
 public sealed class SmtpOutboxDecorator(
     ISmtpService smtpService,
     ILogger<SmtpOutboxDecorator> logger,
-    IDocumentSession documentSession) : ISmtpService
+    IRedisService redisService) : ISmtpService
 {
     public async Task SendEmailAsync(EmailMetadata emailMetadata, CancellationToken cancellationToken = default)
     {
@@ -25,16 +25,10 @@ public sealed class SmtpOutboxDecorator(
             IsSent = false
         };
 
-        documentSession.Store(emailOutbox);
-
-        await documentSession.SaveChangesAsync(cancellationToken);
+        await redisService.GetOrSetAsync(emailOutbox.Id.ToString(), () => emailOutbox, TimeSpan.FromDays(1));
 
         await smtpService.SendEmailAsync(emailMetadata, cancellationToken);
 
-        emailOutbox.IsSent = true;
-
-        documentSession.Update(emailOutbox);
-
-        await documentSession.SaveChangesAsync(cancellationToken);
+        await redisService.RemoveAsync(emailOutbox.Id.ToString());
     }
 }

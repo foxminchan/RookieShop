@@ -2,7 +2,7 @@
 
 public sealed class EmailOutbox
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public object? Model { get; set; }
     public string? Subject { get; set; }
     public string? Template { get; set; }
