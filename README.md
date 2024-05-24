@@ -24,6 +24,7 @@ RookieShop is a .NET Core web application training project demonstrating Clean A
   - [Setup tools and dependencies](#setup-tools-and-dependencies)
   - [Running the application](#running-the-application)
 - [Testing](#testing)
+- [Deployment](#deployment)
 - [Observability](#observability)
 - [Project References](#project-references)
 - [License](#license)
@@ -152,6 +153,17 @@ dotnet test RookieShop.sln
 > ```bash
 > k6 run ./k6/performance-test.js
 > ```
+
+## Deployment
+
+<p align="justify">
+Deploying the application to the production environment by using <code>Aspirate (Aspir8)</code> by running the following command:
+</p>
+
+```bash
+dotnet aspirate generate
+dotnet aspirate apply
+```
 
 ## Observability
 
