@@ -1,5 +1,6 @@
 ﻿using Refit;
 using RookieShop.Storefront.Areas.User.Models;
+using RookieShop.Storefront.Constants;
 
 namespace RookieShop.Storefront.Areas.User.Services;
 
@@ -13,4 +14,7 @@ public interface ICustomerService
 
     [Put("/customers")]
     Task UpdateCustomerAsync(CustomerViewModel customer);
+
+    [Post("/customers")]
+    Task CreateCustomerAsync(CustomerRequest request, [Header(HeaderName.IdempotencyKey)] Guid requestId);
 }

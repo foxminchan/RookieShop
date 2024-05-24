@@ -1,9 +1,11 @@
-﻿@model dynamic
+﻿@model RookieShop.Storefront.Areas.User.Models.CustomerRequest
 
 @{
     ViewBag.Title = "Personal Information";
-    Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<partial name="_ValidationScriptsPartial"/>
 
 <div class="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
     <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" aria-hidden="true">
@@ -13,39 +15,67 @@
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Personal Information</h2>
         <p class="mt-2 text-lg leading-8 text-gray-600">Update your personal information before you continue.</p>
     </div>
-    <form action="#" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
+    <form asp-area="User" asp-controller="Customer" asp-action="CreateCustomer" asp-antiforgery="true"
+          class="mx-auto mt-16 max-w-xl sm:mt-20">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div class="sm:col-span-2">
-                <label for="fullname" class="block text-sm font-semibold leading-6 text-gray-900">Full name</label>
+                <label asp-for="Name" class="block text-sm font-semibold leading-6 text-gray-900">Full name</label>
                 <div class="mt-2.5">
-                    <input type="text" name="fullname" id="fullname" autocomplete="organization" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input type="text" asp-for="Name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                    <span asp-validation-for="Name" class="text-red-900"></span>
                 </div>
             </div>
             <div class="sm:col-span-2">
-                <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
+                <label asp-for="Email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
                 <div class="mt-2.5">
-                    <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input type="email" asp-for="Email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                    <span asp-validation-for="Email" class="text-red-900"></span>
                 </div>
             </div>
             <div class="sm:col-span-2">
-                <label for="phone" class="block text-sm font-semibold leading-6 text-gray-900">Phone number</label>
+                <label asp-for="Phone" class="block text-sm font-semibold leading-6 text-gray-900">Phone number</label>
                 <div class="mt-2.5">
-                    <input type="tel" name="phone" id="phone" autocomplete="email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input type="tel" asp-for="Phone" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                    <span asp-validation-for="Phone" class="text-red-900"></span>
                 </div>
             </div>
             <div class="sm:col-span-2">
-                <label for="gender" class="block text-sm font-semibold leading-6 text-gray-900">Gender</label>
-                <select name="gender" id="gender" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pr-9">
+                <label asp-for="Gender" class="block text-sm font-semibold leading-6 text-gray-900">Gender</label>
+                <select asp-for="Gender" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pr-9">
                     <option value="Male">Male</option>
                     <option value="Femaile">Female</option>
                     <option value="Other">Other</option>
                 </select>
+                <span asp-validation-for="Gender" class="text-red-900"></span>
             </div>
         </div>
         <div class="mt-10">
-            <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <button id="submit-btn" type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Submit
             </button>
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#submit-btn").on("click", function () {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You are about to update your personal information.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, update it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("form").submit();
+                    }
+                });
+            });
+        });
+    </script>
+}
