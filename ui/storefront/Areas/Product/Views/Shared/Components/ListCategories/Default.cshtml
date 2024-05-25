@@ -1,22 +1,21 @@
 ﻿@model RookieShop.Storefront.Areas.Product.Models.Categories.ListCategoriesViewModel
 
-<form class="hidden lg:block">
-    <div class="pt-6" id="filter-section-1">
-        <div class="space-y-4">
-            @foreach (var category in Model.Categories)
-            {
-                <div class="flex items-center">
-                    <input id="@(string.Concat("filter-category-", category.Id))"
-                           name="id"
-                           value="@category.Id"
-                           type="checkbox"
-                           class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="@(string.Concat("filter-category-", category.Id))"
-                           class="ml-3 text-sm text-gray-600">
-                        @category.Name
-                    </label>
-                </div>
-            }
-        </div>
+<div class="pt-6" id="filter-section-1">
+    <div class="space-y-4">
+        @foreach (var category in Model.Categories)
+        {
+            <div class="flex items-center">
+                <input id="@(string.Concat("filter-category-", category.Id))"
+                       name="id"
+                       value="@category.Id"
+                       type="checkbox"
+                       checked="@Context.Request.Query["category"].Contains(category.Id.ToString())"
+                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <label for="@(string.Concat("filter-category-", category.Id))"
+                       class="ml-3 text-sm text-gray-600">
+                    @category.Name
+                </label>
+            </div>
+        }
     </div>
-</form>
+</div>

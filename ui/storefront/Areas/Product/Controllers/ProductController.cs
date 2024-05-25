@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RookieShop.Storefront.Areas.Product.Models.Products;
 using RookieShop.Storefront.Areas.Product.Services;
 
 namespace RookieShop.Storefront.Areas.Product.Controllers;
@@ -12,12 +13,21 @@ public class ProductController(IProductService productService) : Controller
 
         var page = !query.ContainsKey("page") ? 1 : int.Parse(query["page"]!);
 
-        var sortBy = !query.ContainsKey("sortBy") ? null : query["sortBy"].ToString();
+        var sort = !query.ContainsKey("sort") ? nameof(ProductViewModel.Id) : query["sort"].ToString();
+
+        var order = !query.ContainsKey("order") || bool.Parse(query["order"]!);
+
+        var category = !query.ContainsKey("category") ? null :
+            query["category"]
+                .Select(c => Guid.TryParse(c, out var parsedGuid) ? parsedGuid : Guid.Empty)
+                .ToArray();
 
         var product = await productService.ListProductsAsync(new()
         {
             PageNumber = page,
-            OrderBy = sortBy
+            OrderBy = sort,
+            IsDescending = order,
+            CategoryIds = category
         });
 
         return View(product);

@@ -20,9 +20,18 @@
                         </div>
                         <div id="sort-category-dropdown" class="hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div class="py-1" role="none">
-                                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Newest</a>
-                                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Price: Low to High</a>
-                                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-4">Price: High to Low</a>
+                                <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-sort="Name" asp-route-order="false" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">
+                                    Name: A to Z
+                                </a>
+                                <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-sort="Name" asp-route-order="true" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">
+                                    Name: Z to A
+                                </a>
+                                <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-sort="Price" asp-route-order="false" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">
+                                    Price: Low to High
+                                </a>
+                                <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-sort="Price" asp-route-order="true" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-4">
+                                    Price: High to Low
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -48,16 +57,7 @@
                         @await Component.InvokeAsync("ListCategories")
                     </div>
                     <div class="lg:col-span-3">
-                        <div class="bg-white">
-                            <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                                <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                                    @RenderBody()
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                            <partial name="_PaginationPartial" model="Model.PagedInfo"/>
-                        </div>
+                        @RenderBody()
                     </div>
                 </div>
             </section>
@@ -98,6 +98,39 @@
               showCategoryFilter.removeClass("hidden");
               hideCategoryFilter.addClass("hidden");
             });
+
+             $("#filter-section-1").on('change', 'input[type="checkbox"]', function() {
+                updateQueryString($(this));
+            });
+
+            function updateQueryString(checkbox) {
+                const selectedCategories = Array.from(
+                    $("#filter-section-1").find('input[type="checkbox"]:checked')
+                ).map(checkbox => checkbox.value);
+
+                const urlParams = new URLSearchParams(window.location.search);
+
+                if (selectedCategories.length > 0) {
+                    urlParams.set("category", selectedCategories.join(","));
+                } else {
+                    urlParams.delete("category");
+                }
+
+                window.location.search = urlParams.toString();
+
+                fetchProducts();
+            }
+
+            function fetchProducts() {
+               $.ajax({
+                    url: window.location.href,
+                    type: "GET",
+                    success: function (data) {
+                        const html = $(data).find(".grid").html();
+                        $(".grid").html(html);
+                    }
+                });
+            }
         });
  </script>
 }
