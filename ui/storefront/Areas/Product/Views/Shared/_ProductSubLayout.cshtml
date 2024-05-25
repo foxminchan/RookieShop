@@ -1,0 +1,103 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout is not null)
+        Layout = parentLayout.ToString();
+    else
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-white">
+    <div>
+        <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900">All Products</h1>
+                <div class="flex items-center">
+                    <div class="relative inline-block text-left">
+                        <div>
+                            <button id="sort-btn" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false" aria-haspopup="true">
+                                Sort
+                                <img asp-append-version="true" loading="lazy" class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" src="~/imgs/filter/arrow-down.svg" alt="Sort"/>
+                            </button>
+                        </div>
+                        <div id="sort-category-dropdown" class="hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                            <div class="py-1" role="none">
+                                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Newest</a>
+                                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Price: Low to High</a>
+                                <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-4">Price: High to Low</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
+                        <span class="sr-only">Filters</span>
+                        <img asp-append-version="true" loading="lazy" class="h-5 w-5" src="~/imgs/filter/filter.svg" alt="Filter"/>
+                    </button>
+                </div>
+            </div>
+            <section aria-labelledby="products-heading" class="pb-24 pt-6">
+                <h2 id="products-heading" class="sr-only">Products</h2>
+                <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+                    <div class="border-b border-gray-200 py-6">
+                        <h3 class="-my-3 flow-root">
+                            <button type="button" class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-1" aria-expanded="false">
+                                <span class="font-medium text-gray-900">Category</span>
+                                <span class="ml-6 flex items-center">
+                                    <img asp-append-version="true" loading="lazy" src="~/imgs/product/plus.svg" class="h-5 w-5" alt="plus"/>
+                                    <img asp-append-version="true" loading="lazy" src="~/imgs/product/minus.svg" class="h-5 w-5 hidden" alt="minus"/>
+                                </span>
+                            </button>
+                        </h3>
+                        @await Component.InvokeAsync("ListCategories")
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="bg-white">
+                            <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                                <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                            <partial name="_PaginationPartial" model="Model.PagedInfo"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+@await RenderSectionAsync("Scripts", false)
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const sortBtn = $("#sort-btn");
+            const sortCategoryDropdown = $("#sort-category-dropdown");
+            sortBtn.on("click", function () {
+              const expanded = sortBtn.attr("aria-expanded") === "true" || false;
+              sortBtn.attr("aria-expanded", !expanded);
+              sortCategoryDropdown.toggleClass("hidden");
+            });
+            $(document).on("click", function (event) {
+              if (!sortBtn.is(event.target) && sortBtn.has(event.target).length === 0) {
+                sortBtn.attr("aria-expanded", false);
+                sortCategoryDropdown.addClass("hidden");
+              }
+            });
+
+            const showCategoryFilter = $("#show-category-filter");
+            const hideCategoryFilter = $("#hide-category-filter");
+
+            showCategoryFilter.on("click", function () {
+              $("#filter-section-1").removeClass("hidden");
+              showCategoryFilter.addClass("hidden");
+              hideCategoryFilter.removeClass("hidden");
+            });
+
+            hideCategoryFilter.on("click", function () {
+              $("#filter-section-1").addClass("hidden");
+              showCategoryFilter.removeClass("hidden");
+              hideCategoryFilter.addClass("hidden");
+            });
+        });
+ </script>
+}

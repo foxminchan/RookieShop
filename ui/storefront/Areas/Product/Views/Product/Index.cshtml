@@ -1,89 +1,43 @@
-﻿@model RookieShop.Storefront.Areas.Product.Models.Categories.ListCategoriesViewModel
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model RookieShop.Storefront.Areas.Product.Models.Products.ListProductsViewModel
 
 @{
     ViewBag.Title = "Products";
-    Layout = "~/Views/Shared/_layout.cshtml";
+    Layout = "~/Areas/Product/Views/Shared/_ProductSubLayout.cshtml";
 }
 
-<div class="bg-white">
-    <div>
-        <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
-                <h1 class="text-4xl font-bold tracking-tight text-gray-900">All Products</h1>
-                <partial name="_FilterPartial"/>
+@foreach (var product in Model.Products)
+{
+    <div class="group relative">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+            <img asp-append-version="true" loading="lazy" src="@(product.ImageUrl ?? "~/imgs/product/default-preview-image.png")" alt="@product.Name" class="h-full w-full lg:h-full lg:w-full">
+        </div>
+        <div class="mt-4 flex justify-between">
+            <div>
+                <h3 class="text-sm text-gray-700">
+                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">
+                        <span aria-hidden="true" class="absolute inset-0"></span>
+                        @product.Name
+                    </a>
+                </h3>
             </div>
-            <section aria-labelledby="products-heading" class="pb-24 pt-6">
-                <h2 id="products-heading" class="sr-only">Products</h2>
-                <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                    <form class="hidden lg:block">
-                        <div class="border-b border-gray-200 py-6">
-                            <h3 class="-my-3 flow-root">
-                                <button type="button" class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-1" aria-expanded="false">
-                                    <span class="font-medium text-gray-900">Category</span>
-                                    <span class="ml-6 flex items-center">
-                                        <img asp-append-version="true" loading="lazy" src="~/imgs/product/plus.svg" class="h-5 w-5" alt="plus"/>
-                                        <img asp-append-version="true" loading="lazy" src="~/imgs/product/minus.svg" class="h-5 w-5 hidden" alt="minus"/>
-                                    </span>
-                                </button>
-                            </h3>
-                            <div class="pt-6" id="filter-section-1">
-                                <div class="space-y-4">
-                                    @foreach (var category in Model.Categories)
-                                    {
-                                        <div class="flex items-center">
-                                            <input id="@(string.Concat("filter-category-", category.Id))"
-                                                   name="id"
-                                                   value="@category.Id"
-                                                   type="checkbox"
-                                                   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                            <label for="@(string.Concat("filter-category-", category.Id))"
-                                                   class="ml-3 text-sm text-gray-600">
-                                                @category.Name
-                                            </label>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    @await Component.InvokeAsync("ListProducts", Context.Request.Query)
-                </div>
-            </section>
-        </main>
+            <div class="flex flex-col items-end">
+                @if (product.Quantity > 0)
+                {
+                    <p class="text-sm font-medium text-gray-500 line-through">
+                        @($"{product.Price.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}")
+                    </p>
+
+                    <p class="text-sm font-medium text-gray-900">
+                        @($"{product.PriceSale.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}")
+                    </p>
+                }
+                else
+                {
+                    <p class="text-sm font-medium text-red-900">Out of stock</p>
+                }
+            </div>
+        </div>
     </div>
-</div>
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            const sortBtn = $("#sort-btn");
-            const sortCategoryDropdown = $("#sort-category-dropdown");
-            sortBtn.on("click", function () {
-              const expanded = sortBtn.attr("aria-expanded") === "true" || false;
-              sortBtn.attr("aria-expanded", !expanded);
-              sortCategoryDropdown.toggleClass("hidden");
-            });
-            $(document).on("click", function (event) {
-              if (!sortBtn.is(event.target) && sortBtn.has(event.target).length === 0) {
-                sortBtn.attr("aria-expanded", false);
-                sortCategoryDropdown.addClass("hidden");
-              }
-            });
-
-            const showCategoryFilter = $("#show-category-filter");
-            const hideCategoryFilter = $("#hide-category-filter");
-
-            showCategoryFilter.on("click", function () {
-              $("#filter-section-1").removeClass("hidden");
-              showCategoryFilter.addClass("hidden");
-              hideCategoryFilter.removeClass("hidden");
-            });
-
-            hideCategoryFilter.on("click", function () {
-              $("#filter-section-1").addClass("hidden");
-              showCategoryFilter.removeClass("hidden");
-              hideCategoryFilter.addClass("hidden");
-            });
-        });
-    </script>
 }
