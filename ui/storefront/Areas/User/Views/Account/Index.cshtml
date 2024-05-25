@@ -6,8 +6,6 @@
     Layout = "~/Views/Shared/_SettingsSubLayout.cshtml";
 }
 
-<partial name="_ValidationScriptsPartial"/>
-
 <div class="p-2 md:p-4">
     <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
         <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
@@ -63,6 +61,8 @@
 </div>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+
     <script>
         $(document).ready(function () {
             $("#submit-btn").on("click", function () {
