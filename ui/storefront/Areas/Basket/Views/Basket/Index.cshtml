@@ -15,7 +15,7 @@
                     <div class="flex items-center justify-between pb-8 border-b border-gray-300">
                         <h2 class="font-manrope font-bold text-3xl leading-10 text-black">Shopping Cart</h2>
                         <h2 class="font-manrope font-bold text-xl leading-8 text-gray-600">
-                            @Model.BasketDetails.Count > 1 ? $"{Model.BasketDetails.Count} Items" : $"{Model.BasketDetails.Count} Item"
+                            @(Model.BasketDetails.Count > 1 ? $"{Model.BasketDetails.Count} Items" : $"{Model.BasketDetails.Count} Item")
                         </h2>
                     </div>
                     <div class="grid grid-cols-12 mt-8 max-md:hidden pb-6 border-b border-gray-200">
@@ -45,7 +45,7 @@
                     <div class="mt-8">
                         <div class="flex items-center justify-between pb-6">
                             <p class="font-normal text-lg leading-8 text-black">
-                                @Model.BasketDetails.Count > 1 ? $"{Model.BasketDetails.Count} Items" : $"{Model.BasketDetails.Count} Item"
+                                @(Model.BasketDetails.Count > 1 ? $"{Model.BasketDetails.Count} Items" : $"{Model.BasketDetails.Count} Item")
                             </p>
                             <p class="font-medium text-lg leading-8 text-black">
                                 @Model.TotalPrice.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))

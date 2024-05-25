@@ -1,9 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RookieShop.Storefront.Areas.Basket.Services;
+using RookieShop.Storefront.Areas.User.Models;
 
 namespace RookieShop.Storefront.Areas.Basket.Controllers;
 
+[Authorize]
 [Area("Basket")]
-public class BasketController : Controller
+public class BasketController(IBasketService basketService) : Controller
 {
-    public IActionResult Index() => View();
+    public async Task<IActionResult> Index()
+    {
+        if (HttpContext.Items["Customer"] is not CustomerViewModel customer) return Unauthorized();
+
+        var basket = await basketService.GetBasketAsync(customer.AccountId);
+
+        return View(basket);
+    }
 }
