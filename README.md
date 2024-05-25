@@ -6,7 +6,7 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <p align="justify">
-RookieShop is a .NET Core web application training project demonstrating Clean Architecture, Domain-Driven Design, and modern web development with Aspire and Next.js. The project is part of the Rookie Phase-1 Assignment at NashTech.
+RookieShop is a .NET Core web application training project demonstrating Clean Architecture, DDD and modern web development with Aspire and Next.js. The project is part of the Rookie Phase-1 Assignment at NashTech.
 </p>
 
 <hr/>
@@ -76,17 +76,17 @@ Build an e-commerce web site with minimum functionality below:
 
 ## Software Architecture
 
-<img loading="lazy" src="./img/system-design.png" alt="System Design" width="100%" height="100%">
+<img loading="lazy" src="./img/software-architecture.png" alt="Software Architecture" width="100%" />
 
 | No  | Name            | Usecase                                                                                              |
 | --- | --------------- | ---------------------------------------------------------------------------------------------------- |
 | 1   | identity server | An authentication server that provides authentication and authorization services for the application |
 | 2   | store front     | A user-facing website that allows customers to view, rate, and purchase products                     |
 | 3   | back office     | An admin-facing website that allows administrators to manage products, categories, and customers     |
-| 4   | dashboard       | An observability dashboard that provides insights into the application's performance and behavior    |
-| 5   | web api         | A REST API that provides data to the user-facing and admin-facing websites                           |
-| 6   | redis           | A distributed lock manager, cache and cart storage                                                   |
-| 7   | postgres        | A relational database that stores the application's data                                             |
+| 4   | web api         | A REST API that provides data to the user-facing and admin-facing websites                           |
+| 5   | redis           | A distributed lock manager, cache and cart storage                                                   |
+| 6   | postgres        | A relational database that stores the application's data                                             |
+| 7   | open telemetry  | A telemetry data collector that collects and exports telemetry data to the Aspire Dashboard          |
 
 ## Getting Started
 
@@ -171,9 +171,9 @@ dotnet aspirate apply
 The project uses OpenTelemetry to collect the telemetry data from the application. The data is sent to the OpenTelemetry Collector and exported to the Aspire Dashboard. The Aspire Dashboard is a monitoring and observability tool that provides insights into the application's performance and behavior. It helps developers to identify and troubleshoot issues in the application.
 </p>
 
-<img loading="lazy" src="./img/aspire-dashboard.png" alt="Aspire Dashboard Overview" width="100%" height="100%">
+<img loading="lazy" src="./img/aspire-dashboard.png" alt="Aspire Dashboard Overview" width="100%" />
 
-<img loading="lazy" src="./img/aspire-dashboard-trace.png" alt="Aspire Dashboard Trace" width="100%" height="100%">
+<img loading="lazy" src="./img/aspire-dashboard-trace.png" alt="Aspire Dashboard Trace" width="100%" />
 
 ## Project References
 
@@ -190,5 +190,5 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 ## Organization
 
 <a href="https://www.nashtechglobal.com/" target="_blank">
-	<img loading="lazy" src="./img/nash-tech.png" alt="NashTech" width="80" height="80">
+	<img loading="lazy" src="./img/nash-tech.png" alt="NashTech" width="80" height="80" />
 </a>
