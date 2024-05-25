@@ -72,65 +72,49 @@
         $(document).ready(function () {
             const sortBtn = $("#sort-btn");
             const sortCategoryDropdown = $("#sort-category-dropdown");
+
             sortBtn.on("click", function () {
-              const expanded = sortBtn.attr("aria-expanded") === "true" || false;
-              sortBtn.attr("aria-expanded", !expanded);
-              sortCategoryDropdown.toggleClass("hidden");
+                sortCategoryDropdown.toggleClass("hidden");
             });
+
             $(document).on("click", function (event) {
-              if (!sortBtn.is(event.target) && sortBtn.has(event.target).length === 0) {
-                sortBtn.attr("aria-expanded", false);
-                sortCategoryDropdown.addClass("hidden");
-              }
-            });
-
-            const showCategoryFilter = $("#show-category-filter");
-            const hideCategoryFilter = $("#hide-category-filter");
-
-            showCategoryFilter.on("click", function () {
-              $("#filter-section-1").removeClass("hidden");
-              showCategoryFilter.addClass("hidden");
-              hideCategoryFilter.removeClass("hidden");
-            });
-
-            hideCategoryFilter.on("click", function () {
-              $("#filter-section-1").addClass("hidden");
-              showCategoryFilter.removeClass("hidden");
-              hideCategoryFilter.addClass("hidden");
-            });
-
-             $("#filter-section-1").on('change', 'input[type="checkbox"]', function() {
-                updateQueryString($(this));
-            });
-
-            function updateQueryString(checkbox) {
-                const selectedCategories = Array.from(
-                    $("#filter-section-1").find('input[type="checkbox"]:checked')
-                ).map(checkbox => checkbox.value);
-
-                const urlParams = new URLSearchParams(window.location.search);
-
-                if (selectedCategories.length > 0) {
-                    urlParams.set("category", selectedCategories.join(","));
-                } else {
-                    urlParams.delete("category");
+                if (!sortBtn.is(event.target) && sortBtn.has(event.target).length === 0) {
+                    sortCategoryDropdown.addClass("hidden");
                 }
+            });
 
-                window.location.search = urlParams.toString();
+            const filterSection = $("#filter-section-1");
+            $("#show-category-filter, #hide-category-filter").on("click", function () {
+                filterSection.toggleClass("hidden");
+                $(this).siblings().toggleClass("hidden");
+            });
 
-                fetchProducts();
+            filterSection.on("change", 'input[type="checkbox"]', function () {
+                const selectedCategories = filterSection
+                .find('input[type="checkbox"]:checked')
+                .map(function () { return this.value;})
+                .get();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (selectedCategories.length > 0) {
+                urlParams.set("category", selectedCategories.join(","));
+            } else {
+                urlParams.delete("category");
             }
+            window.location.search = urlParams.toString();
 
-            function fetchProducts() {
-               $.ajax({
-                    url: window.location.href,
-                    type: "GET",
-                    success: function (data) {
-                        const html = $(data).find(".grid").html();
-                        $(".grid").html(html);
-                    }
-                });
-            }
+            fetchProducts();
         });
- </script>
+
+        function fetchProducts() {
+            $.ajax({
+                url: window.location.href,
+                type: "GET",
+                success: function (data) {
+                    $(".grid").html($(data).find(".grid").html());
+                },
+            });
+          }
+        });
+  </script>
 }
