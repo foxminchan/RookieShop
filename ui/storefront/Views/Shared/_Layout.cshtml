@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="A project developed by a rookie transitioning to an engineer at NashTech." />
+    <meta name="description" content="A project developed by a rookie transitioning to an engineer at NashTech."/>
     <meta name="author" content="FoxMinChan"/>
     <meta name="keywords" content="Rookie, NashTech, FoxMinChan, E-commerce, ASP.NET Core, Tailwind CSS, Razor Pages"/>
     <meta name="robots" content="index, follow"/>
@@ -12,9 +12,18 @@
     <meta name="theme-color" content="#ffffff"/>
     <meta name="msapplication-TileColor" content="#ffffff"/>
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/lib/dist/sweetalert2/sweetalert2.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/lib/dist/font-awesome/css/fontawesome.min.css" asp-append-version="true" />
+    <cache expires-after="@TimeSpan.FromSeconds(300)">
+        <environment names="Development,Docker">
+            <link rel="stylesheet" href="~/css/output.css" asp-append-version="true"/>
+            <link rel="stylesheet" href="~/lib/dist/sweetalert2/sweetalert2.css" asp-append-version="true"/>
+            <link rel="stylesheet" href="~/lib/dist/font-awesome/css/fontawesome.min.css" asp-append-version="true"/>
+        </environment>
+        <environment names="Staging,Production">
+            <link rel="stylesheet" href="https://cdn.tailwindcss.com" asp-append-version="true"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.css" asp-append-version="true"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" asp-append-version="true"/>
+        </environment>
+    </cache>
 </head>
 <body class="flex flex-col min-h-screen pt-24">
 <header id="head" class="shadow-sm">
@@ -93,9 +102,26 @@
     </div>
 </footer>
 
-<script src="~/js/site.js" asp-append-version="true"></script>
-<script src="~/lib/dist/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-<script src="~/lib/dist/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
+<cache expires-after="@TimeSpan.FromSeconds(300)">
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <environment names="Development,Docker">
+        <script src="~/lib/dist/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+                crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
+                asp-fallback-src="~/lib/sweetalert2/dist/sweetalert2.min.js"
+                asp-fallback-test="window.Swal">
+        </script>
+    </environment>
+</cache>
+
 @await RenderSectionAsync("Scripts", false)
 
 <script>

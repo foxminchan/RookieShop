@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using RookieShop.ServiceDefaults;
+using RookieShop.Storefront;
 using RookieShop.Storefront.Configurations;
 using RookieShop.Storefront.Middlewares;
 using RookieShop.Storefront.Options;
@@ -32,9 +34,17 @@ builder.AddAuthenticationService(appSettings.OpenIdSettings);
 
 builder.AddHttpServices(appSettings.BaseApiEndpoint);
 
+builder.Services.AddMemoryCache();
+
 builder.Services.AddScoped<CustomerInfoMiddleware>();
 
-builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
+builder.Services.AddRouting(options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer));
+
+builder.Services.AddMvc(options =>
+{
+    options.EnableEndpointRouting = false;
+    options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
+});
 
 var app = builder.Build();
 
