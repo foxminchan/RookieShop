@@ -10,8 +10,10 @@ var postgresUser = builder.AddParameter("SqlUser", secret: true);
 
 var postgresPassword = builder.AddParameter("SqlPassword", secret: true);
 
-var db = builder.AddPostgres("db", postgresUser, postgresPassword, 5432)
-    .WithDataBindMount("../../mnt/postgres");
+var db = builder
+    .AddPostgres("db", postgresUser, postgresPassword, 5432)
+    .WithDataBindMount("../../mnt/postgres")
+    .WithPgAdmin();
 
 var shopDb = db.AddDatabase("shopdb");
 

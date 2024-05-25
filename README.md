@@ -171,7 +171,7 @@ dotnet aspirate apply
 The project uses OpenTelemetry to collect the telemetry data from the application. The data is sent to the OpenTelemetry Collector and exported to the Aspire Dashboard. The Aspire Dashboard is a monitoring and observability tool that provides insights into the application's performance and behavior. It helps developers to identify and troubleshoot issues in the application.
 </p>
 
-<img loading="lazy" src="./img/aspire-dashboard-overview.png" alt="Aspire Dashboard Overview" width="100%" height="100%">
+<img loading="lazy" src="./img/aspire-dashboard.png" alt="Aspire Dashboard Overview" width="100%" height="100%">
 
 <img loading="lazy" src="./img/aspire-dashboard-trace.png" alt="Aspire Dashboard Trace" width="100%" height="100%">
 
