@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "My Account";
-    Layout = "_Layout";
+    Layout = "~/Views/Shared/_SettingsSubLayout.cshtml";
 }
 
 <partial name="_ValidationScriptsPartial"/>
@@ -50,7 +50,8 @@
                         <span asp-validation-for="Gender" class="text-red-900"></span>
                     </div>
                     <div class="flex justify-end">
-                        <button type="submit"
+                        <button id="#submit-btn"
+                                type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
                             Save
                         </button>
@@ -60,3 +61,26 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#submit-btn").on("click", function () {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You are about to update your personal information.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, update it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#submit-btn").submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

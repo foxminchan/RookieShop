@@ -1,8 +1,78 @@
-﻿@model dynamic
+﻿@using System.Globalization
+@using RookieShop.Storefront.Areas.Order.Models
+@model RookieShop.Storefront.Areas.Order.Models.ListOrdersViewModel
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewBag.Title = "Order History";
+    Layout = "~/Views/Shared/_SettingsSubLayout.cshtml";
 }
 
-<h2>title</h2>
+<div class="mx-auto p-6">
+    <div class="bg-white rounded-lg p-6">
+        <h1 class="pl-6 text-2xl font-bold sm:text-xl">Order History</h1>
+        @if (Model.Orders.Count == 0)
+        {
+            <div class="w-full px-6 pb-8 mt-8">
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center space-x-4">
+                        <div class="flex-1">
+                            <div class="text-lg font-medium">No orders found</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (var order in Model.Orders)
+            {
+                <div class="w-full px-6 pb-8 mt-8">
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center space-x-4">
+                            <div class="flex-1">
+                                <div class="text-lg font-medium">
+                                    #Order @order.Id.ToString("D").Split('-').Last()
+                                </div>
+                                <div class="text-sm text-gray-500">
+                                    @order.TotalPrice.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
+                                </div>
+                            </div>
+                            @{
+                                var status = order.Status switch
+                                {
+                                    OrderStatus.Pending => "bg-yellow-50 text-yellow-700 ring-yellow-700/10",
+                                    OrderStatus.Shipping => "bg-blue-50 text-blue-700 ring-blue-700/10",
+                                    OrderStatus.Completed => "bg-green-50 text-green-700 ring-green-700/10",
+                                    OrderStatus.Canceled => "bg-red-50 text-red-700 ring-red-700/10",
+                                    _ => "bg-gray-50 text-gray-700 ring-gray-700/10"
+                                };
+
+                                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset @status">
+                                    @order.Status
+                                </span>
+                            }
+                            <div class="text-lg font-medium">
+                                @order.CreatedDate.ToString("dd/MM/yyyy")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="w-full px-6 pb-8 mt-8">
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center space-x-4">
+                        <div class="flex-1">
+                            <div class="text-lg font-medium">Total Orders</div>
+                        </div>
+                        <div class="text-lg font-medium">
+                            @Model.Orders.Count
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <partial name="_PaginationPartial" model="Model.PagedInfo"/>
+        }
+    </div>
+</div>

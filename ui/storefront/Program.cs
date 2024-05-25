@@ -16,6 +16,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddWebOptimizer();
+
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
@@ -41,6 +43,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+app.UseWebOptimizer();
 
 app.UseMiddleware<CustomerInfoMiddleware>();
 

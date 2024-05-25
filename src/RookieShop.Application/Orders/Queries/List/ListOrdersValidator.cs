@@ -6,7 +6,7 @@ public sealed class ListOrdersValidator : AbstractValidator<ListOrdersQuery>
 {
     public ListOrdersValidator()
     {
-        RuleFor(x => x.PageIndex).GreaterThan(1);
-        RuleFor(x => x.PageSize).GreaterThan(0);
+        RuleFor(x => x.PageIndex).GreaterThanOrEqualTo(1);
+        RuleFor(x => x.PageSize).GreaterThanOrEqualTo(0);
     }
 }

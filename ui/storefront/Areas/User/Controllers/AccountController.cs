@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.Storefront.Areas.User.Services;
 using RookieShop.Storefront.Areas.User.Models;
 
 namespace RookieShop.Storefront.Areas.User.Controllers;
 
+[Authorize]
 [Area("User")]
 public class AccountController(ICustomerService customerService) : Controller
 {
@@ -35,7 +37,7 @@ public class AccountController(ICustomerService customerService) : Controller
 
     public async Task<IActionResult> Index()
     {
-        var customer = HttpContext.Items["Customer"] as CustomerViewModel;
+        if (HttpContext.Items["Customer"] is not CustomerViewModel customer) return Unauthorized();
 
         return View(customer);
     }

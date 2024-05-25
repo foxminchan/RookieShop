@@ -16,4 +16,5 @@ public sealed record OrderDto(
     decimal TotalPrice,
     CustomerId CustomerId,
     OrderStatus OrderStatus,
+    DateTime CreatedDate,
     IEnumerable<OrderItemDto> OrderItems);

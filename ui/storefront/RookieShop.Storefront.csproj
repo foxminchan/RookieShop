@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Ardalis.Result.AspNetCore" />
+		<PackageReference Include="LigerShark.WebOptimizer.Core" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -16,4 +16,5 @@ public sealed record OrderVm(
     decimal TotalPrice,
     CustomerId CustomerId,
     OrderStatus OrderStatus,
+    DateTime CreatedDate,
     List<OrderItemVm> Items);

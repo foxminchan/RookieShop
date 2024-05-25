@@ -20,6 +20,7 @@ public static class DomainToDtoMapper
             order.TotalPrice(),
             order.CustomerId,
             order.OrderStatus,
+            order.CreatedDate,
             orderDetails);
     }
 

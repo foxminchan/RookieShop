@@ -20,6 +20,7 @@ public static class DtoToViewModelMapper
             order.TotalPrice,
             order.CustomerId,
             order.OrderStatus,
+            order.CreatedDate,
             orderItems);
     }
 
