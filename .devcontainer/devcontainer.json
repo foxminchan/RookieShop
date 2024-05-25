@@ -12,6 +12,28 @@
     "ghcr.io/elanhasson/devcontainer-features/dotnet-aspire-daily:1": {},
     "ghcr.io/prom3theu5/aspirational-manifests/aspirate:latest": {}
   },
+  "postCreateCommand": "bash .devcontainer/init.sh",
+  "forwardPorts": [
+    "api:9000",
+    "storefont:4000",
+    "identityserver:5001",
+    "db:5432",
+    "cache:6379"
+  ],
+  "portsAttributes": {
+    "9000": {
+      "protocol": "https",
+      "label": "API"
+    },
+    "4000": {
+      "protocol": "https",
+      "label": "StoreFront"
+    },
+    "5001": {
+      "protocol": "https",
+      "label": "IdentityServer"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -19,7 +41,8 @@
         "ms-dotnettools.csdevkit",
         "ms-dotnettools.vscodeintellicode-csharp",
         "bradlc.vscode-tailwindcss",
-        "dsznajder.es7-react-js-snippets"
+        "dsznajder.es7-react-js-snippets",
+        "redhat.vscode-yaml"
       ]
     }
   }

@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+    "ms-dotnettools.csharp",
+    "ms-dotnettools.csdevkit",
+    "ms-dotnettools.vscodeintellicode-csharp",
+    "bradlc.vscode-tailwindcss",
+    "dsznajder.es7-react-js-snippets",
+		"redhat.vscode-yaml"
+  ]
+}
