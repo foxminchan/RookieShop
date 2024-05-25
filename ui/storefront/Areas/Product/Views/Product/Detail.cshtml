@@ -80,31 +80,12 @@
                 </div>
                 <p class="font-medium text-xl leading-8 text-gray-900 text-center">@Model.TotalReviews reviews</p>
             </div>
-            <div class="p-2 rounded-3xl">
-                <form class="max-w-md mx-auto mt-16 p-4 bg-white shadow rounded">
-                    <h2 class="text-2xl font-bold mb-4">Your review</h2>
-                    <div class="mb-4">
-                        <label class="block mb-1">Rating</label>
-                        <div class="flex justify-center">
-                            @for (var star = 1; star <= 5; star++)
-                            {
-                                <div class="flex items-center me-4">
-                                    <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-primary-300 focus:ring-2" type="radio" name="rating" id="@star" value="@star"/>
-                                    <label class="ms-2 text-sm font-medium text-gray-900" for="@star">
-                                        @star
-                                    </label>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="message" class="block mb-1">Message</label>
-                        <textarea id="message" name="message" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-300 sm:text-sm sm:leading-6 resize-none"></textarea>
-                    </div>
-                    <button type="submit" class="text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center">Submit</button>
-                </form>
-            </div>
+            @await Component.InvokeAsync("Feedback")
         </div>
         @await Component.InvokeAsync("Rating", new { Context.Request.Query, ProductId = Model.Id })
     </div>
 </section>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}

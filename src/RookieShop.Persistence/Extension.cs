@@ -14,27 +14,26 @@ public static class Extension
     {
         builder.Services.AddSingleton<IDatabaseFactory, DatabaseFactory>();
 
-        builder.AddNpgsqlDbContext<ApplicationDbContext>("shopdb", 
-            static settings => settings.DisableHealthChecks = true, 
+        builder.AddNpgsqlDbContext<ApplicationDbContext>("shopdb",
             configureDbContextOptions: dbContextOptionsBuilder =>
-        {
-            dbContextOptionsBuilder.UseNpgsql(optionsBuilder =>
-                {
-                    optionsBuilder.MigrationsAssembly(AssemblyReference.DbContextAssembly.FullName);
-                    optionsBuilder.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
-                })
-                .UseExceptionProcessor()
-                .UseSnakeCaseNamingConvention()
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            {
+                dbContextOptionsBuilder.UseNpgsql(optionsBuilder =>
+                    {
+                        optionsBuilder.MigrationsAssembly(AssemblyReference.DbContextAssembly.FullName);
+                        optionsBuilder.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
+                    })
+                    .UseExceptionProcessor()
+                    .UseSnakeCaseNamingConvention()
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
-            dbContextOptionsBuilder.AddInterceptors(new AuditableEntityInterceptor());
+                dbContextOptionsBuilder.AddInterceptors(new AuditableEntityInterceptor());
 
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development)
-                dbContextOptionsBuilder
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableDetailedErrors()
-                    .EnableSensitiveDataLogging();
-        });
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development)
+                    dbContextOptionsBuilder
+                        .LogTo(Console.WriteLine, LogLevel.Information)
+                        .EnableDetailedErrors()
+                        .EnableSensitiveDataLogging();
+            });
 
         builder.Services.AddScoped<IDatabaseFacade>(p => p.GetRequiredService<ApplicationDbContext>());
         builder.Services.AddScoped<IDomainEventContext>(p => p.GetRequiredService<ApplicationDbContext>());

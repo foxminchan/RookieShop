@@ -2,26 +2,35 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "provider": "cdnjs",
       "library": "font-awesome@6.5.2",
       "destination": "wwwroot/lib/dist/font-awesome/"
     },
     {
-      "provider": "cdnjs",
       "library": "sweetalert2@11.11.0",
       "destination": "wwwroot/lib/dist/sweetalert2/"
-    },
-    {
-      "library": "jquery@4.0.0-beta",
-      "destination": "wwwroot/lib/dist/jquery/"
     },
     {
       "library": "jquery-validate@1.20.0",
       "destination": "wwwroot/lib/dist/jquery-validation/"
     },
     {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/dist/toastr.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@4.0.0-beta",
+      "destination": "wwwroot/lib/dist/jquery/"
+    },
+    {
+      "provider": "cdnjs",
       "library": "jquery-validation-unobtrusive@4.0.0",
       "destination": "wwwroot/lib/dist/jquery-validation-unobtrusive/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-validate@1.20.0",
+      "destination": "wwwroot/lib/dist/jquery-validate/"
     }
   ],
   "version": "1.0"

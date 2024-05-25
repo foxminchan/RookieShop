@@ -15,13 +15,33 @@
     <cache expires-after="@TimeSpan.FromSeconds(300)">
         <environment names="Development,Docker">
             <link rel="stylesheet" href="~/css/output.css" asp-append-version="true"/>
+            <link rel="stylesheet" href="~/lib/dist/toastr.js/toastr.min.css" asp-append-version="true"/>
             <link rel="stylesheet" href="~/lib/dist/sweetalert2/sweetalert2.css" asp-append-version="true"/>
             <link rel="stylesheet" href="~/lib/dist/font-awesome/css/fontawesome.min.css" asp-append-version="true"/>
         </environment>
         <environment names="Staging,Production">
             <link rel="stylesheet" href="https://cdn.tailwindcss.com" asp-append-version="true"/>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.css" asp-append-version="true"/>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" asp-append-version="true" />
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+                  asp-fallback-href="~/lib/dist/font-awesome/css/fontawesome.min.css"
+                  asp-append-version="true"
+                  rel="stylesheet"
+                  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+                  crossorigin="anonymous"
+                  referrerpolicy="no-referrer"/>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.11.0/sweetalert2.min.css"
+                  asp-fallback-href="~/lib/dist/sweetalert2/sweetalert2.min.css"
+                  asp-append-version="true"
+                  rel="stylesheet"
+                  integrity="sha512-OWGg8FcHstyYFwtjfkiCoYHW2hG3PDWwdtczPAPUcETobBJOVCouKig8rqED0NMLcT9GtE4jw6IT1CSrwY87uw=="
+                  crossorigin="anonymous"
+                  referrerpolicy="no-referrer"/>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+                  asp-fallback-href="~/lib/dist/toastr.js/toastr.min.css"
+                  asp-append-version="true"
+                  rel="stylesheet"
+                  integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+                  crossorigin="anonymous"
+                  referrerpolicy="no-referrer"/>
         </environment>
     </cache>
 </head>
@@ -105,19 +125,33 @@
 <cache expires-after="@TimeSpan.FromSeconds(300)">
     <script src="~/js/site.js" asp-append-version="true"></script>
     <environment names="Development,Docker">
-        <script src="~/lib/dist/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/jquery/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/dist/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/toastr.js/toastr.min.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-src="~/lib/dist/jquery/jquery.min.js"
                 asp-fallback-test="window.jQuery"
+                asp-append-version="true"
                 integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
                 crossorigin="anonymous">
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
-                asp-fallback-src="~/lib/sweetalert2/dist/sweetalert2.min.js"
-                asp-fallback-test="window.Swal">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.11.0/sweetalert2.min.js"
+                asp-fallback-src="~/lib/dist/sweetalert2/sweetalert2.min.js"
+                asp-fallback-test="window.Swal"
+                asp-append-version="true"
+                integrity="sha512-Wi5Ms24b10EBwWI9JxF03xaAXdwg9nF51qFUDND/Vhibyqbelri3QqLL+cXCgNYGEgokr+GA2zaoYaypaSDHLg=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+                asp-fallback-src="~/lib/dist/toastr.js/toastr.min.js"
+                asp-fallback-test="window.toastr"
+                asp-append-version="true"
+                integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer">
         </script>
     </environment>
 </cache>

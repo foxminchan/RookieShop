@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RookieShop.Storefront.Areas.Product.Models.Feedbacks;
 using RookieShop.Storefront.Areas.Product.Models.Products;
 using RookieShop.Storefront.Areas.Product.Services;
 
 namespace RookieShop.Storefront.Areas.Product.Controllers;
 
 [Area("Product")]
-public class ProductController(IProductService productService) : Controller
+public class ProductController(
+    IProductService productService,
+    IFeedbackService feedbackService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -37,5 +40,20 @@ public class ProductController(IProductService productService) : Controller
     {
         var product = await productService.GetProductByIdAsync(new(id));
         return ModelState.IsValid ? View(product) : BadRequest(ModelState);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddFeedback(FeedbackRequest feedback)
+    {
+        if (feedback.AccountId is null)
+            return RedirectToAction("Login", "Account", new { area = "User" });
+
+        if (!ModelState.IsValid)
+            return RedirectToAction("Detail", new { id = feedback.ProductId });
+
+        await feedbackService.CreateFeedbackAsync(feedback, Guid.NewGuid());
+
+        return RedirectToAction("Detail", new { id = feedback.ProductId });
     }
 }
