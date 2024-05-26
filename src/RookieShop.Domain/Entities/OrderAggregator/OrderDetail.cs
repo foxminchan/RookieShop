@@ -26,8 +26,8 @@ public sealed class OrderDetail : EntityBase
     public OrderId OrderId { get; set; }
     public decimal Price { get; set; }
     public int Quantity { get; set; }
-    public Product Product { get; set; } = new();
-    public Order Order { get; set; } = new();
+    public Product? Product { get; set; }
+    public Order? Order { get; set; }
 
     public decimal ToPrice() => Price * Quantity;
 }

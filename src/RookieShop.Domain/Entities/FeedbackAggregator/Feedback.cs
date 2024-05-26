@@ -31,7 +31,7 @@ public sealed class Feedback : EntityBase, IAggregateRoot
     public CustomerId? CustomerId { get; set; }
     public Customer? Customer { get; set; }
     public ProductId ProductId { get; set; }
-    public Product Product { get; set; } = new();
+    public Product? Product { get; set; }
 
     public void Update(string? content, int rating, ProductId productId, CustomerId? customerId)
     {
