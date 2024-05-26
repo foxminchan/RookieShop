@@ -17,23 +17,14 @@ public sealed class CreateBasket
         _handler = new(_redisMock.Object, loggerMock.Object);
     }
 
-    private static Basket CreateBasketEntity() => Basket.Factory.Create(Guid.NewGuid(), [
-        new(new(Guid.NewGuid()), 3, 1000),
-        new(new(Guid.NewGuid()), 2, 500),
-        new(new(Guid.NewGuid()), 1, 200)
-    ]);
+    private static Basket CreateBasketEntity() => Basket.Factory.Create(Guid.NewGuid(), new(Guid.NewGuid()), 3, 1000);
 
     [Fact]
     public async Task GivenValidData_ShouldReturnSuccessResult()
     {
         // Arrange
         var command = new CreateBasketCommand(
-            Guid.NewGuid(),
-            [
-                new(new(Guid.NewGuid()), 3, 1000),
-                new(new(Guid.NewGuid()), 2, 500),
-                new(new(Guid.NewGuid()), 1, 200)
-            ]);
+            Guid.NewGuid(), new(Guid.NewGuid()), 3, 1000);
         _redisMock.Setup(repo =>
                 repo.HashGetOrSetAsync(nameof(Basket), It.IsAny<string>(), It.IsAny<Func<Basket>>()))
             .ReturnsAsync(CreateBasketEntity);
@@ -46,21 +37,5 @@ public sealed class CreateBasket
         _redisMock.Verify(repo =>
                 repo.HashGetOrSetAsync(nameof(Basket), It.IsAny<string>(), It.IsAny<Func<Basket>>()),
             Times.Once);
-    }
-
-    [Fact]
-    public async Task GivenNullBasketItems_ShouldThrowArgumentNullException()
-    {
-        // Arrange
-        var command = new CreateBasketCommand(Guid.NewGuid(), null!);
-
-        // Act
-        Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
-
-        // Assert
-        await act.Should().ThrowAsync<ArgumentNullException>();
-        _redisMock.Verify(repo =>
-                repo.HashGetOrSetAsync(nameof(Basket), It.IsAny<string>(), It.IsAny<Func<Basket>>()),
-            Times.Never);
     }
 }

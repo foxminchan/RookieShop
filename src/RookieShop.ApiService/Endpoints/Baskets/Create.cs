@@ -29,7 +29,7 @@ public sealed class Create(ISender sender) : IEndpoint<Created<CreateBasketRespo
     public async Task<Created<CreateBasketResponse>> HandleAsync(CreateBasketRequest request,
         CancellationToken cancellationToken = default)
     {
-        CreateBasketCommand command = new(request.AccountId, request.BasketDetails);
+        CreateBasketCommand command = new(request.AccountId, request.ProductId, request.Quantity, request.Price);
 
         var result = await sender.Send(command, cancellationToken);
 

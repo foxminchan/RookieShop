@@ -28,15 +28,7 @@
 
                 @if (Model.Quantity > 0)
                 {
-                    <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                        <a
-                            href="#"
-                            class="text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center"
-                            role="button">
-                            <img asp-append-version="true" loading="lazy" class="w-5 h-5 -ms-2 me-2" src="~/imgs/product/cart.svg" alt="cart"/>
-                            Add to cart
-                        </a>
-                    </div>
+                    @await Component.InvokeAsync("AddToCart", new { ProductId = Model.Id, Price = Model.PriceSale })
                 }
                 else
                 {

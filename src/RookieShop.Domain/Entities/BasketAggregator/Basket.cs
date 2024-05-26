@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 
 namespace RookieShop.Domain.Entities.BasketAggregator;
 
@@ -22,16 +23,14 @@ public sealed class Basket(Guid accountId)
 
     public static class Factory
     {
-        public static Basket Create(Guid accountId, List<BasketDetail> basketDetails)
+        public static Basket Create(Guid accountId, ProductId productId, int quantity, decimal price)
         {
-            Basket basket = new(accountId);
-
-            Guard.Against.NullOrEmpty(basketDetails);
-
-            foreach (var basketDetail in basketDetails.Select(item => new BasketDetail(item.Id, item.Quantity, item.Price)))
+            Basket basket = new(accountId)
             {
-                basket.AddItems(basketDetail);
-            }
+                AccountId = accountId
+            };
+
+            basket.AddItems(new(productId, quantity, price));
 
             return basket;
         }

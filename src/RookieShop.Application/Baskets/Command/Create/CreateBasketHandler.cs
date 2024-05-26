@@ -12,7 +12,7 @@ public sealed class CreateBasketHandler(IRedisService redisService, ILogger<Crea
 {
     public async Task<Result<Guid>> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
     {
-        var basket = Basket.Factory.Create(request.AccountId, request.BasketDetails);
+        var basket = Basket.Factory.Create(request.AccountId, request.ProductId, request.Quantity, request.Price);
 
         logger.LogInformation("[{Command}] - Creating basket for account {AccountId} with {@Basket}",
             nameof(CreateBasketCommand), request.AccountId, JsonSerializer.Serialize(basket));

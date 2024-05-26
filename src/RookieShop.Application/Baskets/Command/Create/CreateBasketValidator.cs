@@ -9,19 +9,13 @@ public sealed class CreateBasketValidator : AbstractValidator<CreateBasketComman
         RuleFor(x => x.AccountId)
             .NotEmpty();
 
-        RuleFor(x => x.BasketDetails)
-            .ForEach(d =>
-                d.ChildRules(b =>
-                {
-                    b.RuleFor(x => x.Id)
-                        .NotEmpty();
-
-                    b.RuleFor(x => x.Quantity)
-                        .GreaterThan(0);
-
-                    b.RuleFor(x => x.Price)
-                        .GreaterThanOrEqualTo(0);
-                }))
+        RuleFor(x => x.ProductId)
             .NotEmpty();
+
+        RuleFor(x => x.Quantity)
+            .GreaterThan(0);
+
+        RuleFor(x => x.Price)
+            .GreaterThanOrEqualTo(0);
     }
 }

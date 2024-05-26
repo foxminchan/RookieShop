@@ -10,15 +10,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Polly" />
-		<PackageReference Include="Polly.Extensions" />
 		<PackageReference Include="Refit.HttpClientFactory" />
-		<PackageReference Include="AspNetCore.HealthChecks.Uris" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Ardalis.Result.AspNetCore" />
 		<PackageReference Include="LigerShark.WebOptimizer.Core" />
+		<PackageReference Include="AspNetCore.HealthChecks.Uris" />
 	</ItemGroup>
 
 	<ItemGroup>
