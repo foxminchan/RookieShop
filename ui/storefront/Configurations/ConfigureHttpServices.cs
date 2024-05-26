@@ -15,8 +15,6 @@ public static class ConfigureHttpServices
     {
         Guard.Against.NullOrEmpty(apiEndpoint);
 
-        builder.Services.TryAddTransient<RetryDelegate>();
-
         builder.Services.TryAddTransient<LoggingDelegate>();
 
         builder.Services.TryAddTransient<AuthorizeDelegate>();
@@ -38,7 +36,6 @@ public static class ConfigureHttpServices
                     CollectionFormat = CollectionFormat.Multi
                 })
                 .ConfigureHttpClient(c => c.BaseAddress = new(apiEndpoint))
-                .AddHttpMessageHandler<RetryDelegate>()
                 .AddHttpMessageHandler<LoggingDelegate>()
                 .AddHttpMessageHandler<AuthorizeDelegate>();
         }

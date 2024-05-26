@@ -59,9 +59,7 @@ Build an e-commerce web site with minimum functionality below:
 
 ## Project Progress Report
 
-| Checkpoint | Demo video | Report | Presentation |
-| ---------- | ---------- | ------ | ------------ |
-| 1          |            |        |              |
+- [Checkpoint (26/05/2024)](https://1drv.ms/f/c/68d538396ba820a0/EqzzVkU11xdBvUViwZy9BN4BsblxrWbbopKxs9olVDvzEw?e=JWMaRB)
 
 ## Technical Stack
 

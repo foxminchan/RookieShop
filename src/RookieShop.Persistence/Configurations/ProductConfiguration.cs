@@ -55,8 +55,5 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
 
         builder.Navigation(e => e.Category)
             .AutoInclude();
-
-        builder.Navigation(p => p.Feedbacks)
-            .AutoInclude();
     }
 }

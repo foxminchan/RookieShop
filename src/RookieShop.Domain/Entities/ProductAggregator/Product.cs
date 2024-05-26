@@ -43,7 +43,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public CategoryId? CategoryId { get; set; }
     public Category? Category { get; set; }
     public ICollection<OrderDetail>? OrderDetails { get; set; } = [];
-    public IReadOnlyCollection<Feedback>? Feedbacks { get; set; } = [];
+    public ICollection<Feedback>? Feedbacks { get; set; } = [];
     public bool IsDeleted { get; set; }
 
     public void Delete() => IsDeleted = true;
