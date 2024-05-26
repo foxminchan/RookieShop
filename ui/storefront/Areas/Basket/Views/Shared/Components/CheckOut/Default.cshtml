@@ -1,46 +1,125 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using RookieShop.Storefront.Areas.Basket.Models
+@model RookieShop.Storefront.Areas.Order.Models.OrderRequest
+
 <form>
-    <label class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+    <label asp-for="Street" class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
         Street
     </label>
     <div class="flex pb-4 w-full">
         <div class="relative w-full">
             <input type="text"
+                   asp-for="Street"
                    class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
-                   placeholder="Cong Hoa" required />
+                   placeholder="Cong Hoa" required/>
         </div>
     </div>
-    <label class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+    <label asp-for="City" class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
         City
     </label>
     <div class="flex pb-4 w-full">
         <div class="relative w-full">
             <input type="text"
+                   asp-for="City"
                    class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
-                   placeholder="Tan Binh" required />
+                   placeholder="Tan Binh" required/>
         </div>
     </div>
-    <label class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+    <label asp-for="Province" class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
         Province
     </label>
     <div class="flex pb-4 w-full">
         <div class="relative w-full">
             <input type="text"
+                   asp-for="Province"
                    class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
-                   placeholder="Ho Chi Minh" required />
+                   placeholder="Ho Chi Minh" required/>
         </div>
     </div>
-    <label class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+    <label asp-for="PaymentMethod" class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
         Payment Method
     </label>
-    <div class="flex pb-4 w-full">
-        <div class="relative w-full">
-            <select type="text"
-                    class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400">
-                <option value="@PaymentMethod.Cash">@PaymentMethod.Cash</option>
-                <option value="@PaymentMethod.Card">@PaymentMethod.Card</option>
-            </select>
+    <div class="mb-3 flex -mx-2">
+        <div class="px-2">
+            <label asp-for="PaymentMethod" class="flex items-center cursor-pointer">
+                <input asp-for="PaymentMethod" type="radio" class="form-radio h-5 w-5 text-indigo-500" id="type1" value="@PaymentMethod.Cash" checked/>
+                <img loading="lazy" src="~/imgs/payment/dollar.png" class="h-8 ml-3" alt="Cash" asp-append-version="true"/>
+            </label>
+        </div>
+        <div class="px-2">
+            <label asp-for="PaymentMethod" class="flex items-center cursor-pointer">
+                <input asp-for="PaymentMethod" type="radio" class="form-radio h-5 w-5 text-indigo-500" id="type2" value="@PaymentMethod.Card"/>
+                <img loading="lazy" src="~/imgs/payment/stripe.png" class="h-8 ml-3" alt="Stripe" asp-append-version="true"/>
+            </label>
+        </div>
+    </div>
+    <div id="card-info-section">
+        <label asp-for="CardHolderName" class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+            Holder Name
+        </label>
+        <div class="flex pb-4 w-full">
+            <div class="relative w-full">
+                <input type="text"
+                       asp-for="CardHolderName"
+                       class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
+                       placeholder="John Smith"/>
+            </div>
+        </div>
+        <label asp-for="CardNumber" class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+            Card Number
+        </label>
+        <div class="flex pb-4 w-full">
+            <div class="relative w-full">
+                <input type="text"
+                       asp-for="CardNumber"
+                       class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
+                       placeholder="0000 0000 0000"/>
+            </div>
+        </div>
+        <label asp-for="ExpiryMonth" class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+            Expiration Date
+        </label>
+        <div class="mb-3 flex -mx-2">
+            <div class="px-2 w-full">
+                <div class="relative w-full">
+                    <select asp-for="ExpiryMonth" class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400">
+                        <option value="01">01 - Jan</option>
+                        <option value="02">02 - Feb</option>
+                        <option value="03">03 - Mar</option>
+                        <option value="04">04 - Apr</option>
+                        <option value="05">05 - May</option>
+                        <option value="06">06 - June</option>
+                        <option value="07">07 - July</option>
+                        <option value="08">08 - Aug</option>
+                        <option value="09">09 - Sep</option>
+                        <option value="10">10 - Oct</option>
+                        <option value="11">11 - Nov</option>
+                        <option value="12">12 - Dec</option>
+                    </select>
+                </div>
+            </div>
+            <div class="px-2 w-full">
+                <div class="relative w-full">
+                    <select asp-for="ExpiryYear" class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400">
+                        @for (var value = DateTime.Now.Year; value < DateTime.Now.Year + 10; value++)
+                        {
+                            var year = value;
+                            <option value="@value">@year</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <label asp-for="Cvc" class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+            CVC/CVV
+        </label>
+        <div class="flex pb-4 w-full">
+            <div class="relative w-full">
+                <input type="text"
+                       asp-for="Cvc"
+                       class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
+                       placeholder="xxx"/>
+            </div>
         </div>
     </div>
     <button class="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">

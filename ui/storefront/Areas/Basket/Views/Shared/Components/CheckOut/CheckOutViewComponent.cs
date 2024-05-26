@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RookieShop.Storefront.Areas.Order.Models;
 
 namespace RookieShop.Storefront.Areas.Basket.Views.Shared.Components.CheckOut;
 
@@ -7,6 +8,7 @@ public sealed class CheckOutViewComponent : ViewComponent
 {
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        return View();
+        OrderRequest orderRequest = new();
+        return View(orderRequest);
     }
 }

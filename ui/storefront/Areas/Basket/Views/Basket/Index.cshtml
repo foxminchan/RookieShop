@@ -62,3 +62,18 @@ else
 {
     <partial name="_EmptyCartPartial"/>
 }
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#card-info-section').hide();
+            $('input[type=radio][name=PaymentMethod]').change(function () {
+                if (this.value === 'Card') {
+                    $('#card-info-section').show();
+                } else {
+                    $('#card-info-section').hide();
+                }
+            });
+        });
+    </script>
+}
