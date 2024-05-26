@@ -7,7 +7,7 @@ public interface IRedisService
     Task<T> GetOrSetAsync<T>(string key, Func<T> valueFactory);
 
     Task<T> GetOrSetAsync<T>(string key, Func<T> valueFactory, TimeSpan expiration);
-    
+
     Task<T?> HashGetAsync<T>(string key, string hashKey);
 
     Task<T> HashSetAsync<T>(string key, string hashKey, T value);

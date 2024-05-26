@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
-using RookieShop.Application.Orders.Command.Delete;
+using RookieShop.Application.Orders.Commands.Delete;
 using RookieShop.Domain.Entities.OrderAggregator.Primitives;
 using RookieShop.Infrastructure.Endpoints.Abstractions;
 using RookieShop.Infrastructure.RateLimiter;

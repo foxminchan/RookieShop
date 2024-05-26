@@ -16,6 +16,7 @@ public sealed class CalculateRatingWorker : CronJobBackgroundService
         _logger = logger;
         _serviceProvider = serviceProvider;
         Cron = "0 0 0 * * ?"; // Run at midnight
+        // Cron = "0 */1 * * * ?"; // Run every minute
     }
 
     protected override async Task DoWork(CancellationToken stoppingToken)

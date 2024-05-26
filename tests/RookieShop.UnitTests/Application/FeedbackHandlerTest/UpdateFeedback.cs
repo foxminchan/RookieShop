@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Microsoft.Extensions.Logging;
-using RookieShop.Application.Feedbacks.Command.Update;
+using RookieShop.Application.Feedbacks.Commands.Update;
 using RookieShop.Domain.Entities.FeedbackAggregator;
 using RookieShop.Domain.Entities.FeedbackAggregator.Primitives;
 using RookieShop.Domain.SharedKernel;

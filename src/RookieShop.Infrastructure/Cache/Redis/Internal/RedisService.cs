@@ -8,13 +8,12 @@ namespace RookieShop.Infrastructure.Cache.Redis.Internal;
 
 public sealed class RedisService(IConfiguration configuration) : IRedisService
 {
+    private const int DefaultExpirationTime = 3600;
     private readonly SemaphoreSlim _connectionLock = new(1, 1);
 
     private readonly Lazy<ConnectionMultiplexer> _connectionMultiplexer = new(() =>
         ConnectionMultiplexer.Connect(configuration.GetConnectionString("redis")
                                       ?? throw new InvalidOperationException()));
-
-    private const int DefaultExpirationTime = 3600;
 
     private ConnectionMultiplexer ConnectionMultiplexer => _connectionMultiplexer.Value;
 
@@ -69,8 +68,8 @@ public sealed class RedisService(IConfiguration configuration) : IRedisService
 
         var value = await Database.HashGetAsync(key, hashKey.ToLower());
 
-        return !value.IsNull 
-            ? GetByteToObject<T>(value) 
+        return !value.IsNull
+            ? GetByteToObject<T>(value)
             : default;
     }
 
@@ -85,16 +84,16 @@ public sealed class RedisService(IConfiguration configuration) : IRedisService
         return value;
     }
 
+    public async Task HashRemoveAsync(string key, string hashKey)
+        => await Database.HashDeleteAsync(key, hashKey.ToLower());
+
+    public async Task RemoveAsync(string key) => await Database.KeyDeleteAsync(key);
+
     public async Task<IEnumerable<T>> GetValuesAsync<T>(string key)
     {
         var values = await Database.HashGetAllAsync(key);
         return values.Select(x => GetByteToObject<T>(x.Value)).ToArray();
     }
-
-    public async Task HashRemoveAsync(string key, string hashKey)
-        => await Database.HashDeleteAsync(key, hashKey.ToLower());
-
-    public async Task RemoveAsync(string key) => await Database.KeyDeleteAsync(key);
 
     private static T GetByteToObject<T>(RedisValue value)
     {

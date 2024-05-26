@@ -4,9 +4,10 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RookieShop.Application.Orders.Services;
-using RookieShop.Application.Orders.Worker;
+using RookieShop.Application.Orders.Workers;
 using RookieShop.Application.Products.Services;
 using RookieShop.Application.Products.Workers;
+using RookieShop.Infrastructure.Cache;
 using RookieShop.Infrastructure.Logging;
 using RookieShop.Infrastructure.Validator;
 using RookieShop.Persistence;
@@ -37,6 +38,7 @@ public static class Extension
                     ServiceLifetime.Scoped);
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TxBehavior<,>),
                     ServiceLifetime.Scoped);
+                cfg.AddOpenBehavior(typeof(QueryCachingBehavior<,>));
             });
 
         builder.Services.AddScoped<IOrderService, OrderService>();

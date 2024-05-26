@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
-using RookieShop.Application.Baskets.Command.DeleteItem;
+using RookieShop.Application.Baskets.Commands.DeleteItem;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Infrastructure.Endpoints.Abstractions;
 using RookieShop.Infrastructure.RateLimiter;

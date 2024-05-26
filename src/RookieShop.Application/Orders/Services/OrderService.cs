@@ -1,4 +1,4 @@
-﻿using RookieShop.Application.Orders.Command.Create;
+﻿using RookieShop.Application.Orders.Commands.Create;
 using RookieShop.Domain.Entities.BasketAggregator;
 using RookieShop.Domain.Entities.CustomerAggregator;
 using RookieShop.Infrastructure.Merchant.Stripe;

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.ApiService.Filters;
-using RookieShop.Application.Baskets.Command.Create;
+using RookieShop.Application.Baskets.Commands.Create;
 using RookieShop.Domain.Constants;
 using RookieShop.Infrastructure.Endpoints.Abstractions;
 using RookieShop.Infrastructure.RateLimiter;

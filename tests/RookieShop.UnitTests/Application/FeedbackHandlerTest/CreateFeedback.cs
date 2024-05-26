@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using RookieShop.Application.Feedbacks.Command.Create;
+using RookieShop.Application.Feedbacks.Commands.Create;
 using RookieShop.Domain.Entities.FeedbackAggregator;
 using RookieShop.Domain.SharedKernel;
 

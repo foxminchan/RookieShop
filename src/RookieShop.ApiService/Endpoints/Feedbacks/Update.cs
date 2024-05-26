@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using RookieShop.ApiService.ViewModels.Feedbacks;
-using RookieShop.Application.Feedbacks.Command.Update;
+using RookieShop.Application.Feedbacks.Commands.Update;
 using RookieShop.Infrastructure.Endpoints.Abstractions;
 using RookieShop.Infrastructure.RateLimiter;
 

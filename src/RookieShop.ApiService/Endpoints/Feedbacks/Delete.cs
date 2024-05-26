@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
-using RookieShop.Application.Feedbacks.Command.Delete;
+using RookieShop.Application.Feedbacks.Commands.Delete;
 using RookieShop.Domain.Entities.FeedbackAggregator.Primitives;
 using RookieShop.Infrastructure.Endpoints.Abstractions;
 using RookieShop.Infrastructure.RateLimiter;

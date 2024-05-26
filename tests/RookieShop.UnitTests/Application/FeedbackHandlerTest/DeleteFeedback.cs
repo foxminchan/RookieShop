@@ -1,5 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using RookieShop.Application.Feedbacks.Command.Delete;
+using RookieShop.Application.Feedbacks.Commands.Delete;
 using RookieShop.Domain.Entities.FeedbackAggregator;
 using RookieShop.Domain.Entities.FeedbackAggregator.Primitives;
 using RookieShop.Domain.SharedKernel;

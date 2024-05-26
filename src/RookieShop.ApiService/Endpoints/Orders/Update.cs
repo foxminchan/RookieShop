@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RookieShop.ApiService.Filters;
 using RookieShop.ApiService.ViewModels.Orders;
-using RookieShop.Application.Orders.Command.Update;
+using RookieShop.Application.Orders.Commands.Update;
 using RookieShop.Domain.Constants;
 using RookieShop.Infrastructure.Endpoints.Abstractions;
 using RookieShop.Infrastructure.RateLimiter;
