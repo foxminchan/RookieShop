@@ -71,7 +71,8 @@ public static class SeedData
                 UserName = "nguyenxuannhan407@gmail.com",
                 Email = "nguyenxuannhan407@gmail.com",
                 EmailConfirmed = true,
-                PhoneNumber = "1234567890"
+                PhoneNumber = "1234567890",
+                LockoutEnabled = false
             };
 
             var result = userMgr.CreateAsync(nhan, "NashTech@2024").Result;
@@ -106,7 +107,8 @@ public static class SeedData
                 UserName = "nguyenxuannhan.dev@gmail.com",
                 Email = "nguyenxuannhan.dev@gmail.com",
                 EmailConfirmed = true,
-                PhoneNumber = "1234567890"
+                PhoneNumber = "1234567890",
+                LockoutEnabled = false
             };
 
             var result = userMgr.CreateAsync(fox, "NashTech@2024").Result;

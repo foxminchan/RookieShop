@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using RookieShop.Storefront.Areas.User.Models;
 using RookieShop.Storefront.Areas.User.Services;
 
 namespace RookieShop.Storefront.Middlewares;
@@ -22,7 +23,22 @@ public sealed class CustomerInfoMiddleware(IHttpContextAccessor httpContextAcces
             return;
         }
 
-        var customer = await customerService.GetCustomerByAccountAsync(Guid.Parse(userId));
+        if (context.Items.ContainsKey("Customer"))
+        {
+            await next(context);
+            return;
+        }
+
+        CustomerViewModel? customer;
+
+        try
+        {
+            customer = await customerService.GetCustomerByAccountAsync(Guid.Parse(userId));
+        }
+        catch (Exception)
+        {
+            customer = null;
+        }
 
         if (customer is null) context.Response.Redirect("/User/Customer");
 

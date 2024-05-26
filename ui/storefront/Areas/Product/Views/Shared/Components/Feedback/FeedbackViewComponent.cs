@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RookieShop.Storefront.Areas.Product.Models.Feedbacks;
 using RookieShop.Storefront.Areas.User.Models;
-using RookieShop.Storefront.Areas.User.Services;
 
 namespace RookieShop.Storefront.Areas.Product.Views.Shared.Components.Feedback;
 

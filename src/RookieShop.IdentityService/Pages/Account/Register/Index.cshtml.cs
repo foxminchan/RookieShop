@@ -1,3 +1,4 @@
+using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,9 @@ public sealed class Index(UserManager<ApplicationUser> userManager) : PageModel
         user = new()
         {
             UserName = Input.Username,
-            PhoneNumber = Input.PhoneNumber
+            Email = Input.Username,
+            PhoneNumber = Input.PhoneNumber,
+            EmailConfirmed = true
         };
 
         var result = await userManager.CreateAsync(user, Input.Password);
@@ -58,6 +61,12 @@ public sealed class Index(UserManager<ApplicationUser> userManager) : PageModel
 
             return Page();
         }
+
+        await userManager.AddClaimsAsync(user,
+        [
+            new(JwtClaimTypes.PhoneNumber, user.PhoneNumber),
+            new(JwtClaimTypes.Email, user.Email)
+        ]);
 
         await userManager.AddToRoleAsync(user, "user");
 
