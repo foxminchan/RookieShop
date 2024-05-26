@@ -14,6 +14,12 @@ public sealed class DeleteItemHandler(IRedisService redisService) : ICommandHand
 
         Guard.Against.NotFound(request.AccountId, basket);
 
+        if (basket.BasketDetails.Count == 1)
+        {
+            await redisService.HashRemoveAsync(nameof(Basket), request.AccountId.ToString());
+            return Result.Success();
+        }
+
         var basketDetail = basket.BasketDetails.First(x => x.Id == request.ProductId);
 
         basketDetail.Quantity = 0;
