@@ -13,6 +13,7 @@
 		<PackageReference Include="Refit.HttpClientFactory" />
 		<PackageReference Include="Ardalis.Result.AspNetCore" />
 		<PackageReference Include="LigerShark.WebOptimizer.Core" />
+		<PackageReference Include="WebEssentials.AspNetCore.PWA" />
 		<PackageReference Include="AspNetCore.HealthChecks.Uris" />
 	</ItemGroup>
 

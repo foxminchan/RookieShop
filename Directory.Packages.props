@@ -101,6 +101,7 @@
 		<PackageVersion Include="Quartz.Extensions.Hosting" Version="3.9.0" />
 		<PackageVersion Include="SonarAnalyzer.CSharp" Version="9.25.1.91650" />
 		<PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageVersion Include="WebEssentials.AspNetCore.PWA" Version="1.0.85" />
 		<PackageVersion Include="LigerShark.WebOptimizer.Core" Version="3.0.405" />
 		<PackageVersion Include="Duende.IdentityServer.AspNetIdentity" Version="7.0.4" />
 		<PackageVersion Include="MicroElements.Swashbuckle.FluentValidation" Version="6.0.0" />

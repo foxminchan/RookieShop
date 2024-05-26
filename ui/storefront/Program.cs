@@ -46,6 +46,8 @@ builder.Services.AddMvc(options =>
     options.Conventions.Add(new RouteTokenTransformerConvention(new RookieShop.Storefront.SlugifyParameterTransformer()));
 });
 
+builder.Services.AddProgressiveWebApp();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
