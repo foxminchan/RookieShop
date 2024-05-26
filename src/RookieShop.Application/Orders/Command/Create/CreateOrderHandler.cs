@@ -31,10 +31,7 @@ public sealed class CreateOrderHandler(
         var customer = await customerRepository.FirstOrDefaultAsync(spec, cancellationToken);
         Guard.Against.NotFound(request.AccountId, customer);
 
-        var basket = await redisService.HashGetOrSetAsync<Basket>(
-            nameof(Basket),
-            request.AccountId.ToString(),
-            () => null!);
+        var basket = await redisService.HashGetAsync<Basket>(nameof(Basket), request.AccountId.ToString());
         Guard.Against.NotFound(request.AccountId, basket);
 
         var orderDetails = basket.BasketDetails

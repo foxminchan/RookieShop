@@ -8,19 +8,6 @@ namespace RookieShop.Infrastructure.Cache.Redis.Internal;
 
 public sealed class RedisService(IConfiguration configuration) : IRedisService
 {
-    private const string GetKeysLuaScript = """
-                                                local pattern = ARGV[1]
-                                                local keys = redis.call('KEYS', pattern)
-                                                return keys
-                                            """;
-
-    private const string ClearCacheLuaScript = """
-                                                   local pattern = ARGV[1]
-                                                   for _,k in ipairs(redis.call('KEYS', pattern)) do
-                                                       redis.call('DEL', k)
-                                                   end
-                                               """;
-
     private readonly SemaphoreSlim _connectionLock = new(1, 1);
 
     private readonly Lazy<ConnectionMultiplexer> _connectionMultiplexer = new(() =>
@@ -74,7 +61,7 @@ public sealed class RedisService(IConfiguration configuration) : IRedisService
             : default;
     }
 
-    public async Task<T> HashGetOrSetAsync<T>(string key, string hashKey, Func<T> valueFactory)
+    public async Task<T> HashGetAsync<T>(string key, string hashKey)
     {
         Guard.Against.NullOrEmpty(key);
 
@@ -82,22 +69,18 @@ public sealed class RedisService(IConfiguration configuration) : IRedisService
 
         var value = await Database.HashGetAsync(key, hashKey.ToLower());
 
-        if (!string.IsNullOrEmpty(value)) return GetByteToObject<T>(value);
-
-        if (valueFactory() is not null)
-            await Database.HashSetAsync(key, hashKey.ToLower(),
-                JsonSerializer.Serialize(valueFactory()));
-
-        return valueFactory();
+        return GetByteToObject<T>(value);
     }
 
-    public async Task<IEnumerable<string>> GetKeysAsync(string pattern)
+    public async Task<T> HashSetAsync<T>(string key, string hashKey, T value)
     {
-        var keys = await Database.ScriptEvaluateAsync(GetKeysLuaScript, values: [pattern]);
+        Guard.Against.NullOrEmpty(key);
 
-        return ((RedisResult[])keys!)
-            .Select(x => x.ToString())
-            .ToArray();
+        Guard.Against.NullOrEmpty(hashKey);
+
+        await Database.HashSetAsync(key, hashKey.ToLower(), JsonSerializer.Serialize(value));
+
+        return value;
     }
 
     public async Task<IEnumerable<T>> GetValuesAsync<T>(string key)
@@ -106,26 +89,10 @@ public sealed class RedisService(IConfiguration configuration) : IRedisService
         return values.Select(x => GetByteToObject<T>(x.Value)).ToArray();
     }
 
-    public async Task<bool> RemoveAllKeysAsync(string pattern = "*")
-    {
-        var succeed = true;
-
-        var keys = await GetKeysAsync(pattern);
-        foreach (var key in keys) succeed = await Database.KeyDeleteAsync(key);
-
-        return succeed;
-    }
-
     public async Task HashRemoveAsync(string key, string hashKey)
         => await Database.HashDeleteAsync(key, hashKey.ToLower());
 
     public async Task RemoveAsync(string key) => await Database.KeyDeleteAsync(key);
-
-    public async Task ResetAsync()
-        => await Database.ScriptEvaluateAsync(
-            ClearCacheLuaScript,
-            values: ["*"],
-            flags: CommandFlags.FireAndForget);
 
     private static T GetByteToObject<T>(RedisValue value)
     {

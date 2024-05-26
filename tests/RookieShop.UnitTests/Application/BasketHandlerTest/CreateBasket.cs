@@ -26,7 +26,7 @@ public sealed class CreateBasket
         var command = new CreateBasketCommand(
             Guid.NewGuid(), new(Guid.NewGuid()), 3, 1000);
         _redisMock.Setup(repo =>
-                repo.HashGetOrSetAsync(nameof(Basket), It.IsAny<string>(), It.IsAny<Func<Basket>>()))
+                repo.HashSetAsync(nameof(Basket), It.IsAny<string>(), It.IsAny<Func<Basket>>()))
             .ReturnsAsync(CreateBasketEntity);
 
         // Act
@@ -35,7 +35,7 @@ public sealed class CreateBasket
         // Assert
         result.IsSuccess.Should().BeTrue();
         _redisMock.Verify(repo =>
-                repo.HashGetOrSetAsync(nameof(Basket), It.IsAny<string>(), It.IsAny<Func<Basket>>()),
+                repo.HashSetAsync(nameof(Basket), It.IsAny<string>(), It.IsAny<Func<Basket>>()),
             Times.Once);
     }
 }

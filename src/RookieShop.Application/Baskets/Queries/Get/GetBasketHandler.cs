@@ -11,10 +11,7 @@ public sealed class GetBasketHandler(IRedisService redisService) : IQueryHandler
 {
     public async Task<Result<BasketDto>> Handle(GetBasketQuery request, CancellationToken cancellationToken)
     {
-        var basket = await redisService.HashGetOrSetAsync<Basket>(
-            nameof(Basket),
-            request.AccountId.ToString(),
-            () => null!);
+        var basket = await redisService.HashGetAsync<Basket>(nameof(Basket), request.AccountId.ToString());
 
         Guard.Against.NotFound(request.AccountId, basket);
 

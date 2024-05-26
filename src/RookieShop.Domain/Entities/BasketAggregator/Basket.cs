@@ -18,7 +18,14 @@ public sealed class Basket(Guid accountId)
 
         var basketDetail = BasketDetails.FirstOrDefault(x => x.Id == basketDetails.Id);
 
-        basketDetail?.Update(basketDetails.Quantity, basketDetails.Price);
+        if (basketDetail is not null)
+        {
+            basketDetail.Update(basketDetails.Quantity, basketDetails.Price);
+        }
+        else
+        {
+            AddItems(basketDetails);
+        }
     }
 
     public static class Factory
@@ -34,5 +41,17 @@ public sealed class Basket(Guid accountId)
 
             return basket;
         }
+    }
+
+    public Basket MergeBasket(Basket basket)
+    {
+        Guard.Against.Null(basket);
+
+        foreach (var basketDetail in basket.BasketDetails)
+        {
+            UpdateBasketDetails(basketDetail);
+        }
+
+        return this;
     }
 }

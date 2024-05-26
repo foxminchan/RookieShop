@@ -17,11 +17,19 @@ public sealed class CreateBasketHandler(IRedisService redisService, ILogger<Crea
         logger.LogInformation("[{Command}] - Creating basket for account {AccountId} with {@Basket}",
             nameof(CreateBasketCommand), request.AccountId, JsonSerializer.Serialize(basket));
 
-        var result = await redisService.HashGetOrSetAsync(
-            nameof(Basket),
-            basket.AccountId.ToString(),
-            () => basket);
+        var existingBasket = await redisService.HashGetAsync<Basket?>(nameof(Basket), request.AccountId.ToString());
 
-        return result.AccountId;
+        if (existingBasket is not null)
+        {
+            basket.UpdateBasketDetails(new(request.ProductId, request.Quantity, request.Price));
+            basket = existingBasket.MergeBasket(basket);
+            await redisService.HashSetAsync(nameof(Basket), request.AccountId.ToString(), basket);
+        }
+        else
+        {
+            basket = await redisService.HashSetAsync(nameof(Basket), basket.AccountId.ToString(), basket);
+        }
+
+        return basket.AccountId;
     }
 }
