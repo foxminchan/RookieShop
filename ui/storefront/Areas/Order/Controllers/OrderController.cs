@@ -17,11 +17,21 @@ public class OrderController(IOrderService orderService) : Controller
         OrderFilterParams filterParams = new()
         {
             PageNumber = 1,
-            CustomerId = customer.AccountId
+            CustomerId = customer.Id
         };
 
         var orders = await orderService.ListOrdersAsync(filterParams);
 
         return View(orders);
+    }
+
+    public async Task<IActionResult> ConfirmOrder(Guid orderId)
+    {
+        if (!ModelState.IsValid)
+            return RedirectToAction("Index", "Order", new { area = "Order" });
+
+        var order = await orderService.GetOrderByIdAsync(orderId);
+
+        return View(order);
     }
 }

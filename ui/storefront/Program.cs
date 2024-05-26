@@ -38,12 +38,12 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddScoped<CustomerInfoMiddleware>();
 
-builder.Services.AddRouting(options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer));
+builder.Services.AddRouting(options => options.ConstraintMap["slugify"] = typeof(RookieShop.Storefront.SlugifyParameterTransformer));
 
 builder.Services.AddMvc(options =>
 {
     options.EnableEndpointRouting = false;
-    options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
+    options.Conventions.Add(new RouteTokenTransformerConvention(new RookieShop.Storefront.SlugifyParameterTransformer()));
 });
 
 var app = builder.Build();

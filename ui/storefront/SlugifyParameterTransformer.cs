@@ -2,14 +2,20 @@
 
 namespace RookieShop.Storefront;
 
-public sealed class SlugifyParameterTransformer : IOutboundParameterTransformer
+public sealed partial class SlugifyParameterTransformer : IOutboundParameterTransformer
 {
+    [GeneratedRegex("([a-z])([A-Z])")]
+    private static partial Regex Slug();
+
     public string? TransformOutbound(object? value)
     {
-        if (value == null) { return null; }
+        if (value is null)
+            return null;
+
         var str = value.ToString();
-        return string.IsNullOrEmpty(str) 
-            ? null 
-            : Regex.Replace(str, "([a-z])([A-Z])", "$1-$2").ToLower();
+
+        return string.IsNullOrEmpty(str)
+            ? null
+            : Slug().Replace(str, "$1-$2").ToLowerInvariant();
     }
 }

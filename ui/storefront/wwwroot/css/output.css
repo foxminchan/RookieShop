@@ -2095,6 +2095,10 @@ video {
   --tw-shadow: var(--tw-shadow-colored);
 }
 
+.focus\:z-10:focus {
+  z-index: 10;
+}
+
 .focus\:border-indigo-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(99 102 241 / var(--tw-border-opacity));
@@ -2142,6 +2146,11 @@ video {
 .focus\:ring-blue-300:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(147 197 253 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-gray-100:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(243 244 246 / var(--tw-ring-opacity));
 }
 
 .focus\:ring-gray-200:focus {
@@ -2392,6 +2401,12 @@ video {
     gap: 1.5rem;
   }
 
+  .sm\:space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+  }
+
   .sm\:rounded-lg {
     border-radius: 0.5rem;
   }
@@ -2421,6 +2436,10 @@ video {
 
   .sm\:text-center {
     text-align: center;
+  }
+
+  .sm\:text-end {
+    text-align: end;
   }
 
   .sm\:text-2xl {
@@ -2490,6 +2509,10 @@ video {
 
   .md\:my-8 {
     margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .md\:mb-8 {
     margin-bottom: 2rem;
   }
 

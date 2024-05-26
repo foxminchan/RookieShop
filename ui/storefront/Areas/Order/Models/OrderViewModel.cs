@@ -25,7 +25,7 @@ public sealed class OrderViewModel
 
     [JsonPropertyName("customerId")] public Guid CustomerId { get; set; }
 
-    [JsonPropertyName("status")] public OrderStatus Status { get; set; }
+    [JsonPropertyName("orderStatus")] public OrderStatus Status { get; set; }
 
     [JsonPropertyName("createdDate")] public DateTime CreatedDate { get; set; }
 

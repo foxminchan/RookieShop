@@ -6,6 +6,7 @@ namespace RookieShop.Storefront.Areas.Product.Models.Feedbacks;
 public sealed class FeedbackRequest
 {
     [AliasAs("rating")]
+    [Required(ErrorMessage = "Rating is required")]
     [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
     public int Rating { get; set; }
 
