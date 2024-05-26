@@ -50,9 +50,9 @@ public sealed class CreateOrderHandler(
                 "[{Command}] - Creating order for account {AccountId} with {@Order}",
                 nameof(CreateOrderCommand), request.AccountId, JsonSerializer.Serialize(newOrder));
 
-            order = await orderRepository.AddAsync(newOrder, cancellationToken);
+            newOrder.AddOrderDetail(request.AccountId, newOrder, customer.Email);
 
-            order.AddOrderDetail(request.AccountId, order, customer.Email);
+            order = await orderRepository.AddAsync(newOrder, cancellationToken);
         }
 
         return order.Id;

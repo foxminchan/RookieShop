@@ -24,8 +24,7 @@ public static class Extension
         Guard.Against.Null(smtpSettings);
 
         builder.Services.AddFluentEmail(smtpSettings.Email, nameof(RookieShop))
-            .AddSmtpSender(smtpSettings.Host, smtpSettings.Port, smtpSettings.Email, smtpSettings.Secret)
-            .AddRazorRenderer();
+            .AddSmtpSender(smtpSettings.Host, smtpSettings.Port, smtpSettings.Email, smtpSettings.Secret);
 
         builder.ConfigureEmailService();
 

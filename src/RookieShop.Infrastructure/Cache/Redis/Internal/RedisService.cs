@@ -61,7 +61,7 @@ public sealed class RedisService(IConfiguration configuration) : IRedisService
             : default;
     }
 
-    public async Task<T> HashGetAsync<T>(string key, string hashKey)
+    public async Task<T?> HashGetAsync<T>(string key, string hashKey)
     {
         Guard.Against.NullOrEmpty(key);
 
@@ -69,7 +69,9 @@ public sealed class RedisService(IConfiguration configuration) : IRedisService
 
         var value = await Database.HashGetAsync(key, hashKey.ToLower());
 
-        return GetByteToObject<T>(value);
+        return !value.IsNull 
+            ? GetByteToObject<T>(value) 
+            : default;
     }
 
     public async Task<T> HashSetAsync<T>(string key, string hashKey, T value)

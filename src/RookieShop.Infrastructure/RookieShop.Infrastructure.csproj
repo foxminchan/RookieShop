@@ -13,7 +13,6 @@
 	<ItemGroup>
 		<PackageReference Include="Polly" />
 		<PackageReference Include="Polly.Extensions" />
-		<PackageReference Include="FluentEmail.Razor" />
 		<PackageReference Include="FluentEmail.Mailtrap" />
 	</ItemGroup>
 

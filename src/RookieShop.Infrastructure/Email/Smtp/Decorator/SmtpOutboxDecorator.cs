@@ -16,9 +16,8 @@ public sealed class SmtpOutboxDecorator(
 
         var emailOutbox = new EmailOutbox
         {
-            Model = emailMetadata.Model,
+            Body = emailMetadata.Body,
             Subject = emailMetadata.Subject,
-            Template = emailMetadata.Template,
             To = emailMetadata.To,
             Cc = emailMetadata.Cc,
             Bcc = emailMetadata.Bcc,

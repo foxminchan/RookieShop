@@ -15,7 +15,7 @@ public sealed class SmtpService(
         email = email
             .To(emailMetadata.To)
             .Subject(emailMetadata.Subject)
-            .UsingTemplate(emailMetadata.Template, emailMetadata.Model);
+            .Body(emailMetadata.Body);
 
         if (!string.IsNullOrWhiteSpace(emailMetadata.Bcc)) email = email.BCC(emailMetadata.Bcc);
 

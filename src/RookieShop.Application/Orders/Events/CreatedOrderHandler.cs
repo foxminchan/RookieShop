@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using RookieShop.Application.Orders.DTOs;
 using RookieShop.Domain.Entities.BasketAggregator;
 using RookieShop.Domain.Entities.OrderAggregator.Events;
 using RookieShop.Domain.Entities.OrderAggregator.IntegrationEvents;
@@ -17,9 +16,8 @@ public sealed class CreatedOrderHandler(IRedisService redisService, IEventBus ev
         await redisService.HashRemoveAsync(nameof(Basket), notification.AccountId.ToString());
 
         EmailMetadata metadata = new(
-            notification.Order.ToOrderDto(),
+            $"Thank you for your order {notification.Order.Id}!, Your order is being processed",
             "Order Confirmation",
-            $"{Directory.GetCurrentDirectory()}/Templates/Order.cshtml",
             notification.Email);
 
         await eventBus.PublishAsync(new OrderInvoiceIntegrationEvent<EmailMetadata>(Guid.NewGuid(), metadata),

@@ -17,9 +17,9 @@ public sealed class UpdateOrderHandler(IRepository<Order> repository)
 
         order.Update(request.OrderStatus);
 
-        await repository.UpdateAsync(order, cancellationToken);
-
         order.UpdateOrderStatus(order);
+
+        await repository.UpdateAsync(order, cancellationToken);
 
         return order.ToOrderDto();
     }

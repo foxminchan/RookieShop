@@ -55,7 +55,7 @@ public sealed class TxBehavior<TRequest, TResponse>(
             var tasks = domainEvents.Select(async
                 domainEvent =>
             {
-                await publisher.Publish(new EventWrapper(domainEvent), cancellationToken);
+                await publisher.Publish(domainEvent, cancellationToken);
 
                 logger.LogDebug(
                     "[{Behavior}] Published domain event {DomainEventName} with payload {DomainEventContent}",

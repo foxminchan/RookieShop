@@ -13,9 +13,8 @@ public sealed class UpdatedOrderHandler(ISmtpService smtpService) : INotificatio
         var order = notification.Order.ToOrderDto();
 
         EmailMetadata metadata = new(
-            order,
+            $"Your order {order.Id} has been updated to {order.OrderStatus}",
             "Order Status ",
-            $"{Directory.GetCurrentDirectory()}/Templates/Order.cshtml",
             notification.Order.Customer?.Email);
 
         await smtpService.SendEmailAsync(metadata, cancellationToken);
