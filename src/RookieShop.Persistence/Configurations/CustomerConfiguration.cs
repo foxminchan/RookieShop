@@ -42,42 +42,6 @@ public sealed class CustomerConfiguration : BaseConfiguration<Customer>
     {
         yield return new()
         {
-            Name = "John Doe",
-            Email = "john.doe@gmail.com",
-            Phone = "0123456789",
-            Gender = Gender.Male,
-            AccountId = null
-        };
-
-        yield return new()
-        {
-            Name = "William Smith",
-            Email = "william.smith@gmail.com",
-            Phone = "0123456789",
-            Gender = Gender.Male,
-            AccountId = null
-        };
-
-        yield return new()
-        {
-            Name = "Maria Garcia",
-            Email = "maria.garcia@gmail.com",
-            Phone = "0123456789",
-            Gender = Gender.Female,
-            AccountId = null
-        };
-
-        yield return new()
-        {
-            Name = "Anna Johnson",
-            Email = "anna.johnson@gmail.com",
-            Phone = "0123456789",
-            Gender = Gender.Female,
-            AccountId = null
-        };
-
-        yield return new()
-        {
             Name = "Nhan Nguyen",
             Email = "nguyenxuannhan407@gmail.com",
             Phone = "0123456789",
@@ -91,7 +55,7 @@ public sealed class CustomerConfiguration : BaseConfiguration<Customer>
             Email = "nguyenxuannhan.dev@gmail.com",
             Phone = "0123456789",
             Gender = Gender.Male,
-            AccountId = new("e5255692-c91f-43ba-937c-059895fd67a2")
+            AccountId = null
         };
     }
 }

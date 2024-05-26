@@ -37,51 +37,44 @@ public sealed class CategoryConfiguration : BaseConfiguration<Category>
     {
         yield return new()
         {
-            Name = "Book",
-            Description =
+            Name = "Books",
+            Description = 
                 "A book is a medium for recording information in the form of writing or images, typically composed of many pages bound together and protected by a cover."
         };
 
         yield return new()
         {
-            Name = "Clothes",
-            Description =
-                "Clothes are items worn on the body. They are typically made of fabrics or textiles but over time have included garments made from animal skin or other thin sheets of materials put together."
+            Name = "Toys",
+            Description = 
+                "A toy is an item that is used in play, especially one designed for such use. Playing with toys can be an enjoyable means of training young children for life in society."
         };
 
         yield return new()
         {
-            Name = "Electronics",
-            Description =
-                "Electronics comprises the physics, engineering, technology and applications that deal with the emission, flow and control of electrons in vacuum and matter."
+            Name = "Comics",
+            Description = 
+                "A comic book, also called comic magazine or (in the United Kingdom and Ireland) simply comic, is a publication that consists of comics art in the form of sequential juxtaposed panels that represent individual scenes."
         };
 
         yield return new()
         {
-            Name = "Furniture",
-            Description =
-                "Furniture refers to movable objects intended to support various human activities such as seating, eating, and sleeping."
+            Name = "Artworks",
+            Description = 
+                "Artwork is a term that describes art that is created to be appreciated for its own sake. It generally refers to visual art, such as paintings, sculptures, and printmaking."
         };
 
         yield return new()
         {
-            Name = "Jewelry",
-            Description =
-                "Jewellery consists of small decorative items worn for personal adornment, such as brooches, rings, necklaces, earrings, pendants, bracelets, and cuff-links."
+            Name = "Souvenirs",
+            Description = 
+                "A souvenir is an object that is kept as a reminder of a person, place, or event. The object itself may have intrinsic value, or be a symbol of experience."
         };
 
         yield return new()
         {
-            Name = "Shoes",
-            Description =
-                "A shoe is an item of footwear intended to protect and comfort the human foot. Shoes"
-        };
-
-        yield return new()
-        {
-            Name = "Sport",
-            Description =
-                "Sport includes all forms of competitive physical activity or games which, through casual or organized participation, at least in part aim to use, maintain or improve physical ability and skills while providing enjoyment to participants, and in some cases, entertainment for spectators."
+            Name = "Stationery",
+            Description = 
+                "Stationery is a mass noun referring to commercially manufactured writing materials, including cut paper, envelopes, writing implements, continuous form paper, and other office supplies."
         };
     }
 }

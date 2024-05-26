@@ -23,10 +23,7 @@ public static class SeedData
 
         if (admin is null)
         {
-            admin = new()
-            {
-                Name = "staff"
-            };
+            admin = new("admin");
 
             var result = roleMgr.CreateAsync(admin).Result;
 
@@ -34,28 +31,27 @@ public static class SeedData
 
             roleMgr.AddClaimAsync(admin, new(JwtClaimTypes.Role, AuthScope.Read)).Wait();
             roleMgr.AddClaimAsync(admin, new(JwtClaimTypes.Role, AuthScope.Write)).Wait();
+            roleMgr.AddClaimAsync(admin, new(JwtClaimTypes.Role, AuthScope.All)).Wait();
 
-            Log.Debug("staff created");
+            Log.Debug("admin created");
         }
         else
         {
-            Log.Debug("staff already exists");
+            Log.Debug("admin already exists");
         }
 
         var user = roleMgr.FindByNameAsync("user").Result;
 
         if (user is null)
         {
-            user = new()
-            {
-                Name = "user"
-            };
+            user = new("user");
 
             var result = roleMgr.CreateAsync(user).Result;
 
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
 
             roleMgr.AddClaimAsync(user, new(JwtClaimTypes.Role, AuthScope.Read)).Wait();
+            roleMgr.AddClaimAsync(user, new(JwtClaimTypes.Role, AuthScope.Write)).Wait();
 
             Log.Debug("user created");
         }
@@ -72,8 +68,8 @@ public static class SeedData
         {
             nhan = new()
             {
-                UserName = "nhan@gmail.com",
-                Email = "nhan@gmail.com",
+                UserName = "nguyenxuannhan407@gmail.com",
+                Email = "nguyenxuannhan407@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumber = "1234567890"
             };
@@ -84,15 +80,13 @@ public static class SeedData
 
             result = userMgr.AddClaimsAsync(nhan,
             [
-                new(JwtClaimTypes.Name, "Nhan Nguyen"),
-                new(JwtClaimTypes.GivenName, "Nhan"),
-                new(JwtClaimTypes.FamilyName, "Nguyen"),
-                new(JwtClaimTypes.WebSite, "https://github.com/foxminchan")
+                new(JwtClaimTypes.PhoneNumber, nhan.PhoneNumber),
+                new(JwtClaimTypes.Email, nhan.Email)
             ]).Result;
 
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
 
-            userMgr.AddToRoleAsync(nhan, "staff").Wait();
+            userMgr.AddToRoleAsync(nhan, "admin").Wait();
 
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
 
@@ -109,8 +103,8 @@ public static class SeedData
         {
             fox = new()
             {
-                UserName = "fox@gmail.com",
-                Email = "fox@gmail.com",
+                UserName = "nguyenxuannhan.dev@gmail.com",
+                Email = "nguyenxuannhan.dev@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumber = "1234567890"
             };
@@ -120,10 +114,8 @@ public static class SeedData
 
             result = userMgr.AddClaimsAsync(fox,
             [
-                new(JwtClaimTypes.Name, "Fox Chan"),
-                new(JwtClaimTypes.GivenName, "Fox"),
-                new(JwtClaimTypes.FamilyName, "Chan"),
-                new(JwtClaimTypes.WebSite, "https://github.com/foxminchan")
+                new(JwtClaimTypes.PhoneNumber, fox.PhoneNumber),
+                new(JwtClaimTypes.Email, fox.Email)
             ]).Result;
 
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
