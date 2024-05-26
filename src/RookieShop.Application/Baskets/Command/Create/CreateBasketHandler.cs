@@ -21,7 +21,6 @@ public sealed class CreateBasketHandler(IRedisService redisService, ILogger<Crea
 
         if (existingBasket is not null)
         {
-            basket.UpdateBasketDetails(new(request.ProductId, request.Quantity, request.Price));
             basket = existingBasket.MergeBasket(basket);
             await redisService.HashSetAsync(nameof(Basket), request.AccountId.ToString(), basket);
         }

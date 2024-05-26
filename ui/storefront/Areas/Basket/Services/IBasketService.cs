@@ -11,4 +11,7 @@ public interface IBasketService
 
     [Post("/baskets")]
     Task AddToBasketAsync(BasketRequest basketRequest, [Header(HeaderName.IdempotencyKey)] Guid requestId);
+
+    [Delete("/baskets/items")]
+    Task DeleteItemAsync([Query] DeleteItemRequest deleteItemRequest);
 }

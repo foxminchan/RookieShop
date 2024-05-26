@@ -22,18 +22,18 @@
                        asp-for="Quantity"
                        class="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px]  text-center bg-transparent"
                        value="@Model.Quantity"
-                       placeholder="1" />
+                       placeholder="1"/>
             </div>
         </div>
         <div class="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
             <p class="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600 pr-4">
                 @Model.TotalPrice.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
             </p>
-            <form class="transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                <button type="submit" class="text-red-500 hover:text-red-700">
+            <div class="transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                <a asp-area="Basket" asp-controller="Basket" asp-action="DeleteItem" asp-route-id="@Model.Product.Id" class="text-red-500 hover:text-red-700">
                     <i class="icon-remove"></i> Remove
-                </button>
-            </form>
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -39,4 +39,23 @@ public class BasketController(IBasketService basketService) : Controller
 
         return RedirectToAction("Detail", "Product", new { id = basketRequest.ProductId, area = "Product" });
     }
+
+    public async Task<IActionResult> DeleteItem()
+    {
+        if (!ModelState.IsValid)
+            return RedirectToAction("Index");
+
+        if (!Guid.TryParse(RouteData.Values["id"]?.ToString(), out var productId))
+            return RedirectToAction("Index");
+
+        if (HttpContext.Items["Customer"] is not CustomerViewModel customer) return Unauthorized();
+
+        await basketService.DeleteItemAsync(new()
+        {
+            AccountId = customer.AccountId,
+            ProductId = productId
+        });
+
+        return RedirectToAction("Index");
+    }
 }

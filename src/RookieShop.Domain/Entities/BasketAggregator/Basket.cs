@@ -20,7 +20,12 @@ public sealed class Basket(Guid accountId)
 
         if (basketDetail is not null)
         {
-            basketDetail.Update(basketDetails.Quantity, basketDetails.Price);
+            basketDetail.Quantity += basketDetails.Quantity;
+
+            if (basketDetail.Quantity <= 0)
+            {
+                BasketDetails.Remove(basketDetail);
+            }
         }
         else
         {
