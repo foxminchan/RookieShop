@@ -30,7 +30,7 @@
                 @Model.TotalPrice.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
             </p>
             <div class="transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                <a asp-area="Basket" asp-controller="Basket" asp-action="DeleteItem" asp-route-id="@Model.Product.Id" class="text-red-500 hover:text-red-700">
+                <a class="text-red-500 hover:text-red-700 cursor-pointer" id="remove-item-btn" data-id="@Model.Product.Id">
                     <i class="icon-remove"></i> Remove
                 </a>
             </div>

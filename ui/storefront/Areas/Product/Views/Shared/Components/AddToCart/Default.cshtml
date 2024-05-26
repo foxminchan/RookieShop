@@ -1,7 +1,7 @@
 ﻿@model RookieShop.Storefront.Areas.Basket.Models.BasketRequest
 
 <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-    <form asp-area="Basket" asp-controller="Basket" asp-action="AddToBasket" asp-antiforgery="true">
+    <form asp-area="Basket" asp-controller="Basket" asp-action="AddToBasket" asp-antiforgery="true" id="addToBasketForm">
         <input type="hidden" asp-for="AccountId" value="@Model.AccountId"/>
         <input type="hidden" asp-for="ProductId" value="@Model.ProductId"/>
         <input type="hidden" asp-for="Quantity" value="@Model.Quantity"/>
