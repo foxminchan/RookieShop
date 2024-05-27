@@ -5,8 +5,6 @@ import { ReactNode } from "react";
 import Providers from "./providers";
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
-import Header from "@/components/layouts/header";
-import Sidebar from "@/components/layouts/sidebar";
 import { Inter as FontSans } from "next/font/google";
 
 const fontSans = FontSans({
@@ -35,13 +33,7 @@ export default async function DashboardLayout({
         )}
       >
         <NextTopLoader />
-        <Providers session={session}>
-          <Header />
-          <div className="flex h-screen overflow-hidden">
-            <Sidebar />
-            <main className="w-full pt-16">{children}</main>
-          </div>
-        </Providers>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );

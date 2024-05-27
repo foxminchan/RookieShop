@@ -1,6 +1,5 @@
 "use client";
 
-import { useSidebar } from "@/lib/hooks/useSidebar";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { navItems } from "@/lib/constants/data";
@@ -11,15 +10,14 @@ type SidebarProps = {
 };
 
 export default function Sidebar({ className }: Readonly<SidebarProps>) {
-  const { isMinimized, toggle } = useSidebar();
-  const [status, setStatus] = useState(false);
+  const [status] = useState(false);
 
   return (
     <nav
       className={cn(
         `relative hidden h-screen border-r pt-20 md:block`,
         status && "duration-500",
-        !isMinimized ? "w-72" : "w-[72px]",
+        "w-72",
         className,
       )}
     >

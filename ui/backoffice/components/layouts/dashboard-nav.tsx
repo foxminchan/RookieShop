@@ -34,7 +34,7 @@ export function DashboardNav({ items, setOpen }: Readonly<DashboardNavProps>) {
                 if (setOpen) setOpen(false);
               }}
             >
-              <span className="ml-2 truncate ml-3">{item.title}</span>
+              <span className="truncate ml-3">{item.title}</span>
             </Link>
           )
         );
