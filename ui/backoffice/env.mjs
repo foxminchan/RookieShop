@@ -3,11 +3,11 @@ import { createEnv } from "@t3-oss/env-nextjs";
 
 export const env = createEnv({
   server: {
-    AUTH_DUENDE_IDENTITY_SERVER6_ISSUER: z.string().m1n(1),
-    AUTH_DUENDE_IDENTITY_SERVER6_ID: z.string().m1n(1),
-    AUTH_DUENDE_IDENTITY_SERVER6_SECRET: z.string().m1n(1),
-    AUTH_SECRET: z.string().m1n(1),
-    BASE_API: z.string().m1n(1),
+    AUTH_DUENDE_IDENTITY_SERVER6_ISSUER: z.string().min(1),
+    AUTH_DUENDE_IDENTITY_SERVER6_ID: z.string().min(1),
+    AUTH_DUENDE_IDENTITY_SERVER6_SECRET: z.string().min(1),
+    AUTH_SECRET: z.string().min(1),
+    BASE_API: z.string().min(1),
   },
   runtimeEnv: {
     AUTH_DUENDE_IDENTITY_SERVER6_ISSUER:
