@@ -54,12 +54,12 @@ export default class HttpService {
     return await this.instance.get<T, AxiosResponse<T>>(`${url}`, config);
   }
 
-  public async post<T>(
+  public async post<T, R>(
     url: string,
     data: unknown = undefined,
     config: AxiosRequestConfig | undefined = undefined,
-  ): Promise<AxiosResponse<T>> {
-    return await this.instance.post<T, AxiosResponse<T>>(url, data, config);
+  ): Promise<AxiosResponse<R>> {
+    return await this.instance.post<T, AxiosResponse<R>>(url, data, config);
   }
 
   public async put<T>(
@@ -78,11 +78,11 @@ export default class HttpService {
     return await this.instance.patch<T, AxiosResponse<T>>(url, data, config);
   }
 
-  public async delete<T>(
+  public async delete(
     url: string,
     config: AxiosRequestConfig | undefined = undefined,
-  ): Promise<AxiosResponse<T>> {
-    return await this.instance.delete<T, AxiosResponse<T>>(url, config);
+  ): Promise<AxiosResponse> {
+    return await this.instance.delete(url, config);
   }
 
   public setHttpConfigs(config?: Partial<AxiosRequestConfig>) {
