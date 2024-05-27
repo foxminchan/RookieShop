@@ -3,38 +3,32 @@ import { NavItem } from "../@types/global";
 export const navItems: NavItem[] = [
   {
     title: "Dashboard",
-    href: "/",
-    icon: "dashboard",
+    href: "/dashboard",
     label: "Dashboard",
   },
   {
     title: "Product",
-    href: "/product",
-    icon: "product",
+    href: "/dashboard/product",
     label: "product",
   },
   {
     title: "Category",
-    href: "/Category",
-    icon: "category",
+    href: "/dashboard/category",
     label: "category",
   },
   {
     title: "Customer",
-    href: "/Customer",
-    icon: "customer",
+    href: "/dashboard/customer",
     label: "customer",
   },
   {
     title: "Order",
-    href: "/dashboard/Order",
-    icon: "order",
+    href: "/dashboard/order",
     label: "order",
   },
   {
     title: "Profile",
     href: "/dashboard/profile",
-    icon: "profile",
     label: "profile",
   },
 ];

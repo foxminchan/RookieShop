@@ -23,7 +23,6 @@ export interface NavItem {
   href?: string;
   disabled?: boolean;
   external?: boolean;
-  icon?: keyof typeof Icons;
   label?: string;
   description?: string;
 }
