@@ -6,6 +6,7 @@ import Providers from "./providers";
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import { Inter as FontSans } from "next/font/google";
+import { siteConfig } from "@/lib/configs/site.config";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -13,8 +14,25 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Backoffice",
-  description: "An admin dashboard for managing your app",
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: siteConfig.authors,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    images: siteConfig.ogImage,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
 };
 
 export default async function DashboardLayout({
