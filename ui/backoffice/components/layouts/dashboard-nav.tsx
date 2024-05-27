@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { NavItem } from "@/lib/@types";
+import { NavItem } from "@/types";
 import { usePathname } from "next/navigation";
 
 type DashboardNavProps = {

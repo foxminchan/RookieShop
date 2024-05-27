@@ -5,7 +5,7 @@ import axios, {
   AxiosRequestConfig,
 } from "axios";
 import _omitBy from "lodash/omitBy";
-import axiosConfig from "@/lib/configs/api.config";
+import axiosConfig from "../configs/api.config";
 
 export default class HttpService {
   private instance: AxiosInstance;
