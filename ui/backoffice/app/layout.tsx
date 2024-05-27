@@ -1,8 +1,13 @@
-import type { Metadata } from "next";
 import "./globals.css";
-import { Inter as FontSans } from "next/font/google";
+import { auth } from "@/auth";
 import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
 import Providers from "./providers";
+import type { Metadata } from "next";
+import NextTopLoader from "nextjs-toploader";
+import Header from "@/components/layouts/header";
+import Sidebar from "@/components/layouts/sidebar";
+import { Inter as FontSans } from "next/font/google";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -14,11 +19,13 @@ export const metadata: Metadata = {
   description: "An admin dashboard for managing your app",
 };
 
-export default function RootLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -27,7 +34,14 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Providers>{children}</Providers>
+        <NextTopLoader />
+        <Providers session={session}>
+          <Header />
+          <div className="flex h-screen overflow-hidden">
+            <Sidebar />
+            <main className="w-full pt-16">{children}</main>
+          </div>
+        </Providers>
       </body>
     </html>
   );

@@ -3,9 +3,15 @@ import QueryProvider from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { PropsWithChildren } from "react";
+import { SessionProvider, SessionProviderProps } from "next-auth/react";
 
-function Providers({ children }: Readonly<PropsWithChildren>) {
+function Providers({
+  session,
+  children,
+}: Readonly<{
+  session: SessionProviderProps["session"];
+  children: React.ReactNode;
+}>) {
   return (
     <JotaiProvider>
       <ThemeProvider
@@ -15,7 +21,9 @@ function Providers({ children }: Readonly<PropsWithChildren>) {
         disableTransitionOnChange
       >
         <QueryProvider>
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            <SessionProvider session={session}>{children}</SessionProvider>
+          </TooltipProvider>
         </QueryProvider>
         <Toaster />
       </ThemeProvider>
