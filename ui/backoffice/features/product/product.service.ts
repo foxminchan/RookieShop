@@ -6,6 +6,7 @@ import {
   UpdateProductRequest,
   CreateProductResponse,
 } from "./product.types";
+import { env } from "@/env.mjs";
 import { v4 as uuidv4 } from "uuid";
 import { AxiosResponse } from "axios";
 import { injectable } from "inversify";
@@ -20,7 +21,7 @@ export default class ProductService
 {
   constructor() {
     super({
-      baseURL: process.env.BASE_URL,
+      baseURL: env.BASE_API as string,
     });
   }
 
