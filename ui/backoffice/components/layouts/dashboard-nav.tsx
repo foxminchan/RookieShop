@@ -2,16 +2,14 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { NavItem } from "@/lib/@types";
 import { usePathname } from "next/navigation";
-import { NavItem } from "@/lib/@types/global";
-import { Dispatch, SetStateAction } from "react";
 
 type DashboardNavProps = {
   items: NavItem[];
-  setOpen?: Dispatch<SetStateAction<boolean>>;
 };
 
-export function DashboardNav({ items, setOpen }: Readonly<DashboardNavProps>) {
+export default function DashboardNav({ items }: Readonly<DashboardNavProps>) {
   const path = usePathname();
 
   if (!items?.length) {
@@ -30,9 +28,6 @@ export function DashboardNav({ items, setOpen }: Readonly<DashboardNavProps>) {
                 path === item.href ? "bg-accent" : "transparent",
                 item.disabled && "cursor-not-allowed opacity-80",
               )}
-              onClick={() => {
-                if (setOpen) setOpen(false);
-              }}
             >
               <span className="truncate ml-3">{item.title}</span>
             </Link>

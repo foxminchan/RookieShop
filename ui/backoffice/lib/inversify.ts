@@ -1,11 +1,7 @@
+import IProductService from "@/features/product/product.interface";
 import { container } from "./configs/inversify.config";
 import { TYPES } from "./constants/types";
-import { IHttpService } from "./interfaces/iHttpService";
-import { ILocalStorageService } from "./interfaces/iLocalStorageService";
 
-const axiosService = container.get<IHttpService>(TYPES.IHttpService);
-const localStorageService = container.get<ILocalStorageService>(
-  TYPES.ILocalStorageService,
-);
+const productService = container.get<IProductService>(TYPES.IProductService);
 
-export { axiosService, localStorageService };
+export { productService };

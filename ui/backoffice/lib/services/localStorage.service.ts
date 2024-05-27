@@ -1,8 +1,4 @@
-import { injectable } from "inversify";
-import { ILocalStorageService } from "../interfaces/iLocalStorageService";
-
-@injectable()
-class LocalStorageService implements ILocalStorageService {
+class LocalStorageService {
   public set<T>(key: string, value: T): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -21,4 +17,6 @@ class LocalStorageService implements ILocalStorageService {
   }
 }
 
-export default LocalStorageService;
+const localStorageService = new LocalStorageService();
+
+export default localStorageService;

@@ -1,16 +1,11 @@
 import "reflect-metadata";
 import { Container } from "inversify";
-import { IHttpService } from "../interfaces/iHttpService";
-import HttpService from "../services/http.service";
 import { TYPES } from "../constants/types";
-import { ILocalStorageService } from "../interfaces/iLocalStorageService";
-import LocalStorageService from "../services/localStorage.service";
+import IProductService from "@/features/product/product.interface";
+import ProductService from "@/features/product/product.service";
 
 const container = new Container();
 
-container.bind<IHttpService>(TYPES.IHttpService).to(HttpService);
-container
-  .bind<ILocalStorageService>(TYPES.ILocalStorageService)
-  .to(LocalStorageService);
+container.bind<IProductService>(TYPES.IProductService).to(ProductService);
 
 export { container };

@@ -5,12 +5,9 @@ import axios, {
   AxiosRequestConfig,
 } from "axios";
 import _omitBy from "lodash/omitBy";
-import { injectable } from "inversify";
 import axiosConfig from "@/lib/configs/api.config";
-import { IHttpService } from "../interfaces/iHttpService";
 
-@injectable()
-export default class HttpService implements IHttpService {
+export default class HttpService {
   private instance: AxiosInstance;
 
   constructor(config = axiosConfig) {
