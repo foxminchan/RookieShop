@@ -1,7 +1,7 @@
-import { DuendeAuthButton } from "@/components/custom/dunde-auth-button";
-import { Icons } from "@/components/custom/icons";
-import { Metadata } from "next";
 import Link from "next/link";
+import { Metadata } from "next";
+import { Icons } from "@/components/custom/icons";
+import { DuendeAuthButton } from "@/components/custom/dunde-auth-button";
 
 export const metadata: Metadata = {
   title: "Login",
