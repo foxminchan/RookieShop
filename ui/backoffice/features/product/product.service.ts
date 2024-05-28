@@ -1,6 +1,6 @@
 import {
   Product,
-  ListProduct,
+  ListProducts,
   ProductFilterParams,
   CreateProductRequest,
   UpdateProductRequest,
@@ -21,19 +21,19 @@ export default class ProductService
 {
   constructor() {
     super({
-      baseURL: env.BASE_API as string,
+      baseURL: `${env.BASE_API}/products`,
     })
   }
 
   async getProduct(id: string): Promise<AxiosResponse<Product>> {
-    return await this.get<Product>(`/products/${id}`)
+    return await this.get<Product>(`/${id}`)
   }
 
   async listProducts(
     options: Partial<ProductFilterParams>
-  ): Promise<AxiosResponse<ListProduct>> {
+  ): Promise<AxiosResponse<ListProducts>> {
     const query = buildQueryString(options)
-    return await this.get<ListProduct>(`/products?${query}`)
+    return await this.get<ListProducts>(`?${query}`)
   }
 
   async createProduct(
@@ -52,12 +52,12 @@ export default class ProductService
   }
 
   async deleteProduct(id: string): Promise<AxiosResponse> {
-    return await this.delete(`/products/${id}`)
+    return await this.delete(`/${id}`)
   }
 
   async updateProduct(
     product: UpdateProductRequest
   ): Promise<AxiosResponse<unknown, unknown>> {
-    return await this.put<Product>("/products", product)
+    return await this.put<Product>("/", product)
   }
 }

@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios"
 import {
   CreateProductRequest,
   CreateProductResponse,
-  ListProduct,
+  ListProducts,
   Product,
   ProductFilterParams,
   UpdateProductRequest,
@@ -13,7 +13,7 @@ export default interface IProductService {
 
   listProducts(
     options: Partial<ProductFilterParams>
-  ): Promise<AxiosResponse<ListProduct>>
+  ): Promise<AxiosResponse<ListProducts>>
 
   createProduct(
     product: CreateProductRequest

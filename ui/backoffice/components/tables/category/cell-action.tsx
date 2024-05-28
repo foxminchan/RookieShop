@@ -11,8 +11,8 @@ import { FC, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Edit, MoreHorizontal, Trash } from "lucide-react"
-import { AlertModal } from "@/components/modals/alert-modal"
 import { Category } from "@/features/category/category.type"
+import { AlertModal } from "@/components/modals/alert-modal"
 
 type CellActionProps = {
   data: Category

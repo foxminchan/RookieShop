@@ -21,3 +21,16 @@ export type SiteConfig = {
     url: string
   }
 }
+
+export type DataTableProps<TData, TValue> = {
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+  searchKey: string
+  pageNo: number
+  totalRecords: number
+  pageSizeOptions?: number[]
+  pageCount: number
+  searchParams?: {
+    [key: string]: string | string[] | undefined
+  }
+}

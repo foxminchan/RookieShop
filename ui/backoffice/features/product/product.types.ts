@@ -14,7 +14,7 @@ export type Product = {
   category: Category
 }
 
-export type ListProduct = {
+export type ListProducts = {
   pagedInfo: PagedInfo
   products: Product[]
 }
