@@ -5,9 +5,12 @@ import axios, {
   AxiosRequestConfig,
 } from "axios"
 import _omitBy from "lodash/omitBy"
+import { injectable } from "inversify"
 import axiosConfig from "../configs/api.config"
+import IHttpService from "../interfaces/http.interface"
 
-export default class HttpService {
+@injectable()
+export default class HttpService implements IHttpService {
   private instance: AxiosInstance
 
   constructor(config = axiosConfig) {
@@ -85,7 +88,7 @@ export default class HttpService {
     return await this.instance.delete(url, config)
   }
 
-  public setHttpConfigs(config?: Partial<AxiosRequestConfig>) {
+  public setHttpConfigs(config?: Partial<AxiosRequestConfig>): void {
     if (config?.baseURL) {
       this.instance.defaults.baseURL = config.baseURL
     }
