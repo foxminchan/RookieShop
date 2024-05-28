@@ -3,33 +3,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="A project developed by a rookie transitioning to an engineer at NashTech."/>
-    <meta name="author" content="Nhan Nguyen"/>
-    <meta name="keywords" content="Rookie, NashTech, FoxMinChan, E-commerce, ASP.NET Core, Tailwind CSS, Razor Pages"/>
-    <meta name="application-name" content="Rookie Shop"/>
-    <meta name="robots" content="index, follow"/>
-    <meta name="googlebot" content="index, follow"/>
-    <meta name="bingbot" content="index, follow"/>
-    <meta name="theme-color" content="#ffffff"/>
-    <meta name="msapplication-TileColor" content="#ffffff"/>
-    <meta name="og:title" content="Rookie Shop"/>
-    <meta name="og:description" content="A project developed by a rookie transitioning to an engineer at NashTech."/>
-    <meta name="og:image" content="https://repository-images.githubusercontent.com/795604204/527ffed3-73ee-4d94-a51d-6564508397f8"/>
-    <meta name="og:type" content="website"/>
-    <meta name="og:locale" content="en_US"/>
+    <partial name="Partials/_DefaultMetaTagsPartital"/>
     @await RenderSectionAsync("MetaTags", required: false)
     <title>@ViewData["Title"]</title>
     <link rel="author" href="https://github.com/foxminchan"/>
     <cache expires-after="@TimeSpan.FromSeconds(300)">
-        <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" asp-append-version="true"/>
-        <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" asp-append-version="true"/>
-        <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" asp-append-version="true"/>
-        <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" asp-append-version="true"/>
-        <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" asp-append-version="true"/>
-        <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" asp-append-version="true"/>
-        <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" asp-append-version="true"/>
-        <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" asp-append-version="true"/>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" asp-append-version="true"/>
+        <partial name="Partials/_AppleIconPartial"/>
         <environment names="Development,Docker">
             <link rel="stylesheet" href="~/css/output.css" asp-append-version="true"/>
             <link rel="stylesheet" href="~/lib/dist/toastr.js/toastr.min.css" asp-append-version="true"/>
@@ -191,7 +170,8 @@
 
 <script>
     $(document).ready(function () {
-        $('#logout-btn').click(function () {
+        $('#logout-btn').click(function (event) {
+            event.preventDefault();
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You will be logged out.',
@@ -202,8 +182,8 @@
                 confirmButtonText: 'Yes, log out!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '/User/Account/Logout';
-                }
+                    htmx.ajax('POST', '/User/Account/Logout', null); 
+                } 
             });
         });
     });

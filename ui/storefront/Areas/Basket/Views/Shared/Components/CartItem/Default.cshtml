@@ -30,8 +30,26 @@
                 @Model.TotalPrice.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
             </p>
             <div class="transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                <a class="text-red-500 hover:text-red-700 cursor-pointer" id="remove-item-btn" data-id="@Model.Product.Id">
-                    <i class="icon-remove"></i> Remove
+                <a class="text-red-500 hover:text-red-700 cursor-pointer remove-item-btn"
+                   data-id="@Model.Product.Id"
+                   hx-post="@Url.Action("DeleteItem", "Basket", new { area = "Basket", id = Model.Product.Id })"
+                   hx-target="#basket"
+                   hx-trigger="confirmed"
+                   onClick="Swal.fire({
+                                title: 'Are you sure?' ,
+                                text: 'Do you want to continue?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6' ,
+                                cancelButtonColor: '#d33' ,
+                                confirmButtonText: 'Yes, delete it!'
+                            }).then((result)=>{
+                                if(result.isConfirmed){
+                                    htmx.trigger(this, 'confirmed');
+                                    toastr.success('Item removed from cart');
+                                } 
+                            })">
+                    Remove
                 </a>
             </div>
         </div>

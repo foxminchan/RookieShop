@@ -8,7 +8,7 @@
 
 @if (Model is not null)
 {
-    <section class="relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full xl:after:w-1/3 after:top-0 after:right-0 after:bg-gray-50">
+    <section class="relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full xl:after:w-1/3 after:top-0 after:right-0 after:bg-gray-50" id="basket">
         <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto relative z-10">
             <div class="grid grid-cols-12">
                 <div class="col-span-12 xl:col-span-8 lg:pr-8 pt-14 pb-8 lg:py-24 w-full max-xl:max-w-3xl max-xl:mx-auto">
@@ -33,10 +33,10 @@
                             </div>
                         </div>
                     </div>
-                    @foreach (var item in Model.BasketDetails)
-                    {
-                        @await Component.InvokeAsync("CartItem", new { id = item.Id, quantity = item.Quantity })
-                    }
+                        @foreach (var item in Model.BasketDetails)
+                        {
+                            @await Component.InvokeAsync("CartItem", new { id = item.Id, quantity = item.Quantity })
+                        }
                 </div>
                 <div class=" col-span-12 xl:col-span-4 bg-gray-50 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:pl-8 py-24">
                     <h2 class="font-manrope font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300">
@@ -74,23 +74,6 @@ else
                     $('#card-info-section').hide();
                 }
             });
-
-            $('#remove-item-btn').on('click', function (e) {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = '/Basket/Basket/DeleteItem/' + $(this).data('id');
-                            toastr.success('Item removed from cart');
-                        }
-                    });
-                });
         });
     </script>
 }

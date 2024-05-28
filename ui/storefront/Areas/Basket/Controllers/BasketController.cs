@@ -27,7 +27,6 @@ public class BasketController(IBasketService basketService) : Controller
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddToBasket(BasketRequest basketRequest)
     {
         if (!ModelState.IsValid)

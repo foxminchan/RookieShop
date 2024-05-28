@@ -734,10 +734,6 @@ video {
   margin-right: -0.25rem;
 }
 
-.-ms-2 {
-  margin-inline-start: -0.5rem;
-}
-
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -764,10 +760,6 @@ video {
 
 .mb-8 {
   margin-bottom: 2rem;
-}
-
-.me-2 {
-  margin-inline-end: 0.5rem;
 }
 
 .me-4 {

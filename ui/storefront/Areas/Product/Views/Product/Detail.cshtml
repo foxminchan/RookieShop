@@ -94,24 +94,12 @@
 @section Scripts{
     <partial name="_ValidationScriptsPartial"/>
     <script>
-        $(document).ready(function () {
-            $('#add-to-cart-btn').click(function () {
-                $(this).prop('disabled', true);
-                $.ajax({
-                    type: 'POST',
-                    url: $('#addToBasketForm').attr('action'),
-                    data: $('#addToBasketForm').serialize(),
-                    success: function (result) {
-                        toastr.success("Added to cart successfully.");
-                    },
-                    error: function () {
-                        toastr.error("An error occurred while adding to cart.");
-                    },
-                    complete: function () {
-                        $('#add-to-cart-btn').prop('disabled', false);
-                    }
-                });
-            });
+        $(document).on('htmx:afterOnLoad', (event) => {
+            if (event.detail.xhr.status === 200) {
+                toastr.success("Item added to cart!", "Success");
+            } else {
+                toastr.error("Error adding to cart. Please try again.", "Error");
+            }
         });
     </script>
 }

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using RookieShop.ServiceDefaults;
-using RookieShop.Storefront;
 using RookieShop.Storefront.Configurations;
 using RookieShop.Storefront.Middlewares;
 using RookieShop.Storefront.Options;
