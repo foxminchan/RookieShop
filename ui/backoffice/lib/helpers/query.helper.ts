@@ -1,4 +1,4 @@
-import { FilterParams, PagingFilter } from "@/types/api";
+import { FilterParams, PagingFilter } from "@/types/api"
 
 /**
  * Generates a query string from an object's key-value pairs.
@@ -10,7 +10,7 @@ export function buildQueryString(options: Record<string, any>): string {
     .filter(([, value]) => value !== undefined)
     .map(
       ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
     )
-    .join("&");
+    .join("&")
 }

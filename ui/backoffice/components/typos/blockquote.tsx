@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { BlockquoteHTMLAttributes, DetailedHTMLProps } from "react";
+import { cn } from "@/lib/utils"
+import { BlockquoteHTMLAttributes, DetailedHTMLProps } from "react"
 
 export function TypographyBlockquote({
   children,
@@ -16,5 +16,5 @@ export function TypographyBlockquote({
     >
       {children}
     </blockquote>
-  );
+  )
 }

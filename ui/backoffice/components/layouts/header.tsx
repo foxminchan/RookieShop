@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import { UserNav } from "./user-nav";
-import { ModeToggle } from "../custom/mode-toggle";
+import Link from "next/link"
+import Image from "next/image"
+import { UserNav } from "./user-nav"
+import { ModeToggle } from "../custom/mode-toggle"
 
 export default function Header() {
   return (
@@ -21,5 +21,5 @@ export default function Header() {
         </div>
       </nav>
     </div>
-  );
+  )
 }

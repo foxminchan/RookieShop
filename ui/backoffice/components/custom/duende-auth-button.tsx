@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { signIn } from "next-auth/react";
-import { Icons } from "@/components/custom/icons";
-import { buttonVariants } from "@/components/ui/button";
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { signIn } from "next-auth/react"
+import { Icons } from "@/components/custom/icons"
+import { buttonVariants } from "@/components/ui/button"
 
 interface DuendeAuthButtonProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -12,8 +12,8 @@ export function DuendeAuthButton({
   className,
   ...props
 }: DuendeAuthButtonProps) {
-  const [isLoading] = React.useState<boolean>(false);
-  const [isDuendeLoading, setIsDuendeLoading] = React.useState<boolean>(false);
+  const [isLoading] = React.useState<boolean>(false)
+  const [isDuendeLoading, setIsDuendeLoading] = React.useState<boolean>(false)
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
@@ -21,8 +21,8 @@ export function DuendeAuthButton({
         type="button"
         className={cn(buttonVariants({ variant: "outline" }))}
         onClick={() => {
-          setIsDuendeLoading(true);
-          signIn("duende-identity-server6");
+          setIsDuendeLoading(true)
+          signIn("duende-identity-server6")
         }}
         disabled={isLoading || isDuendeLoading}
       >
@@ -34,5 +34,5 @@ export function DuendeAuthButton({
         Sign in
       </button>
     </div>
-  );
+  )
 }

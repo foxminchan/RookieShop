@@ -26,8 +26,8 @@ import {
   Trash,
   User,
   X,
-} from "lucide-react";
-export type Icon = LucideIcon;
+} from "lucide-react"
+export type Icon = LucideIcon
 
 export const Icons = {
   logo: Store,
@@ -57,4 +57,4 @@ export const Icons = {
   category: Book,
   customer: User,
   order: Receipt,
-};
+}

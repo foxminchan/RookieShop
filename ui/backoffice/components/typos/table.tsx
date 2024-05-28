@@ -1,11 +1,11 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 import {
   DetailedHTMLProps,
   HTMLAttributes,
   TableHTMLAttributes,
   TdHTMLAttributes,
   ThHTMLAttributes,
-} from "react";
+} from "react"
 
 export function TableRow({
   children,
@@ -19,7 +19,7 @@ export function TableRow({
     <tr className={cn("m-0 border-t p-0 even:bg-muted", className)} {...props}>
       {children}
     </tr>
-  );
+  )
 }
 
 export function TableHeaderCell({
@@ -34,13 +34,13 @@ export function TableHeaderCell({
     <th
       className={cn(
         "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
-        className,
+        className
       )}
       {...props}
     >
       {children}
     </th>
-  );
+  )
 }
 
 export function TableDataCell({
@@ -55,13 +55,13 @@ export function TableDataCell({
     <td
       className={cn(
         "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
-        className,
+        className
       )}
       {...props}
     >
       {children}
     </td>
-  );
+  )
 }
 
 export function Table({
@@ -75,5 +75,5 @@ export function Table({
         {children}
       </table>
     </div>
-  );
+  )
 }

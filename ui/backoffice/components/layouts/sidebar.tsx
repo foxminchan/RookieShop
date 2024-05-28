@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { navItems } from "@/lib/constants/data";
-import DashboardNav from "./dashboard-nav";
+import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { navItems } from "@/lib/constants/data"
+import DashboardNav from "./dashboard-nav"
 
 type SidebarProps = {
-  className?: string;
-};
+  className?: string
+}
 
 export default function Sidebar({ className }: Readonly<SidebarProps>) {
-  const [status] = useState(false);
+  const [status] = useState(false)
 
   return (
     <nav
@@ -18,7 +18,7 @@ export default function Sidebar({ className }: Readonly<SidebarProps>) {
         `relative hidden h-screen border-r pt-20 md:block`,
         status && "duration-500",
         "w-72",
-        className,
+        className
       )}
     >
       <div className="space-y-4 py-4">
@@ -29,5 +29,5 @@ export default function Sidebar({ className }: Readonly<SidebarProps>) {
         </div>
       </div>
     </nav>
-  );
+  )
 }

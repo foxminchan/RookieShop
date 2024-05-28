@@ -1,16 +1,16 @@
 type BasePaging = {
-  pageNumber: number;
-  pageSize: number;
-};
+  pageNumber: number
+  pageSize: number
+}
 
 export type PagedInfo = BasePaging & {
-  totalPages: number;
-  totalRecords: number;
-};
+  totalPages: number
+  totalRecords: number
+}
 
-export type PagingFilter = BasePaging;
+export type PagingFilter = BasePaging
 
 export type FilterParams = BasePaging & {
-  isDescending: boolean;
-  orderBy: string;
-};
+  isDescending: boolean
+  orderBy: string
+}

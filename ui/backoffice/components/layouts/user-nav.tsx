@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   DropdownMenu,
@@ -9,14 +9,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import router from "next/router";
-import { Button } from "../ui/button";
-import { signOut, useSession } from "next-auth/react";
-import { Avatar, AvatarFallback } from "../ui/avatar";
+} from "../ui/dropdown-menu"
+import router from "next/router"
+import { Button } from "../ui/button"
+import { signOut, useSession } from "next-auth/react"
+import { Avatar, AvatarFallback } from "../ui/avatar"
 
 export function UserNav() {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
   if (session) {
     return (
       <DropdownMenu>
@@ -52,6 +52,6 @@ export function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    );
+    )
   }
 }

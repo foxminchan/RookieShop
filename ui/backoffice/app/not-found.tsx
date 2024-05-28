@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 
 export default function NotFound() {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <div className="absolute left-1/2 top-1/2 mb-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center text-center">
@@ -25,5 +25,5 @@ export default function NotFound() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

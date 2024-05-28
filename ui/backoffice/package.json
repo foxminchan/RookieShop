@@ -84,7 +84,6 @@
     "zod": "^3.22.5"
   },
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "ianvs/prettier-plugin-sort-imports",
     "@tailwindcss/typography": "^0.5.13",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",

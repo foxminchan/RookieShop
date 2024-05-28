@@ -1,4 +1,4 @@
-import { SiteConfig } from "@/types";
+import { SiteConfig } from "@/types"
 
 export const siteConfig: SiteConfig = {
   name: "RookieShop",
@@ -21,4 +21,4 @@ export const siteConfig: SiteConfig = {
     name: "Nhan Nguyen",
     url: "https://github.com/foxminchan",
   },
-};
+}

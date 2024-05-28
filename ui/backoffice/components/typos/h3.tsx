@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { cn } from "@/lib/utils"
+import { DetailedHTMLProps, HTMLAttributes } from "react"
 
 export function TypographyH3({
   children,
@@ -10,11 +10,11 @@ export function TypographyH3({
     <h3
       className={cn(
         "scroll-m-20 text-2xl font-semibold tracking-tight",
-        className,
+        className
       )}
       {...props}
     >
       {children}
     </h3>
-  );
+  )
 }

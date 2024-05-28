@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { cn } from "@/lib/utils"
+import { DetailedHTMLProps, HTMLAttributes } from "react"
 
 export function TypographyMuted({
   children,
@@ -13,5 +13,5 @@ export function TypographyMuted({
     <p className={cn("text-sm text-muted-foreground", className)} {...props}>
       {children}
     </p>
-  );
+  )
 }

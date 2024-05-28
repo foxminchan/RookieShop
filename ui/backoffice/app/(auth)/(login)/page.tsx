@@ -1,12 +1,12 @@
-import Link from "next/link";
-import { Metadata } from "next";
-import { Icons } from "@/components/custom/icons";
-import { DuendeAuthButton } from "@/components/custom/duende-auth-button";
+import Link from "next/link"
+import { Metadata } from "next"
+import { Icons } from "@/components/custom/icons"
+import { DuendeAuthButton } from "@/components/custom/duende-auth-button"
 
 export const metadata: Metadata = {
   title: "Login",
   description: "Login to your account",
-};
+}
 
 export default function LoginPage() {
   return (
@@ -33,5 +33,5 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
-  );
+  )
 }

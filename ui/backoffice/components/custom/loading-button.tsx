@@ -1,10 +1,10 @@
-import { Loader2 } from "lucide-react";
-import React from "react";
-import { Button, ButtonProps } from "../ui/button";
+import { Loader2 } from "lucide-react"
+import React from "react"
+import { Button, ButtonProps } from "../ui/button"
 
 export interface LoadingButtonProps extends ButtonProps {
-  isLoading?: boolean;
-  loadingHolder?: React.ReactNode;
+  isLoading?: boolean
+  loadingHolder?: React.ReactNode
 }
 
 function LoadingButton({
@@ -23,7 +23,7 @@ function LoadingButton({
     <Button disabled={isLoading} {...props}>
       {isLoading ? loadingHolder : children}
     </Button>
-  );
+  )
 }
 
-export { LoadingButton };
+export { LoadingButton }

@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { cn } from "@/lib/utils"
+import { DetailedHTMLProps, HTMLAttributes } from "react"
 
 export function TypographySmall({
   children,
@@ -13,5 +13,5 @@ export function TypographySmall({
     >
       {children}
     </small>
-  );
+  )
 }

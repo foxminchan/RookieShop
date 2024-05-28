@@ -1,4 +1,4 @@
-import { NavItem } from "../../types";
+import { NavItem } from "../../types"
 
 export const navItems: NavItem[] = [
   {
@@ -37,4 +37,4 @@ export const navItems: NavItem[] = [
     href: "/dashboard/profile",
     label: "profile",
   },
-];
+]

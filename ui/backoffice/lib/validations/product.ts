@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod"
 
 export const productSchema = z.object({
   name: z.string().min(3).max(50),
@@ -6,4 +6,4 @@ export const productSchema = z.object({
   quantity: z.number().int().positive(),
   price: z.number().int().positive(),
   priceSale: z.number().int().positive(),
-});
+})

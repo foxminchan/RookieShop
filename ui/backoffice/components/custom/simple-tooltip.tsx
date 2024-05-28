@@ -1,11 +1,11 @@
-import React from "react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { TooltipProps, TooltipTriggerProps } from "@radix-ui/react-tooltip";
+import React from "react"
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+import { TooltipProps, TooltipTriggerProps } from "@radix-ui/react-tooltip"
 
 interface SimpleTooltipProps extends TooltipTriggerProps {
-  tooltipContent: React.ReactNode;
-  parentProps?: TooltipProps;
-  children: React.ReactNode;
+  tooltipContent: React.ReactNode
+  parentProps?: TooltipProps
+  children: React.ReactNode
 }
 
 function SimpleTooltip({
@@ -19,7 +19,7 @@ function SimpleTooltip({
       <TooltipTrigger {...props}>{children}</TooltipTrigger>
       <TooltipContent>{tooltipContent}</TooltipContent>
     </Tooltip>
-  );
+  )
 }
 
-export default SimpleTooltip;
+export default SimpleTooltip

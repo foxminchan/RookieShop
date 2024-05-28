@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { cn } from "@/lib/utils"
+import { DetailedHTMLProps, HTMLAttributes } from "react"
 
 export function TypographyLead({
   children,
@@ -13,5 +13,5 @@ export function TypographyLead({
     <p className={cn("text-xl text-muted-foreground", className)} {...props}>
       {children}
     </p>
-  );
+  )
 }
