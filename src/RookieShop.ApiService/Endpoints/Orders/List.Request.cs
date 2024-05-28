@@ -3,4 +3,9 @@ using RookieShop.Domain.Entities.OrderAggregator.Enums;
 
 namespace RookieShop.ApiService.Endpoints.Orders;
 
-public sealed record ListOrdersRequest(int PageIndex, int PageSize, OrderStatus? Status, CustomerId? UserId);
+public sealed record ListOrdersRequest(
+    int PageIndex,
+    int PageSize,
+    OrderStatus? Status,
+    CustomerId? UserId,
+    string? Search = null);

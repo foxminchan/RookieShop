@@ -12,7 +12,7 @@ public sealed class ListCategoriesHandler(IReadRepository<Category> repository)
     public async Task<PagedResult<IEnumerable<CategoryDto>>> Handle(ListCategoriesQuery request,
         CancellationToken cancellationToken)
     {
-        CategoriesFilterSpec spec = new(request.PageIndex, request.PageSize);
+        CategoriesFilterSpec spec = new(request.PageIndex, request.PageSize, request.Search);
 
         var categories = await repository.ListAsync(spec, cancellationToken);
 

@@ -1,5 +1,4 @@
 ﻿using RookieShop.Application.Categories.DTOs;
-using RookieShop.Domain.Entities.FeedbackAggregator;
 using RookieShop.Domain.Entities.ProductAggregator;
 
 namespace RookieShop.Application.Products.DTOs;
@@ -20,6 +19,7 @@ public static class DomainToDtoMapper
             product.ImageName,
             product.AverageRating,
             product.TotalReviews,
+            product.Status,
             category);
     }
 

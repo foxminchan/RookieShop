@@ -18,6 +18,7 @@ public sealed class ListProductsHandler(IReadRepository<Product> repository, IAz
             request.PageSize,
             request.OrderBy,
             request.IsDescending,
+            request.Search,
             request.CategoryIds);
 
         var products = await repository.ListAsync(spec, cancellationToken);

@@ -5,7 +5,8 @@ using RookieShop.Infrastructure.Cache.Abstractions;
 
 namespace RookieShop.Application.Categories.Queries.List;
 
-public sealed record ListCategoriesQuery(int PageIndex, int PageSize) : IQuery<PagedResult<IEnumerable<CategoryDto>>>, ICachedRequest
+public sealed record ListCategoriesQuery(int PageIndex, int PageSize, string? Search = null)
+    : IQuery<PagedResult<IEnumerable<CategoryDto>>>, ICachedRequest
 {
     public string CacheKey => nameof(Categories);
 

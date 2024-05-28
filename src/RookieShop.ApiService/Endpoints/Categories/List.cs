@@ -11,7 +11,8 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListCategoriesResponse>,
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/categories",
-                async (int pageIndex = 1, int pageSize = 0) => await HandleAsync(new(pageIndex, pageSize)))
+                async (int pageIndex = 1, int pageSize = 0, string? search = null)
+                    => await HandleAsync(new(pageIndex, pageSize, search)))
             .Produces<Ok<ListCategoriesResponse>>()
             .WithTags(nameof(Categories))
             .WithName("List Categories")
@@ -21,7 +22,7 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListCategoriesResponse>,
     public async Task<Ok<ListCategoriesResponse>> HandleAsync(ListCategoriesRequest request,
         CancellationToken cancellationToken = default)
     {
-        ListCategoriesQuery query = new(request.PageIndex, request.PageSize);
+        ListCategoriesQuery query = new(request.PageIndex, request.PageSize, request.Search);
 
         var result = await sender.Send(query, cancellationToken);
 

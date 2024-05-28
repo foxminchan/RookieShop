@@ -17,8 +17,9 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListProductsResponse>, L
                         int pageSize = 0,
                         string? orderBy = nameof(ProductVm.Id),
                         bool isDescending = false,
+                        string? search = null,
                         CategoryId?[]? categoryIds = null) =>
-                    await HandleAsync(new(pageNumber, pageSize, orderBy, isDescending, categoryIds)))
+                    await HandleAsync(new(pageNumber, pageSize, orderBy, isDescending, search, categoryIds)))
             .Produces<Ok<ListProductsResponse>>()
             .WithTags(nameof(Products))
             .WithName("List Products")
@@ -33,6 +34,7 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListProductsResponse>, L
             request.PageSize,
             request.OrderBy,
             request.IsDescending,
+            request.Search,
             request.CategoryIds);
 
         var result = await sender.Send(query, cancellationToken);

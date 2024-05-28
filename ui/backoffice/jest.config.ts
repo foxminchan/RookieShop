@@ -12,6 +12,9 @@ const createJestConfig = nextJest({
 })
 
 const config: Config = {
+  // The root directory that Jest should scan for tests and modules within
+  displayName: "backoffice",
+
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
 

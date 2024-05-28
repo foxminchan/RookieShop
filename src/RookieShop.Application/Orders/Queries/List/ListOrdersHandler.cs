@@ -12,7 +12,7 @@ public sealed class ListOrdersHandler(IReadRepository<Order> repository)
     public async Task<PagedResult<IEnumerable<OrderDto>>> Handle(ListOrdersQuery request,
         CancellationToken cancellationToken)
     {
-        OrderFilterSpec spec = new(request.PageIndex, request.PageSize, request.Status, request.UserId);
+        OrderFilterSpec spec = new(request.PageIndex, request.PageSize, request.Status, request.UserId, request.Search);
 
         var orders = await repository.ListAsync(spec, cancellationToken);
 

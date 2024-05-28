@@ -1,4 +1,5 @@
 ﻿using RookieShop.Application.Categories.DTOs;
+using RookieShop.Domain.Entities.ProductAggregator.Enums;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 
 namespace RookieShop.Application.Products.DTOs;
@@ -13,4 +14,5 @@ public sealed record ProductDto(
     string? ImageUrl,
     double AverageRating,
     int TotalReviews,
+    ProductStatus Status,
     CategoryDto? Category);

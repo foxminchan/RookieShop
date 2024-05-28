@@ -12,7 +12,7 @@ public sealed class FeedbackFilterSpec : Specification<Feedback>
         if (pageSize == 0) pageSize = int.MaxValue;
 
         if (productId is not null)
-            Query.Where(feedback => feedback.Product.Id == productId);
+            Query.Where(feedback => feedback.Product!.Id == productId);
 
         if (customerId is not null)
             Query.Where(feedback => feedback.CustomerId == customerId);

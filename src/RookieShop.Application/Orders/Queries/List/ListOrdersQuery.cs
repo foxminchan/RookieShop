@@ -10,4 +10,5 @@ public sealed record ListOrdersQuery(
     int PageIndex,
     int PageSize,
     OrderStatus? Status,
-    CustomerId? UserId) : IQuery<PagedResult<IEnumerable<OrderDto>>>;
+    CustomerId? UserId, 
+    string? Search = null) : IQuery<PagedResult<IEnumerable<OrderDto>>>;
