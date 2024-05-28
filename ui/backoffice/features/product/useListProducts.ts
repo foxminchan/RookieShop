@@ -5,7 +5,7 @@ import { buildQueryString } from "@/lib/helpers/query.helper"
 
 export default function useListProducts(options: Partial<ProductFilterParams>) {
   return useQuery({
-    queryKey: [`products${buildQueryString(options)}`],
+    queryKey: [`products?${buildQueryString(options)}`],
     queryFn: () => productService.listProducts(options),
   })
 }

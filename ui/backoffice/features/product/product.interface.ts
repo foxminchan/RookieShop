@@ -12,7 +12,7 @@ export default interface IProductService {
   getProduct(id: string): Promise<AxiosResponse<Product>>
 
   listProducts(
-    options: Partial<ProductFilterParams>
+    options?: Partial<ProductFilterParams>
   ): Promise<AxiosResponse<ListProducts>>
 
   createProduct(

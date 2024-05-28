@@ -1,4 +1,4 @@
-import { PagedInfo } from "@/types/api"
+import { PagingFilter, PagedInfo } from "@/types/api"
 
 export type Category = {
   id: string
@@ -9,4 +9,8 @@ export type Category = {
 export type ListCategories = {
   pagedInfo: PagedInfo
   categories: Category[]
+}
+
+export type CategoryFilterParams = PagingFilter & {
+  search?: string | null
 }
