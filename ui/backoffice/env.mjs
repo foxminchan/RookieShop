@@ -8,6 +8,7 @@ export const env = createEnv({
     AUTH_DUENDE_IDENTITY_SERVER6_SECRET: z.string().min(1),
     AUTH_SECRET: z.string().min(1),
     BASE_API: z.string().min(1),
+    OTEL_EXPORTER_OTLP_ENDPOINT: z.string(),
   },
   runtimeEnv: {
     AUTH_DUENDE_IDENTITY_SERVER6_ISSUER:
@@ -18,5 +19,6 @@ export const env = createEnv({
       process.env.AUTH_DUENDE_IDENTITY_SERVER6_SECRET,
     AUTH_SECRET: process.env.AUTH_SECRET,
     BASE_API: process.env.BASE_API,
+    OTEL_EXPORTER_OTLP_ENDPOINT: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
   },
 })
