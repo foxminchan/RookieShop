@@ -23,5 +23,7 @@ public sealed class ProductViewModel
 
     [JsonPropertyName("totalReviews")] public int TotalReviews { get; set; }
 
+    [JsonPropertyName("status")] public ProductStatus Status { get; set; }
+
     [JsonPropertyName("category")] public CategoryViewModel? Category { get; set; }
 }

@@ -31,6 +31,11 @@
       "provider": "cdnjs",
       "library": "jquery-validate@1.20.0",
       "destination": "wwwroot/lib/dist/jquery-validate/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "htmx@1.9.12",
+      "destination": "wwwroot/lib/dist/htmx/"
     }
   ],
   "version": "1.0"

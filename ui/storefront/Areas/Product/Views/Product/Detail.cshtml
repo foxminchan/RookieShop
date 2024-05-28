@@ -1,10 +1,16 @@
 ﻿@using System.Globalization
 @using System.Web
+@using RookieShop.Storefront.Areas.Product.Models.Products
 @model RookieShop.Storefront.Areas.Product.Models.Products.ProductViewModel
 
 @{
     ViewBag.Title = Model.Name ?? "Product Detail";
     Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+@section MetaTags{
+    <meta name="title" content="@Model.Name"/>
+    <meta name="description" content="@Model.Description"/>
 }
 
 <section class="py-8 bg-white md:py-16 antialiased">
@@ -25,16 +31,23 @@
                         @($"{Model.PriceSale.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}")
                     </p>
                 </div>
-
-                @if (Model.Quantity > 0)
+                @if (Model.Status != ProductStatus.Discontinued && Model.Quantity > 0)
                 {
                     @await Component.InvokeAsync("AddToCart", new { ProductId = Model.Id, Price = Model.PriceSale })
                 }
                 else
                 {
-                    <p class="mt-6 text-red-900">Out of stock</p>
+                    <p class="mt-6 text-red-900">
+                        @if (Model.Status == ProductStatus.Discontinued)
+                        {
+                            <span>Discontinued</span>
+                        }
+                        else
+                        {
+                            <span>Out of stock</span>
+                        }
+                    </p>
                 }
-
                 <hr class="my-6 md:my-8 border-gray-200"/>
 
                 <p class="mb-6 text-gray-500 text-justify">
