@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { signIn } from "next-auth/react"
 import { Icons } from "@/components/custom/icons"
@@ -12,8 +12,8 @@ export function DuendeAuthButton({
   className,
   ...props
 }: DuendeAuthButtonProps) {
-  const [isLoading] = React.useState<boolean>(false)
-  const [isDuendeLoading, setIsDuendeLoading] = React.useState<boolean>(false)
+  const [isLoading] = useState<boolean>(false)
+  const [isDuendeLoading, setIsDuendeLoading] = useState<boolean>(false)
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>

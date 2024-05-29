@@ -55,16 +55,16 @@ export default class HttpService {
     url: string,
     data?: T,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<R>> {
-    return await this.instance.post<T, AxiosResponse<R>>(url, data, config)
+  ): Promise<R> {
+    return await this.instance.post<T, R>(url, data, config)
   }
 
   public async put<T = unknown, R = null>(
     url: string,
     data: T,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<R>> {
-    return await this.instance.put<T, AxiosResponse<R>>(url, data, config)
+  ): Promise<R> {
+    return await this.instance.put<T, R>(url, data, config)
   }
 
   public async patch<T = unknown, R = null>(

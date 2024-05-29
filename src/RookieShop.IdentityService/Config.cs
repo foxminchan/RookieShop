@@ -82,7 +82,7 @@ public static class Config
             ClientName = "Back Office",
             ClientSecrets = { new("secret".Sha256()) },
             AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{client.Backoffice}/api/auth/callback/duende-identityserver6" },
+            RedirectUris = { $"{client.Backoffice}/api/auth/callback/duende-identity-service" },
             PostLogoutRedirectUris = { $"{client.Backoffice}" },
             AllowedCorsOrigins = { $"{client.Backoffice}" },
             AllowedScopes =

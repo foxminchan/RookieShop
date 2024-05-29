@@ -38,9 +38,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 export default function FilterTable<TData, TValue>({
   columns,
   data,
-  pageNo,
   searchKey,
-  totalRecords,
   pageCount,
   pageSizeOptions = [10, 20, 30, 40, 50],
 }: DataTableProps<TData, TValue>) {

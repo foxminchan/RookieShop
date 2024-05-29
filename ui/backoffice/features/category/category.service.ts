@@ -1,6 +1,13 @@
+import {
+  Category,
+  ListCategories,
+  CategoryFilterParams,
+  CreateCategoryRequest,
+  UpdateCategoryRequest,
+  CreateCategoryResponse,
+} from "./category.type"
 import HttpService from "@/lib/services/http.service"
 import { buildQueryString } from "@/lib/helpers/query.helper"
-import { ListCategories, CategoryFilterParams } from "./category.type"
 
 class CategoryService extends HttpService {
   constructor() {
@@ -11,6 +18,14 @@ class CategoryService extends HttpService {
     options?: Partial<CategoryFilterParams>
   ): Promise<ListCategories> {
     return this.get<ListCategories>(`/categories?${buildQueryString(options)}`)
+  }
+
+  createCategory(data: CreateCategoryRequest): Promise<CreateCategoryResponse> {
+    return this.post(`/categories`, data)
+  }
+
+  updateCategory(data: UpdateCategoryRequest): Promise<Category> {
+    return this.put(`/categories`, data)
   }
 }
 
