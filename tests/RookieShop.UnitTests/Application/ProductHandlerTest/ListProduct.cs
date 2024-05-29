@@ -36,7 +36,7 @@ public sealed class ListProduct
                 repo.ListAsync(It.IsAny<ProductsFilterSpec>(), CancellationToken.None))
             .ReturnsAsync(products);
 
-        var query = new ListProductsQuery(1, 0, null, false, null);
+        var query = new ListProductsQuery(1, 0, null, false, null, []);
 
         // Act
         var result = await _handler.Handle(query, CancellationToken.None);
@@ -51,7 +51,7 @@ public sealed class ListProduct
     public async Task GivenValidRequest_ShouldReturnEmptyList_IfProductsNotExist()
     {
         // Arrange
-        var query = new ListProductsQuery(1, 0, null, false, null);
+        var query = new ListProductsQuery(1, 0, null, false, null, []);
         _repositoryMock.Setup(repo =>
                 repo.ListAsync(It.IsAny<ProductsFilterSpec>(), CancellationToken.None))
             .ReturnsAsync([]);

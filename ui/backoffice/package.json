@@ -10,7 +10,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev-ca": "NODE_EXTRA_CA_CERTS=./certificates/aspnet_https.crt next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -68,7 +67,6 @@
     "embla-carousel-react": "^8.0.2",
     "input-otp": "^1.2.4",
     "install": "^0.13.0",
-    "inversify": "^6.0.2",
     "jotai": "^2.8.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.378.0",
@@ -82,7 +80,6 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.3",
     "react-resizable-panels": "^2.0.18",
-    "reflect-metadata": "^0.2.2",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

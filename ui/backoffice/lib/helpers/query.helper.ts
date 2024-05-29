@@ -9,7 +9,7 @@ export function buildQueryString(options?: Record<string, any>): string {
   }
 
   return Object.entries(options)
-    .filter(([, value]) => value !== undefined)
+    .filter(([, value]) => !!value)
     .map(
       ([key, value]) =>
         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`

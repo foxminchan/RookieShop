@@ -35,7 +35,7 @@ builder.Services
 
 builder.Services.AddCors(options => options.AddPolicy(nameof(RookieShop),
     policy => policy
-        .WithOrigins(appSettings.CorsSettings.AllowedOrigins)
+        .WithOrigins(appSettings.CorsSettings.Storefront, appSettings.CorsSettings.Backoffice)
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyHeader()
         .AllowAnyMethod()));
@@ -71,6 +71,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
+    app.UseHttpsRedirection();
     app.UseExceptionHandler("/error");
     app.UseHsts();
 }
@@ -78,8 +79,6 @@ else
 app.UseAntiforgery();
 
 app.UseResponseCompression();
-
-app.UseHttpsRedirection();
 
 app.MapInfrastructure();
 

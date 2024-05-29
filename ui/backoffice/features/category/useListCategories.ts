@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { categoryService } from "@/lib/inversify"
+import categoryService from "./category.service"
 import { CategoryFilterParams } from "./category.type"
 import { buildQueryString } from "@/lib/helpers/query.helper"
 

@@ -1,5 +1,5 @@
 type BasePaging = {
-  pageNumber: number
+  pageIndex: number
   pageSize: number
 }
 

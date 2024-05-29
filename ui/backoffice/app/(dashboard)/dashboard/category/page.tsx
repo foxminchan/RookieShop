@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Plus } from "lucide-react"
@@ -16,19 +18,19 @@ type paramsProps = {
   }
 }
 
-export default async function page({ searchParams }: paramsProps) {
+export default function page({ searchParams }: paramsProps) {
   const page = Number(searchParams.page) || 1
   const pageLimit = Number(searchParams.limit) || 10
   const name = (searchParams.search as string) || null
 
-  const categories = useListCategories({
-    pageNumber: page,
+  const { data } = useListCategories({
+    pageIndex: page,
     pageSize: pageLimit,
     search: name,
   })
 
-  const data = categories.data?.data
-  const totalCategories = categories.data?.data.pagedInfo.totalRecords
+  const categories = data?.categories || []
+  const totalCategories = data?.pageInfo.totalRecords || 0
 
   return (
     <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
@@ -49,8 +51,8 @@ export default async function page({ searchParams }: paramsProps) {
       <Separator />
       <CategoryTable
         page={page}
-        pageCount={data?.pagedInfo.totalPages || 0}
-        data={data?.categories || []}
+        pageCount={data?.pageInfo.totalPages || 0}
+        data={categories || []}
         totalRecords={totalCategories || 0}
       />
     </div>

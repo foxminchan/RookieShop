@@ -2,5 +2,7 @@
 
 public sealed class CorsSettings
 {
-    public string[] AllowedOrigins { get; set; } = [];
+    public string Storefront { get; set; } = string.Empty;
+
+    public string Backoffice { get; set; } = string.Empty;
 }

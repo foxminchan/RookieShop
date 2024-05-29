@@ -5,12 +5,9 @@ import axios, {
   AxiosRequestConfig,
 } from "axios"
 import _omitBy from "lodash/omitBy"
-import { injectable } from "inversify"
 import axiosConfig from "../configs/api.config"
-import IHttpService from "../interfaces/http.interface"
 
-@injectable()
-export default class HttpService implements IHttpService {
+export default class HttpService {
   private instance: AxiosInstance
 
   constructor(config = axiosConfig) {
@@ -50,41 +47,35 @@ export default class HttpService implements IHttpService {
     return axiosInstance
   }
 
-  public async get<T>(
-    url: string,
-    config: AxiosRequestConfig | undefined = undefined
-  ): Promise<AxiosResponse<T>> {
-    return await this.instance.get<T, AxiosResponse<T>>(`${url}`, config)
+  public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    return (await this.instance.get<T, AxiosResponse<T>>(url, config)) as T
   }
 
-  public async post<T, R>(
+  public async post<T = unknown, R = null>(
     url: string,
-    data: unknown = undefined,
-    config: AxiosRequestConfig | undefined = undefined
+    data?: T,
+    config?: AxiosRequestConfig
   ): Promise<AxiosResponse<R>> {
     return await this.instance.post<T, AxiosResponse<R>>(url, data, config)
   }
 
-  public async put<T>(
+  public async put<T = unknown, R = null>(
     url: string,
-    data: unknown = undefined,
-    config: AxiosRequestConfig | undefined = undefined
-  ): Promise<AxiosResponse<unknown, unknown>> {
-    return await this.instance.put<T, AxiosResponse<T>>(url, data, config)
+    data: T,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<R>> {
+    return await this.instance.put<T, AxiosResponse<R>>(url, data, config)
   }
 
-  public async patch<T>(
+  public async patch<T = unknown, R = null>(
     url: string,
-    data: unknown = undefined,
-    config: AxiosRequestConfig | undefined = undefined
-  ): Promise<AxiosResponse<T>> {
-    return await this.instance.patch<T, AxiosResponse<T>>(url, data, config)
+    data: T,
+    config?: AxiosRequestConfig
+  ): Promise<R> {
+    return await this.instance.patch<T, R>(url, data, config)
   }
 
-  public async delete(
-    url: string,
-    config: AxiosRequestConfig | undefined = undefined
-  ): Promise<AxiosResponse> {
+  public async delete(url: string, config?: AxiosRequestConfig): Promise<void> {
     return await this.instance.delete(url, config)
   }
 
