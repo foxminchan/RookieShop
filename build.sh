@@ -16,6 +16,8 @@ DOTNET_GLOBAL_FILE="$SCRIPT_DIR//global.json"
 DOTNET_INSTALL_URL="https://dot.net/v1/dotnet-install.sh"
 DOTNET_CHANNEL="STS"
 
+ASPIRE_WORKLOADS="aspire"
+
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_NOLOGO=1
 
@@ -58,6 +60,12 @@ fi
 
 echo "Microsoft (R) .NET SDK version $("$DOTNET_EXE" --version)"
 
+# Install Aspire Workloads
+if [[ ! -z ${ASPIRE_WORKLOADS+x} && "$ASPIRE_WORKLOADS" != "" ]]; then
+    "$DOTNET_EXE" workload install $ASPIRE_WORKLOADS
+fi
+
+# Add Nuke Enterprise feed
 if [[ ! -z ${NUKE_ENTERPRISE_TOKEN+x} && "$NUKE_ENTERPRISE_TOKEN" != "" ]]; then
     "$DOTNET_EXE" nuget remove source "nuke-enterprise" &>/dev/null || true
     "$DOTNET_EXE" nuget add source "https://f.feedz.io/nuke/enterprise/nuget" --name "nuke-enterprise" --username "PAT" --password "$NUKE_ENTERPRISE_TOKEN" --store-password-in-clear-text &>/dev/null || true

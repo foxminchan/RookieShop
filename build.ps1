@@ -13,12 +13,14 @@ $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
 # CONFIGURATION
 ###########################################################################
 
-$BuildProjectFile = "$PSScriptRoot\build\build.csproj"
+$BuildProjectFile = "$PSScriptRoot\build\Build.csproj"
 $TempDirectory = "$PSScriptRoot\\.nuke\temp"
 
 $DotNetGlobalFile = "$PSScriptRoot\\global.json"
 $DotNetInstallUrl = "https://dot.net/v1/dotnet-install.ps1"
 $DotNetChannel = "STS"
+
+$AspireWorkload = "aspire"
 
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
 $env:DOTNET_NOLOGO = 1
@@ -65,6 +67,12 @@ else {
 
 Write-Output "Microsoft (R) .NET SDK version $(& $env:DOTNET_EXE --version)"
 
+# Install Aspire Workloads
+if ($AspireWorkload) {
+    ExecSafe { & $env:DOTNET_EXE workload install $AspireWorkload }
+}
+
+# Install Nuke Enterprise feed
 if (Test-Path env:NUKE_ENTERPRISE_TOKEN) {
     & $env:DOTNET_EXE nuget remove source "nuke-enterprise" > $null
     & $env:DOTNET_EXE nuget add source "https://f.feedz.io/nuke/enterprise/nuget" --name "nuke-enterprise" --username "PAT" --password $env:NUKE_ENTERPRISE_TOKEN > $null
