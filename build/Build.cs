@@ -14,7 +14,7 @@ using Nuke.Common.Utilities.Collections;
     OnPushBranches = ["main"],
     OnPullRequestBranches = ["main"],
     InvokedTargets = [nameof(Init), nameof(Lint), nameof(TestWithCoverage)])]
-public class Build : NukeBuild
+public sealed class Build : NukeBuild
 {
     /// Support plugins are available for:
     ///   - JetBrains ReSharper        https://nuke.build/resharper

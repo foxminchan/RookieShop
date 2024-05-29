@@ -24,6 +24,7 @@ RookieShop is a .NET Core web application training project demonstrating Clean A
   - [Setup tools and dependencies](#setup-tools-and-dependencies)
   - [Running the application](#running-the-application)
 - [Testing](#testing)
+- [CI/CD](#cicd)
 - [Deployment](#deployment)
 - [Observability](#observability)
 - [Project References](#project-references)
@@ -137,7 +138,7 @@ dotnet run --project src/RookieShop.AppHost/RookieShop.AppHost.csproj
 ## Testing
 
 <p align="justify">
-In the project, we use xUnit for unit testing and Moq for mocking. For integration testing, we use the <code>Aspire</code> for running the test in the Docker container. I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>test</code> folder. I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
+In the project, i use xUnit for unit testing and Moq for mocking. For integration testing, i use the <code>Aspire</code> for running the test in the Docker container. I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>test</code> folder. I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
 </p>
 
 ```bash
@@ -145,11 +146,19 @@ dotnet test RookieShop.sln
 ```
 
 > [!NOTE]
-> For performance testing, we use the <code>K6</code> tool to simulate the load on the application. To run the performance test, you can use the following:
+> For performance testing, i use the <code>K6</code> tool to simulate the load on the application. To run the performance test, you can use the following:
 >
 > ```bash
 > k6 run ./k6/performance-test.js
 > ```
+
+## CI/CD
+
+<p align="justify">
+I implement the CI/CD pipeline for the project using the <code>NUKE</code> with the <code>GitHub Actions</code>. The pipeline consists of the following steps:
+</p>
+
+<img loading="lazy" src="./img/ci.png" alt="Ci" width="100%" />
 
 ## Deployment
 
