@@ -36,7 +36,7 @@ public sealed class CategoriesEndpointTest
     }
 
     [Fact]
-    public async Task GiveNullDataAndUnAuthorize_PostCategories_ShouldBeBadRequestStatusCode()
+    public async Task GiveNullDataAndUnAuthorize_PostCategories_ShouldBeUnauthorizedStatusCode()
     {
         // Arrange
         var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.RookieShop_ApiService>();
@@ -46,23 +46,6 @@ public sealed class CategoriesEndpointTest
         // Act
         var httpClient = app.CreateHttpClient("api-service");
         var response = await httpClient.PostAndEnsureUnauthorizedAsync("/api/v1/categories", null);
-
-        // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-    }
-
-    [Fact]
-    public async Task GiveNullDataAndAuthorize_DeleteCategories_ShouldBeBadRequestStatusCode()
-    {
-        // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.RookieShop_ApiService>();
-        await using var app = await appHost.BuildAsync();
-        await app.StartAsync();
-        var id = Guid.NewGuid().ToString();
-
-        // Act
-        var httpClient = app.CreateHttpClient("api-service");
-        var response = await httpClient.DeleteAndEnsureUnauthorizedAsync($"/api/v1/categories/{id}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);

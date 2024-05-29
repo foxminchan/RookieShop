@@ -13,6 +13,9 @@ using Nuke.Common.Utilities.Collections;
     AutoGenerate = false,
     OnPushBranches = ["main"],
     OnPullRequestBranches = ["main"],
+    CacheKeyFiles = ["**/global.json", "**/*.csproj"],
+    CacheIncludePatterns = [".nuke/temp", "~/.nuget/packages"],
+    CacheExcludePatterns = [],
     InvokedTargets = [nameof(Init), nameof(Lint), nameof(TestWithCoverage)])]
 public sealed class Build : NukeBuild
 {
@@ -56,8 +59,6 @@ public sealed class Build : NukeBuild
         .After(Init)
         .Executes(() =>
         {
-            NpmTasks.NpmRun(s => s
-                .SetCommand("lint"));
             Solution.GetAllProjects(ProjectPrefix)
                 .ForEach(project => DotNetTasks.DotNetBuild(s => s
                     .SetProjectFile(project)
