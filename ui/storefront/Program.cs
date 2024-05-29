@@ -51,6 +51,7 @@ var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
+    app.UseHttpsRedirection();
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
@@ -60,8 +61,6 @@ app.UseWebOptimizer();
 app.UseMiddleware<CustomerInfoMiddleware>();
 
 app.MapHealthCheck();
-
-app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 

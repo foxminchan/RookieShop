@@ -43,8 +43,7 @@ var blobs = storage.AddBlobs("blobs");
 var identityService = builder
     .AddProject<RookieShop_IdentityService>("identity-service")
     .WithReference(redis)
-    .WithReference(userDb)
-    .WithHttpEndpoint();
+    .WithReference(userDb);
 
 var apiService = builder
     .AddProject<RookieShop_ApiService>("api-service")
@@ -54,21 +53,21 @@ var apiService = builder
     .WithEnvironment("StripeSettings__SecretKey", stripeApiKey)
     .WithEnvironment("SmtpSettings__Secret", emailSecret)
     .WithEnvironment("AzuriteSettings__ConnectionString", blobs.WithEndpoint())
-    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint(protocol));
+    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"));
 
 var backoffice = builder
     .AddNpmApp("backoffice", "../../ui/backoffice", "dev")
     .WithHttpEndpoint(env: "PORT")
     .WithEnvironment("BROWSER", "none")
     .WithEnvironment("NEXT_PUBLIC_BASE_API", $"{apiService.GetEndpoint(protocol)}/api/v1")
-    .WithEnvironment("AUTH_DUENDE_IDENTITY_SERVER6_ISSUER", identityService.GetEndpoint(protocol))
+    .WithEnvironment("AUTH_DUENDE_IDENTITY_SERVER6_ISSUER", identityService.GetEndpoint("https"))
     .PublishAsDockerFile();
 
 var storefront = builder
     .AddProject<RookieShop_Storefront>("storefront")
     .WithReference(redis)
     .WithHttpEndpoint()
-    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint(protocol))
+    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint(protocol)}/api/v1");
 
 apiService

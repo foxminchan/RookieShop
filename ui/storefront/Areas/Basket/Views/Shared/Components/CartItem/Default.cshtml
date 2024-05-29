@@ -31,8 +31,11 @@
             </p>
             <div class="transition-opacity duration-300 opacity-0 group-hover:opacity-100">
                 <a class="text-red-500 hover:text-red-700 cursor-pointer remove-item-btn"
-                   data-id="@Model.Product.Id"
-                   hx-post="@Url.Action("DeleteItem", "Basket", new { area = "Basket", id = Model.Product.Id })"
+                   hx-post
+                   hx-area="Basket"
+                   hx-controller="Basket"
+                   hx-action="DeleteItem"
+                   hx-route-id="@Model.Product.Id"
                    hx-target="#basket"
                    hx-trigger="confirmed"
                    onClick="Swal.fire({

@@ -18,6 +18,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Htmx" />
+		<PackageReference Include="Htmx.TagHelpers" />
 		<PackageReference Include="Microsoft.TypeScript.MSBuild" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />

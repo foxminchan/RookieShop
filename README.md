@@ -70,7 +70,6 @@ Build an e-commerce web site with minimum functionality below:
 - [Postgres](https://www.postgresql.org/)
 - [Aspire](https://learn.microsoft.com/dotnet/aspire)
 - [OpenTelemetry](https://opentelemetry.io/)
-- [TestContainers](https://www.testcontainers.org/)
 
 ## Software Architecture
 
@@ -138,7 +137,7 @@ dotnet run --project src/RookieShop.AppHost/RookieShop.AppHost.csproj
 ## Testing
 
 <p align="justify">
-In the project, we use xUnit for unit testing and Moq for mocking. For integration testing, we use the <code>TestContainers</code> for running the test in the Docker container. I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>test</code> folder. I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
+In the project, we use xUnit for unit testing and Moq for mocking. For integration testing, we use the <code>Aspire</code> for running the test in the Docker container. I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>test</code> folder. I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
 </p>
 
 ```bash
