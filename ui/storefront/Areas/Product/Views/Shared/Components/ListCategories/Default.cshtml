@@ -1,16 +1,22 @@
 ﻿@model RookieShop.Storefront.Areas.Product.Models.Categories.ListCategoriesViewModel
 
-<div class="pt-6" id="filter-section-1">
+<div class="pt-6" id="filter-section-1" hx-target="#product-grid" hx-boost="true">
     <div class="space-y-4">
         @foreach (var category in Model.Categories)
         {
             <div class="flex items-center">
                 <input id="@(string.Concat("filter-category-", category.Id))"
-                       name="id"
+                       name="category"
                        value="@category.Id"
                        type="checkbox"
                        checked="@Context.Request.Query["category"].Contains(category.Id.ToString())"
-                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                       hx-get
+                       hx-area="Product"
+                       hx-controller="Product"
+                       hx-action="Index"
+                       hx-route-category="@category.Id"
+                       hx-trigger="change"
+                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
                 <label for="@(string.Concat("filter-category-", category.Id))"
                        class="ml-3 text-sm text-gray-600">
                     @category.Name

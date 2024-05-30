@@ -5,64 +5,98 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="bg-white">
-    <div>
-        <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
-                <h1 class="text-4xl font-bold tracking-tight text-gray-900">All Products</h1>
-                <div class="flex items-center">
-                    <div class="relative inline-block text-left">
-                        <div>
-                            <button id="sort-btn" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false" aria-haspopup="true">
-                                Sort
-                                <img asp-append-version="true" loading="lazy" class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" src="~/imgs/filter/arrow-down.svg" alt="Sort"/>
-                            </button>
-                        </div>
-                        <div id="sort-category-dropdown" class="hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                            <div class="py-1" role="none">
-                                <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-sort="Name" asp-route-order="false" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">
-                                    Name: A to Z
-                                </a>
-                                <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-sort="Name" asp-route-order="true" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">
-                                    Name: Z to A
-                                </a>
-                                <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-sort="Price" asp-route-order="false" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">
-                                    Price: Low to High
-                                </a>
-                                <a asp-area="Product" asp-controller="Product" asp-action="Index" asp-route-sort="Price" asp-route-order="true" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-4">
-                                    Price: High to Low
-                                </a>
-                            </div>
+<div id="product-grid" class="bg-white">
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900">All Products</h1>
+            <div class="flex items-center">
+                <div class="relative inline-block text-left">
+                    <div>
+                        <button id="sort-btn" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false" aria-haspopup="true">
+                            Sort
+                            <img asp-append-version="true" loading="lazy" class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" src="~/imgs/filter/arrow-down.svg" alt="Sort"/>
+                        </button>
+                    </div>
+                    <div id="sort-category-dropdown" class="hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                        <div class="py-1" role="none">
+                            <a hx-get
+                               hx-area="Product"
+                               hx-controller="Product"
+                               hx-action="Index"
+                               hx-route-sort="Name"
+                               hx-route-order="false"
+                               hx-target="#product-grid" 
+                               class="text-gray-500 block px-4 py-2 text-sm cursor-pointer" 
+                               role="menuitem" 
+                               tabindex="-1" 
+                               id="menu-item-1">
+                                Name: A to Z
+                            </a>
+                            <a hx-get
+                               hx-area="Product"
+                               hx-controller="Product"
+                               hx-action="Index"
+                               hx-route-sort="Name"
+                               hx-route-order="true"
+                               hx-target="#product-grid" 
+                               class="text-gray-500 block px-4 py-2 text-sm cursor-pointer" 
+                               role="menuitem" 
+                               tabindex="-1" 
+                               id="menu-item-2">
+                                Name: Z to A
+                            </a>
+                            <a hx-get
+                               hx-area="Product"
+                               hx-controller="Product"
+                               hx-action="Index"
+                               hx-route-sort="Price"
+                               hx-route-order="false"
+                               hx-target="#product-grid" 
+                               class="text-gray-500 block px-4 py-2 text-sm cursor-pointer" 
+                               role="menuitem" 
+                               tabindex="-1" 
+                               id="menu-item-3">
+                                Price: Low to High
+                            </a>
+                            <a hx-get
+                               hx-area="Product"
+                               hx-controller="Product"
+                               hx-action="Index"
+                               hx-route-sort="Price"
+                               hx-route-order="true"
+                               hx-target="#product-grid" 
+                               class="text-gray-500 block px-4 py-2 text-sm cursor-pointer" 
+                               role="menuitem" 
+                               tabindex="-1" 
+                               id="menu-item-4">
+                                Price: High to Low
+                            </a>
                         </div>
                     </div>
-                    <button type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
-                        <span class="sr-only">Filters</span>
-                        <img asp-append-version="true" loading="lazy" class="h-5 w-5" src="~/imgs/filter/filter.svg" alt="Filter"/>
-                    </button>
+                </div>
+                <button type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
+                    <span class="sr-only">Filters</span>
+                    <img asp-append-version="true" loading="lazy" class="h-5 w-5" src="~/imgs/filter/filter.svg" alt="Filter"/>
+                </button>
+            </div>
+        </div>
+        <section aria-labelledby="products-heading" class="pb-24 pt-6">
+            <h2 id="products-heading" class="sr-only">Products</h2>
+            <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+                <div class="border-b border-gray-200 py-6">
+                    <h3 class="-my-3 flow-root">
+                        <span class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-500 font-medium text-gray-900" aria-controls="filter-section-1 ">
+                            Category
+                        </span>
+                    </h3>
+                    @await Component.InvokeAsync("ListCategories")
+                </div>
+                <div class="lg:col-span-3">
+                    @RenderBody()
                 </div>
             </div>
-            <section aria-labelledby="products-heading" class="pb-24 pt-6">
-                <h2 id="products-heading" class="sr-only">Products</h2>
-                <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                    <div class="border-b border-gray-200 py-6">
-                        <h3 class="-my-3 flow-root">
-                            <button type="button" class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-1" aria-expanded="false">
-                                <span class="font-medium text-gray-900">Category</span>
-                                <span class="ml-6 flex items-center">
-                                    <img asp-append-version="true" loading="lazy" src="~/imgs/product/plus.svg" class="h-5 w-5" alt="plus"/>
-                                    <img asp-append-version="true" loading="lazy" src="~/imgs/product/minus.svg" class="h-5 w-5 hidden" alt="minus"/>
-                                </span>
-                            </button>
-                        </h3>
-                        @await Component.InvokeAsync("ListCategories")
-                    </div>
-                    <div class="lg:col-span-3">
-                        @RenderBody()
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
+        </section>
+    </main>
 </div>
 
 @await RenderSectionAsync("Scripts", false)
@@ -82,39 +116,6 @@
                     sortCategoryDropdown.addClass("hidden");
                 }
             });
-
-            const filterSection = $("#filter-section-1");
-            $("#show-category-filter, #hide-category-filter").on("click", function () {
-                filterSection.toggleClass("hidden");
-                $(this).siblings().toggleClass("hidden");
-            });
-
-            filterSection.on("change", 'input[type="checkbox"]', function () {
-                const selectedCategories = filterSection
-                .find('input[type="checkbox"]:checked')
-                .map(function () { return this.value;})
-                .get();
-
-            const urlParams = new URLSearchParams(window.location.search);
-            if (selectedCategories.length > 0) {
-                urlParams.set("category", selectedCategories.join(","));
-            } else {
-                urlParams.delete("category");
-            }
-            window.location.search = urlParams.toString();
-
-            fetchProducts();
-        });
-
-        function fetchProducts() {
-            $.ajax({
-                url: window.location.href,
-                type: "GET",
-                success: function (data) {
-                    $(".grid").html($(data).find(".grid").html());
-                },
-            });
-          }
         });
   </script>
 }
