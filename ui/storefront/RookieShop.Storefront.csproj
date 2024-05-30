@@ -49,6 +49,12 @@
 	</ItemGroup>
 
 	<Target Name="Tailwind" BeforeTargets="Build">
+		<Message Importance="Normal" Text="Installing node packages"
+		         Condition="!Exists('node_modules')" />
+		<Exec Command="bun install" 
+		      Condition="!Exists('node_modules')" 
+		      WorkingDirectory="$(MSBuildProjectDirectory)" />
+		<Message Importance="Normal" Text="Building Tailwind CSS" />
 		<Exec Command="bun run css:build" />
 	</Target>
 
