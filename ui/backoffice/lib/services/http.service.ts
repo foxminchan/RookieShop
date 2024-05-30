@@ -5,6 +5,7 @@ import axios, {
   AxiosRequestConfig,
 } from "axios"
 import _omitBy from "lodash/omitBy"
+import { v4 as uuidv4 } from "uuid"
 import axiosConfig from "../configs/api.config"
 
 export default class HttpService {
@@ -56,6 +57,12 @@ export default class HttpService {
     data?: T,
     config?: AxiosRequestConfig
   ): Promise<R> {
+    config = {
+      ...config,
+      headers: {
+        "X-Idempotency-Key": uuidv4(),
+      },
+    }
     return await this.instance.post<T, R>(url, data, config)
   }
 

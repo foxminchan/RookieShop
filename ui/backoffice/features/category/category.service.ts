@@ -6,6 +6,7 @@ import {
   UpdateCategoryRequest,
   CreateCategoryResponse,
 } from "./category.type"
+import { v4 as uuidv4 } from "uuid"
 import HttpService from "@/lib/services/http.service"
 import { buildQueryString } from "@/lib/helpers/query.helper"
 
