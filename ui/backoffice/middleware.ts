@@ -1,5 +1,4 @@
-import { auth } from "@/auth"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { RateLimiterMemory } from "rate-limiter-flexible"
 
 const rateLimiter = new RateLimiterMemory({
@@ -7,24 +6,13 @@ const rateLimiter = new RateLimiterMemory({
   duration: 1,
 })
 
-export default auth(async (req) => {
+export function middleware(request: NextRequest) {
   try {
-    await rateLimiter.consume(req.ip as string)
-    const { pathname } = req.nextUrl
-    if (!req.auth) {
-      if (pathname === "/") {
-        return NextResponse.next()
-      } else {
-        return NextResponse.redirect(new URL("/", req.url))
-      }
-    }
-    if (req.auth && pathname === "/") {
-      return NextResponse.redirect(new URL("/dashboard", req.url))
-    }
+    rateLimiter.consume(request.ip || "")
     return NextResponse.next()
   } catch (rateLimiterRes) {
     return new NextResponse("Too many requests", { status: 429 })
   }
-})
+}
 
 export const config = { matcher: ["/", "/dashboard/:path*"] }

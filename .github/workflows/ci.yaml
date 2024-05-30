@@ -37,6 +37,11 @@ jobs:
           node-version: "latest"
           cache: npm
 
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          version: "latest"
+
       - name: Cache .nuke/temp, ~/.nuget/packages
         uses: actions/cache@v2
         with:

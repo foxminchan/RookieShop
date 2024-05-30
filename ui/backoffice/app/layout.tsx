@@ -1,5 +1,4 @@
 import "./globals.css"
-import { auth } from "@/auth"
 import { cn } from "@/lib/utils"
 import { ReactNode } from "react"
 import Providers from "./providers"
@@ -36,8 +35,6 @@ export default async function DashboardLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
-  const session = await auth()
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -47,7 +44,7 @@ export default async function DashboardLayout({
         )}
       >
         <NextTopLoader />
-        <Providers session={session}>{children}</Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

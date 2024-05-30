@@ -57,10 +57,10 @@ var apiService = builder
 
 var backoffice = builder
     .AddNpmApp("backoffice", "../../ui/backoffice", "dev")
-    .WithHttpEndpoint(env: "PORT")
+    .WithHttpEndpoint(port: 3000, env: "PORT")
     .WithEnvironment("BROWSER", "none")
     .WithEnvironment("NEXT_PUBLIC_BASE_API", $"{apiService.GetEndpoint(protocol)}/api/v1")
-    .WithEnvironment("AUTH_DUENDE_IDENTITY_SERVER6_ISSUER", identityService.GetEndpoint("https"))
+    .WithEnvironment("NEXT_PUBLIC_DUENDE_AUTHORITY", identityService.GetEndpoint("https"))
     .PublishAsDockerFile();
 
 var storefront = builder

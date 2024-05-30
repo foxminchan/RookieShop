@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Next.js with Bun",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/ui/backoffice/node_modules/next/dist/bin/next",
+      "args": ["dev"],
+      "runtimeExecutable": "node",
+      "cwd": "${workspaceFolder}/ui/backoffice",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/ui/backoffice/.next/**/*.js"],
+      "preLaunchTask": "build"
+    }
+  ]
+}

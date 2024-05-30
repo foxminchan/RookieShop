@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "npm run build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+
+      "problemMatcher": [],
+      "detail": "Build the project using Bun"
+    },
+    {
+      "label": "dev",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "next", "dev"],
+
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"],
+      "detail": "Start the Next.js development server using Bun"
+    }
+  ]
+}

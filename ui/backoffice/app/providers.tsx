@@ -1,15 +1,13 @@
 import { Toaster } from "@/components/ui/toaster"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import OidcProvider from "@/components/providers/oidc-provider"
 import JotaiProvider from "@/components/providers/jotai-provider"
 import QueryProvider from "@/components/providers/query-provider"
 import { ThemeProvider } from "@/components/providers/theme-provider"
-import { SessionProvider, SessionProviderProps } from "next-auth/react"
 
 export default function Providers({
-  session,
   children,
 }: Readonly<{
-  session: SessionProviderProps["session"]
   children: React.ReactNode
 }>) {
   return (
@@ -22,7 +20,7 @@ export default function Providers({
       >
         <QueryProvider>
           <TooltipProvider>
-            <SessionProvider session={session}>{children}</SessionProvider>
+            <OidcProvider>{children}</OidcProvider>
           </TooltipProvider>
         </QueryProvider>
         <Toaster />

@@ -1,12 +1,14 @@
-import NextAuth from "next-auth"
-import DuendeIDS6Provider from "next-auth/providers/duende-identity-server6"
+import { env } from "./env.mjs"
+import { UserManagerSettings } from "oidc-client-ts"
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [
-    DuendeIDS6Provider({
-      clientId: "interactive.confidential",
-      clientSecret: "secret",
-      issuer: "https://demo.duendesoftware.com",
-    }),
-  ],
-})
+export const oidcConfig: UserManagerSettings = {
+  authority: env.NEXT_PUBLIC_DUENDE_AUTHORITY,
+  client_id: env.NEXT_PUBLIC_DUENDE_CLIENT_ID,
+  redirect_uri: env.NEXT_PUBLIC_REDIRECT_URI,
+  post_logout_redirect_uri: env.NEXT_PUBLIC_POST_LOGOUT_REDIRECT_URI,
+  response_type: env.NEXT_PUBLIC_RESPONSE_TYPE,
+  scope: env.NEXT_PUBLIC_DUENDE_CLIENT_SCOPE,
+  automaticSilentRenew: true,
+  includeIdTokenInSilentRenew: true,
+  monitorSession: true,
+}

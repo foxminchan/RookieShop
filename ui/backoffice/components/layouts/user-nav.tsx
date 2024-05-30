@@ -12,12 +12,13 @@ import {
 } from "../ui/dropdown-menu"
 import router from "next/router"
 import { Button } from "../ui/button"
-import { signOut, useSession } from "next-auth/react"
+import { useAuth } from "react-oidc-context"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 
 export function UserNav() {
-  const { data: session } = useSession()
-  if (session) {
+  const auth = useAuth()
+
+  if (auth.isAuthenticated) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -31,10 +32,10 @@ export function UserNav() {
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
-                {session.user?.name}
+                {auth.user?.profile.sub}
               </p>
               <p className="text-xs leading-none text-muted-foreground">
-                {session.user?.email}
+                {auth.user?.profile.email}
               </p>
             </div>
           </DropdownMenuLabel>
@@ -46,7 +47,7 @@ export function UserNav() {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => signOut()}>
+          <DropdownMenuItem onClick={() => void auth.signinRedirect()}>
             Log out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
