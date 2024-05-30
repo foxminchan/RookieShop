@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Edit, MoreHorizontal, Trash } from "lucide-react"
 import { Category } from "@/features/category/category.type"
 import { AlertModal } from "@/components/modals/alert-modal"
+import useDeleteCategory from "@/features/category/useDeleteCategory"
 
 type CellActionProps = {
   data: Category
@@ -22,8 +23,13 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
   const [loading] = useState(false)
   const [open, setOpen] = useState(false)
   const router = useRouter()
+  const { mutate: deleteCategory } = useDeleteCategory()
 
-  const onConfirm = async () => {}
+  const onConfirm = async () => {
+    deleteCategory(data.id)
+    setOpen(false)
+    router.replace(`/dashboard/category`)
+  }
 
   return (
     <>

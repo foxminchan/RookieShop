@@ -4,5 +4,6 @@
   "sonarlint.connectedMode.project": {
     "connectionId": "foxminchan",
     "projectKey": "foxminchan_RookieShop"
-  }
+  },
+  "cSpell.words": ["oidc"]
 }

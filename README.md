@@ -64,12 +64,14 @@ Build an e-commerce web site with minimum functionality below:
 ## Technical Stack
 
 - [ASP.NET Core 8.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
+- [htmx](https://htmx.org/)
 - [Next.js 14.0](https://nextjs.org/)
 - [Duende IdentityServer 7.0](https://duendesoftware.com/products/identityserver)
 - [Redis](https://redis.io/)
 - [Postgres](https://www.postgresql.org/)
 - [Aspire](https://learn.microsoft.com/dotnet/aspire)
 - [OpenTelemetry](https://opentelemetry.io/)
+- [NUKE](https://nuke.build/)
 
 ## Software Architecture
 

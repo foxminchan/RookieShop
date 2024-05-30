@@ -28,6 +28,10 @@ class CategoryService extends HttpService {
   updateCategory(data: UpdateCategoryRequest): Promise<Category> {
     return this.put(`/categories`, data)
   }
+
+  deleteCategory(id: string): Promise<void> {
+    return this.delete(`/categories/${id}`)
+  }
 }
 
 export default new CategoryService()

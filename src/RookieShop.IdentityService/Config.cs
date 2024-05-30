@@ -80,10 +80,14 @@ public static class Config
         {
             ClientId = "back-office",
             ClientName = "Back Office",
-            ClientSecrets = { new("secret".Sha256()) },
-            AllowedGrantTypes = [GrantType.AuthorizationCode],
-            RedirectUris = { $"{client.Backoffice}/api/auth/callback/duende-identity-service" },
-            PostLogoutRedirectUris = { $"{client.Backoffice}" },
+            AccessTokenType = AccessTokenType.Reference,
+            AllowedGrantTypes = GrantTypes.Code,
+            AllowAccessTokensViaBrowser = true,
+            RequireClientSecret = false,
+            RequireConsent = false,
+            RequirePkce = true,
+            RedirectUris = { $"{client.Backoffice}/api/auth/callback" },
+            PostLogoutRedirectUris = { $"{client.Backoffice}", },
             AllowedCorsOrigins = { $"{client.Backoffice}" },
             AllowedScopes =
             {

@@ -1,5 +1,11 @@
-import { env } from "./env.mjs"
-import { UserManagerSettings } from "oidc-client-ts"
+"use client"
+
+import {
+  UserManager,
+  UserManagerSettings,
+  WebStorageStateStore,
+} from "oidc-client-ts"
+import { env } from "@/env.mjs"
 
 export const oidcConfig: UserManagerSettings = {
   authority: env.NEXT_PUBLIC_DUENDE_AUTHORITY,
@@ -11,4 +17,9 @@ export const oidcConfig: UserManagerSettings = {
   automaticSilentRenew: true,
   includeIdTokenInSilentRenew: true,
   monitorSession: true,
+  userStore: new WebStorageStateStore({ store: window.localStorage }),
 }
+
+const userManager = new UserManager(oidcConfig)
+
+export default userManager
