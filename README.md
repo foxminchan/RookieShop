@@ -93,6 +93,7 @@ Build an e-commerce web site with minimum functionality below:
 
 - Get the latest source code: [https://github.com/foxminchan/RookieShop](https://github.com/foxminchan/RookieShop)
 - Install & start Docker Desktop: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+- Install .NET 8.0 SDK: [https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download)
 - Install Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 - Install bun: [https://bun.sh/](https://bun.sh/)
 
@@ -105,14 +106,15 @@ Build an e-commerce web site with minimum functionality below:
 - Install the latest [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download)
 - Install [Visual Studio Code with C# Dev Kit](https://code.visualstudio.com/docs/csharp/get-started)
 
-> Or use JetBrains Rider for the best experience
+> [!TIP]
+> Using JetBrains Rider is also a good choice for developing .NET Core applications in Mac and Linux.
 
 ### Setup tools and dependencies
 
 ```bash
 # Setup the tools
 
-bun install
+npm install
 dotnet tool restore
 
 # Install the dependencies for the .NET Core projects
@@ -139,7 +141,13 @@ dotnet run --project src/RookieShop.AppHost/RookieShop.AppHost.csproj
 ## Testing
 
 <p align="justify">
-In the project, i use xUnit for unit testing and Moq for mocking. For integration testing, i use the <code>Aspire</code> for running the test in the Docker container. I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>test</code> folder. I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
+
+In the project, i use xUnit for unit testing, Moq for mocking and FluentAssertions for assertion. For functional testing, i use the <code>Aspire xUnit</code> for running the test in the <code>Aspire</code> environment.
+
+I also use the <code>NetArchTest</code> library to enforce the architecture rules in the project. The test project is located in the <code>tests</code> folder.
+
+I follow the <b>Test Pyramid</b> strategy to write the test. To run the test, you can use the following command:
+
 </p>
 
 ```bash
@@ -164,7 +172,7 @@ I implement the CI/CD pipeline for the project using the <code>NUKE</code> with 
 ## Deployment
 
 <p align="justify">
-Deploying the application to the production environment by using <code>Aspirate (Aspir8)</code> by running the following command:
+Deploying the application to the production environment by using <a href="https://prom3theu5.github.io/aspirational-manifests" target="_blank"><code>Aspirate (Aspir8)</code></a> by running the following command:
 </p>
 
 ```bash
@@ -185,9 +193,9 @@ The project uses OpenTelemetry to collect the telemetry data from the applicatio
 ## Project References
 
 - https://github.com/dotnet/eShop
+- https://github.com/aspirant-project/aspirant
 - https://github.com/dotnet-architecture/eShopOnWeb
 - https://github.com/ardalis/CleanArchitecture
-- https://github.com/thangchung/clean-architecture-dotnet
 - https://github.com/phongnguyend/Practical.CleanArchitecture
 
 ## License
