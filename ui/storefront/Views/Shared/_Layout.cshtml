@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <partial name="Partials/_DefaultMetaTagsPartital"/>
-    @await RenderSectionAsync("MetaTags", required: false)
+    @await RenderSectionAsync("MetaTags", false)
     <title>@ViewData["Title"]</title>
     <link rel="author" href="https://github.com/foxminchan"/>
     <cache expires-after="@TimeSpan.FromSeconds(300)">

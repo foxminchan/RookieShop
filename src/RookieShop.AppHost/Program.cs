@@ -9,12 +9,12 @@ builder.AddForwardedHeaders();
 var protocol = "https";
 
 // Secret parameters
-var postgresUser = builder.AddParameter("SqlUser", secret: true);
-var postgresPassword = builder.AddParameter("SqlPassword", secret: true);
-var stripeApiKey = builder.AddParameter("StripeApiKey", secret: true);
-var emailSecret = builder.AddParameter("EmailSecret", secret: true);
-var googleClientId = builder.AddParameter("GoogleClientId", secret: true);
-var googleClientSecret = builder.AddParameter("GoogleClientSecret", secret: true);
+var postgresUser = builder.AddParameter("SqlUser", true);
+var postgresPassword = builder.AddParameter("SqlPassword", true);
+var stripeApiKey = builder.AddParameter("StripeApiKey", true);
+var emailSecret = builder.AddParameter("EmailSecret", true);
+var googleClientId = builder.AddParameter("GoogleClientId", true);
+var googleClientSecret = builder.AddParameter("GoogleClientSecret", true);
 
 // Postgres database
 var db = builder
@@ -57,7 +57,7 @@ var apiService = builder
 
 var backoffice = builder
     .AddNpmApp("backoffice", "../../ui/backoffice", "dev")
-    .WithHttpEndpoint(port: 3000, env: "PORT")
+    .WithHttpEndpoint(3000, env: "PORT")
     .WithEnvironment("BROWSER", "none")
     .WithEnvironment("NEXT_PUBLIC_BASE_API", $"{apiService.GetEndpoint(protocol)}/api/v1")
     .WithEnvironment("NEXT_PUBLIC_DUENDE_AUTHORITY", identityService.GetEndpoint("https"))

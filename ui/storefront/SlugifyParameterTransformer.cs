@@ -4,9 +4,6 @@ namespace RookieShop.Storefront;
 
 public sealed partial class SlugifyParameterTransformer : IOutboundParameterTransformer
 {
-    [GeneratedRegex("([a-z])([A-Z])")]
-    private static partial Regex Slug();
-
     public string? TransformOutbound(object? value)
     {
         if (value is null)
@@ -18,4 +15,7 @@ public sealed partial class SlugifyParameterTransformer : IOutboundParameterTran
             ? null
             : Slug().Replace(str, "$1-$2").ToLowerInvariant();
     }
+
+    [GeneratedRegex("([a-z])([A-Z])")]
+    private static partial Regex Slug();
 }

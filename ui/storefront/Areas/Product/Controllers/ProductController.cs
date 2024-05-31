@@ -20,8 +20,9 @@ public class ProductController(
 
         var order = !query.ContainsKey("order") || bool.Parse(query["order"]!);
 
-        var category = !query.ContainsKey("category") ? null :
-            query["category"]
+        var category = !query.ContainsKey("category")
+            ? null
+            : query["category"]
                 .Select(c => Guid.TryParse(c, out var parsedGuid) ? parsedGuid : Guid.Empty)
                 .ToArray();
 

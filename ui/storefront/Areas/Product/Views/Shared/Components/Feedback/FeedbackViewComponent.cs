@@ -14,13 +14,9 @@ public sealed class FeedbackViewComponent : ViewComponent
         Guid? customerId;
 
         if (HttpContext.Items["Customer"] is not CustomerViewModel customer)
-        {
             customerId = null;
-        }
         else
-        {
             customerId = customer.Id;
-        }
 
         FeedbackRequest feedback = new()
         {

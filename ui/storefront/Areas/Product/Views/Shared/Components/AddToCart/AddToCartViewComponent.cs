@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 using RookieShop.Storefront.Areas.Basket.Models;
-using System.Security.Claims;
 
 namespace RookieShop.Storefront.Areas.Product.Views.Shared.Components.AddToCart;
 

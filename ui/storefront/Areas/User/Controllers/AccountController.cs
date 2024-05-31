@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RookieShop.Storefront.Areas.User.Services;
 using RookieShop.Storefront.Areas.User.Models;
+using RookieShop.Storefront.Areas.User.Services;
 
 namespace RookieShop.Storefront.Areas.User.Controllers;
 
@@ -32,7 +32,9 @@ public class AccountController(ICustomerService customerService) : Controller
             Response.Redirect(Url.Content("/"));
         }
         else
+        {
             Response.Redirect(Url.Content("/"));
+        }
     }
 
     public async Task<IActionResult> Index()

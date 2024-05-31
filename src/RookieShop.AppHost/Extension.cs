@@ -12,7 +12,8 @@ public static class Extension
 
     internal sealed class AddForwardHeadersHook : IDistributedApplicationLifecycleHook
     {
-        public Task BeforeStartAsync(DistributedApplicationModel appModel, CancellationToken cancellationToken = default)
+        public Task BeforeStartAsync(DistributedApplicationModel appModel,
+            CancellationToken cancellationToken = default)
         {
             foreach (var p in appModel.GetProjectResources())
             {

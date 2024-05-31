@@ -5,8 +5,7 @@ namespace RookieShop.Storefront.Areas.Basket.Models;
 
 public sealed class BasketRequest
 {
-    [AliasAs("accountId")]
-    public Guid? AccountId { get; set; }
+    [AliasAs("accountId")] public Guid? AccountId { get; set; }
 
     [AliasAs("id")]
     [Required(ErrorMessage = "Product Id is required")]
