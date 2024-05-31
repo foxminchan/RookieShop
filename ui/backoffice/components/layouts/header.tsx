@@ -1,7 +1,8 @@
-import Link from "next/link"
 import Image from "next/image"
-import { UserNav } from "./user-nav"
+import Link from "next/link"
+
 import ModeToggle from "../custom/mode-toggle"
+import { UserNav } from "./user-nav"
 
 export default function Header() {
   return (

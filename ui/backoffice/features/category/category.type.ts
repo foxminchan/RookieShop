@@ -1,4 +1,4 @@
-import { PagingFilter, PagedInfo } from "@/types/api"
+import { PagedInfo, PagingFilter } from "@/types/api"
 
 export type Category = {
   id: string

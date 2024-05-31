@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
+
 import { authService } from "@/lib/services/auth.service"
 
 export default function SigninCallback() {

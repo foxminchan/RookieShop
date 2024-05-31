@@ -1,5 +1,25 @@
 "use client"
 
+import { useCallback, useEffect, useState } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { DataTableProps } from "@/types"
+import {
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+} from "@radix-ui/react-icons"
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  PaginationState,
+  useReactTable,
+} from "@tanstack/react-table"
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import {
   Select,
   SelectContent,
@@ -15,25 +35,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {
-  PaginationState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
-import {
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-} from "@radix-ui/react-icons"
-import { DataTableProps } from "@/types"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { useCallback, useEffect, useState } from "react"
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export default function FilterTable<TData, TValue>({
   columns,

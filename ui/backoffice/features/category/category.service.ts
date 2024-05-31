@@ -1,13 +1,14 @@
+import { buildQueryString } from "@/lib/helpers/query.helper"
+import HttpService from "@/lib/services/http.service"
+
 import {
   Category,
-  ListCategories,
   CategoryFilterParams,
   CreateCategoryRequest,
-  UpdateCategoryRequest,
   CreateCategoryResponse,
+  ListCategories,
+  UpdateCategoryRequest,
 } from "./category.type"
-import HttpService from "@/lib/services/http.service"
-import { buildQueryString } from "@/lib/helpers/query.helper"
 
 class CategoryService extends HttpService {
   constructor() {

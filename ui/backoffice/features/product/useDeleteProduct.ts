@@ -1,5 +1,6 @@
-import productService from "./product.service"
 import { useMutation } from "@tanstack/react-query"
+
+import productService from "./product.service"
 
 export default function useDeleteProduct() {
   return useMutation<void, AppAxiosError, string>({

@@ -1,11 +1,7 @@
 "use client"
 
-import {
-  UserManager,
-  UserManagerSettings,
-  WebStorageStateStore,
-} from "oidc-client-ts"
 import { env } from "@/env.mjs"
+import { UserManagerSettings, WebStorageStateStore } from "oidc-client-ts"
 
 export const oidcConfig: UserManagerSettings = {
   authority: env.NEXT_PUBLIC_DUENDE_AUTHORITY,

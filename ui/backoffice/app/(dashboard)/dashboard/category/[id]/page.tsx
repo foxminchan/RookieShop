@@ -1,8 +1,9 @@
 "use client"
 
+import useGetCategory from "@/features/category/useGetCategory"
+
 import BreadCrumb from "@/components/ui/breadcrumb"
 import { CategoryForm } from "@/components/forms/category-form"
-import useGetCategory from "@/features/category/useGetCategory"
 
 export default function EditCategory({
   params,

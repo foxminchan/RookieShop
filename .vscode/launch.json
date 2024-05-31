@@ -15,6 +15,17 @@
       "sourceMaps": true,
       "outFiles": ["${workspaceFolder}/ui/backoffice/.next/**/*.js"],
       "preLaunchTask": "build"
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "name": "C#: RookieShop Debug",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/RookieShop.AppHost.csproj"
     }
   ]
 }

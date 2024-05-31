@@ -1,7 +1,8 @@
-import { User } from "oidc-client-ts"
-import { authService } from "../services/auth.service"
-import { oidcStorageName } from "../configs/oicd.config"
 import { atomWithStorage, createJSONStorage } from "jotai/utils"
+import { User } from "oidc-client-ts"
+
+import { oidcStorageName } from "../configs/oicd.config"
+import { authService } from "../services/auth.service"
 
 const storage = createJSONStorage<User | null>(() => window.localStorage, {
   reviver: User.fromStorageString,

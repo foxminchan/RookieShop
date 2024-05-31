@@ -1,8 +1,10 @@
 "use client"
 
-import { cn } from "@/lib/utils"
 import { useState } from "react"
+
 import { navItems } from "@/lib/constants/data"
+import { cn } from "@/lib/utils"
+
 import DashboardNav from "./dashboard-nav"
 
 type SidebarProps = {

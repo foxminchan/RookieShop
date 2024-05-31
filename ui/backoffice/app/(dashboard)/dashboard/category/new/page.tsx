@@ -1,5 +1,5 @@
-import { CategoryForm } from "@/components/forms/category-form"
 import BreadCrumb from "@/components/ui/breadcrumb"
+import { CategoryForm } from "@/components/forms/category-form"
 
 export default function AddCategory() {
   const breadcrumbItems = [

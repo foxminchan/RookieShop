@@ -1,5 +1,6 @@
-import { oidcConfig, oidcStorageName } from "../configs/oicd.config"
 import { User, UserManager, UserManagerSettings } from "oidc-client-ts"
+
+import { oidcConfig, oidcStorageName } from "../configs/oicd.config"
 
 export class AuthService {
   oidcConfig: UserManagerSettings = oidcConfig

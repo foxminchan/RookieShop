@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils"
 import {
   DetailedHTMLProps,
   HTMLAttributes,
@@ -6,6 +5,8 @@ import {
   TdHTMLAttributes,
   ThHTMLAttributes,
 } from "react"
+
+import { cn } from "@/lib/utils"
 
 export function TableRow({
   children,

@@ -1,6 +1,7 @@
 import React from "react"
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import { TooltipProps, TooltipTriggerProps } from "@radix-ui/react-tooltip"
+
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 
 interface SimpleTooltipProps extends TooltipTriggerProps {
   tooltipContent: React.ReactNode

@@ -1,5 +1,13 @@
 "use client"
 
+import { FC, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { Category } from "@/features/category/category.type"
+import useDeleteCategory from "@/features/category/useDeleteCategory"
+import useListCategories from "@/features/category/useListCategories"
+import { Edit, MoreHorizontal, Trash } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,14 +15,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { FC, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { usePathname, useRouter } from "next/navigation"
-import { Edit, MoreHorizontal, Trash } from "lucide-react"
-import { Category } from "@/features/category/category.type"
 import { AlertModal } from "@/components/modals/alert-modal"
-import useDeleteCategory from "@/features/category/useDeleteCategory"
-import useListCategories from "@/features/category/useListCategories"
 
 type CellActionProps = {
   data: Category

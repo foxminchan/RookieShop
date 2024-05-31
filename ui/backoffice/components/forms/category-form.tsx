@@ -1,14 +1,16 @@
 "use client"
 
+import { FC, useEffect } from "react"
+import { useParams, useRouter } from "next/navigation"
 import { UpdateCategoryRequest } from "@/features/category/category.type"
 import useCreateCategory from "@/features/category/useCreateCategory"
 import useUpdateCategory from "@/features/category/useUpdateCategory"
-import { categorySchema } from "@/lib/validations/category"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useParams, useRouter } from "next/navigation"
-import { FC, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+
+import { categorySchema } from "@/lib/validations/category"
+
 import { Button } from "../ui/button"
 import {
   Form,

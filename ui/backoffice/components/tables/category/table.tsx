@@ -1,8 +1,10 @@
 "use client"
 
-import { columns } from "./columns"
-import FilterTable from "@/components/custom/filter-table"
 import { Category } from "@/features/category/category.type"
+
+import FilterTable from "@/components/custom/filter-table"
+
+import { columns } from "./columns"
 
 export default function CategoryTable({
   page,

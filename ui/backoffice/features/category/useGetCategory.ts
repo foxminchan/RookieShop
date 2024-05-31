@@ -1,5 +1,6 @@
-import categoryService from "./category.service"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
+
+import categoryService from "./category.service"
 
 export default function useListCategories(id: string) {
   return useQuery({

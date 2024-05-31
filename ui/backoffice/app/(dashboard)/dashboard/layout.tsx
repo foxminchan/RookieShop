@@ -1,8 +1,9 @@
 "use client"
 
-import { useAtomValue } from "jotai"
-import { useRouter } from "next/navigation"
 import { ReactNode, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useAtomValue } from "jotai"
+
 import { userAtom } from "@/lib/jotai/userAtom"
 import Header from "@/components/layouts/header"
 import Sidebar from "@/components/layouts/sidebar"

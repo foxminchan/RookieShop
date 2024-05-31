@@ -1,15 +1,17 @@
 "use client"
 
+import { useAtom } from "jotai"
+
+import { userAtom } from "@/lib/jotai/userAtom"
+
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { Button } from "../ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import { useAtom } from "jotai"
-import { Button } from "../ui/button"
-import { userAtom } from "@/lib/jotai/userAtom"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
 export function UserNav() {
   const [user, setUser] = useAtom(userAtom)

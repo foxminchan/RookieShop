@@ -1,12 +1,13 @@
 "use client"
 
-import { toast } from "@/components/ui/use-toast"
+import { PropsWithChildren, useState } from "react"
 import {
   MutationCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query"
-import { PropsWithChildren, useState } from "react"
+
+import { toast } from "@/components/ui/use-toast"
 
 export default function QueryProvider({
   children,

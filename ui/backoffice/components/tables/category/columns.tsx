@@ -1,9 +1,11 @@
 "use client"
 
-import { CellAction } from "./cell-action"
-import { ColumnDef } from "@tanstack/react-table"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Category } from "@/features/category/category.type"
+import { ColumnDef } from "@tanstack/react-table"
+
+import { Checkbox } from "@/components/ui/checkbox"
+
+import { CellAction } from "./cell-action"
 
 export const columns: ColumnDef<Category>[] = [
   {

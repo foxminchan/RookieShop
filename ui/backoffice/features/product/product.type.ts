@@ -1,5 +1,6 @@
-import { Category } from "../category/category.type"
 import { FilterParams, PagedInfo } from "@/types/api"
+
+import { Category } from "../category/category.type"
 
 export type Product = {
   id: string

@@ -1,14 +1,15 @@
 "use client"
 
 import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { Plus } from "lucide-react"
-import { Heading } from "@/components/ui/heading"
-import Breadcrumb from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import { buttonVariants } from "@/components/ui/button"
-import CategoryTable from "@/components/tables/category/table"
 import useListCategories from "@/features/category/useListCategories"
+import { Plus } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import Breadcrumb from "@/components/ui/breadcrumb"
+import { buttonVariants } from "@/components/ui/button"
+import { Heading } from "@/components/ui/heading"
+import { Separator } from "@/components/ui/separator"
+import CategoryTable from "@/components/tables/category/table"
 
 const breadcrumbItems = [{ title: "Category", link: "/dashboard/category" }]
 

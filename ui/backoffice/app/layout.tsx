@@ -1,11 +1,14 @@
 import "./globals.css"
-import { cn } from "@/lib/utils"
+
 import { ReactNode } from "react"
-import Providers from "./providers"
 import type { Metadata } from "next"
-import NextTopLoader from "nextjs-toploader"
 import { Inter as FontSans } from "next/font/google"
+import NextTopLoader from "nextjs-toploader"
+
 import { siteConfig } from "@/lib/configs/site.config"
+import { cn } from "@/lib/utils"
+
+import Providers from "./providers"
 
 const fontSans = FontSans({
   subsets: ["latin"],

@@ -1,7 +1,8 @@
-import { cn } from "@/lib/utils"
-import { ChevronRightIcon } from "@radix-ui/react-icons"
-import Link from "next/link"
 import React from "react"
+import Link from "next/link"
+import { ChevronRightIcon } from "@radix-ui/react-icons"
+
+import { cn } from "@/lib/utils"
 
 type BreadCrumbType = {
   title: string

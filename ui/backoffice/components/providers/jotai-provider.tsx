@@ -1,5 +1,5 @@
-import { Provider } from "jotai"
 import React, { PropsWithChildren } from "react"
+import { Provider } from "jotai"
 
 export default function JotaiProvider({
   children,

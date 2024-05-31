@@ -1,8 +1,9 @@
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
 import _omitBy from "lodash/omitBy"
 import { v4 as uuidv4 } from "uuid"
-import { authService } from "./auth.service"
+
 import axiosConfig from "../configs/api.config"
-import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from "axios"
+import { authService } from "./auth.service"
 
 export default class HttpService {
   private instance: AxiosInstance

@@ -1,9 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { NavItem } from "@/types"
 import { usePathname } from "next/navigation"
+import { NavItem } from "@/types"
+
+import { cn } from "@/lib/utils"
 
 type DashboardNavProps = {
   items: NavItem[]

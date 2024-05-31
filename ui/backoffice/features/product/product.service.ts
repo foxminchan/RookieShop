@@ -1,12 +1,13 @@
+import { buildQueryString } from "@/lib/helpers/query.helper"
+import HttpService from "@/lib/services/http.service"
+
 import {
-  Product,
-  ListProducts,
-  ProductFilterParams,
   CreateProductRequest,
   CreateProductResponse,
+  ListProducts,
+  Product,
+  ProductFilterParams,
 } from "./product.type"
-import HttpService from "@/lib/services/http.service"
-import { buildQueryString } from "@/lib/helpers/query.helper"
 
 class ProductService extends HttpService {
   constructor() {
