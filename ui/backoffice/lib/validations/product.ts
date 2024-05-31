@@ -1,9 +1,14 @@
 import * as z from "zod"
 
-export const productSchema = z.object({
-  name: z.string().min(3).max(50),
-  description: z.string().min(3).max(1000),
-  quantity: z.number().int().positive(),
-  price: z.number().int().positive(),
-  priceSale: z.number().int().positive(),
-})
+export const productSchema = z
+  .object({
+    name: z.string().min(3).max(50),
+    description: z.string().min(3).max(1000),
+    quantity: z.number().int().positive(),
+    price: z.number().int().positive(),
+    priceSale: z.number().int().positive(),
+  })
+  .refine((data) => data.priceSale < data.price, {
+    message: "Price sale must be less than price",
+    path: ["priceSale"],
+  })

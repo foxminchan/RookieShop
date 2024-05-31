@@ -14,14 +14,14 @@ class CategoryService extends HttpService {
     super()
   }
 
+  getCategory(id: string): Promise<Category> {
+    return this.get(`/categories/${id}`)
+  }
+
   listCategories(
     options?: Partial<CategoryFilterParams>
   ): Promise<ListCategories> {
     return this.get<ListCategories>(`/categories?${buildQueryString(options)}`)
-  }
-
-  getCategory(id: string): Promise<Category> {
-    return this.get(`/categories/${id}`)
   }
 
   createCategory(data: CreateCategoryRequest): Promise<CreateCategoryResponse> {
