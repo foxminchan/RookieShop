@@ -2,14 +2,14 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import userManager from "@/lib/configs/oicd.config"
+import { authService } from "@/lib/services/auth.service"
 
 export default function SigninCallback() {
   const router = useRouter()
 
   useEffect(() => {
     async function handleCallback() {
-      await userManager.signinRedirectCallback()
+      await authService.userManager.signinRedirectCallback()
       router.push("/dashboard")
     }
     handleCallback()

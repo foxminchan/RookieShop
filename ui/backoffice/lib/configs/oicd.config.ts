@@ -20,6 +20,4 @@ export const oidcConfig: UserManagerSettings = {
   userStore: new WebStorageStateStore({ store: window.localStorage }),
 }
 
-const userManager = new UserManager(oidcConfig)
-
-export default userManager
+export const oidcStorageName = `oidc.user:${env.NEXT_PUBLIC_DUENDE_AUTHORITY}:${env.NEXT_PUBLIC_DUENDE_CLIENT_ID}`

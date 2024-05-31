@@ -1,17 +1,26 @@
+"use client"
+
 import Header from "@/components/layouts/header"
 import Sidebar from "@/components/layouts/sidebar"
-import type { Metadata } from "next"
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "An admin dashboard for managing your app",
-}
+import { userAtom } from "@/lib/services/auth.service"
+import { useAtomValue } from "jotai"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const router = useRouter()
+  const user = useAtomValue(userAtom)
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/")
+    }
+  }, [user])
+
   return (
     <>
       <Header />
