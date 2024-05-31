@@ -1,12 +1,8 @@
-import axios, {
-  AxiosError,
-  AxiosInstance,
-  AxiosResponse,
-  AxiosRequestConfig,
-} from "axios"
 import _omitBy from "lodash/omitBy"
 import { v4 as uuidv4 } from "uuid"
+import { authService } from "./auth.service"
 import axiosConfig from "../configs/api.config"
+import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from "axios"
 
 export default class HttpService {
   private instance: AxiosInstance
@@ -19,17 +15,13 @@ export default class HttpService {
     this.instance = instance
   }
 
-  private onResponse = (response: AxiosResponse) => {
-    return response.data
-  }
-
-  private onResponseError = (error: AxiosError): Promise<AxiosError> => {
-    return Promise.reject(error)
-  }
-
   private setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
     axiosInstance.interceptors.request.use(
       async (config) => {
+        const token = authService.getUser()?.id_token
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`
+        }
         return config
       },
       (error) => {
@@ -39,10 +31,10 @@ export default class HttpService {
     )
     axiosInstance.interceptors.response.use(
       async (response) => {
-        return this.onResponse(response)
+        return response.data
       },
       (error) => {
-        return this.onResponseError(error)
+        return Promise.reject(new Error(error))
       }
     )
     return axiosInstance
@@ -79,6 +71,12 @@ export default class HttpService {
     data: T,
     config?: AxiosRequestConfig
   ): Promise<R> {
+    config = {
+      ...config,
+      headers: {
+        "X-Idempotency-Key": uuidv4(),
+      },
+    }
     return await this.instance.patch<T, R>(url, data, config)
   }
 

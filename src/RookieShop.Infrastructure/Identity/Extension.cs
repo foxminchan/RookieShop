@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RookieShop.Domain.Constants;
 using RookieShop.Infrastructure.Identity.Settings;
 using RookieShop.Infrastructure.Validator;
 
@@ -36,13 +35,9 @@ public static class Extension
 
         builder.Services.AddAuthorizationBuilder()
             .AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
-                policy.RequireAuthenticatedUser()
-                    .RequireClaim("scope", AuthScope.Read)
-                    .RequireClaim("scope", AuthScope.Write))
+                policy.RequireAuthenticatedUser())
             .SetDefaultPolicy(new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
                 .RequireAuthenticatedUser()
-                .RequireClaim("scope", AuthScope.Read)
-                .RequireClaim("scope", AuthScope.Write)
                 .Build());
 
         return builder;

@@ -6,7 +6,6 @@ import {
   UpdateCategoryRequest,
   CreateCategoryResponse,
 } from "./category.type"
-import { v4 as uuidv4 } from "uuid"
 import HttpService from "@/lib/services/http.service"
 import { buildQueryString } from "@/lib/helpers/query.helper"
 
@@ -19,6 +18,10 @@ class CategoryService extends HttpService {
     options?: Partial<CategoryFilterParams>
   ): Promise<ListCategories> {
     return this.get<ListCategories>(`/categories?${buildQueryString(options)}`)
+  }
+
+  getCategory(id: string): Promise<Category> {
+    return this.get(`/categories/${id}`)
   }
 
   createCategory(data: CreateCategoryRequest): Promise<CreateCategoryResponse> {

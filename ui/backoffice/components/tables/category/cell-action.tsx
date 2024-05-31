@@ -8,12 +8,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FC, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { usePathname, useRouter } from "next/navigation"
 import { Edit, MoreHorizontal, Trash } from "lucide-react"
 import { Category } from "@/features/category/category.type"
 import { AlertModal } from "@/components/modals/alert-modal"
 import useDeleteCategory from "@/features/category/useDeleteCategory"
+import useListCategories from "@/features/category/useListCategories"
 
 type CellActionProps = {
   data: Category
@@ -23,12 +24,17 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
   const [loading] = useState(false)
   const [open, setOpen] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
   const { mutate: deleteCategory } = useDeleteCategory()
+  const { refetch } = useListCategories()
+
+  const categoryPath = `/dashboard/category/`
 
   const onConfirm = async () => {
     deleteCategory(data.id)
     setOpen(false)
-    router.replace(`/dashboard/category`)
+    if (pathname !== categoryPath) router.replace(categoryPath)
+    else await refetch()
   }
 
   return (
@@ -49,7 +55,7 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/category/${data.id}`)}
+            onClick={() => router.push(`${categoryPath}${data.id}`)}
           >
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

@@ -1,7 +1,7 @@
 import { CategoryForm } from "@/components/forms/category-form"
 import BreadCrumb from "@/components/ui/breadcrumb"
 
-export default function Page() {
+export default function AddCategory() {
   const breadcrumbItems = [
     { title: "Category", link: "/dashboard/category" },
     { title: "Create", link: "/dashboard/category/new" },

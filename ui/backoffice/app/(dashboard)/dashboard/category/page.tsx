@@ -20,7 +20,7 @@ type paramsProps = {
 
 export default function CatgoryPage({ searchParams }: paramsProps) {
   const page = Number(searchParams.page) || 1
-  const pageLimit = Number(searchParams.limit) || 10
+  const pageLimit = Number(searchParams.limit) || 20
   const name = (searchParams.search as string) || null
 
   const { data } = useListCategories({
@@ -30,7 +30,7 @@ export default function CatgoryPage({ searchParams }: paramsProps) {
   })
 
   const categories = data?.categories || []
-  const totalCategories = data?.pageInfo.totalRecords || 0
+  const totalCategories = data?.pageInfo.totalRecords ?? 0
 
   return (
     <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
@@ -51,7 +51,7 @@ export default function CatgoryPage({ searchParams }: paramsProps) {
       <Separator />
       <CategoryTable
         page={page}
-        pageCount={data?.pageInfo.totalPages || 0}
+        pageCount={data?.pageInfo.totalPages ?? 0}
         data={categories || []}
         totalRecords={totalCategories || 0}
       />
