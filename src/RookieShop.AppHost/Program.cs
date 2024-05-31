@@ -15,6 +15,7 @@ var stripeApiKey = builder.AddParameter("StripeApiKey", true);
 var emailSecret = builder.AddParameter("EmailSecret", true);
 var googleClientId = builder.AddParameter("GoogleClientId", true);
 var googleClientSecret = builder.AddParameter("GoogleClientSecret", true);
+var openAiKey = builder.AddParameter("OpenAiKey", true);
 
 // Postgres database
 var db = builder
@@ -67,6 +68,7 @@ var storefront = builder
     .AddProject<RookieShop_Storefront>("storefront")
     .WithReference(redis)
     .WithHttpEndpoint()
+    .WithEnvironment("SmartComponents__ApiKey", openAiKey)
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint(protocol)}/api/v1");
 

@@ -1,5 +1,9 @@
 ﻿@model RookieShop.Storefront.Areas.Product.Models.Feedbacks.FeedbackRequest
 
+@{
+    const string userRole = "Customer who bought the product and want to leave a review";
+}
+
 <div class="p-2 rounded-3xl">
     <form asp-area="Product" asp-controller="Product" asp-action="AddFeedback" class="max-w-md mx-auto mt-16 p-4 bg-white shadow rounded">
         <h2 class="text-2xl font-bold mb-4">Your review</h2>
@@ -20,7 +24,13 @@
         </div>
         <div class="mb-4">
             <label asp-for="Content" class="block mb-1">Message</label>
-            <textarea asp-for="Content" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-300 sm:text-sm sm:leading-6 resize-none"></textarea>
+            <smart-textarea 
+                id="Content"
+                name="Content"
+                user-role="@userRole"
+                rows="3" 
+                placeholder="Your review helps other customers to make a decision"
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-300 sm:text-sm sm:leading-6 resize-none"/>
             <span asp-validation-for="Content" class="text-red-900"></span>
         </div>
         <button type="submit" class="text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center">

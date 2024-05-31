@@ -4,7 +4,7 @@ import {
   ProductFilterParams,
   CreateProductRequest,
   CreateProductResponse,
-} from "./product.types"
+} from "./product.type"
 import HttpService from "@/lib/services/http.service"
 import { buildQueryString } from "@/lib/helpers/query.helper"
 

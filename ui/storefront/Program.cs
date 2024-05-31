@@ -5,6 +5,7 @@ using RookieShop.Storefront;
 using RookieShop.Storefront.Configurations;
 using RookieShop.Storefront.Middlewares;
 using RookieShop.Storefront.Options;
+using SmartComponents.Inference.OpenAI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,9 @@ builder.Services.AddMvc(options =>
     options.EnableEndpointRouting = false;
     options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
 });
+
+builder.Services.AddSmartComponents()
+    .WithInferenceBackend<OpenAIInferenceBackend>();
 
 builder.Services.AddProgressiveWebApp();
 

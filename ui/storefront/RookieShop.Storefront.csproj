@@ -20,6 +20,11 @@
 	<ItemGroup>
 		<PackageReference Include="Htmx" />
 		<PackageReference Include="Htmx.TagHelpers" />
+		<PackageReference Include="SmartComponents.AspNetCore" />
+		<PackageReference Include="SmartComponents.Inference.OpenAI" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.TypeScript.MSBuild" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
@@ -51,8 +56,8 @@
 	<Target Name="Tailwind" BeforeTargets="Build">
 		<Message Importance="Normal" Text="Installing node packages"
 		         Condition="!Exists('node_modules')" />
-		<Exec Command="bun install" 
-		      Condition="!Exists('node_modules')" 
+		<Exec Command="bun install"
+		      Condition="!Exists('node_modules')"
 		      WorkingDirectory="$(MSBuildProjectDirectory)" />
 		<Message Importance="Normal" Text="Building Tailwind CSS" />
 		<Exec Command="bun run css:build" />

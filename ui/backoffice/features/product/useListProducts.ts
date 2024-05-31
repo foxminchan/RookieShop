@@ -1,6 +1,6 @@
 import productService from "./product.service"
 import { useQuery } from "@tanstack/react-query"
-import { ProductFilterParams } from "./product.types"
+import { ProductFilterParams } from "./product.type"
 
 export default function useListProducts(
   options?: Partial<ProductFilterParams>
