@@ -18,13 +18,12 @@ public sealed class BestSellerProductsHandler(IDatabaseFactory factory)
                                 p.name AS {nameof(BestSellerProductsDto.ProductName)}, 
                                 p.image_name AS {nameof(BestSellerProductsDto.ImageUrl)}, 
                                 SUM(od.quantity) AS {nameof(BestSellerProductsDto.TotalSoldQuantity)},
-                                p.price->>'price_sale' AS {nameof(BestSellerProductsDto.PriceSale)},
-                                p.price->>'price' AS {nameof(BestSellerProductsDto.Price)}
+                                p.price AS {nameof(BestSellerProductsDto.Price)}
                             FROM products p
                                 JOIN order_details od ON p.id = od.product_id
                                 JOIN orders o ON od.order_id = o.id
-                            WHERE (@From IS NULL OR o.order_date >= @From)
-                                AND (@To IS NULL OR o.order_date <= @To) 
+                            WHERE (@From IS NULL OR o.update_date >= @From)
+                                AND (@To IS NULL OR o.update_date <= @To) 
                                 AND o.order_status = 1
                             GROUP BY p.id, p.name, p.image_name, p.price
                             ORDER BY {nameof(BestSellerProductsDto.TotalSoldQuantity)} DESC
