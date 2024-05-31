@@ -1,24 +1,18 @@
-;("")
-
 import { NextRequest, NextResponse } from "next/server"
 import { RateLimiterMemory } from "rate-limiter-flexible"
-import userManager from "./lib/configs/oicd.config"
 
 const rateLimiter = new RateLimiterMemory({
-  points: 50,
+  points: 20,
   duration: 1,
 })
 
 export async function middleware(request: NextRequest) {
-  // // rateLimiter.consume(request.ip || "")
-  // if (!(await userManager.getUser())) {
-  //   return new NextResponse("", { status: 302, headers: { Location: "/" } })
-  // } else {
-  //   return new NextResponse("", {
-  //     status: 302,
-  //     headers: { Location: "/dashboard" },
-  //   })
-  // }
+  try {
+    await rateLimiter.consume(request.ip || "")
+    return NextResponse.next()
+  } catch (rateLimiterRes) {
+    return new NextResponse("Too many requests", { status: 429 })
+  }
 }
 
 export const config = { matcher: ["/", "/dashboard/:path*"] }

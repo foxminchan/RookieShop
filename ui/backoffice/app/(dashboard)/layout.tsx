@@ -1,15 +1,13 @@
 import { Metadata } from "next"
-import React from "react"
+import React, { PropsWithChildren } from "react"
 
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "Dashboard",
 }
 
-type Props = {}
-
-function Layout({ children }: React.PropsWithChildren<Props>) {
+export default function DashBoardLayout({
+  children,
+}: Readonly<PropsWithChildren>) {
   return <>{children}</>
 }
-
-export default Layout

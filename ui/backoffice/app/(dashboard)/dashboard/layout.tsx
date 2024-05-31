@@ -7,7 +7,7 @@ import { userAtom } from "@/lib/jotai/userAtom"
 import Header from "@/components/layouts/header"
 import Sidebar from "@/components/layouts/sidebar"
 
-export default function DashboardLayout({
+export default function MainDashboardLayout({
   children,
 }: Readonly<{
   children: ReactNode

@@ -8,7 +8,7 @@ interface SimpleTooltipProps extends TooltipTriggerProps {
   children: React.ReactNode
 }
 
-function SimpleTooltip({
+export default function SimpleTooltip({
   children,
   tooltipContent,
   parentProps,
@@ -21,5 +21,3 @@ function SimpleTooltip({
     </Tooltip>
   )
 }
-
-export default SimpleTooltip

@@ -1,11 +1,12 @@
 "use client"
 
 import { cn } from "@/lib/utils"
+import { HTMLAttributes } from "react"
 import { useAuth } from "react-oidc-context"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/custom/icons"
 
-interface DuendeAuthButtonProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface DuendeAuthButtonProps extends HTMLAttributes<HTMLDivElement> {}
 
 export function DuendeAuthButton({
   className,

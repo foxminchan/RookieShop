@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function DashboardLayout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: ReactNode

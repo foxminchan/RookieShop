@@ -8,7 +8,9 @@ import {
 } from "@tanstack/react-query"
 import { PropsWithChildren, useState } from "react"
 
-function QueryProvider({ children }: Readonly<PropsWithChildren>) {
+export default function QueryProvider({
+  children,
+}: Readonly<PropsWithChildren>) {
   const [client] = useState(
     new QueryClient({
       mutationCache: new MutationCache({
@@ -27,5 +29,3 @@ function QueryProvider({ children }: Readonly<PropsWithChildren>) {
 
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>
 }
-
-export default QueryProvider

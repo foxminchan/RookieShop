@@ -41,7 +41,7 @@ export default function FilterTable<TData, TValue>({
   searchKey,
   pageCount,
   pageSizeOptions = [10, 20, 30, 40, 50],
-}: DataTableProps<TData, TValue>) {
+}: Readonly<DataTableProps<TData, TValue>>) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()

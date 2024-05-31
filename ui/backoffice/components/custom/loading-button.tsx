@@ -7,7 +7,7 @@ export interface LoadingButtonProps extends ButtonProps {
   loadingHolder?: React.ReactNode
 }
 
-function LoadingButton({
+export default function LoadingButton({
   isLoading = false,
   loadingHolder = (
     <>
@@ -25,5 +25,3 @@ function LoadingButton({
     </Button>
   )
 }
-
-export { LoadingButton }

@@ -18,7 +18,7 @@ type paramsProps = {
   }
 }
 
-export default function CatgoryPage({ searchParams }: paramsProps) {
+export default function CatgoryPage({ searchParams }: Readonly<paramsProps>) {
   const page = Number(searchParams.page) || 1
   const pageLimit = Number(searchParams.limit) || 20
   const name = (searchParams.search as string) || null
