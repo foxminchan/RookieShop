@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,6 +34,10 @@ public static class Extension
 
     private static void ConfigureEmailService(this IHostApplicationBuilder builder)
     {
+        var conn = builder.Configuration.GetConnectionString("shopdb");
+
+        Guard.Against.NullOrEmpty(conn);
+
         builder.Services.AddResiliencePipeline(nameof(Smtp), resiliencePipelineBuilder => resiliencePipelineBuilder
             .AddRetry(new()
             {
@@ -42,6 +47,8 @@ public static class Extension
                 BackoffType = DelayBackoffType.Constant
             })
             .AddTimeout(TimeSpan.FromSeconds(10)));
+
+        builder.Services.AddMarten(conn);
 
         builder.Services.AddScoped<ISmtpService, SmtpService>();
 

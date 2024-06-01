@@ -16,7 +16,7 @@ public sealed class CreatedOrderHandler(IRedisService redisService, IEventBus ev
         await redisService.HashRemoveAsync(nameof(Basket), notification.AccountId.ToString());
 
         EmailMetadata metadata = new(
-            $"Thank you for your order {notification.Order.Id}!, Your order is being processed",
+          $"Thank you for your order. Order will be processed soon. Order ID: {notification.Order.Id}",
             "Order Confirmation",
             notification.Email);
 

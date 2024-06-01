@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RookieShop.Application.Orders.DTOs;
+using RookieShop.Domain.Entities.OrderAggregator.Enums;
 using RookieShop.Domain.Entities.OrderAggregator.Events;
 using RookieShop.Infrastructure.Email.Smtp;
 using RookieShop.Infrastructure.Email.Smtp.Abstractions;
@@ -10,11 +10,16 @@ public sealed class UpdatedOrderHandler(ISmtpService smtpService) : INotificatio
 {
     public async Task Handle(UpdatedOrderEvent notification, CancellationToken cancellationToken)
     {
-        var order = notification.Order.ToOrderDto();
-
         EmailMetadata metadata = new(
-            $"Your order {order.Id} has been updated to {order.OrderStatus}",
-            "Order Status ",
+            $"Your order status has been updated to {
+                notification.Order.OrderStatus switch {
+                    OrderStatus.Pending => "Pending",
+                    OrderStatus.Shipping => "Processing",
+                    OrderStatus.Canceled => "Canceled",
+                    OrderStatus.Completed => "Completed",
+                    _ => "Unknown" }
+            }",
+            "Order Status",
             notification.Order.Customer?.Email);
 
         await smtpService.SendEmailAsync(metadata, cancellationToken);

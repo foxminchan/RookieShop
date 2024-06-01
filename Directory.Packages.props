@@ -85,12 +85,15 @@
 		<!-- Web Utils -->
 		<PackageVersion Include="Htmx" Version="1.8.0" />
 		<PackageVersion Include="Htmx.TagHelpers" Version="1.8.0" />
+		<PackageVersion Include="Refit.HttpClientFactory" Version="7.0.0" />
 		<PackageVersion Include="WebEssentials.AspNetCore.PWA" Version="1.0.85" />
 		<PackageVersion Include="LigerShark.WebOptimizer.Core" Version="3.0.405" />
 		<PackageVersion Include="SmartComponents.AspNetCore" Version="0.1.0-preview10148" />
 		<PackageVersion Include="SmartComponents.Inference.OpenAI" Version="0.1.0-preview10148" />
-		<!-- Miscellaneous -->
+		<!-- Data -->
+		<PackageVersion Include="Marten" Version="7.18.0" />
 		<PackageVersion Include="Dapper" Version="2.1.35" />
+		<!-- Miscellaneous -->
 		<PackageVersion Include="Scrutor" Version="4.2.2" />
 		<PackageVersion Include="MediatR" Version="12.2.0" />
 		<PackageVersion Include="Nuke.Common" Version="8.0.0" />
@@ -100,7 +103,6 @@
 		<PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
 		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 		<PackageVersion Include="StronglyTypedId" Version="1.0.0-beta08" />
-		<PackageVersion Include="Refit.HttpClientFactory" Version="7.0.0" />
 		<PackageVersion Include="Quartz.Extensions.Hosting" Version="3.9.0" />
 		<PackageVersion Include="SonarAnalyzer.CSharp" Version="9.25.1.91650" />
 		<PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
