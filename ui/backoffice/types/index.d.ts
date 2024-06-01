@@ -31,6 +31,6 @@ export type DataTableProps<TData, TValue> = {
   pageSizeOptions?: number[]
   pageCount: number
   searchParams?: {
-    [key: string]: string | string[] | undefined
+    [key: string]: string | string[] | undefined | boolean
   }
 }

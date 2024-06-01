@@ -6,7 +6,7 @@ public static class DomainToDtoMapper
 {
     public static BasketDto ToBasketDto(this Basket basket)
     {
-        var basketDetails = basket.BasketDetails.Select(x => x.ToBasketDetailDto()).ToList();
+        var basketDetails = basket.BasketDetails.ToBasketDetailDto().ToList();
 
         return new(
             basket.AccountId,
@@ -14,8 +14,14 @@ public static class DomainToDtoMapper
             basketDetails);
     }
 
+    public static IEnumerable<BasketDto> ToBasketDto(this IEnumerable<Basket> baskets)
+        => baskets.Select(ToBasketDto);
+
     public static BasketDetailDto ToBasketDetailDto(this BasketDetail basketDetail) =>
         new(basketDetail.Id,
             basketDetail.Quantity,
             basketDetail.Price);
+
+    public static IEnumerable<BasketDetailDto> ToBasketDetailDto(this IEnumerable<BasketDetail> basketDetails)
+        => basketDetails.Select(ToBasketDetailDto);
 }

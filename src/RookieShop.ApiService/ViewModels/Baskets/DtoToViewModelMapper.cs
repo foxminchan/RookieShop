@@ -14,6 +14,9 @@ public static class DtoToViewModelMapper
             basketDetails);
     }
 
+    public static IEnumerable<BasketVm> ToBasketVm(this IEnumerable<BasketDto> basketDto) =>
+        basketDto.Select(ToBasketVm);
+
     public static BasketDetailVm ToBasketDetailVm(this BasketDetailDto basketDetail) =>
         new(basketDetail.Id, basketDetail.Quantity, basketDetail.Price);
 }

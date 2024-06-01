@@ -84,16 +84,19 @@ public sealed class RedisService(IConfiguration configuration) : IRedisService
         return value;
     }
 
+    public async Task<IEnumerable<T>> HashGetAllAsync<T>(string key)
+    {
+        var values = await Database.HashGetAllAsync(key);
+
+        return values.Length != 0
+            ? values.Select(x => GetByteToObject<T>(x.Value)).ToArray()
+            : [];
+    }
+
     public async Task HashRemoveAsync(string key, string hashKey)
         => await Database.HashDeleteAsync(key, hashKey.ToLower());
 
     public async Task RemoveAsync(string key) => await Database.KeyDeleteAsync(key);
-
-    public async Task<IEnumerable<T>> GetValuesAsync<T>(string key)
-    {
-        var values = await Database.HashGetAllAsync(key);
-        return values.Select(x => GetByteToObject<T>(x.Value)).ToArray();
-    }
 
     private static T GetByteToObject<T>(RedisValue value)
     {

@@ -12,6 +12,8 @@ public interface IRedisService
 
     Task<T> HashSetAsync<T>(string key, string hashKey, T value);
 
+    Task<IEnumerable<T>> HashGetAllAsync<T>(string key);
+
     Task HashRemoveAsync(string key, string hashKey);
 
     Task RemoveAsync(string key);
