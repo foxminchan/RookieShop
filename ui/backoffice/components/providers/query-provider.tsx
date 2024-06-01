@@ -21,7 +21,7 @@ export default function QueryProvider({
           toast({
             variant: "destructive",
             title: "Theres an error occurred",
-            description: `${(error as any).message}`,
+            description: `${error.message}`,
           })
         },
       }),

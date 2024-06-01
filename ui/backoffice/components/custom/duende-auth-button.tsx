@@ -20,7 +20,7 @@ export function DuendeAuthButton({
       <Button
         className="w-full"
         variant="outline"
-        onClick={() => void auth.signinRedirect()}
+        onClick={() => auth.signinRedirect()}
       >
         <Icons.lock className="mr-2 h-4 w-4" /> Sign in
       </Button>
