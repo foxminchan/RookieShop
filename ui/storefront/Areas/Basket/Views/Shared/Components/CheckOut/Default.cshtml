@@ -1,5 +1,7 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using RookieShop.Storefront.Areas.Basket.Models
+@using SmartComponents.AspNetCore
 @model RookieShop.Storefront.Areas.Order.Models.OrderRequest
 
 <form>
@@ -83,18 +85,11 @@
             <div class="px-2 w-full">
                 <div class="relative w-full">
                     <select asp-for="ExpiryMonth" class="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400">
-                        <option value="01">01 - Jan</option>
-                        <option value="02">02 - Feb</option>
-                        <option value="03">03 - Mar</option>
-                        <option value="04">04 - Apr</option>
-                        <option value="05">05 - May</option>
-                        <option value="06">06 - June</option>
-                        <option value="07">07 - July</option>
-                        <option value="08">08 - Aug</option>
-                        <option value="09">09 - Sep</option>
-                        <option value="10">10 - Oct</option>
-                        <option value="11">11 - Nov</option>
-                        <option value="12">12 - Dec</option>
+                        @for (var month = 1; month <= 12; month++)
+                        {
+                            var cultureMonth = month;
+                            <option value="@month.ToString("D2")">@cultureMonth.ToString("D2") - @CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(cultureMonth)</option>
+                        }
                     </select>
                 </div>
             </div>
