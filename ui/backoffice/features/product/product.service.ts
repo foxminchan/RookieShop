@@ -19,7 +19,7 @@ class ProductService extends HttpService {
   }
 
   listProducts(options?: Partial<ProductFilterParams>): Promise<ListProducts> {
-    return this.get<ListProducts>(`/products?${buildQueryString(options)}`)
+    return this.get(`/products?${buildQueryString(options)}`)
   }
 
   createProduct(data: CreateProductRequest): Promise<CreateProductResponse> {

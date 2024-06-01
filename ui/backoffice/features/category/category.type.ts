@@ -7,7 +7,7 @@ export type Category = {
 }
 
 export type ListCategories = {
-  pageInfo: PagedInfo
+  pagedInfo: PagedInfo
   categories: Category[]
 }
 

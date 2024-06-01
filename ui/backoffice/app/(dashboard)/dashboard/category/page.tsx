@@ -31,7 +31,7 @@ export default function CatgoryPage({ searchParams }: Readonly<paramsProps>) {
   })
 
   const categories = data?.categories || []
-  const totalCategories = data?.pageInfo.totalRecords ?? 0
+  const totalCategories = data?.pagedInfo.totalRecords ?? 0
 
   return (
     <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
@@ -52,7 +52,7 @@ export default function CatgoryPage({ searchParams }: Readonly<paramsProps>) {
       <Separator />
       <CategoryTable
         page={page}
-        pageCount={data?.pageInfo.totalPages ?? 0}
+        pageCount={data?.pagedInfo.totalPages ?? 0}
         data={categories || []}
         totalRecords={totalCategories || 0}
       />

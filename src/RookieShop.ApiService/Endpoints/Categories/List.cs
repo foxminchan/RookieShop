@@ -28,7 +28,7 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListCategoriesResponse>,
 
         ListCategoriesResponse response = new()
         {
-            PageInfo = result.PagedInfo,
+            PagedInfo = result.PagedInfo,
             Categories = result.Value.ToCategoryVm()
         };
 

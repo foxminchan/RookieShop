@@ -5,6 +5,6 @@ namespace RookieShop.ApiService.Endpoints.Categories;
 
 public sealed class ListCategoriesResponse
 {
-    public PagedInfo? PageInfo { get; set; }
+    public PagedInfo? PagedInfo { get; set; }
     public List<CategoryVm>? Categories { get; set; } = [];
 }

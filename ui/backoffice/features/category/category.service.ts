@@ -22,7 +22,7 @@ class CategoryService extends HttpService {
   listCategories(
     options?: Partial<CategoryFilterParams>
   ): Promise<ListCategories> {
-    return this.get<ListCategories>(`/categories?${buildQueryString(options)}`)
+    return this.get(`/categories?${buildQueryString(options)}`)
   }
 
   createCategory(data: CreateCategoryRequest): Promise<CreateCategoryResponse> {
