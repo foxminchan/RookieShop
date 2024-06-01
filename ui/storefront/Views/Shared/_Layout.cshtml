@@ -66,7 +66,32 @@
                             </a>
                         </li>
                         <li>
-                            <a id="logout-btn" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Log Out</a>
+                            <a hx-post
+                               hx-area="User"
+                               hx-controller="Account"
+                               hx-action="Logout"
+                               hx-vals="@null"
+                               hx-swap="outerHTML"
+                               hx-target="#head"
+                               hx-indicator=".loading"
+                               hx-trigger="confirmed"
+                               onClick="Swal.fire({
+                                            title: 'Are you sure?' ,
+                                            text: 'You will be logged out.' ,
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33' ,
+                                            confirmButtonText: 'Yes, log out!'
+                                        }).then((result)=>{
+                                            if(result.isConfirmed){
+                                                htmx.trigger(this, 'confirmed');
+                                                toastr.success('You have been logged out');
+                                            } 
+                                        })"
+                               class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center cursor-pointer">
+                                Log Out
+                            </a>
                         </li>
                     </ul>
                 }
@@ -116,6 +141,7 @@
         <script src="~/lib/dist/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
         <script src="~/lib/dist/toastr.js/toastr.min.js" asp-append-version="true"></script>
         <script src="~/lib/dist/htmx/htmx.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/alpinejs/cdn.min.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://code.jquery.com/jquery-4.0.0-beta.slim.min.js"
@@ -148,31 +174,14 @@
                 integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
                 crossorigin="anonymous">
         </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"
+                asp-fallback-src="~/lib/dist/alpinejs/cdn.min.js"
+                asp-fallback-test="window.Alpine"
+                asp-append-version="true"></script>
     </environment>
 </cache>
 
 @await RenderSectionAsync("Scripts", false)
-
-<script>
-    $(document).ready(function () {
-        $('#logout-btn').click(function (event) {
-            event.preventDefault();
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will be logged out.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, log out!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    htmx.ajax('POST', '/User/Account/Logout', null); 
-                } 
-            });
-        });
-    });
-</script>
 
 </body>
 </html>

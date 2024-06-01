@@ -5,19 +5,35 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="product-grid" class="bg-white">
+<div id="product-grid" class="bg-white" x-data="{ isDropdownOpen: false }">
     <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
             <h1 class="text-4xl font-bold tracking-tight text-gray-900">All Products</h1>
             <div class="flex items-center">
                 <div class="relative inline-block text-left">
                     <div>
-                        <button id="sort-btn" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false" aria-haspopup="true">
+                        <button 
+                            id="sort-btn" 
+                            type="button" 
+                            class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" 
+                            aria-expanded="false" 
+                            aria-haspopup="true"
+                            @@click="isDropdownOpen = !isDropdownOpen"
+                        >
                             Sort
                             <img asp-append-version="true" loading="lazy" class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" src="~/imgs/filter/arrow-down.svg" alt="Sort"/>
                         </button>
                     </div>
-                    <div id="sort-category-dropdown" class="hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div 
+                        id="sort-category-dropdown" 
+                        class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" 
+                        role="menu" 
+                        aria-orientation="vertical" 
+                        aria-labelledby="menu-button" 
+                        tabindex="-1"
+                        x-show="isDropdownOpen"
+                        @@click.away="isDropdownOpen = false"
+                    >
                         <div class="py-1" role="none">
                             <a hx-get
                                hx-area="Product"
@@ -100,22 +116,3 @@
 </div>
 
 @await RenderSectionAsync("Scripts", false)
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            const sortBtn = $("#sort-btn");
-            const sortCategoryDropdown = $("#sort-category-dropdown");
-
-            sortBtn.on("click", function () {
-                sortCategoryDropdown.toggleClass("hidden");
-            });
-
-            $(document).on("click", function (event) {
-                if (!sortBtn.is(event.target) && sortBtn.has(event.target).length === 0) {
-                    sortCategoryDropdown.addClass("hidden");
-                }
-            });
-        });
-  </script>
-}

@@ -4,7 +4,12 @@
   "license": "MIT",
   "author": {
     "name": "Nhan Nguyen",
-    "email": "nguyenxuannhan407@gmail.com"
+    "email": "nguyenxuannhan407@gmail.com",
+    "url": "https://github.com/foxminchan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxminchan/RookieShop"
   },
   "description": "A project developed by a rookie transitioning to an engineer at NashTech",
   "type": "module",

@@ -10,7 +10,13 @@
     <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
         <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
         <div class="grid max-w-2xl mx-auto">
-            <form asp-area="User" asp-controller="Account" asp-action="Update" asp-antiforgery="true">
+            <form hx-post
+                  hx-area="User"
+                  hx-controller="Account"
+                  hx-action="Update"
+                  hx-swap="outerHTML"
+                  hx-target="#setting-section"
+                  _="on htmx:beforeSend set #submit-btn.disabled to 'disabled' and set #submit-btn.innerHTML to 'Saving...'">
                 <div class="items-center mt-8 sm:mt-14 text-[#202142]">
                     <div asp-validation-summary="ModelOnly"></div>
                     <input type="hidden" asp-for="Id" value="@Model.Id"/>
@@ -26,14 +32,18 @@
                     </div>
                     <div class="mb-2 sm:mb-6">
                         <label asp-for="Email"class="block mb-2 text-sm font-medium text-indigo-900">Your email</label>
-                        <input type="email"asp-for="Email"value="@Model.Email"
-                               class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="your.email@mail.com" disabled>
+                        <input type="email"
+                               asp-for="Email"
+                               value="@Model.Email"
+                               class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                               placeholder="your.email@mail.com"
+                               readonly>
                         <span asp-validation-for="Email" class="text-red-900"></span>
                     </div>
                     <div class="mb-2 sm:mb-6">
-                        <label asp-for="Phone"class="block mb-2 text-sm font-medium text-indigo-900">Your phone number</label>
+                        <label asp-for="Phone" class="block mb-2 text-sm font-medium text-indigo-900">Your phone number</label>
                         <input asp-for="Phone" type="tel" value="@Model.Phone"
-                               class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 " placeholder="0123456789" disabled>
+                               class="bg-indigo-50 border text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 " placeholder="0123456789" readonly>
                         <span asp-validation-for="Phone" class="text-red-900"></span>
                     </div>
                     <div class="mb-6">
@@ -50,6 +60,20 @@
                     <div class="flex justify-end">
                         <button id="#submit-btn"
                                 type="submit"
+                                hx-trigger="confirmed"
+                                onClick="Swal.fire({
+                                            title: 'Are you sure?' ,
+                                            text: 'You are about to update your personal information.',
+                                            icon: 'info',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33' ,
+                                            confirmButtonText: 'Yes, update it!'
+                                        }).then((result)=>{
+                                            if(result.isConfirmed){
+                                                htmx.trigger(this, 'confirmed');
+                                            } 
+                                        })"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
                             Save
                         </button>
@@ -62,25 +86,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
-
-    <script>
-        $(document).ready(function () {
-            $("#submit-btn").on("click", function () {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You are about to update your personal information.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, update it!",
-                    cancelButtonText: "No, cancel!",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $("#submit-btn").submit();
-                    }
-                });
-            });
-        });
-    </script>
 }

@@ -12,7 +12,6 @@ public class CustomerController(ICustomerService customerService) : Controller
     public IActionResult Index() => View();
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateCustomerAsync(CustomerRequest request)
     {
         if (!ModelState.IsValid)

@@ -45,7 +45,6 @@ public class AccountController(ICustomerService customerService) : Controller
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(CustomerViewModel customer)
     {
         if (!ModelState.IsValid)

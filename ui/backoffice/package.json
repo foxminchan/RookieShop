@@ -4,7 +4,8 @@
   "license": "MIT",
   "author": {
     "name": "Nhan Nguyen",
-    "email": "nguyenxuannhan407@gmail.com"
+    "email": "nguyenxuannhan407@gmail.com",
+    "url": "https://github.com/foxminchan"
   },
   "description": "A project developed by a rookie transitioning to an engineer at NashTech",
   "private": true,
@@ -19,6 +20,18 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "cypress:open": "cypress open"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
