@@ -7,6 +7,11 @@ aspirate-state.json
 
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
+# VuePress files
+**/.vuepress/.cache/
+**/.vuepress/.temp/
+**/.vuepress/dist/
+
 # Logs
 
 logs
