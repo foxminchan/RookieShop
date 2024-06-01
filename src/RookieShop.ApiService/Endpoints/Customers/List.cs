@@ -11,8 +11,8 @@ public sealed class List(ISender sender) : IEndpoint<Ok<ListCustomersResponse>, 
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/customers",
-                async (int pageIndex = 1, int pageSize = 0, string? name = null) =>
-                    await HandleAsync(new(pageIndex, pageSize, name)))
+                async (int pageIndex = 1, int pageSize = 0, string? search = null) =>
+                    await HandleAsync(new(pageIndex, pageSize, search)))
             .Produces<Ok<ListCustomersResponse>>()
             .WithTags(nameof(Customers))
             .WithName("List Customers")

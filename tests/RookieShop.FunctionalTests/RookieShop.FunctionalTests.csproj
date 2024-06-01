@@ -13,6 +13,7 @@
 		<PackageReference Include="xunit.runner.visualstudio" />
 		<PackageReference Include="XunitContext" />
 		<PackageReference Include="FluentAssertions" />
+		<PackageReference Include="FluentAssertions.Analyzers" />
 		<PackageReference Include="Ardalis.HttpClientTestExtensions" />
 	</ItemGroup>
 

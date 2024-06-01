@@ -84,4 +84,4 @@ app.MapInfrastructure();
 
 app.MapEndpoints();
 
-app.Run();
+await app.RunAsync();

@@ -172,14 +172,32 @@ export default function FilterTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    const cellValue = cell.getValue()
+                    if (
+                      cell.column.columnDef.id === "image" &&
+                      typeof cellValue === "string"
+                    ) {
+                      return (
+                        <TableCell key={cell.id}>
+                          <img
+                            src={cellValue}
+                            alt={cellValue}
+                            className="w-12 h-12 object-cover rounded-md"
+                          />
+                        </TableCell>
+                      )
+                    } else {
+                      return (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      )
+                    }
+                  })}
                 </TableRow>
               ))
             ) : (
@@ -231,10 +249,6 @@ export default function FilterTable<TData, TValue>({
           </div>
         </div>
         <div className="flex w-full items-center justify-between gap-2 sm:justify-end">
-          <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount()}
-          </div>
           <div className="flex items-center space-x-2">
             <Button
               aria-label="Go to first page"

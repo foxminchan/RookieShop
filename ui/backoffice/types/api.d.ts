@@ -12,5 +12,5 @@ export type PagingFilter = BasePaging
 
 export type FilterParams = BasePaging & {
   isDescending: boolean
-  orderBy: string
+  orderBy: string | null
 }

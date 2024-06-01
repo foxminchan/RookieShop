@@ -12,6 +12,7 @@ export type Product = {
   imageUrl: string
   averageRating: number
   totalReviews: number
+  status: ProductStatus
   category: Category
 }
 
@@ -21,6 +22,7 @@ export type ListProducts = {
 }
 
 export type ProductFilterParams = FilterParams & {
+  search?: string | null
   categoryIds: string[]
 }
 

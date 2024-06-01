@@ -83,4 +83,4 @@ identityService
     .WithEnvironment("Client__Storefront", storefront.GetEndpoint(protocol))
     .WithEnvironment("Client__Swagger", apiService.GetEndpoint(protocol));
 
-builder.Build().Run();
+await builder.Build().RunAsync();

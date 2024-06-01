@@ -12,6 +12,7 @@
 		<PackageReference Include="xunit.runner.visualstudio" />
 		<PackageReference Include="NetArchTest.Rules" />
 		<PackageReference Include="FluentAssertions" />
+		<PackageReference Include="FluentAssertions.Analyzers" />
 	</ItemGroup>
 
 	<ItemGroup>

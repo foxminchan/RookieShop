@@ -29,7 +29,7 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
   const { mutate: deleteCategory } = useDeleteCategory()
   const { refetch } = useListCategories()
 
-  const categoryPath = `/dashboard/category/`
+  const categoryPath = `/dashboard/category`
 
   const onConfirm = async () => {
     deleteCategory(data.id)
@@ -56,7 +56,7 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => router.push(`${categoryPath}${data.id}`)}
+            onClick={() => router.push(`${categoryPath}/${data.id}`)}
           >
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

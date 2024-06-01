@@ -2,6 +2,7 @@
 
 import useListCustomers from "@/features/customer/useListCustomers"
 
+import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@/lib/constants/default"
 import Breadcrumb from "@/components/ui/breadcrumb"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
@@ -16,8 +17,8 @@ type paramsProps = {
 }
 
 export default function CustomerPage({ searchParams }: Readonly<paramsProps>) {
-  const page = Number(searchParams.page) || 1
-  const pageLimit = Number(searchParams.limit) || 20
+  const page = Number(searchParams.page) || DEFAULT_PAGE_INDEX
+  const pageLimit = Number(searchParams.limit) || DEFAULT_PAGE_SIZE
   const name = (searchParams.search as string) || null
 
   const { data } = useListCustomers({
@@ -25,8 +26,6 @@ export default function CustomerPage({ searchParams }: Readonly<paramsProps>) {
     pageSize: pageLimit,
     search: name,
   })
-
-  console.log(data)
 
   const customers = data?.customers || []
   const totalCustomers = data?.pagedInfo.totalRecords ?? 0

@@ -4,6 +4,7 @@ import Link from "next/link"
 import useListCategories from "@/features/category/useListCategories"
 import { Plus } from "lucide-react"
 
+import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@/lib/constants/default"
 import { cn } from "@/lib/utils"
 import Breadcrumb from "@/components/ui/breadcrumb"
 import { buttonVariants } from "@/components/ui/button"
@@ -20,8 +21,8 @@ type paramsProps = {
 }
 
 export default function CatgoryPage({ searchParams }: Readonly<paramsProps>) {
-  const page = Number(searchParams.page) || 1
-  const pageLimit = Number(searchParams.limit) || 20
+  const page = Number(searchParams.page) || DEFAULT_PAGE_INDEX
+  const pageLimit = Number(searchParams.limit) || DEFAULT_PAGE_SIZE
   const name = (searchParams.search as string) || null
 
   const { data } = useListCategories({
@@ -41,7 +42,6 @@ export default function CatgoryPage({ searchParams }: Readonly<paramsProps>) {
           title={`Category (${totalCategories})`}
           description="Manage categories"
         />
-
         <Link
           href={"/dashboard/category/new"}
           className={cn(buttonVariants({ variant: "default" }))}

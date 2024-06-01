@@ -33,6 +33,12 @@ export const navItems: NavItem[] = [
   },
   {
     id: 6,
+    title: "Feedback",
+    href: "/dashboard/feedback",
+    label: "feedback",
+  },
+  {
+    id: 7,
     title: "Profile",
     href: "/dashboard/profile",
     label: "profile",
