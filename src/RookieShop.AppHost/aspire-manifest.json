@@ -20,13 +20,63 @@
         }
       }
     },
+    "StripeApiKey": {
+      "type": "parameter.v0",
+      "value": "{StripeApiKey.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "EmailSecret": {
+      "type": "parameter.v0",
+      "value": "{EmailSecret.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "GoogleClientId": {
+      "type": "parameter.v0",
+      "value": "{GoogleClientId.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "GoogleClientSecret": {
+      "type": "parameter.v0",
+      "value": "{GoogleClientSecret.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "OpenAiKey": {
+      "type": "parameter.v0",
+      "value": "{OpenAiKey.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
     "db": {
       "type": "container.v0",
       "connectionString": "Host={db.bindings.tcp.host};Port={db.bindings.tcp.port};Username={SqlUser.value};Password={SqlPassword.value}",
       "image": "docker.io/library/postgres:16.2",
       "bindMounts": [
         {
-          "source": "../mnt/postgres",
+          "source": "../../mnt/postgres",
           "target": "/var/lib/postgresql/data",
           "readOnly": false
         }
@@ -58,10 +108,14 @@
       "type": "container.v0",
       "connectionString": "{redis.bindings.tcp.host}:{redis.bindings.tcp.port}",
       "image": "docker.io/library/redis:7.2",
-      "args": ["--save", "60", "1"],
+      "args": [
+        "--save",
+        "60",
+        "1"
+      ],
       "bindMounts": [
         {
-          "source": "../mnt/redis",
+          "source": "../../mnt/redis",
           "target": "/data",
           "readOnly": false
         }
@@ -89,7 +143,7 @@
     },
     "identity-service": {
       "type": "project.v0",
-      "path": "RookieShop.IdentityService/RookieShop.IdentityService.csproj",
+      "path": "../RookieShop.IdentityService/RookieShop.IdentityService.csproj",
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
@@ -97,9 +151,11 @@
         "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
         "ConnectionStrings__redis": "{redis.connectionString}",
         "ConnectionStrings__userdb": "{userdb.connectionString}",
+        "Provider__Google__ClientId": "{GoogleClientId.value}",
+        "Provider__Google__ClientSecret": "{GoogleClientSecret.value}",
         "Client__Backoffice": "{backoffice.bindings.http.url}",
-        "Client__Storefront": "{storefront.bindings.https.url}",
-        "Client__Swagger": "{api-service.bindings.https.url}"
+        "Client__Storefront": "{storefront.bindings.http.url}",
+        "Client__Swagger": "{api-service.bindings.http.url}"
       },
       "bindings": {
         "http": {
@@ -116,7 +172,7 @@
     },
     "api-service": {
       "type": "project.v0",
-      "path": "RookieShop.ApiService/RookieShop.ApiService.csproj",
+      "path": "../RookieShop.ApiService/RookieShop.ApiService.csproj",
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
@@ -124,8 +180,12 @@
         "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
         "ConnectionStrings__redis": "{redis.connectionString}",
         "ConnectionStrings__shopdb": "{shopdb.connectionString}",
+        "StripeSettings__SecretKey": "{StripeApiKey.value}",
+        "SmtpSettings__Secret": "{EmailSecret.value}",
         "AzuriteSettings__ConnectionString": "{blobs.connectionString}",
-        "OpenIdSettings__Authority": "{identity-service.bindings.https.url}"
+        "OpenIdSettings__Authority": "{identity-service.bindings.https.url}",
+        "CorsSettings__Storefront": "{storefront.bindings.http.url}",
+        "CorsSettings__Backoffice": "{backoffice.bindings.http.url}"
       },
       "bindings": {
         "http": {
@@ -135,6 +195,11 @@
         },
         "https": {
           "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "http": {
+          "scheme": "http",
           "protocol": "tcp",
           "transport": "http"
         }
@@ -142,48 +207,53 @@
     },
     "backoffice": {
       "type": "dockerfile.v0",
-      "path": "../ui/backoffice/Dockerfile",
-      "context": "../ui/backoffice",
+      "path": "../../ui/backoffice/Dockerfile",
+      "context": "../../ui/backoffice",
       "env": {
         "NODE_ENV": "development",
         "PORT": "{backoffice.bindings.http.targetPort}",
         "BROWSER": "none",
-        "BASE_API": "{api-service.bindings.https.url}/api/v1",
-        "AUTH_DUENDE_IDENTITY_SERVER6_ISSUER": "{identity-service.bindings.https.url}"
+        "NEXT_PUBLIC_BASE_API": "{api-service.bindings.http.url}/api/v1",
+        "NEXT_PUBLIC_DUENDE_AUTHORITY": "{identity-service.bindings.https.url}"
       },
       "bindings": {
         "http": {
           "scheme": "http",
           "protocol": "tcp",
           "transport": "http",
+          "port": 3000,
           "targetPort": 8000
         }
       }
     },
     "storefront": {
       "type": "project.v0",
-      "path": "../ui/storefront/RookieShop.Storefront.csproj",
+      "path": "../../ui/storefront/RookieShop.Storefront.csproj",
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
         "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
         "ConnectionStrings__redis": "{redis.connectionString}",
+        "SmartComponents__ApiKey": "{OpenAiKey.value}",
         "OpenIdSettings__Authority": "{identity-service.bindings.https.url}",
-        "BaseApiEndpoint": "{api-service.bindings.https.url}/api/v1"
+        "BaseApiEndpoint": "{api-service.bindings.http.url}/api/v1"
       },
       "bindings": {
         "http": {
           "scheme": "http",
           "protocol": "tcp",
-          "transport": "http",
-          "external": true
+          "transport": "http"
         },
         "https": {
           "scheme": "https",
           "protocol": "tcp",
-          "transport": "http",
-          "external": true
+          "transport": "http"
+        },
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
         }
       }
     }
