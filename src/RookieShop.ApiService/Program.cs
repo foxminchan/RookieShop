@@ -29,6 +29,7 @@ builder.Services
     .AddRouting(options => options.LowercaseUrls = true)
     .AddSingleton(new JsonSerializerOptions
     {
+        WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         PropertyNameCaseInsensitive = true
     });

@@ -1,4 +1,6 @@
-﻿@model List<RookieShop.Storefront.Models.Report.BestSellerProductViewModel>
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<RookieShop.Storefront.Models.Report.BestSellerProductViewModel>
 
 @if (Model.Count == 0)
 {
@@ -21,19 +23,19 @@ else
             <div class="mt-4 flex justify-between">
                 <div>
                     <h3 class="text-sm text-gray-700">
-                        <span class="font-medium hover:text-gray-800">
+                        <a asp-area="Product"
+                           asp-controller="Product"
+                           asp-action="Detail"
+                           asp-route-id="@item.ProductId" 
+                           class="font-medium hover:text-gray-800">
                             <span aria-hidden="true" class="absolute inset-0"></span>
                             @item.ProductName
-                        </span>
+                        </a>
                     </h3>
                 </div>
-                <a asp-area="Product"
-                   asp-controller="Product"
-                   asp-action="Detail"
-                   asp-route-id="@item.ProductId"
-                   class="text-sm font-medium text-gray-900 text-red-900">
-                    Purchase
-                </a>
+                <span class="text-sm font-medium text-gray-900 text-red-900">
+                    @item.Price?.PriceSale?.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
+                </span>
             </div>
         </div>
     }
