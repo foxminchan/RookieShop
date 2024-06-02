@@ -6,6 +6,7 @@ using RookieShop.Storefront.Areas.Order.Services;
 using RookieShop.Storefront.Areas.Product.Services;
 using RookieShop.Storefront.Areas.User.Services;
 using RookieShop.Storefront.Delegates;
+using RookieShop.Storefront.Services;
 
 namespace RookieShop.Storefront.Configurations;
 
@@ -26,7 +27,8 @@ public static class ConfigureHttpServices
             typeof(IFeedbackService),
             typeof(IBasketService),
             typeof(ICustomerService),
-            typeof(IOrderService)
+            typeof(IOrderService),
+            typeof(IReportService)
         ];
 
         foreach (var type in types)

@@ -23,7 +23,9 @@ public sealed class BestSellerProductsHandler(IDatabaseFactory factory, IAzurite
                             FROM products p
                             	JOIN order_details od ON p.id = od.product_id
                             	JOIN orders o ON od.order_id = o.id
-                            WHERE o.order_status = 1
+                            WHERE o.order_status = 1 
+                                AND p.status = 1
+                                AND p.is_deleted = false 
                             GROUP BY p.id, p.name, p.image_name, p.price 
                             ORDER BY {nameof(BestSellerProductsDto.TotalSoldQuantity)} DESC
                             LIMIT 5
