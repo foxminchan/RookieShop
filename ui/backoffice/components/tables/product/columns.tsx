@@ -3,6 +3,7 @@
 import { Product } from "@/features/product/product.type"
 import { ColumnDef } from "@tanstack/react-table"
 
+import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 
 import { CellAction } from "./cell-action"
@@ -28,9 +29,19 @@ export const columns: ColumnDef<Product>[] = [
     enableHiding: false,
   },
   {
-    id: "image",
     accessorKey: "imageUrl",
     header: "IMAGE",
+    cell: (props) => {
+      const imageUrl = props.getValue() as string
+      return (
+        <img
+          loading="lazy"
+          src={imageUrl}
+          alt="product"
+          className="w-10 h-10"
+        />
+      )
+    },
   },
   {
     accessorKey: "name",
@@ -40,6 +51,23 @@ export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "status",
     header: "STATUS",
+    cell: (props) => {
+      const status = props.getValue() as string
+      return (
+        <Badge
+          variant="secondary"
+          className={`px-2 py-1 text-xs font-semibold rounded-full ${
+            status === "InStock"
+              ? "bg-green-500 text-white"
+              : status === "OutOfStock"
+                ? "bg-yellow-500 text-white"
+                : "bg-red-500 text-white"
+          }`}
+        >
+          {status}
+        </Badge>
+      )
+    },
   },
   {
     accessorKey: "description",
@@ -48,18 +76,66 @@ export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "quantity",
     header: "QUANTITY",
+    cell: (props) => {
+      const quantity = props.getValue() as number
+      return quantity > 0 ? (
+        <span className="text-green-500">{quantity}</span>
+      ) : (
+        <span className="text-red-500">{quantity}</span>
+      )
+    },
   },
   {
     accessorKey: "price",
     header: "PRICE",
+    cell: (props) => {
+      const price = props.getValue() as number
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(price)
+    },
   },
   {
     accessorKey: "priceSale",
     header: "PRICE SALE",
+    cell: (props) => {
+      const priceSale = props.getValue() as number
+      return (
+        <span className="text-red-500">
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(priceSale)}
+        </span>
+      )
+    },
   },
   {
     accessorKey: "averageRating",
     header: "AVERAGE RATING",
+    cell: (props) => {
+      const rating = props.getValue() as number
+      return (
+        <div className="flex items-center">
+          <div className="flex space-x-1">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <svg
+                key={index}
+                className="w-4 h-4 fill-current text-yellow-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill={index < rating ? "currentColor" : "none"}
+                  d="M12 2l2.121 6.485L20 9.757l-5.485 3.758L16 20l-4-2.5L8 20l1.485-6.242L4 9.757l5.879-1.272z"
+                />
+              </svg>
+            ))}
+          </div>
+        </div>
+      )
+    },
   },
   {
     accessorKey: "totalRating",

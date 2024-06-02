@@ -174,32 +174,14 @@ export default function FilterTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => {
-                    const cellValue = cell.getValue()
-                    if (
-                      cell.column.columnDef.id === "image" &&
-                      typeof cellValue === "string"
-                    ) {
-                      return (
-                        <TableCell key={cell.id}>
-                          <img
-                            src={cellValue}
-                            alt={cellValue}
-                            className="w-12 h-12 object-cover rounded-md"
-                          />
-                        </TableCell>
-                      )
-                    } else {
-                      return (
-                        <TableCell key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </TableCell>
-                      )
-                    }
-                  })}
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))
             ) : (
