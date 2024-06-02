@@ -45,8 +45,6 @@ The project should apply as many techniques of ASP.NET MVC Core as possible. For
 
 ## Technical Stack
 
-### Backend
-
 - [ASP.NET Core 8.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0): A cross-platform, high-performance, open-source framework for building modern, cloud-based, Internet-connected applications.
 - [htmx](https://htmx.org/): A JavaScript library that allows you to access AJAX, WebSockets, and Server-Sent Events directly in HTML, using attributes.
 - [Alphine.js](https://alpinejs.dev/): A rugged, minimal framework for composing JavaScript behavior in your markup.

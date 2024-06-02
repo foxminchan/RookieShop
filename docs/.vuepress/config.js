@@ -18,7 +18,7 @@ export default defineUserConfig({
     editLinks: false,
     editLinkText: "Help us improve this page!",
     nav: [{ text: "Home", link: "/" }],
-    sidebar: ["/"],
+    sidebar: ["/", "/model/", "/design/"],
   }),
   head: [["link", { rel: "icon", href: "favicon.ico" }]],
   bundler: viteBundler(),
