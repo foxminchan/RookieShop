@@ -13,7 +13,7 @@ public interface IOrderService
     Task<OrderViewModel> GetOrderByIdAsync(Guid orderId);
 
     [Post("/orders")]
-    Task<OrderViewModel> CreateOrderAsync(
+    Task<OrderCreatedResponse> CreateOrderAsync(
         OrderRequest orderRequest,
         [Header(HeaderName.IdempotencyKey)] Guid requestId);
 }

@@ -53,5 +53,6 @@ The project should apply as many techniques of ASP.NET MVC Core as possible. For
 - [Redis](https://redis.io/): An open-source, in-memory data structure store used as a database, cache, and message broker.
 - [Postgres](https://www.postgresql.org/): A powerful, open-source object-relational database system.
 - [Aspire](https://learn.microsoft.com/dotnet/aspire): An opinionated, cloud ready stack for building observable, production ready, distributed applications.
+- [Yarp](https://microsoft.github.io/reverse-proxy/): A reverse proxy that routes incoming requests to the appropriate service.
 - [OpenTelemetry](https://opentelemetry.io/): An observability framework for cloud-native software.
 - [NUKE](https://nuke.build/): A cross-platform build automation system with C# DSL.

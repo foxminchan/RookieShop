@@ -82,7 +82,7 @@ Build an e-commerce web site with minimum functionality below:
 
 | No  | Name            | Usecase                                                                                              | Technology                |
 | --- | --------------- | ---------------------------------------------------------------------------------------------------- | ------------------------- |
-| 0   | Ingress         | A reverse proxy that routes incoming requests to the appropriate service                             | Yarp                      |
+| 0   | ingress         | A reverse proxy that routes incoming requests to the appropriate service                             | Yarp                      |
 | 1   | identity server | An authentication server that provides authentication and authorization services for the application | Duende IdentityServer 7.0 |
 | 2   | store front     | A user-facing website that allows customers to view, rate, and purchase products                     | Razor, htmx, Alphine.js   |
 | 3   | back office     | An admin-facing website that allows administrators to manage products, categories, and customers     | Next.js 14.0              |

@@ -12,6 +12,7 @@ public sealed class OrderRequest
 
     [AliasAs("cardHolderName")]
     [MaxLength(50, ErrorMessage = "Card holder name must be less than 50 characters")]
+    [Display(Name = "Holder Name")]
     public string? CardHolderName { get; set; }
 
     [AliasAs("number")]
@@ -31,7 +32,7 @@ public sealed class OrderRequest
 
     [AliasAs("cvc")]
     [MaxLength(4, ErrorMessage = "CVC must be less than 4 characters")]
-    [Display(Name = "CVC")]
+    [Display(Name = "CVC/CVV")]
     public string? Cvc { get; set; }
 
     [AliasAs("street")]
@@ -41,10 +42,12 @@ public sealed class OrderRequest
 
     [AliasAs("city")]
     [MaxLength(50, ErrorMessage = "City must be less than 50 characters")]
+    [Display(Name = "District/City")]
     public string? City { get; set; }
 
     [AliasAs("province")]
     [MaxLength(50, ErrorMessage = "Province must be less than 50 characters")]
+    [Display(Name = "State/Province")]
     public string? Province { get; set; }
 
     [AliasAs("accountId")]
