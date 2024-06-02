@@ -24,7 +24,9 @@ jobs:
           cache: npm
 
       - name: Install Deps
-        run: npm ci
+        run: |
+          corepack enable
+          npm ci
 
       - name: Build Docs
         env:
