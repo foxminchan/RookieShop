@@ -4,7 +4,7 @@
 
 The high level design of the system is based on the following components:
 
-![Architecture Diagram](/RookieShop/system-design.png)
+![Architecture Diagram](/system-design.png)
 
 | No  | Name            | Usecase                                                                                              | Technology                |
 | --- | --------------- | ---------------------------------------------------------------------------------------------------- | ------------------------- |
