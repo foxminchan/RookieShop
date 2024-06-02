@@ -73,7 +73,6 @@
                                hx-vals="@null"
                                hx-swap="outerHTML"
                                hx-target="#head"
-                               hx-indicator=".loading"
                                hx-trigger="confirmed"
                                onClick="Swal.fire({
                                             title: 'Are you sure?' ,
@@ -116,6 +115,7 @@
                             Products
                         </a>
                     </li>
+                    @await Component.InvokeAsync("CategoryDropDown")
                     <li>
                         <a asp-area="" asp-controller="About" asp-action="Index" class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 @(ViewContext.RouteData.Values["controller"]!.Equals("About") ? "text-blue-700" : "text-gray-900")">
                             About

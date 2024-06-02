@@ -1,0 +1,25 @@
+﻿@model RookieShop.Storefront.Areas.Product.Models.Categories.ListCategoriesViewModel
+
+@if(Model.Categories.Count > 0)
+{
+    <li x-data="{ open: false }" class="relative group" @@click.away=" open=false">
+        <button class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 text-gray-900" @@click="open = !open">
+            Categories
+            <img asp-append-version="true" loading="lazy" class="inline-block w-4 h-4 ml-2" src="~/imgs/filter/arrow-down.svg" alt="Sort" />
+        </button>
+
+        <div x-show="open" class="absolute mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+            @foreach(var category in Model.Categories)
+            {
+                <a asp-area="Product"
+                   asp-controller="Product"
+                   asp-action="Index"
+                   asp-route-category="@category.Id"
+                   asp-route-page="1"
+                   class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    @category.Name
+                </a>
+            }
+        </div>
+    </li>
+}

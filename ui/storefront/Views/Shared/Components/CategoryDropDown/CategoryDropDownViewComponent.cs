@@ -3,10 +3,10 @@ using RookieShop.Storefront.Areas.Product.Models.Categories;
 using RookieShop.Storefront.Areas.Product.Services;
 using RookieShop.Storefront.Services;
 
-namespace RookieShop.Storefront.Areas.Product.Views.Shared.Components.ListCategories;
+namespace RookieShop.Storefront.Views.Shared.Components.CategoryDropDown;
 
 [ViewComponent]
-public class ListCategoriesViewComponent(
+public sealed class CategoryDropDownViewComponent(
     ICategoryService categoryService,
     IMemoryCacheService memoryCacheService) : ViewComponent
 {

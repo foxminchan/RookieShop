@@ -5,6 +5,7 @@ using RookieShop.Storefront;
 using RookieShop.Storefront.Configurations;
 using RookieShop.Storefront.Middlewares;
 using RookieShop.Storefront.Options;
+using RookieShop.Storefront.Services;
 using SmartComponents.Inference.OpenAI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +37,8 @@ builder.AddAuthenticationService(appSettings.OpenIdSettings);
 builder.AddHttpServices(appSettings.BaseApiEndpoint);
 
 builder.Services.AddMemoryCache();
+
+builder.Services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
 
 builder.Services.AddScoped<CustomerInfoMiddleware>();
 
