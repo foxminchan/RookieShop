@@ -1,18 +1,25 @@
-import { defaultTheme } from '@vuepress/theme-default'
-import { defineUserConfig } from 'vuepress/cli'
-import { viteBundler } from '@vuepress/bundler-vite'
+import { defaultTheme } from "@vuepress/theme-default";
+import { defineUserConfig } from "vuepress/cli";
+import { viteBundler } from "@vuepress/bundler-vite";
 
 export default defineUserConfig({
-  lang: 'en-US',
+  lang: "en-US",
 
-  title: 'VuePress',
-  description: 'My first VuePress Site',
+  base: "/RookieShop/",
+  title: "RookieShop",
+  description:
+    "A project developed by a rookie transitioning to an engineer at NashTech",
 
   theme: defaultTheme({
-    logo: 'https://vuejs.press/images/hero.png',
-
-    navbar: ['/', '/get-started'],
+    displayAllHeaders: true,
+    logo: "/logo.png",
+    docsDir: "docs",
+    repo: "foxminchan/RookieShop",
+    editLinks: false,
+    editLinkText: "Help us improve this page!",
+    nav: [{ text: "Home", link: "/" }],
+    sidebar: ["/"],
   }),
-
+  head: [["link", { rel: "icon", href: "favicon.ico" }]],
   bundler: viteBundler(),
-})
+});

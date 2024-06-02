@@ -7,11 +7,6 @@ aspirate-state.json
 
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
-# VuePress files
-**/.vuepress/.cache/
-**/.vuepress/.temp/
-**/.vuepress/dist/
-
 # Logs
 
 logs
@@ -142,11 +137,15 @@ dist
 
 # vuepress build output
 
-.vuepress/dist
+**/.vuepress/.cache/
+**/.vuepress/.temp/
+**/.vuepress/dist/
 
 # vuepress v2.x temp and cache directory
 
 .temp
+.cache/
+docs/.vuepress/**/deps
 
 # Docusaurus cache and generated files
 
