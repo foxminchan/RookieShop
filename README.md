@@ -1,6 +1,9 @@
 <h1>RookieShop: Rookie Phase-1 Assignment Project</h1>
 
 [![Issue](https://img.shields.io/github/issues/foxminchan/RookieShop?label=Issue)](https://github.com/foxminchan/RookieShop/issues)
+[![CI](https://github.com/foxminchan/RookieShop/actions/workflows/ci.yaml/badge.svg)](https://github.com/foxminchan/RookieShop/actions/workflows/ci.yaml)
+[![Lint](https://github.com/foxminchan/RookieShop/actions/workflows/lint.yaml/badge.svg)](https://github.com/foxminchan/RookieShop/actions/workflows/lint.yaml)
+[![Deploy Docs](https://github.com/foxminchan/RookieShop/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/foxminchan/RookieShop/actions/workflows/deploy-docs.yml)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=foxminchan_RookieShop&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=foxminchan_RookieShop)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
