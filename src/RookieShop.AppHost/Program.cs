@@ -83,4 +83,13 @@ identityService
     .WithEnvironment("Client__Storefront", storefront.GetEndpoint(protocol))
     .WithEnvironment("Client__Swagger", apiService.GetEndpoint(protocol));
 
+// Ingress and reverse proxy
+builder.AddYarp("ingress")
+    .WithEndpoint(scheme: protocol, port: 80)
+    .WithReference(apiService)
+    .WithReference(identityService)
+    .WithReference(backoffice)
+    .WithReference(storefront)
+    .LoadFromConfiguration("ReverseProxy");
+
 await builder.Build().RunAsync();

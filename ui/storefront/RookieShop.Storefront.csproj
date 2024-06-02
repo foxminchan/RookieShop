@@ -25,7 +25,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.TypeScript.MSBuild" />
+		<PackageReference Include="Microsoft.TypeScript.MSBuild">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
 	</ItemGroup>
@@ -54,11 +57,8 @@
 	</ItemGroup>
 
 	<Target Name="Tailwind" BeforeTargets="Build">
-		<Message Importance="Normal" Text="Installing node packages"
-		         Condition="!Exists('node_modules')" />
-		<Exec Command="bun install"
-		      Condition="!Exists('node_modules')"
-		      WorkingDirectory="$(MSBuildProjectDirectory)" />
+		<Message Importance="Normal" Text="Installing node packages" Condition="!Exists('node_modules')" />
+		<Exec Command="bun install" Condition="!Exists('node_modules')" WorkingDirectory="$(MSBuildProjectDirectory)" />
 		<Message Importance="Normal" Text="Building Tailwind CSS" />
 		<Exec Command="bun run css:build" />
 	</Target>

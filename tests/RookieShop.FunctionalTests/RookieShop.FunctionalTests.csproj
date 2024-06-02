@@ -18,6 +18,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Aspirant.Hosting.Testing.xunit" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\src\RookieShop.AppHost\RookieShop.AppHost.csproj" />
 	</ItemGroup>
 

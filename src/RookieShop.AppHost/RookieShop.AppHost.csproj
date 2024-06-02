@@ -15,6 +15,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Aspirant.Hosting.Yarp" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\ui\storefront\RookieShop.Storefront.csproj" />
 		<ProjectReference Include="..\RookieShop.ApiService\RookieShop.ApiService.csproj" />
 		<ProjectReference Include="..\RookieShop.IdentityService\RookieShop.IdentityService.csproj" />
