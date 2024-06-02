@@ -4,5 +4,4 @@ using RookieShop.Domain.SharedKernel;
 
 namespace RookieShop.Application.Reports.Queries.BestSellerProducts;
 
-public sealed record BestSellerProductsQuery(int Top, DateTime? From, DateTime? To)
-    : IQuery<Result<IEnumerable<BestSellerProductsDto>>>;
+public sealed record BestSellerProductsQuery(int Top) : IQuery<Result<IEnumerable<BestSellerProductsDto>>>;

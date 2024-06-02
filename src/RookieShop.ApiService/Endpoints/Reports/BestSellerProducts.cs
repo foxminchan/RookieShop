@@ -12,7 +12,7 @@ public sealed class BestSellerProducts(ISender sender)
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/reports/best-seller-products",
-                async (int top, DateTime? from, DateTime? to) => await HandleAsync(new(top, from, to)))
+                async (int top) => await HandleAsync(new(top)))
             .Produces<Ok<List<BestSellerProductsDto>>>()
             .WithTags(nameof(Reports))
             .WithName("Best Seller Products")
@@ -22,7 +22,7 @@ public sealed class BestSellerProducts(ISender sender)
     public async Task<Ok<List<BestSellerProductsDto>>> HandleAsync(BestSellerProductsRequest request,
         CancellationToken cancellationToken = default)
     {
-        BestSellerProductsQuery query = new(request.Top, request.From, request.To);
+        BestSellerProductsQuery query = new(request.Top);
 
         var result = await sender.Send(query, cancellationToken);
 

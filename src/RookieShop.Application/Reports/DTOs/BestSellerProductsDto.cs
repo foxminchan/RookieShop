@@ -1,10 +1,10 @@
-﻿using RookieShop.Domain.Entities.ProductAggregator.ValueObjects;
+﻿namespace RookieShop.Application.Reports.DTOs;
 
-namespace RookieShop.Application.Reports.DTOs;
-
-public sealed record BestSellerProductsDto(
-    Guid ProductId,
-    string ProductName,
-    int TotalSoldQuantity,
-    ProductPrice Price,
-    string? ImageUrl);
+public sealed class BestSellerProductsDto
+{
+    public Guid ProductId { get; set; }
+    public string? ProductName { get; set; }
+    public int TotalSoldQuantity { get; set; }
+    public string Price { get; set; } = string.Empty;
+    public string? ImageUrl { get; set; }
+}
