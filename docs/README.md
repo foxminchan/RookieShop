@@ -45,9 +45,12 @@ The project should apply as many techniques of ASP.NET MVC Core as possible. For
 
 ## Technical Stack
 
+### Backend
+
 - [ASP.NET Core 8.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0): A cross-platform, high-performance, open-source framework for building modern, cloud-based, Internet-connected applications.
 - [htmx](https://htmx.org/): A JavaScript library that allows you to access AJAX, WebSockets, and Server-Sent Events directly in HTML, using attributes.
 - [Alphine.js](https://alpinejs.dev/): A rugged, minimal framework for composing JavaScript behavior in your markup.
+- [///\_hyperscript](https://hyperscript.org/): A small, open scripting language. Enhance HTML with concise DOM, event and async features. Make writing interactive HTML a joy.
 - [Next.js 14.0](https://nextjs.org/): A React framework that enables functionality such as server-side rendering and generating static websites for React-based web applications.
 - [Duende IdentityServer 7.0](https://duendesoftware.com/products/identityserver): An authentication server that provides authentication and authorization services for the application.
 - [Redis](https://redis.io/): An open-source, in-memory data structure store used as a database, cache, and message broker.

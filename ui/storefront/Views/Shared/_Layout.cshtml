@@ -136,6 +136,7 @@
         <script src="~/lib/dist/toastr.js/toastr.min.js" asp-append-version="true"></script>
         <script src="~/lib/dist/htmx/htmx.min.js" asp-append-version="true"></script>
         <script src="~/lib/dist/alpinejs/cdn.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/hyperscript.org/_hyperscript.min.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://code.jquery.com/jquery-4.0.0-beta.slim.min.js"
@@ -171,6 +172,9 @@
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"
                 asp-fallback-src="~/lib/dist/alpinejs/cdn.min.js"
                 asp-fallback-test="window.Alpine"
+                asp-append-version="true"></script>
+        <script src="https://unpkg.com/hyperscript.org@0.9.12"
+                asp-fallback-src="~/lib/dist/hyperscript.org/_hyperscript.min.js"
                 asp-append-version="true"></script>
     </environment>
 </cache>

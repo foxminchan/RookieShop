@@ -70,6 +70,7 @@ Build an e-commerce web site with minimum functionality below:
 - [ASP.NET Core 8.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
 - [htmx](https://htmx.org/)
 - [Alphine.js](https://alpinejs.dev/)
+- [///\_hyperscript](https://hyperscript.org/)
 - [Next.js 14.0](https://nextjs.org/)
 - [Duende IdentityServer 7.0](https://duendesoftware.com/products/identityserver)
 - [Redis](https://redis.io/)
