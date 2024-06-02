@@ -58,13 +58,7 @@
                                 <img loading="lazy" src="~/imgs/home/account.svg" class="h-6 w-6" alt="Account" asp-append-version="true"/>
                             </a>
                         </li>
-                        <li>
-                            <a asp-area="Basket" asp-controller="Basket" asp-action="Index" class="flex items-center space-x-2 justify-center py-4 pr-2">
-                                <div class="relative">
-                                    <img loading="lazy" class="mt-2 h-6 w-6" src="~/imgs/home/cart.svg" alt="Cart" asp-append-version="true"/>
-                                </div>
-                            </a>
-                        </li>
+                        @await Component.InvokeAsync("BasketButton")
                         <li>
                             <a hx-post
                                hx-area="User"

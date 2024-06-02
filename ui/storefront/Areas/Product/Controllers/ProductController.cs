@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Htmx;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using RookieShop.Storefront.Areas.Product.Models.Feedbacks;
 using RookieShop.Storefront.Areas.Product.Models.Products;
 using RookieShop.Storefront.Areas.Product.Services;
@@ -25,6 +27,8 @@ public class ProductController(
             : query["category"]
                 .Select(c => Guid.TryParse(c, out var parsedGuid) ? parsedGuid : Guid.Empty)
                 .ToArray();
+
+        Response.Htmx(h => h.PushUrl(Request.GetEncodedUrl()));
 
         var product = await productService.ListProductsAsync(new()
         {

@@ -36,6 +36,9 @@ public class BasketController(IBasketService basketService) : Controller
 
         await basketService.AddToBasketAsync(basketRequest, Guid.NewGuid());
 
+        var count = HttpContext.Items.TryGetValue("BasketCount", out var cachedCount) ? (int)(cachedCount ?? 0) : 0;
+        HttpContext.Items["BasketCount"] = count + 1;
+
         return RedirectToAction("Detail", "Product", new { id = basketRequest.ProductId, area = "Product" });
     }
 
@@ -54,6 +57,9 @@ public class BasketController(IBasketService basketService) : Controller
             AccountId = customer.AccountId,
             ProductId = productId
         });
+
+        var count = HttpContext.Items.TryGetValue("BasketCount", out var cachedCount) ? (int)(cachedCount ?? 0) : 0;
+        HttpContext.Items["BasketCount"] = count - 1;
 
         return RedirectToAction("Index");
     }

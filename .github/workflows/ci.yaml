@@ -10,19 +10,6 @@ on:
       - main
 
 jobs:
-  sonarcloud:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
   ubuntu-latest:
     name: ubuntu-latest
     runs-on: ubuntu-latest
@@ -40,7 +27,7 @@ jobs:
       - name: Set up Bun
         uses: oven-sh/setup-bun@v1
         with:
-          version: "latest"
+          bun-version: "latest"
 
       - name: Cache .nuke/temp, ~/.nuget/packages
         uses: actions/cache@v2
