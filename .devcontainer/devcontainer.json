@@ -13,25 +13,15 @@
     "ghcr.io/prom3theu5/aspirational-manifests/aspirate:latest": {}
   },
   "postCreateCommand": "bash .devcontainer/init.sh",
-  "forwardPorts": [
-    "api:9000",
-    "storefont:4000",
-    "identityserver:5001",
-    "db:5432",
-    "cache:6379"
-  ],
+  "forwardPorts": ["ingress:80", "dashboard:17249"],
   "portsAttributes": {
-    "9000": {
-      "protocol": "https",
-      "label": "API"
+    "80": {
+      "protocol": "http",
+      "label": "Ingess"
     },
-    "4000": {
+    "17249": {
       "protocol": "https",
-      "label": "StoreFront"
-    },
-    "5001": {
-      "protocol": "https",
-      "label": "IdentityServer"
+      "label": "dashboard"
     }
   },
   "customizations": {

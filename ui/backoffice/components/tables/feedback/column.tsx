@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Feedback } from "@/features/feedback/feedback.type"
 import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
@@ -7,7 +8,6 @@ import { format } from "date-fns"
 import { Checkbox } from "@/components/ui/checkbox"
 
 import { CellAction } from "./cell-action"
-import Link from "next/link"
 
 export const columns: ColumnDef<Feedback>[] = [
   {
@@ -45,19 +45,21 @@ export const columns: ColumnDef<Feedback>[] = [
       return (
         <div className="flex items-center">
           <div className="flex space-x-1">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <svg
-                key={index}
-                className="w-4 h-4 fill-current text-yellow-500"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill={index < rating ? "currentColor" : "none"}
-                  d="M12 2l2.121 6.485L20 9.757l-5.485 3.758L16 20l-4-2.5L8 20l1.485-6.242L4 9.757l5.879-1.272z"
-                />
-              </svg>
-            ))}
+            {Array.from({ length: 5 }).map((_, index) => {
+              const starId = `star-${index}`
+              return (
+                <svg
+                  key={starId}
+                  className={`w-4 h-4 fill-current ${
+                    index < rating ? "text-yellow-500" : "text-gray-300"
+                  }`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2l2.121 6.485L20 9.757l-5.485 3.758L16 20l-4-2.5L8 20l1.485-6.242L4 9.757l5.879-1.272z" />
+                </svg>
+              )
+            })}
           </div>
         </div>
       )

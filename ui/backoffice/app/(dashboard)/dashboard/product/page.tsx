@@ -27,14 +27,13 @@ type paramsProps = {
 export default function ProductPage({ searchParams }: Readonly<paramsProps>) {
   const page = Number(searchParams.page) || DEFAULT_PAGE_INDEX
   const pageLimit = Number(searchParams.limit) || DEFAULT_PAGE_SIZE
-  const name = (searchParams.search as string) || null
+  const name = (searchParams.search as string) || undefined
   const orderBy = (searchParams.orderBy as string) || DEFAULT_ORDER_BY
   const isDescending = (searchParams.isDescending as boolean) || false
 
   const { data } = useListProducts({
     pageIndex: page,
     pageSize: pageLimit,
-    categoryIds: [],
     search: name,
     orderBy: orderBy,
     isDescending: isDescending,

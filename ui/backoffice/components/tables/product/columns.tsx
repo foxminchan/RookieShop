@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Product } from "@/features/product/product.type"
 import { ColumnDef } from "@tanstack/react-table"
 
@@ -33,14 +34,7 @@ export const columns: ColumnDef<Product>[] = [
     header: "IMAGE",
     cell: (props) => {
       const imageUrl = props.getValue() as string
-      return (
-        <img
-          loading="lazy"
-          src={imageUrl}
-          alt="product"
-          className="w-10 h-10"
-        />
-      )
+      return <Image src={imageUrl} alt="product" width={50} height={50} />
     },
   },
   {
@@ -72,6 +66,12 @@ export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "description",
     header: "DESCRIPTION",
+    cell: (props) => {
+      const description = props.getValue() as string
+      return description.length > 50
+        ? `${description.slice(0, 50)}...`
+        : description
+    },
   },
   {
     accessorKey: "quantity",
@@ -122,14 +122,13 @@ export const columns: ColumnDef<Product>[] = [
             {Array.from({ length: 5 }).map((_, index) => (
               <svg
                 key={index}
-                className="w-4 h-4 fill-current text-yellow-500"
+                className={`w-4 h-4 fill-current ${
+                  index < rating ? "text-yellow-500" : "text-gray-300"
+                }`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
-                <path
-                  fill={index < rating ? "currentColor" : "none"}
-                  d="M12 2l2.121 6.485L20 9.757l-5.485 3.758L16 20l-4-2.5L8 20l1.485-6.242L4 9.757l5.879-1.272z"
-                />
+                <path d="M12 2l2.121 6.485L20 9.757l-5.485 3.758L16 20l-4-2.5L8 20l1.485-6.242L4 9.757l5.879-1.272z" />
               </svg>
             ))}
           </div>
@@ -138,7 +137,7 @@ export const columns: ColumnDef<Product>[] = [
     },
   },
   {
-    accessorKey: "totalRating",
+    accessorKey: "totalReviews",
     header: "TOTAL RATING",
   },
   {

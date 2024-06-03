@@ -25,7 +25,6 @@ export type ListProducts = {
 
 export type ProductFilterParams = FilterParams & {
   search?: string | null
-  categoryIds: string[]
 }
 
 // --- Requests ---
