@@ -1,5 +1,7 @@
 import { PagedInfo, PagingFilter } from "@/types/api"
 
+// --- Types ---
+
 export type Customer = {
   id: string
   name: string

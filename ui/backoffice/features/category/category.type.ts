@@ -1,5 +1,7 @@
 import { PagedInfo, PagingFilter } from "@/types/api"
 
+// --- Types ---
+
 export type Category = {
   id: string
   name: string

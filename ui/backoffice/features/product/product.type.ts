@@ -2,6 +2,8 @@ import { FilterParams, PagedInfo } from "@/types/api"
 
 import { Category } from "../category/category.type"
 
+// --- Types ---
+
 export type Product = {
   id: string
   name: string

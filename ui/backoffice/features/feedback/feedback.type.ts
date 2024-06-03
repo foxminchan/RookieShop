@@ -1,5 +1,7 @@
 import { PagedInfo } from "@/types/api"
 
+// --- Types ---
+
 export type Feedback = {
   id: string
   productId: string
