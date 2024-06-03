@@ -47,16 +47,18 @@ export const columns: ColumnDef<Product>[] = [
     header: "STATUS",
     cell: (props) => {
       const status = props.getValue() as string
+      let badgeClass = ""
+      if (status === "InStock") {
+        badgeClass = "bg-green-500 text-white"
+      } else if (status === "OutOfStock") {
+        badgeClass = "bg-yellow-500 text-white"
+      } else {
+        badgeClass = "bg-red-500 text-white"
+      }
       return (
         <Badge
           variant="secondary"
-          className={`px-2 py-1 text-xs font-semibold rounded-full ${
-            status === "InStock"
-              ? "bg-green-500 text-white"
-              : status === "OutOfStock"
-                ? "bg-yellow-500 text-white"
-                : "bg-red-500 text-white"
-          }`}
+          className={`px-2 py-1 text-xs font-semibold rounded-full ${badgeClass}`}
         >
           {status}
         </Badge>
@@ -119,18 +121,21 @@ export const columns: ColumnDef<Product>[] = [
       return (
         <div className="flex items-center">
           <div className="flex space-x-1">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <svg
-                key={index}
-                className={`w-4 h-4 fill-current ${
-                  index < rating ? "text-yellow-500" : "text-gray-300"
-                }`}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2l2.121 6.485L20 9.757l-5.485 3.758L16 20l-4-2.5L8 20l1.485-6.242L4 9.757l5.879-1.272z" />
-              </svg>
-            ))}
+            {Array.from({ length: 5 }).map((_, index) => {
+              const starId = `star-${index}`
+              return (
+                <svg
+                  key={starId}
+                  className={`w-4 h-4 fill-current ${
+                    index < rating ? "text-yellow-500" : "text-gray-300"
+                  }`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2l2.121 6.485L20 9.757l-5.485 3.758L16 20l-4-2.5L8 20l1.485-6.242L4 9.757l5.879-1.272z" />
+                </svg>
+              )
+            })}
           </div>
         </div>
       )
