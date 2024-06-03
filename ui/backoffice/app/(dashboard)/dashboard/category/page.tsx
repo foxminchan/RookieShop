@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import useListCategories from "@/features/category/useListCategories"
-import { Plus } from "lucide-react"
 
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@/lib/constants/default"
 import { cn } from "@/lib/utils"
@@ -10,6 +9,7 @@ import Breadcrumb from "@/components/ui/breadcrumb"
 import { buttonVariants } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
+import { Icons } from "@/components/custom/icons"
 import CategoryTable from "@/components/tables/category/table"
 
 const breadcrumbItems = [{ title: "Category", link: "/dashboard/category" }]
@@ -46,7 +46,7 @@ export default function CatgoryPage({ searchParams }: Readonly<paramsProps>) {
           href={"/dashboard/category/new"}
           className={cn(buttonVariants({ variant: "default" }))}
         >
-          <Plus className="mr-2 h-4 w-4" /> Add New
+          <Icons.add className="mr-2 h-4 w-4" /> Add New
         </Link>
       </div>
       <Separator />

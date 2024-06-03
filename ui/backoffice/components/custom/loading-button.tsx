@@ -1,7 +1,7 @@
 import React from "react"
-import { Loader2 } from "lucide-react"
 
 import { Button, ButtonProps } from "../ui/button"
+import { Icons } from "./icons"
 
 export interface LoadingButtonProps extends ButtonProps {
   isLoading?: boolean
@@ -12,7 +12,7 @@ export default function LoadingButton({
   isLoading = false,
   loadingHolder = (
     <>
-      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
       {"Please wait"}
     </>
   ),

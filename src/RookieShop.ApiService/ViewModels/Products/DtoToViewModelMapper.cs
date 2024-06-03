@@ -15,6 +15,8 @@ public static class DtoToViewModelMapper
             product.AverageRating,
             product.TotalReviews,
             product.Status,
+            product.CreatedDate,
+            product.UpdatedDate,
             product.Category);
 
     public static List<ProductVm> ToProductVm(this IEnumerable<ProductDto> products) =>

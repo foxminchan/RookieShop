@@ -1,40 +1,29 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Product } from "@/features/product/product.type"
 import { ColumnDef } from "@tanstack/react-table"
+import { format } from "date-fns"
 
 import { Badge } from "@/components/ui/badge"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Icons } from "@/components/custom/icons"
 
 import { CellAction } from "./cell-action"
 
 export const columns: ColumnDef<Product>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
     accessorKey: "imageUrl",
     header: "IMAGE",
     cell: (props) => {
       const imageUrl = props.getValue() as string
-      return <Image src={imageUrl} alt="product" width={50} height={50} />
+      return <Image src={imageUrl} alt="product" width={90} height={120} />
     },
   },
   {
@@ -70,9 +59,18 @@ export const columns: ColumnDef<Product>[] = [
     header: "DESCRIPTION",
     cell: (props) => {
       const description = props.getValue() as string
-      return description.length > 50
-        ? `${description.slice(0, 50)}...`
-        : description
+      return description.length > 50 ? (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span>{`${description.slice(0, 50)}...`}</span>
+          </TooltipTrigger>
+          <TooltipContent>
+            <div className="p-4 text-sm w-80">{description}</div>
+          </TooltipContent>
+        </Tooltip>
+      ) : (
+        description
+      )
     },
   },
   {
@@ -80,11 +78,16 @@ export const columns: ColumnDef<Product>[] = [
     header: "QUANTITY",
     cell: (props) => {
       const quantity = props.getValue() as number
-      return quantity > 0 ? (
-        <span className="text-green-500">{quantity}</span>
-      ) : (
-        <span className="text-red-500">{quantity}</span>
-      )
+      let className = ""
+      const MEDIUM_QTY = 20
+      if (quantity >= MEDIUM_QTY) {
+        className = "text-green-500"
+      } else if (quantity < MEDIUM_QTY) {
+        className = "text-yellow-500"
+      } else {
+        className = "text-red-500"
+      }
+      return <span className={className}>{quantity}</span>
     },
   },
   {
@@ -100,7 +103,7 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "priceSale",
-    header: "PRICE SALE",
+    header: "SALE",
     cell: (props) => {
       const priceSale = props.getValue() as number
       return (
@@ -115,7 +118,7 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "averageRating",
-    header: "AVERAGE RATING",
+    header: "RATING",
     cell: (props) => {
       const rating = props.getValue() as number
       return (
@@ -142,8 +145,32 @@ export const columns: ColumnDef<Product>[] = [
     },
   },
   {
-    accessorKey: "totalReviews",
-    header: "TOTAL RATING",
+    accessorKey: "createdDate",
+    header: "CREATED",
+    cell: (props) =>
+      props.getValue() && format(props.getValue() as Date, "dd/MM/yyyy"),
+  },
+  {
+    accessorKey: "updatedDate",
+    header: "UPDATED",
+    cell: (props) => {
+      const updatedDate = props.getValue() as Date
+      return updatedDate ? (
+        format(updatedDate, "dd/MM/yyyy")
+      ) : (
+        <Icons.minus className="text-gray-500" />
+      )
+    },
+  },
+  {
+    id: "category",
+    header: "CATEGORY",
+    cell: (props) => {
+      const { category } = props.row.original
+      return (
+        <Link href={`/dashboard/category/${category.id}`}>{category.name}</Link>
+      )
+    },
   },
   {
     id: "actions",

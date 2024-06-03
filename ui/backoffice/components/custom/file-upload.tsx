@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { Trash } from "lucide-react"
 
 import { IMG_MAX_SIZE } from "@/lib/constants/default"
 
@@ -9,13 +8,17 @@ import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import { useToast } from "../ui/use-toast"
+import { Icons } from "./icons"
 
 type ImageUploadProps = {
   onChange?: any
   value?: File | null
 }
 
-export default function FileUpload({ onChange, value }: ImageUploadProps) {
+export default function FileUpload({
+  onChange,
+  value,
+}: Readonly<ImageUploadProps>) {
   const { toast } = useToast()
 
   const onDeleteFile = () => {
@@ -34,7 +37,7 @@ export default function FileUpload({ onChange, value }: ImageUploadProps) {
                 variant="destructive"
                 size="sm"
               >
-                <Trash className="h-4 w-4" />
+                <Icons.trash className="h-4 w-4" />
               </Button>
             </div>
             <div>

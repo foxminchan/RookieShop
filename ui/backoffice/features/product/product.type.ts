@@ -15,6 +15,8 @@ export type Product = {
   averageRating: number
   totalReviews: number
   status: ProductStatus
+  createdDate: Date
+  updatedDate: Date | null
   category: Category
 }
 

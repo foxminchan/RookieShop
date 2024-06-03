@@ -20,6 +20,8 @@ public static class DomainToDtoMapper
             product.AverageRating,
             product.TotalReviews,
             product.Status,
+            product.CreatedDate,
+            product.UpdateDate,
             category);
     }
 

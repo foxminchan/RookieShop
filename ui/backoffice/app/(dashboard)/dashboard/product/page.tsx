@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import useListProducts from "@/features/product/useListProducts"
-import { Plus } from "lucide-react"
 
 import {
   DEFAULT_ORDER_BY,
@@ -14,6 +13,7 @@ import Breadcrumb from "@/components/ui/breadcrumb"
 import { buttonVariants } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
+import { Icons } from "@/components/custom/icons"
 import ProductTable from "@/components/tables/product/table"
 
 const breadcrumbItems = [{ title: "Product", link: "/dashboard/product" }]
@@ -54,7 +54,7 @@ export default function ProductPage({ searchParams }: Readonly<paramsProps>) {
           href={"/dashboard/product/new"}
           className={cn(buttonVariants({ variant: "default" }))}
         >
-          <Plus className="mr-2 h-4 w-4" /> Add New
+          <Icons.add className="mr-2 h-4 w-4" /> Add New
         </Link>
       </div>
       <Separator />

@@ -15,7 +15,6 @@ import {
   PaginationState,
   useReactTable,
 } from "@tanstack/react-table"
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -35,6 +34,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+
+import { Icons } from "./icons"
 
 export default function FilterTable<TData, TValue>({
   columns,
@@ -249,7 +250,7 @@ export default function FilterTable<TData, TValue>({
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
+              <Icons.chevronLeft className="h-4 w-4" aria-hidden="true" />
             </Button>
             <Button
               aria-label="Go to next page"
@@ -258,7 +259,7 @@ export default function FilterTable<TData, TValue>({
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              <ChevronRightIcon className="h-4 w-4" aria-hidden="true" />
+              <Icons.chevronRight className="h-4 w-4" aria-hidden="true" />
             </Button>
             <Button
               aria-label="Go to last page"

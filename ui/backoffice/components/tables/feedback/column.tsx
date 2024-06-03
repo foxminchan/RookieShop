@@ -5,33 +5,16 @@ import { Feedback } from "@/features/feedback/feedback.type"
 import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
 
-import { Checkbox } from "@/components/ui/checkbox"
-
 import { CellAction } from "./cell-action"
 
 export const columns: ColumnDef<Feedback>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
     accessorKey: "customer.customerName",
     header: "CUSTOMER",
+    cell: (props) => {
+      const customerName = props.getValue() as string
+      return customerName || "Anonymous User"
+    },
   },
   {
     accessorKey: "content",

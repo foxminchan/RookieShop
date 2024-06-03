@@ -15,4 +15,6 @@ public sealed record ProductDto(
     double AverageRating,
     int TotalReviews,
     ProductStatus Status,
+    DateTime CreatedDate,
+    DateTime? UpdatedDate,
     CategoryDto? Category);

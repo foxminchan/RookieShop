@@ -14,6 +14,9 @@ public static class ProductSpecExpression
             nameof(Product.Price) => isDescending
                 ? builder.OrderByDescending(product => product.Price.Price)
                 : builder.OrderBy(product => product.Price.Price),
+            nameof(Product.Price.PriceSale) => isDescending
+                ? builder.OrderByDescending(product => product.Price.PriceSale)
+                : builder.OrderBy(product => product.Price.PriceSale),
             nameof(Product.Status) => isDescending
                 ? builder.OrderByDescending(product => product.Status)
                 : builder.OrderBy(product => product.Status),
