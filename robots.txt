@@ -2,4 +2,4 @@
 User-agent:*
 Disallow:
 
-Sitemap: https://vuepress-theme-hope-docs-demo.netlify.app/RookieShop/sitemap.xml
+Sitemap: https://foxminchan.github.io/RookieShop/RookieShop/sitemap.xml
