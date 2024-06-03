@@ -8,4 +8,5 @@ export default defineUserConfig({
   description:
     "A project developed by a rookie transitioning to an engineer at NashTech",
   theme,
+  head: [["link", { rel: "icon", href: "favicon.ico" }]],
 });
