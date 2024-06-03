@@ -1,8 +1,12 @@
 import { buildQueryString } from "@/lib/helpers/query.helper"
 import HttpService from "@/lib/services/http.service"
 
-import { ListCategories } from "../category/category.type"
-import { Order, OrderFilterParams, UpdateOrderRequest } from "./order.type"
+import {
+  ListOrders,
+  Order,
+  OrderFilterParams,
+  UpdateOrderRequest,
+} from "./order.type"
 
 class OrderService extends HttpService {
   constructor() {
@@ -13,7 +17,7 @@ class OrderService extends HttpService {
     return this.get(`/orders/${id}`)
   }
 
-  listOrders(options?: Partial<OrderFilterParams>): Promise<ListCategories> {
+  listOrders(options?: Partial<OrderFilterParams>): Promise<ListOrders> {
     return this.get(`/orders?${buildQueryString(options)}`)
   }
 

@@ -14,11 +14,11 @@ export type Order = {
   totalPrice: number
   customerId: string
   orderStatus: OrderStatus
-  createDate: Date
+  createdDate: Date
   items: OrderItem[]
 }
 
-export type ListOrder = {
+export type ListOrders = {
   pagedInfo: PagedInfo
   orders: Order[]
 }

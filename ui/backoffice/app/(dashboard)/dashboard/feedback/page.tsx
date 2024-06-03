@@ -25,15 +25,15 @@ export default function FeedbackPage({ searchParams }: Readonly<paramsProps>) {
     pageSize: pageLimit,
   })
 
-  const categories = data?.feedbacks || []
-  const totalCategories = data?.pagedInfo.totalRecords ?? 0
+  const feedbacks = data?.feedbacks || []
+  const totalFeedbacks = data?.pagedInfo.totalRecords ?? 0
 
   return (
     <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
       <Breadcrumb items={breadcrumbItems} />
       <div className="flex items-start justify-between">
         <Heading
-          title={`Feedback (${totalCategories})`}
+          title={`Feedback (${totalFeedbacks})`}
           description="Manage feedback"
         />
       </div>
@@ -41,8 +41,8 @@ export default function FeedbackPage({ searchParams }: Readonly<paramsProps>) {
       <FeedbackTable
         page={page}
         pageCount={data?.pagedInfo.totalPages ?? 0}
-        data={categories || []}
-        totalRecords={totalCategories || 0}
+        data={feedbacks || []}
+        totalRecords={totalFeedbacks || 0}
       />
     </div>
   )
