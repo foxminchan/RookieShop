@@ -31,25 +31,25 @@ export type ProductFilterParams = FilterParams & {
 
 export type CreateProductRequest = {
   name: string
-  description?: string
+  description?: string | null
   quantity: number
   price: number
   priceSale: number
-  productImages?: File
-  categoryId?: string
+  productImages?: File | null
+  categoryId?: string | null
 }
 
 export type UpdateProductRequest = {
   id: string
   name: string
-  description?: string
+  description?: string | null
   quantity: number
   price: number
   priceSale: number
-  productImages?: File
+  productImages?: File | null
   status: ProductStatus
-  isDeletedOldImage: boolean
-  categoryId?: string
+  isDeletedOldImage?: boolean | null
+  categoryId?: string | null
 }
 
 // --- Responses ---

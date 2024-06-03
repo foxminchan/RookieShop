@@ -16,7 +16,7 @@ export default hopeTheme({
 
   repo: "foxminchan/RookieShop",
 
-  docsDir: "src",
+  docsDir: "docs",
 
   // navbar
   navbar,

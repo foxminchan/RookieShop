@@ -17,7 +17,6 @@ export default function QueryProvider({
       mutationCache: new MutationCache({
         onError(error, _variables, _context, mutation) {
           if (mutation.options.onError) return
-
           toast({
             variant: "destructive",
             title: "Theres an error occurred",
@@ -25,6 +24,11 @@ export default function QueryProvider({
           })
         },
       }),
+      defaultOptions: {
+        queries: {
+          staleTime: 5 * 60 * 1000,
+        },
+      },
     })
   )
 
