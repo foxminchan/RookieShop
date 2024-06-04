@@ -16,6 +16,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
+import useDebounce from "@/hooks/useDebounce"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
@@ -106,21 +107,22 @@ export default function FilterTable<TData, TValue>({
   })
 
   const searchValue = table.getColumn(searchKey)?.getFilterValue() as string
+  const debouncedSearchValue = useDebounce(searchValue, 500)
 
   useEffect(() => {
-    if (searchValue?.length > 0) {
+    if (debouncedSearchValue?.length > 0) {
       router.push(
         `${pathname}?${createQueryString({
           page: null,
           limit: null,
-          search: searchValue,
+          search: debouncedSearchValue,
         })}`,
         {
           scroll: false,
         }
       )
     }
-    if (searchValue?.length === 0 || searchValue === undefined) {
+    if (debouncedSearchValue?.length === 0 || searchValue === undefined) {
       router.push(
         `${pathname}?${createQueryString({
           page: null,
@@ -134,7 +136,7 @@ export default function FilterTable<TData, TValue>({
     }
 
     setPagination((prev) => ({ ...prev, pageIndex: 0 }))
-  }, [searchValue])
+  }, [debouncedSearchValue])
 
   return (
     <>

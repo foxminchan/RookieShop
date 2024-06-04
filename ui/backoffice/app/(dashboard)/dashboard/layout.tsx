@@ -25,7 +25,7 @@ export default function MainDashboardLayout({
   return (
     <>
       <Header />
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex overflow-hidden">
         <Sidebar />
         <main className="w-full pt-16">{children}</main>
       </div>

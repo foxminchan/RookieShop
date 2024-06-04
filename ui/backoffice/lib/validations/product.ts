@@ -8,8 +8,8 @@ const ACCEPTED_IMAGE_MIME_TYPES = ["image/jpeg", "image/png", "image/jpg"]
 export const productSchema = z
   .object({
     name: z.string().min(3).max(50),
-    description: z.string().min(3).max(1000),
-    quantity: z.number().int().positive(),
+    description: z.string().min(3).max(1000).optional(),
+    quantity: z.coerce.number().int().positive(),
     price: z.coerce.number().int().positive(),
     priceSale: z.coerce.number().int().positive(),
     productImages: z

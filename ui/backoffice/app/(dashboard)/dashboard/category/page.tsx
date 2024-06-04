@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import Link from "next/link"
 import useListCategories from "@/features/category/useListCategories"
 
@@ -25,7 +26,7 @@ export default function CatgoryPage({ searchParams }: Readonly<paramsProps>) {
   const pageLimit = Number(searchParams.limit) || DEFAULT_PAGE_SIZE
   const name = (searchParams.search as string) || null
 
-  const { data } = useListCategories({
+  const { data, refetch } = useListCategories({
     pageIndex: page,
     pageSize: pageLimit,
     search: name,
@@ -33,6 +34,10 @@ export default function CatgoryPage({ searchParams }: Readonly<paramsProps>) {
 
   const categories = data?.categories || []
   const totalCategories = data?.pagedInfo.totalRecords ?? 0
+
+  useEffect(() => {
+    refetch()
+  }, [data, name, refetch])
 
   return (
     <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">

@@ -33,25 +33,18 @@ export type ProductFilterParams = FilterParams & {
 
 export type CreateProductRequest = {
   name: string
-  description?: string | null
+  description?: string
   quantity: number
   price: number
   priceSale: number
-  productImages?: File | null
-  categoryId?: string | null
+  productImages?: File
+  categoryId?: string
 }
 
-export type UpdateProductRequest = {
+export type UpdateProductRequest = CreateProductRequest & {
   id: string
-  name: string
-  description?: string | null
-  quantity: number
-  price: number
-  priceSale: number
-  productImages?: File | null
   status: ProductStatus
-  isDeletedOldImage?: boolean | null
-  categoryId?: string | null
+  isDeletedOldImage?: boolean
 }
 
 // --- Responses ---
@@ -61,7 +54,7 @@ export type CreateProductResponse = {
 }
 
 export enum ProductStatus {
-  InStock = 1,
-  OutOfStock = 2,
-  Discontinued = 3,
+  InStock = "InStock",
+  OutOfStock = "OutOfStock",
+  Discontinued = "Discontinued",
 }

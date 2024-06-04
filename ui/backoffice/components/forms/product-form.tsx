@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useParams, useRouter } from "next/navigation"
 import useListCategories from "@/features/category/useListCategories"
 import {
+  CreateProductRequest,
   ProductStatus,
   UpdateProductRequest,
 } from "@/features/product/product.type"
@@ -14,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { cn } from "@/lib/utils"
 import { productSchema } from "@/lib/validations/product"
 
 import FileUpload from "../custom/file-upload"
@@ -45,7 +47,7 @@ import { useToast } from "../ui/use-toast"
 type ProductFormValues = z.infer<typeof productSchema>
 
 type ProductFormProps = {
-  initialData: UpdateProductRequest | null
+  initialData: CreateProductRequest | UpdateProductRequest | null
   currentProductImages?: string | null
 }
 
@@ -79,22 +81,24 @@ export const ProductForm: FC<ProductFormProps> = ({
   const toastMessage = initialData ? "Product updated." : "Product created."
   const action = initialData ? "Save changes" : "Create"
 
-  const defaultValues = initialData ?? {
-    name: "",
-    description: "",
-    quantity: 0,
-    price: 0,
-    priceSale: 0,
-    isDeletedOldImage: null,
-    status: ProductStatus.OutOfStock,
-    productImages: null,
-    categoryId: null,
-  }
+  const defaultValues =
+    initialData ??
+    ({
+      name: "",
+      description: "",
+      quantity: 0,
+      price: 0,
+      priceSale: 0,
+      productImages: undefined,
+      categoryId: undefined,
+    } satisfies CreateProductRequest)
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
-    // defaultValues,
+    defaultValues,
   })
+
+  const isDeleteImageSelected = form.watch("isDeletedOldImage")
 
   const onSubmit = async (data: ProductFormValues) => {
     try {
@@ -142,50 +146,62 @@ export const ProductForm: FC<ProductFormProps> = ({
           className="w-full space-y-8"
           encType="multipart/form-data"
         >
-          <FormField
-            control={form.control}
-            name="productImages"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Images</FormLabel>
-                <FormControl>
-                  <FileUpload onChange={field.onChange} value={field.value} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {initialData && currentProductImages && (
-            <div className="gap-3 md:grid md:grid-cols-2 rounded-md border p-5">
-              <Image
-                src={currentProductImages}
-                alt="Product image"
-                width={50}
-                height={50}
-              />
+          <div className="grid grid-cols-4 gap-8">
+            <div className="col-span-3">
               <FormField
                 control={form.control}
-                name="isDeletedOldImage"
+                name="productImages"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                    <FormLabel></FormLabel>
+                  <FormItem>
+                    <FormLabel>Images</FormLabel>
                     <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
+                      <FileUpload
+                        onChange={field.onChange}
+                        value={field.value}
                       />
                     </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>Remove old images</FormLabel>
-                      <FormDescription>
-                        Your old images will be removed.
-                      </FormDescription>
-                    </div>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-          )}
+            {initialData && currentProductImages && (
+              <div className="cols-span-1 space-y-4">
+                <div className="w-full p-2">
+                  <img
+                    loading="lazy"
+                    src={currentProductImages}
+                    alt="Product image"
+                    className={cn(
+                      "w-full",
+                      isDeleteImageSelected && "opacity-50"
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="isDeletedOldImage"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                      <FormLabel></FormLabel>
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value || undefined}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Remove old images</FormLabel>
+                        <FormDescription>
+                          Your old images will be removed.
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
+          </div>
           <div className="gap-8 md:grid md:grid-cols-2">
             <FormField
               control={form.control}
@@ -288,23 +304,23 @@ export const ProductForm: FC<ProductFormProps> = ({
                     <FormLabel>Status</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={`${field.value}`}
+                      defaultValue={ProductStatus[field.value]}
                     >
                       <FormControl>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger>
                           <SelectValue placeholder="Select status" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Status</SelectLabel>
-                          <SelectItem value={`${ProductStatus.InStock}`}>
+                          <SelectItem value={ProductStatus.InStock}>
                             In stock
                           </SelectItem>
-                          <SelectItem value={`${ProductStatus.OutOfStock}`}>
+                          <SelectItem value={ProductStatus.OutOfStock}>
                             Out of stock
                           </SelectItem>
-                          <SelectItem value={`${ProductStatus.InStock}`}>
+                          <SelectItem value={ProductStatus.Discontinued}>
                             Out of stock
                           </SelectItem>
                         </SelectGroup>
@@ -323,16 +339,15 @@ export const ProductForm: FC<ProductFormProps> = ({
                   <FormLabel>Category</FormLabel>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={`${field.value}`}
+                    defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Select category" />
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>Category</SelectLabel>
                         {data?.categories?.map((category) => (
                           <SelectItem key={category.id} value={category.id}>
                             {category.name}

@@ -7,6 +7,7 @@ import {
   ListProducts,
   Product,
   ProductFilterParams,
+  UpdateProductRequest,
 } from "./product.type"
 
 class ProductService extends HttpService {
@@ -26,7 +27,7 @@ class ProductService extends HttpService {
     return this.post(`/products`, data)
   }
 
-  updateProduct(data: CreateProductRequest): Promise<Product> {
+  updateProduct(data: UpdateProductRequest): Promise<Product> {
     return this.put(`/products`, data)
   }
 

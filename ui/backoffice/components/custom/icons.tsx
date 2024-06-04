@@ -28,6 +28,7 @@ import {
   Store,
   SunMedium,
   Trash,
+  Upload,
   User,
   X,
 } from "lucide-react"
@@ -66,4 +67,5 @@ export const Icons = {
   arrow: ArrowUpDown,
   more: MoreHorizontal,
   edit: Edit,
+  upload: Upload,
 }
