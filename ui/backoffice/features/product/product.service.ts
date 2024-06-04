@@ -24,11 +24,41 @@ class ProductService extends HttpService {
   }
 
   createProduct(data: CreateProductRequest): Promise<CreateProductResponse> {
-    return this.post(`/products`, data)
+    let formData = new FormData()
+    formData.append("name", data.name)
+    formData.append("description", data.description as string)
+    formData.append("price", data.price.toString())
+    formData.append("priceSale", data.priceSale.toString())
+    formData.append("quantity", data.quantity.toString())
+    formData.append("categoryId", data.categoryId?.toString() ?? "")
+    if (data.productImages) {
+      formData.append("image", data.productImages)
+    }
+    return this.post(`/products`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
   }
 
   updateProduct(data: UpdateProductRequest): Promise<Product> {
-    return this.put(`/products`, data)
+    let formData = new FormData()
+    formData.append("id", data.id)
+    formData.append("name", data.name)
+    formData.append("description", data.description as string)
+    formData.append("price", data.price.toString())
+    formData.append("priceSale", data.priceSale.toString())
+    formData.append("quantity", data.quantity.toString())
+    formData.append("categoryId", data.categoryId?.toString() ?? "")
+    if (data.productImages) {
+      formData.append("image", data.productImages)
+    }
+    formData.append("status", data.status)
+    formData.append(
+      "isDeletedOldImage",
+      data.isDeletedOldImage?.toString() ?? "false"
+    )
+    return this.put(`/products`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
   }
 
   deleteProduct(id: string): Promise<void> {

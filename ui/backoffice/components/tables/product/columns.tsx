@@ -7,7 +7,6 @@ import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
 
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   Tooltip,
   TooltipContent,
@@ -23,7 +22,19 @@ export const columns: ColumnDef<Product>[] = [
     header: "IMAGE",
     cell: (props) => {
       const imageUrl = props.getValue() as string
-      return <Image src={imageUrl} alt="product" width={90} height={120} />
+      return imageUrl ? (
+        <Image src={imageUrl} alt="product" width={90} height={120} />
+      ) : (
+        <div className="flex items-center justify-center w-20 h-20 bg-gray-100 rounded-md">
+          <img
+            loading="lazy"
+            src="https://fakeimg.pl/90x120/?text=RookieShop"
+            alt="product"
+            width={90}
+            height={120}
+          />
+        </div>
+      )
     },
   },
   {

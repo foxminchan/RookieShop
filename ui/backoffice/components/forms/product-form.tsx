@@ -100,7 +100,6 @@ export const ProductForm: FC<ProductFormProps> = ({
   const isDeleteImageSelected = form.watch("isDeletedOldImage")
 
   const onSubmit = async (data: ProductFormValues) => {
-    debugger
     try {
       if (!initialData) {
         createProduct(data)
@@ -149,7 +148,12 @@ export const ProductForm: FC<ProductFormProps> = ({
           encType="multipart/form-data"
         >
           <div
-            className={cn("grid", initialData ? "grid-cols-4" : "grid-cols-3")}
+            className={cn(
+              "grid",
+              initialData && currentProductImages
+                ? "grid-cols-4"
+                : "grid-cols-3"
+            )}
           >
             <div className="col-span-3">
               <FormField
