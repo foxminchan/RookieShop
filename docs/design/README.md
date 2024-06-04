@@ -34,4 +34,14 @@ The high level design of the system is based on the following components:
 
 ## C4 Model
 
-> TODO: Add C4 Model
+### System Context Diagram
+
+![System Context Diagram](/assets/image/context.png)
+
+### Container Diagram
+
+![Container Diagram](/assets/image/container.png)
+
+### Component Diagram
+
+> TODO: Add component diagram
