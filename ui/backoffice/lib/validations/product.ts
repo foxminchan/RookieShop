@@ -31,8 +31,9 @@ export const productSchema = z
           return true
         },
         `Image must be in ${ACCEPTED_IMAGE_MIME_TYPES.join(", ")}`
-      ),
-    status: z.nativeEnum(ProductStatus),
+      )
+      .optional(),
+    status: z.nativeEnum(ProductStatus).optional(),
     isDeletedOldImage: z.boolean().optional(),
     categoryId: z.string().optional(),
   })

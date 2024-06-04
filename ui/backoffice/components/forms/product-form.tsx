@@ -1,7 +1,6 @@
 "use client"
 
 import { FC, useEffect } from "react"
-import Image from "next/image"
 import { useParams, useRouter } from "next/navigation"
 import useListCategories from "@/features/category/useListCategories"
 import {
@@ -101,13 +100,16 @@ export const ProductForm: FC<ProductFormProps> = ({
   const isDeleteImageSelected = form.watch("isDeletedOldImage")
 
   const onSubmit = async (data: ProductFormValues) => {
+    debugger
     try {
       if (!initialData) {
         createProduct(data)
       } else {
+        const { status, ...values } = data
         updateProduct({
           id: params.id as string,
-          ...data,
+          status: status ?? ProductStatus.InStock,
+          ...values,
         })
       }
 
@@ -146,7 +148,9 @@ export const ProductForm: FC<ProductFormProps> = ({
           className="w-full space-y-8"
           encType="multipart/form-data"
         >
-          <div className="grid grid-cols-4 gap-8">
+          <div
+            className={cn("grid", initialData ? "grid-cols-4" : "grid-cols-3")}
+          >
             <div className="col-span-3">
               <FormField
                 control={form.control}
@@ -304,7 +308,9 @@ export const ProductForm: FC<ProductFormProps> = ({
                     <FormLabel>Status</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={ProductStatus[field.value]}
+                      defaultValue={
+                        ProductStatus[field.value as keyof typeof ProductStatus]
+                      }
                     >
                       <FormControl>
                         <SelectTrigger>

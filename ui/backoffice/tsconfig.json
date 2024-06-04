@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "env.mjs"
+    "env.mjs",
+    "__tests__/*"
   ],
   "exclude": ["node_modules"]
 }
