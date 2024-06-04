@@ -11,6 +11,7 @@ import * as z from "zod"
 
 import { categorySchema } from "@/lib/validations/category"
 
+import CustomEditor from "../custom/custom-editor"
 import { Button } from "../ui/button"
 import {
   Form,
@@ -112,42 +113,43 @@ export const CategoryForm: FC<CategoryFormProps> = ({ initialData }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full space-y-8"
         >
-          <div className="gap-8 md:grid md:grid-cols-2">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isDisabled}
-                      placeholder="Category name"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isDisabled}
-                      placeholder="Category description"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={isDisabled}
+                    placeholder="Category name"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <CustomEditor
+                    content={""}
+                    handleContent={(content: string) => {
+                      form.setValue("description", content)
+                    }}
+                    disabled={isDisabled}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <Button disabled={isDisabled} className="ml-auto" type="submit">
             {action}
           </Button>

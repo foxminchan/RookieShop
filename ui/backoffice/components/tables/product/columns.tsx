@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Product } from "@/features/product/product.type"
 import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
+import parse from "html-react-parser"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -73,10 +74,10 @@ export const columns: ColumnDef<Product>[] = [
       return description.length > 50 ? (
         <Tooltip>
           <TooltipTrigger asChild>
-            <span>{`${description.slice(0, 50)}...`}</span>
+            <span>{`${parse(description.slice(0, 50))}...`}</span>
           </TooltipTrigger>
           <TooltipContent>
-            <div className="p-4 text-sm w-80">{description}</div>
+            <div className="p-4 text-sm w-80">{parse(description)}</div>
           </TooltipContent>
         </Tooltip>
       ) : (

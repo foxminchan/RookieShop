@@ -29,7 +29,7 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
   const { mutate: deleteProduct } = useDeleteProduct()
   const { refetch } = useListProducts()
 
-  const productPath = `/dashboard/product/`
+  const productPath = `/dashboard/product`
 
   const onConfirm = async () => {
     deleteProduct(data.id)
@@ -56,7 +56,7 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => router.push(`${productPath}${data.id}`)}
+            onClick={() => router.push(`${productPath}/${data.id}`)}
           >
             <Icons.edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

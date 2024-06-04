@@ -80,6 +80,7 @@
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.0.2",
+    "html-react-parser": "^5.1.10",
     "input-otp": "^1.2.4",
     "install": "^0.13.0",
     "jotai": "^2.8.0",

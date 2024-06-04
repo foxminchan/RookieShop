@@ -17,6 +17,7 @@ import { z } from "zod"
 import { cn } from "@/lib/utils"
 import { productSchema } from "@/lib/validations/product"
 
+import CustomEditor from "../custom/custom-editor"
 import FileUpload from "../custom/file-upload"
 import { Button } from "../ui/button"
 import { Checkbox } from "../ui/checkbox"
@@ -210,41 +211,44 @@ export const ProductForm: FC<ProductFormProps> = ({
               </div>
             )}
           </div>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={isDisabled}
+                    placeholder="Product name"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <CustomEditor
+                    content={initialData?.description ?? ""}
+                    handleContent={(content: string) => {
+                      form.setValue("description", content)
+                    }}
+                    disabled={isDisabled}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className="gap-8 md:grid md:grid-cols-2">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isDisabled}
-                      placeholder="Product name"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isDisabled}
-                      placeholder="Product description"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="price"

@@ -75,3 +75,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.ck .ck-content {
+  height: 200px;
+  color: #000000;
+}

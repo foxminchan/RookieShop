@@ -135,6 +135,10 @@ dist
 
 # public
 
+# ckeditor5-builds
+
+**/ckeditor5/build/
+
 # vuepress build output
 
 node_modules/

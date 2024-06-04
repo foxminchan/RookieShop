@@ -25,7 +25,7 @@ public sealed class ListProductsHandler(IReadRepository<Product> repository, IAz
 
         products.ForEach(p => p.ImageName = azuriteService.GetFileUrl(p.ImageName));
 
-        var totalRecords = await repository.CountAsync(cancellationToken);
+        var totalRecords = await repository.CountAsync(new ProductsFilterSpec(), cancellationToken);
 
         var totalPages = (int)Math.Ceiling(totalRecords / (double)request.PageSize);
 

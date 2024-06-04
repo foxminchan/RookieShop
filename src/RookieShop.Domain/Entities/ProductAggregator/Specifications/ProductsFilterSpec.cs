@@ -21,4 +21,6 @@ public sealed class ProductsFilterSpec : Specification<Product>
             .ApplyPaging(pageIndex, pageSize)
             .ApplyOrdering(orderBy, isDescending);
     }
+
+    public ProductsFilterSpec() => Query.Where(product => !product.IsDeleted);
 }
