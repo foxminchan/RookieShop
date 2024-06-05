@@ -48,7 +48,7 @@ public static class Extension
             })
             .AddTimeout(TimeSpan.FromSeconds(10)));
 
-        builder.Services.AddMarten(conn);
+        builder.Services.AddMarten(conn).UseLightweightSessions();
 
         builder.Services.AddScoped<ISmtpService, SmtpService>();
 

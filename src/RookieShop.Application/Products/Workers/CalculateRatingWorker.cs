@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RookieShop.Infrastructure.HostedServices;
 using RookieShop.Persistence;
@@ -11,12 +12,12 @@ public sealed class CalculateRatingWorker : CronJobBackgroundService
     private readonly ILogger<CalculateRatingWorker> _logger;
     private readonly IServiceProvider _serviceProvider;
 
-    public CalculateRatingWorker(ILogger<CalculateRatingWorker> logger, IServiceProvider serviceProvider)
+    public CalculateRatingWorker(ILogger<CalculateRatingWorker> logger, IServiceProvider serviceProvider,
+        IHostEnvironment environment)
     {
         _logger = logger;
         _serviceProvider = serviceProvider;
-        Cron = "0 0 0 * * ?"; // Run at midnight
-        // Cron = "0 */1 * * * ?"; // Run every minute
+        Cron = environment.IsDevelopment() ? "0 */1 * * * ?" : "0 0 0 * * ?";
     }
 
     protected override async Task DoWork(CancellationToken stoppingToken)
@@ -27,44 +28,33 @@ public sealed class CalculateRatingWorker : CronJobBackgroundService
 
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-            _logger.LogInformation("[{Worker}] Calculate rating worker running at: {Time}",
-                nameof(CalculateRatingWorker),
-                DateTimeOffset.Now);
-
-            var productRatings = await dbContext.Feedbacks
-                .GroupBy(f => f.ProductId)
-                .Select(g => new
+            var feedbacks = await dbContext.Feedbacks
+                .GroupBy(feedback => feedback.ProductId)
+                .Select(group => new
                 {
-                    ProductId = g.Key,
-                    AverageRating = g.Average(f => f.Rating),
-                    TotalReviews = g.Count()
+                    ProductId = group.Key,
+                    AverageRating = group.Average(feedback => feedback.Rating),
+                    TotalFeedback = group.Count()
                 })
                 .ToListAsync(stoppingToken);
 
-            var allProductIds = await dbContext.Products
-                .Select(p => p.Id)
-                .ToListAsync(stoppingToken);
-
-            foreach (var productId in allProductIds)
+            foreach (var feedback in feedbacks)
             {
-                var productRating =
-                    productRatings.Find(r => r.ProductId == productId);
-
-                var product =
-                    await dbContext.Products.FindAsync([productId, stoppingToken], cancellationToken: stoppingToken);
+                var product = await dbContext.Products
+                    .IgnoreAutoIncludes()
+                    .Where(product => !product.IsDeleted)
+                    .FirstOrDefaultAsync(product => product.Id == feedback.ProductId, stoppingToken);
 
                 if (product is null) continue;
 
-                product.AverageRating = productRating?.AverageRating ?? 0;
+                product.AverageRating = feedback.AverageRating;
 
-                product.TotalReviews = productRating?.TotalReviews ?? 0;
+                product.TotalReviews = feedback.TotalFeedback;
 
                 dbContext.Products.Update(product);
             }
 
-            await dbContext.SaveChangesAsync(stoppingToken);
-
-            _logger.LogInformation("[{Worker}] Calculate rating worker completed at: {Time}",
+            _logger.LogInformation("[{Worker}] Calculate rating worker running at: {Time}",
                 nameof(CalculateRatingWorker),
                 DateTimeOffset.Now);
         }

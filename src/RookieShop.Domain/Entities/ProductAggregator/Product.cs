@@ -66,4 +66,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
         CategoryId = categoryId;
         Status = Guard.Against.EnumOutOfRange(status);
     }
+
+    public void UpdateRating(double rating, int totalFeedback) =>
+        (AverageRating, TotalReviews) = (rating, totalFeedback);
 }
