@@ -17,7 +17,7 @@ public sealed class DiffRevenueByMonth(ISender sender) : IEndpoint<Ok<DiffRevenu
             .WithTags(nameof(Reports))
             .WithName("Diff Revenue By Month")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<DiffRevenueByMonthDto>> HandleAsync(DiffRevenueByMonthRequest request,
         CancellationToken cancellationToken = default)

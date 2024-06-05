@@ -17,7 +17,7 @@ public sealed class BestSellerProducts(ISender sender)
             .WithTags(nameof(Reports))
             .WithName("Best Seller Products")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<List<BestSellerProductsVm>>> HandleAsync(BestSellerProductsRequest request,
         CancellationToken cancellationToken = default)

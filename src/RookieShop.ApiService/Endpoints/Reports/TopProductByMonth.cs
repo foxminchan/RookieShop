@@ -17,7 +17,7 @@ public sealed class TopProductByMonth(ISender sender)
             .WithTags(nameof(Reports))
             .WithName("Top Product By Month")
             .MapToApiVersion(new(1, 0))
-            .RequirePerUserRateLimit();
+            .RequirePerIpRateLimit();
 
     public async Task<Ok<List<TopProductByMonthDto>>> HandleAsync(TopProductByMonthRequest request,
         CancellationToken cancellationToken = default)
