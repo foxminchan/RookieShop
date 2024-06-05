@@ -58,3 +58,14 @@ export type OrderGrownByDay = {
   growthPercentage: number
   currentDate: Date
 }
+
+// -- Revenue By Year Report
+
+export type RevenueByYear = {
+  month: string
+  revenue: number
+}
+
+export type RevenueByYearParams = {
+  year: number
+}

@@ -5,7 +5,7 @@ import useGetBestSellerProducts from "@/features/report/useGetBestSellerProducts
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
-export function BestSeller() {
+export default function BestSeller() {
   const { data } = useGetBestSellerProducts({ top: 5 })
   return (
     <div className="space-y-8">

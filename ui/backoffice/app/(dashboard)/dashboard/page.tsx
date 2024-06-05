@@ -14,9 +14,9 @@ import {
 } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent } from "@/components/ui/tabs"
-import { BestSeller } from "@/components/custom/best-seller"
+import BestSeller from "@/components/custom/best-seller"
 import { Icons } from "@/components/custom/icons"
-import { Overview } from "@/components/custom/overview"
+import Overview from "@/components/custom/overview"
 
 export default function Dashboard() {
   const { data: DiffRevenueByMonth } = useGetDiffRevenueByMonth({
