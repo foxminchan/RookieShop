@@ -11,7 +11,7 @@ public sealed class TopProductByMonth(ISender sender)
     : IEndpoint<Ok<List<TopProductByMonthDto>>, TopProductByMonthRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapGet("/report/top-product-by-month",
+        app.MapGet("/reports/top-product-by-month",
                 async (int month, int year, int limit) => await HandleAsync(new(month, year, limit)))
             .Produces<Ok<List<TopProductByMonthDto>>>()
             .WithTags(nameof(Reports))

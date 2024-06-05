@@ -7,6 +7,8 @@ import {
   ChevronLeft,
   ChevronRight,
   CreditCard,
+  Diff,
+  DollarSign,
   Edit,
   File,
   FileText,
@@ -68,4 +70,6 @@ export const Icons = {
   more: MoreHorizontal,
   edit: Edit,
   upload: Upload,
+  dollar: DollarSign,
+  diff: Diff,
 }

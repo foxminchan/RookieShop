@@ -10,7 +10,7 @@ namespace RookieShop.ApiService.Endpoints.Reports;
 public sealed class DiffRevenueByMonth(ISender sender) : IEndpoint<Ok<DiffRevenueByMonthDto>, DiffRevenueByMonthRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapGet("/report/diff-revenue-by-month",
+        app.MapGet("/reports/diff-revenue-by-month",
                 async (int sourceMonth, int sourceYear, int targetMonth, int targetYear) =>
                     await HandleAsync(new(sourceMonth, sourceYear, targetMonth, targetYear)))
             .Produces<Ok<DiffRevenueByMonthDto>>()
