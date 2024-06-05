@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import useGetBestSellerProducts from "@/features/report/useGetBestSellerProducts"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -14,9 +15,12 @@ export function BestSeller() {
             <AvatarFallback>{key + 1}</AvatarFallback>
           </Avatar>
           <div className="ml-4 space-y-1">
-            <p className="text-sm font-medium leading-none">
+            <Link
+              href={`/dashboard/product/${bestSeller.productId}`}
+              className="text-sm font-medium leading-none"
+            >
               {bestSeller.productName}
-            </p>
+            </Link>
             <p className="text-sm text-muted-foreground">
               ${bestSeller.price.priceSale.toFixed(2)}{" "}
             </p>

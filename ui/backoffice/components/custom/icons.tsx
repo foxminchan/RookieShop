@@ -32,6 +32,7 @@ import {
   Trash,
   Upload,
   User,
+  UserRoundPlus,
   X,
 } from "lucide-react"
 
@@ -72,4 +73,5 @@ export const Icons = {
   upload: Upload,
   dollar: DollarSign,
   diff: Diff,
+  userPlus: UserRoundPlus,
 }

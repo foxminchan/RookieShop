@@ -81,7 +81,7 @@ export const columns: ColumnDef<Product>[] = [
           </TooltipContent>
         </Tooltip>
       ) : (
-        description
+        parse(description)
       )
     },
   },
