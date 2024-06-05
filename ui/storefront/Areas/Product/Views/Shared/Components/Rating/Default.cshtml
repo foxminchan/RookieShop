@@ -1,14 +1,14 @@
 ﻿@model RookieShop.Storefront.Areas.Product.Models.Feedbacks.ListFeedbackViewModel
 
-@if (Model.Feedbacks.Any())
-{
-    foreach (var feedback in Model.Feedbacks)
+<div class="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
+    <h4 class="font-manrope font-semibold text-3xl leading-10 text-black mb-6">
+        Most helpful positive
+        review
+    </h4>
+    @if (Model.Feedbacks.Any())
     {
-        <div class="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
-            <h4 class="font-manrope font-semibold text-3xl leading-10 text-black mb-6">
-                Most helpful positive
-                review
-            </h4>
+        foreach (var feedback in Model.Feedbacks)
+        {
             <div class="flex sm:items-center flex-col sm:flex-row justify-between  mb-4">
                 <div class="flex items-center gap-3">
                     @for (var star = 1; star <= 5; star++)
@@ -26,7 +26,9 @@
                     }
                 </div>
                 <div class="flex items-center gap-3">
-                    <h6 class="font-semibold text-lg leading-8 text-black">@feedback.Customer?.Name</h6>
+                    <h6 class="font-semibold text-lg leading-8 text-black">
+                        @(feedback.Customer is null ? "Anonymous" : feedback.Customer.Name)
+                    </h6>
                     <p class="font-medium text-base leading-7 text-gray-400">@feedback.UpdatedDate.ToString("dd/MM/yyyy")</p>
                 </div>
             </div>
@@ -34,18 +36,12 @@
             <p class="font-normal text-lg leading-8 text-gray-500 ">
                 @feedback.Content
             </p>
-        </div>
+        }
     }
-}
-else
-{
-    <div class="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
-        <h4 class="font-manrope font-semibold text-3xl leading-10 text-black mb-6">
-            Most helpful positive
-            review
-        </h4>
+    else
+    {
         <p class="font-normal text-lg leading-8 text-gray-500 ">
             No reviews yet.
         </p>
-    </div>
-}
+    }
+</div>

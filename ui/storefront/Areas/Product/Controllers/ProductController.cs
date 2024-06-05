@@ -48,12 +48,8 @@ public class ProductController(
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddFeedback(FeedbackRequest feedback)
     {
-        if (feedback.AccountId is null)
-            return RedirectToAction("Login", "Account", new { area = "User" });
-
         if (!ModelState.IsValid)
             return RedirectToAction("Detail", new { id = feedback.ProductId });
 

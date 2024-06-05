@@ -21,7 +21,7 @@ public sealed class FeedbackViewComponent : ViewComponent
         FeedbackRequest feedback = new()
         {
             ProductId = productId,
-            AccountId = customerId
+            CustomerId = customerId
         };
 
         return View(feedback);

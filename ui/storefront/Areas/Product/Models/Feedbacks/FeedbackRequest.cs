@@ -19,6 +19,5 @@ public sealed class FeedbackRequest
     public Guid ProductId { get; set; }
 
     [AliasAs("customerId")]
-    [Required(ErrorMessage = "Customer Id is required")]
-    public Guid? AccountId { get; set; }
+    public Guid? CustomerId { get; set; }
 }
