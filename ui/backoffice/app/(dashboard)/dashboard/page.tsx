@@ -1,6 +1,8 @@
 "use client"
 
 import useGetDiffRevenueByMonth from "@/features/report/useGetDiffRevenueByMonth"
+import useGetGrownCustomer from "@/features/report/useGetGrownCustomer"
+import useGetTodayRevenue from "@/features/report/useGetTodayRevenue"
 
 import {
   Card,
@@ -23,6 +25,13 @@ export default function Dashboard() {
     targetYear: new Date().getFullYear().toString(),
   })
 
+  const { data: TodayRevenue } = useGetTodayRevenue()
+
+  const { data: GrownCustomer } = useGetGrownCustomer({
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
+  })
+
   return (
     <ScrollArea className="h-full">
       <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
@@ -42,7 +51,12 @@ export default function Dashboard() {
                   <Icons.dollar className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
+                  <div className="text-2xl font-bold">
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(TodayRevenue?.totalRevenue ?? 0)}
+                  </div>
                 </CardContent>
               </Card>
               <Card>
@@ -56,11 +70,19 @@ export default function Dashboard() {
                   <div className="text-2xl font-bold">
                     {DiffRevenueByMonth?.diff ?? 0 >= 0 ? (
                       <span className="text-green-700">
-                        +${DiffRevenueByMonth?.diff}
+                        +
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(DiffRevenueByMonth?.diff ?? 0)}
                       </span>
                     ) : (
                       <span className="text-red-700">
-                        -${DiffRevenueByMonth?.diff}
+                        -
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(Math.abs(DiffRevenueByMonth?.diff ?? 0))}
                       </span>
                     )}
                   </div>
@@ -74,7 +96,9 @@ export default function Dashboard() {
                   <Icons.userPlus className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+12,234</div>
+                  <div className="text-2xl font-bold">
+                    +{GrownCustomer?.grownCustomers ?? 0}
+                  </div>
                 </CardContent>
               </Card>
               <Card>

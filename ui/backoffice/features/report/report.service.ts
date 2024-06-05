@@ -6,6 +6,9 @@ import {
   BestSellerProductFilterParams,
   DiffRevenueByMonth,
   DiffRevenueByMonthParams,
+  GrownCustomer,
+  GrownCustomerParams,
+  TodayRevenue,
 } from "./report.type"
 
 class ReportService extends HttpService {
@@ -26,6 +29,18 @@ class ReportService extends HttpService {
   ): Promise<DiffRevenueByMonth> {
     return this.get(
       `/reports/diff-revenue-by-month?${buildQueryString(options)}`
+    )
+  }
+
+  getTodayRevenue(): Promise<TodayRevenue> {
+    return this.get("/reports/total-revenue-by-day")
+  }
+
+  getGrownCustomer(
+    options: Partial<GrownCustomerParams>
+  ): Promise<GrownCustomer> {
+    return this.get(
+      `/reports/customers-grown-by-month?${buildQueryString(options)}`
     )
   }
 }

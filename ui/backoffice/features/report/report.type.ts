@@ -29,3 +29,23 @@ export type DiffRevenueByMonthParams = {
   targetMonth: string
   targetYear: string
 }
+
+// -- Today Revenue Report
+
+export type TodayRevenue = {
+  date: Date
+  totalRevenue: number
+}
+
+// -- Grown Customer Report
+
+export type GrownCustomer = {
+  previousTotalCustomers: number
+  currentTotalCustomers: number
+  grownCustomers: number
+}
+
+export type GrownCustomerParams = {
+  month: number
+  year: number
+}
