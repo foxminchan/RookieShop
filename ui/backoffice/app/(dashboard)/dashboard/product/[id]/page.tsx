@@ -19,7 +19,10 @@ export default function EditProduct({
     <div className="flex-1 space-y-4 p-8">
       <BreadCrumb items={breadcrumbItems} />
       {data && (
-        <ProductForm initialData={data} currentProductImages={data.imageUrl} />
+        <ProductForm
+          initialData={{ ...data, categoryId: data.category.id }}
+          currentProductImages={data.imageUrl}
+        />
       )}
     </div>
   )

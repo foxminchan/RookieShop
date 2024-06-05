@@ -138,7 +138,7 @@ export const CategoryForm: FC<CategoryFormProps> = ({ initialData }) => {
                 <FormLabel>Description</FormLabel>
                 <FormControl>
                   <CustomEditor
-                    content={""}
+                    content={initialData?.description ?? ""}
                     handleContent={(content: string) => {
                       form.setValue("description", content)
                     }}

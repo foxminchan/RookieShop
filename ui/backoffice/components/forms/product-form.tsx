@@ -37,7 +37,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../ui/select"
@@ -165,7 +164,10 @@ export const ProductForm: FC<ProductFormProps> = ({
                     <FormLabel>Images</FormLabel>
                     <FormControl>
                       <FileUpload
-                        onChange={field.onChange}
+                        onChange={(...event: any[]) => {
+                          field.onChange(...event)
+                          form.setValue("isDeletedOldImage", !field.value)
+                        }}
                         value={field.value}
                       />
                     </FormControl>
@@ -316,9 +318,7 @@ export const ProductForm: FC<ProductFormProps> = ({
                     <FormLabel>Status</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={
-                        ProductStatus[field.value as keyof typeof ProductStatus]
-                      }
+                      defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -327,7 +327,6 @@ export const ProductForm: FC<ProductFormProps> = ({
                       </FormControl>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectLabel>Status</SelectLabel>
                           <SelectItem value={ProductStatus.InStock}>
                             In stock
                           </SelectItem>
