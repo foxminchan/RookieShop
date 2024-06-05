@@ -49,3 +49,12 @@ export type GrownCustomerParams = {
   month: number
   year: number
 }
+
+// -- Order Grown By Day Report
+
+export type OrderGrownByDay = {
+  todayCount: number
+  yesterdayCount: number
+  growthPercentage: number
+  currentDate: Date
+}

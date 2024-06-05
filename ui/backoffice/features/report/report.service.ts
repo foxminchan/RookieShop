@@ -8,6 +8,7 @@ import {
   DiffRevenueByMonthParams,
   GrownCustomer,
   GrownCustomerParams,
+  OrderGrownByDay,
   TodayRevenue,
 } from "./report.type"
 
@@ -42,6 +43,10 @@ class ReportService extends HttpService {
     return this.get(
       `/reports/customers-grown-by-month?${buildQueryString(options)}`
     )
+  }
+
+  getOrderGrownByDay(): Promise<OrderGrownByDay> {
+    return this.get("/reports/orders-grown-by-day")
   }
 }
 

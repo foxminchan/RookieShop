@@ -2,6 +2,7 @@
 
 import useGetDiffRevenueByMonth from "@/features/report/useGetDiffRevenueByMonth"
 import useGetGrownCustomer from "@/features/report/useGetGrownCustomer"
+import useGetOrderGrownByDay from "@/features/report/useGetOrderGrownByDay"
 import useGetTodayRevenue from "@/features/report/useGetTodayRevenue"
 
 import {
@@ -31,6 +32,8 @@ export default function Dashboard() {
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
   })
+
+  const { data: OrderGrownByDay } = useGetOrderGrownByDay()
 
   return (
     <ScrollArea className="h-full">
@@ -107,7 +110,9 @@ export default function Dashboard() {
                   <Icons.order className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+573</div>
+                  <div className="text-2xl font-bold">
+                    {OrderGrownByDay?.growthPercentage ?? 0}%
+                  </div>
                 </CardContent>
               </Card>
             </div>
