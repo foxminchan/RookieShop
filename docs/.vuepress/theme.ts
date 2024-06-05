@@ -70,7 +70,6 @@ export default hopeTheme({
       tabs: true,
       tasklist: true,
       vPre: true,
-      mermaid: true,
     },
   },
 });

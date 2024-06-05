@@ -15,4 +15,8 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Reports\Queries\CustomersGrownByMonth\" />
+	</ItemGroup>
+
 </Project>
