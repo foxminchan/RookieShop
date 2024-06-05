@@ -47,9 +47,7 @@ public sealed class CalculateRatingWorker : CronJobBackgroundService
 
                 if (product is null) continue;
 
-                product.AverageRating = feedback.AverageRating;
-
-                product.TotalReviews = feedback.TotalFeedback;
+                product.UpdateRating(feedback.AverageRating, feedback.TotalFeedback);
 
                 dbContext.Products.Update(product);
             }

@@ -22,6 +22,5 @@ public sealed class ProductsFilterSpec : Specification<Product>
             .ApplyOrdering(orderBy, isDescending);
     }
 
-    public ProductsFilterSpec() => Query
-        .Where(product => !product.IsDeleted);
+    public ProductsFilterSpec() => Query.Where(product => !product.IsDeleted);
 }
