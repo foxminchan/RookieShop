@@ -37,10 +37,4 @@ export const navItems: NavItem[] = [
     href: "/dashboard/feedback",
     label: "feedback",
   },
-  {
-    id: 7,
-    title: "Profile",
-    href: "/dashboard/profile",
-    label: "profile",
-  },
 ]

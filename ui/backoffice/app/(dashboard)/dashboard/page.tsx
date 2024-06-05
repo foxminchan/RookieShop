@@ -1,6 +1,14 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent } from "@/components/ui/tabs"
+import { BestSeller } from "@/components/custom/best-seller"
+import { Overview } from "@/components/custom/overview"
 
 export default function Dashboard() {
   return (
@@ -118,6 +126,25 @@ export default function Dashboard() {
             </div>
           </TabsContent>
         </Tabs>
+      </div>
+      <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-7 md:p-8">
+        <Card className="col-span-4">
+          <CardHeader>
+            <CardTitle>Overview</CardTitle>
+          </CardHeader>
+          <CardContent className="pl-2">
+            <Overview />
+          </CardContent>
+        </Card>
+        <Card className="col-span-4 md:col-span-3">
+          <CardHeader>
+            <CardTitle>Best Seller</CardTitle>
+            <CardDescription>Top of best selling products</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <BestSeller />
+          </CardContent>
+        </Card>
       </div>
     </ScrollArea>
   )
