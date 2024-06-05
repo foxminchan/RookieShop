@@ -64,21 +64,25 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseWebOptimizer();
+app.UseMiddleware<RobotMiddleware>();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseMiddleware<CustomerInfoMiddleware>();
+
+app.UseWebOptimizer();
 
 app.MapHealthCheck();
 
 app.UseStaticFiles();
+
+app.UseStatusCodePages();
 
 app.UseCookiePolicy();
 
 app.UseRouting();
 
 app.UseAuthorization();
-
-app.UseStatusCodePages();
 
 app.MapControllerRoute(
     "Product",
