@@ -7,16 +7,16 @@ publish-all-dockers: publish-api publish-identity publish-storefront publish-bac
 .PHONY: publish-api
 publish-api:
 	dotnet publish ./src/RookieShop.ApiService/RookieShop.ApiService.csproj --os linux --arch x64 /t:PublishContainer -c Release
-	docker tag rookieshop-webapi:latest ghcr.io/foxminchan/rookieshop/rookieshop-webapi:${VERSION}
-	docker rmi rookieshop-webapi:latest
-	docker push ghcr.io/foxminchan/rookieshop/rookieshop-webapi:${VERSION}
+	docker tag rookieshop-apiservice:latest ghcr.io/foxminchan/rookieshop/rookieshop-apiservice:${VERSION}
+	docker rmi rookieshop-apiservice:latest
+	docker push ghcr.io/foxminchan/rookieshop/rookieshop-apiservice:${VERSION}
 
 .PHONY: publish-identity
 publish-identityserver:
 	dotnet publish ./src/RookieShop.IdentityService/RookieShop.IdentityService.csproj --os linux --arch x64 /t:PublishContainer -c Release
-	docker tag rookieshop-identity:latest ghcr.io/foxminchan/rookieshop/rookieshop-identity:${VERSION}
-	docker rmi rookieshop-identity:latest
-	docker push ghcr.io/foxminchan/rookieshop/rookieshop-identity:${VERSION}
+	docker tag rookieshop-identityservice:latest ghcr.io/foxminchan/rookieshop/rookieshop-identityservice:${VERSION}
+	docker rmi rookieshop-identityservice:latest
+	docker push ghcr.io/foxminchan/rookieshop/rookieshop-identityservice:${VERSION}
 
 .PHONY: publish-storefront
 publish-storefront:
