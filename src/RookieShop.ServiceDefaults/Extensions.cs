@@ -45,14 +45,16 @@ public static class Extensions
             {
                 metrics.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
-                    .AddRuntimeInstrumentation();
+                    .AddRuntimeInstrumentation()
+                    .AddMeter("Marten");
             })
             .WithTracing(tracing =>
             {
                 tracing.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddEntityFrameworkCoreInstrumentation(b => b.SetDbStatementForText = true)
-                    .AddQuartzInstrumentation();
+                    .AddQuartzInstrumentation()
+                    .AddSource("Marten");
             });
 
         builder.AddOpenTelemetryExporters();
