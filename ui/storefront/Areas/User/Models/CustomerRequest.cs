@@ -27,10 +27,12 @@ public class CustomerRequest
     [AliasAs("gender")]
     [JsonPropertyName("gender")]
     [Required(ErrorMessage = "Gender is required")]
+    [JsonRequired]
     public Gender Gender { get; set; }
 
     [AliasAs("accountId")]
     [JsonPropertyName("accountId")]
+    [JsonRequired]
     [Required(ErrorMessage = "Account Id is required")]
     public Guid AccountId { get; set; }
 }

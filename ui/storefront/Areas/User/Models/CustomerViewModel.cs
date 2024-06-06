@@ -7,5 +7,6 @@ public sealed class CustomerViewModel : CustomerRequest
 {
     [JsonPropertyName("id")]
     [Required(ErrorMessage = "Id is required")]
+    [JsonRequired]
     public Guid Id { get; set; }
 }

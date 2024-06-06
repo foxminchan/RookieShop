@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using System.Net.Mime
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model RookieShop.Storefront.Areas.Basket.Models.CartDetailRender
 
@@ -20,9 +21,21 @@
             <div class="flex items-center h-full">
                 <input type="number"
                        asp-for="Quantity"
-                       class="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px]  text-center bg-transparent"
+                       class="border border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px] text-center bg-transparent"
                        value="@Model.Quantity"
-                       placeholder="1"/>
+                       placeholder="1"
+                       hx-target="#basket"
+                       hx-swap="outerHTML"
+                       hx-post
+                       hx-area="Basket"
+                       hx-controller="Basket"
+                       hx-action="UpdateBasket"
+                       hx-headers-Content-Type="@MediaTypeNames.Application.Json"
+                       hx-trigger="change from:body debounce:300ms"
+                       hx-include="[name='ProductId']"
+                       hx-vals='{"AccountId": null, "ProductId": @Model.Product.Id}'
+                       _="on change wait 300ms then trigger this"/>
+                <input type="hidden" name="ProductId" value="@Model.Product.Id" />
             </div>
         </div>
         <div class="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">

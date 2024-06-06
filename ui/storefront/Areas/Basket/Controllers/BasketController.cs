@@ -63,4 +63,19 @@ public class BasketController(IBasketService basketService) : Controller
 
         return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateBasket(UpdateBasketQuantityRequest request)
+    {
+        if (!ModelState.IsValid)
+            return RedirectToAction("Index");
+
+        if (HttpContext.Items["Customer"] is not CustomerViewModel customer) return Unauthorized();
+
+        request.AccountId = customer.AccountId;
+
+        await basketService.UpdateBasketAsync(request, Guid.NewGuid());
+
+        return RedirectToAction("Index");
+    }
 }

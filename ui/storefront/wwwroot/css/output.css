@@ -1251,11 +1251,6 @@ video {
   border-width: 0px;
 }
 
-.border-y {
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-}
-
 .border-b {
   border-bottom-width: 1px;
 }

@@ -10,7 +10,7 @@ public sealed class AddToCartViewComponent(IHttpContextAccessor httpContextAcces
 {
     public async Task<IViewComponentResult> InvokeAsync(Guid productId, decimal price)
     {
-        var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         var basketRequest = new BasketRequest
         {

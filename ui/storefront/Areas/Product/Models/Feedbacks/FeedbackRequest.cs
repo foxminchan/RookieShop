@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Refit;
 
 namespace RookieShop.Storefront.Areas.Product.Models.Feedbacks;
@@ -16,6 +17,7 @@ public sealed class FeedbackRequest
 
     [AliasAs("productId")]
     [Required(ErrorMessage = "Product Id is required")]
+    [JsonRequired]
     public Guid ProductId { get; set; }
 
     [AliasAs("customerId")]

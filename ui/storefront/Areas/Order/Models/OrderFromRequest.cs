@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using RookieShop.Storefront.Areas.Basket.Models;
 
 namespace RookieShop.Storefront.Areas.Order.Models;
@@ -6,6 +7,7 @@ namespace RookieShop.Storefront.Areas.Order.Models;
 public sealed class OrderFromRequest
 {
     [Required(ErrorMessage = "Please select payment method")]
+    [JsonRequired]
     public PaymentMethod PaymentMethod { get; set; }
 
     [MaxLength(100, ErrorMessage = "Street must be less than 100 characters")]
@@ -21,5 +23,6 @@ public sealed class OrderFromRequest
     public string? Province { get; set; }
 
     [Required(ErrorMessage = "Please login to place order")]
+    [JsonRequired]
     public Guid AccountId { get; set; }
 }

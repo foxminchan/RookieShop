@@ -14,4 +14,9 @@ public interface IBasketService
 
     [Delete("/baskets/items")]
     Task DeleteItemAsync([Query] DeleteItemRequest deleteItemRequest);
+
+    [Patch("/baskets")]
+    Task<BasketViewModel> UpdateBasketAsync(
+        UpdateBasketQuantityRequest request,
+        [Header(HeaderName.IdempotencyKey)] Guid requestId);
 }
