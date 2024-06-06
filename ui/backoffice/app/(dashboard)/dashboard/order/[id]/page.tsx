@@ -18,8 +18,6 @@ export default function EditOrder({
 
   const { data: GetOrder } = useGetOrder(params.id)
 
-  console.log(GetOrder)
-
   return (
     <div className="flex-1 space-y-4 p-8">
       <BreadCrumb items={breadcrumbItems} />
