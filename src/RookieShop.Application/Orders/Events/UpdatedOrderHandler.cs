@@ -13,10 +13,10 @@ public sealed class UpdatedOrderHandler(ISmtpService smtpService) : INotificatio
         EmailMetadata metadata = new(
             $"Your order status has been updated to {
                 notification.Order.OrderStatus switch {
-                    OrderStatus.Pending => "Pending",
-                    OrderStatus.Shipping => "Processing",
-                    OrderStatus.Canceled => "Canceled",
-                    OrderStatus.Completed => "Completed",
+                    OrderStatus.Pending => nameof(OrderStatus.Pending),
+                    OrderStatus.Shipping => nameof(OrderStatus.Shipping),
+                    OrderStatus.Canceled => nameof(OrderStatus.Canceled),
+                    OrderStatus.Completed => nameof(OrderStatus.Completed),
                     _ => "Unknown" }
             }",
             "Order Status",

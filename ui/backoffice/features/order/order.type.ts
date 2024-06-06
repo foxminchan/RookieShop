@@ -35,10 +35,10 @@ export enum PaymentMethod {
 }
 
 export enum OrderStatus {
-  Pending = 1,
-  Shipping = 2,
-  Completed = 3,
-  Cancelled = 4,
+  Pending = "Pending",
+  Shipping = "Shipping",
+  Completed = "Completed",
+  Cancelled = "Cancelled",
 }
 
 export type OrderFilterParams = PagingFilter & {

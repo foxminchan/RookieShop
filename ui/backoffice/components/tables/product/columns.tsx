@@ -160,6 +160,10 @@ export const columns: ColumnDef<Product>[] = [
     },
   },
   {
+    accessorKey: "totalReviews",
+    header: "REVIEWS",
+  },
+  {
     accessorKey: "createdDate",
     header: "CREATED",
     cell: (props) =>

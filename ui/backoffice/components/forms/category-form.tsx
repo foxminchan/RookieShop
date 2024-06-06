@@ -61,8 +61,6 @@ export const CategoryForm: FC<CategoryFormProps> = ({ initialData }) => {
     description: "",
   }
 
-  console.log("defaultValues", defaultValues)
-
   const form = useForm<CategoryFormValues>({
     resolver: zodResolver(categorySchema),
     defaultValues,
