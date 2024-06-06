@@ -1,9 +1,9 @@
 FROM oven/bun:1.1.8-slim
 
-WORKDIR /app/next-app
+WORKDIR /ui/backoffice
 
 COPY package.json ./
-COPY bun.lockb ./
+
 RUN bun install
 
 COPY . .

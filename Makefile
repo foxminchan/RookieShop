@@ -27,6 +27,6 @@ publish-storefront:
 
 .PHONY: publish-backoffice
 publish-backoffice:
-	dotnet build -f ./ui/backoffice/Dockerfile . --tag ghcr.io/foxminchan/rookieshop/rookieshop-backoffice:${VERSION}
+	docker build -f ./ui/backoffice/Dockerfile . --tag ghcr.io/foxminchan/rookieshop/rookieshop-backoffice:${VERSION}
 	docker rmi rookieshop-backoffice:latest
 	docker push ghcr.io/foxminchan/rookieshop/rookieshop-backoffice:${VERSION}
