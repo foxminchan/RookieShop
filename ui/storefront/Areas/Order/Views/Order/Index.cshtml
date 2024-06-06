@@ -8,6 +8,14 @@
 }
 
 <div class="mx-auto p-6">
+    @if(TempData["Message"] != null)
+    {
+        <div class="bg-green-50 p-4 rounded-lg shadow-sm flex items-center space-x-4">
+            <div class="flex-1">
+                <div class="text-lg font-medium">@TempData["Message"]</div>
+            </div>
+        </div>
+    }
     <div class="bg-white rounded-lg p-6">
         <h1 class="pl-6 text-2xl font-bold sm:text-xl">Order History</h1>
         @if (Model.Orders.Count == 0)

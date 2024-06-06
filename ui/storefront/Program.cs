@@ -7,6 +7,7 @@ using RookieShop.Storefront.Middlewares;
 using RookieShop.Storefront.Options;
 using RookieShop.Storefront.Services;
 using SmartComponents.Inference.OpenAI;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ var appSettings = new AppSettings();
 builder.Configuration.Bind(appSettings);
 
 builder.AddServiceDefaults();
+
+StripeConfiguration.ApiKey = appSettings.StripeSettings.StripeSecretKey;
 
 builder.Services.AddRazorPages();
 

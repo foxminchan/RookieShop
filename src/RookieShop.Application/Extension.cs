@@ -3,9 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RookieShop.Application.Orders.Services;
 using RookieShop.Application.Orders.Workers;
-using RookieShop.Application.Products.Services;
 using RookieShop.Application.Products.Workers;
 using RookieShop.Infrastructure.Cache;
 using RookieShop.Infrastructure.Logging;
@@ -40,10 +38,6 @@ public static class Extension
                     ServiceLifetime.Scoped);
                 cfg.AddOpenBehavior(typeof(QueryCachingBehavior<,>));
             });
-
-        builder.Services.AddScoped<IOrderService, OrderService>();
-
-        builder.Services.AddScoped<IProductService, ProductService>();
 
         builder.Services.AddHostedService<CalculateRatingWorker>();
 

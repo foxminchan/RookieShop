@@ -12,6 +12,7 @@ var protocol = "https";
 var postgresUser = builder.AddParameter("SqlUser", true);
 var postgresPassword = builder.AddParameter("SqlPassword", true);
 var stripeApiKey = builder.AddParameter("StripeApiKey", true);
+var stripeWebhookSecret = builder.AddParameter("StripeWebhookSecret", true);
 var emailSecret = builder.AddParameter("EmailSecret", true);
 var googleClientId = builder.AddParameter("GoogleClientId", true);
 var googleClientSecret = builder.AddParameter("GoogleClientSecret", true);
@@ -51,7 +52,6 @@ var apiService = builder
     .WithReference(redis)
     .WithReference(shopDb)
     .WithHttpEndpoint()
-    .WithEnvironment("StripeSettings__SecretKey", stripeApiKey)
     .WithEnvironment("SmtpSettings__Secret", emailSecret)
     .WithEnvironment("AzuriteSettings__ConnectionString", blobs.WithEndpoint())
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"));
@@ -67,8 +67,10 @@ var backoffice = builder
 var storefront = builder
     .AddProject<RookieShop_Storefront>("storefront")
     .WithReference(redis)
-    .WithHttpEndpoint()
+    .WithHttpEndpoint(7090)
     .WithEnvironment("SmartComponents__ApiKey", openAiKey)
+    .WithEnvironment("StripeSettings__StripeSecretKey", stripeApiKey)
+    .WithEnvironment("StripeSettings__StripeWebhookSecret", stripeWebhookSecret)
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint(protocol)}/api/v1");
 

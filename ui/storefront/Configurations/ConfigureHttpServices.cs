@@ -39,8 +39,7 @@ public static class ConfigureHttpServices
                 })
                 .ConfigureHttpClient(c => c.BaseAddress = new(apiEndpoint))
                 .AddHttpMessageHandler<LoggingDelegate>()
-                .AddHttpMessageHandler<AuthorizeDelegate>()
-                .AddStandardResilienceHandler();
+                .AddHttpMessageHandler<AuthorizeDelegate>();
         }
 
         return builder;

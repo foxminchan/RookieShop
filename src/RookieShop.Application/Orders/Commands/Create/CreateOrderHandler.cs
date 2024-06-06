@@ -3,8 +3,6 @@ using Ardalis.GuardClauses;
 using Ardalis.Result;
 using Medallion.Threading;
 using Microsoft.Extensions.Logging;
-using RookieShop.Application.Orders.Services;
-using RookieShop.Application.Products.Services;
 using RookieShop.Domain.Entities.BasketAggregator;
 using RookieShop.Domain.Entities.CustomerAggregator;
 using RookieShop.Domain.Entities.CustomerAggregator.Specifications;
@@ -18,8 +16,6 @@ namespace RookieShop.Application.Orders.Commands.Create;
 
 public sealed class CreateOrderHandler(
     IRedisService redisService,
-    IOrderService orderPaymentService,
-    IProductService productRepository,
     IRepository<Order> orderRepository,
     IReadRepository<Customer> customerRepository,
     IDistributedLockProvider distributedLockProvider,
@@ -27,8 +23,8 @@ public sealed class CreateOrderHandler(
 {
     public async Task<Result<OrderId>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        CustomerByIdSpec spec = new(request.AccountId);
-        var customer = await customerRepository.FirstOrDefaultAsync(spec, cancellationToken);
+        var customer =
+            await customerRepository.FirstOrDefaultAsync(new CustomerByIdSpec(request.AccountId), cancellationToken);
         Guard.Against.NotFound(request.AccountId, customer);
 
         var basket = await redisService.HashGetAsync<Basket>(nameof(Basket), request.AccountId.ToString());
@@ -42,9 +38,16 @@ public sealed class CreateOrderHandler(
         await using (await distributedLockProvider.TryAcquireLockAsync(request.AccountId.ToString(),
                          cancellationToken: cancellationToken))
         {
-            await productRepository.StockValidationAsync(orderDetails, cancellationToken);
-
-            var newOrder = await CreateOrder(request, customer, orderDetails, basket, cancellationToken);
+            var newOrder = Order.Factory.Create(
+                request.PaymentMethod,
+                request.Last4,
+                request.BrandName,
+                request.ChargeId,
+                request.Street,
+                request.City,
+                request.Province,
+                customer.Id, OrderStatus.Pending,
+                orderDetails);
 
             logger.LogInformation(
                 "[{Command}] - Creating order for account {AccountId} with {@Order}",
@@ -56,26 +59,5 @@ public sealed class CreateOrderHandler(
         }
 
         return order.Id;
-    }
-
-    private async Task<Order> CreateOrder(CreateOrderCommand request, Customer customer, List<OrderDetail> orderDetails,
-        Basket basket, CancellationToken cancellationToken)
-    {
-        if (request.PaymentMethod == PaymentMethod.Cash)
-            return Order.Factory.Create(
-                request.PaymentMethod,
-                null, null, null,
-                request.Street, request.City, request.Province,
-                customer.Id, OrderStatus.Pending,
-                orderDetails);
-
-        var charge = await orderPaymentService.ProcessPaymentAsync(request, customer, basket, cancellationToken);
-
-        return Order.Factory.Create(
-            request.PaymentMethod,
-            charge.Last4, charge.BrandName, charge.ChargeId,
-            request.Street, request.City, request.Province,
-            customer.Id, OrderStatus.Pending,
-            orderDetails);
     }
 }

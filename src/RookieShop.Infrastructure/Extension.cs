@@ -6,7 +6,6 @@ using RookieShop.Infrastructure.Email;
 using RookieShop.Infrastructure.HealthCheck;
 using RookieShop.Infrastructure.Identity;
 using RookieShop.Infrastructure.Lock;
-using RookieShop.Infrastructure.Merchant;
 using RookieShop.Infrastructure.RateLimiter;
 using RookieShop.Infrastructure.Storage;
 using RookieShop.Infrastructure.Swagger;
@@ -30,7 +29,6 @@ public static class Extension
             .AddStorage()
             .AddEmail()
             .AddHealthCheck()
-            .AddStripeService()
             .AddEventBus();
 
         return builder;

@@ -26,7 +26,6 @@
 	<ItemGroup>
 		<PackageReference Include="Marten" />
 		<PackageReference Include="Scrutor" />
-		<PackageReference Include="Stripe.net" />
 		<PackageReference Include="Quartz.Extensions.Hosting" />
 		<PackageReference Include="Aspire.Azure.Storage.Blobs" />
 	</ItemGroup>

@@ -7,11 +7,9 @@ namespace RookieShop.Application.Orders.Commands.Create;
 
 public sealed record CreateOrderCommand(
     PaymentMethod PaymentMethod,
-    string? CardHolderName,
-    string? Number,
-    string? ExpiryYear,
-    string? ExpiryMonth,
-    string? Cvc,
+    string? Last4,
+    string? BrandName,
+    string? ChargeId,
     string? Street,
     string? City,
     string? Province,

@@ -1,7 +1,8 @@
 ﻿namespace RookieShop.Storefront.Options;
 
-public sealed class AppSettings
+public class AppSettings
 {
     public string BaseApiEndpoint { get; set; } = string.Empty;
+    public StripeSettings StripeSettings { get; set; } = new();
     public OpenIdSettings OpenIdSettings { get; set; } = new();
 }

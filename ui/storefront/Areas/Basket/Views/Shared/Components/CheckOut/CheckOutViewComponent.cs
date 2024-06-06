@@ -8,7 +8,7 @@ public sealed class CheckOutViewComponent : ViewComponent
 {
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        OrderRequest orderRequest = new();
+        OrderFromRequest orderRequest = new ();
         return View(orderRequest);
     }
 }

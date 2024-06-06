@@ -29,11 +29,9 @@ public sealed class Create(ISender sender) : IEndpoint<Created<CreateOrderRespon
     {
         CreateOrderCommand command = new(
             request.PaymentMethod,
-            request.CardHolderName,
-            request.Number,
-            request.ExpiryYear,
-            request.ExpiryMonth,
-            request.Cvc,
+            request.Last4,
+            request.Brand,
+            request.ChargeId,
             request.Street,
             request.City,
             request.Province,
