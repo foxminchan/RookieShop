@@ -30,8 +30,8 @@ export type OrderItem = {
 }
 
 export enum PaymentMethod {
-  Cash = 1,
-  Card = 2,
+  Cash = "Cash",
+  Card = "Card",
 }
 
 export enum OrderStatus {

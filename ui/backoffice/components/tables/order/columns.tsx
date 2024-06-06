@@ -17,24 +17,14 @@ export const columns: ColumnDef<Order>[] = [
   },
   {
     id: "card",
-    header: "CARD",
+    header: "STRIPE INFO",
     cell: (props) => {
       const { last4, brand, chargeId } = props.row.original
       return last4 === null && brand === null && chargeId === null ? (
         <Icons.minus className="text-gray-500" />
       ) : (
         <div>
-          <span>
-            <strong className="text-yellow-500">Last4:</strong> {last4}
-          </span>
-          <br />
-          <span>
-            <strong className="text-yellow-500">Brand:</strong> {brand}
-          </span>
-          <br />
-          <span>
-            <strong className="text-yellow-500">Charge ID:</strong> {chargeId}
-          </span>
+          <span>{chargeId}</span>
         </div>
       )
     },
