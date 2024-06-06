@@ -2,6 +2,7 @@
 using RookieShop.Domain.Entities.CategoryAggregator;
 using RookieShop.Domain.Entities.CategoryAggregator.Specifications;
 using RookieShop.Domain.SharedKernel;
+using RookieShop.Infrastructure.Cache.Redis;
 
 namespace RookieShop.UnitTests.Application.CategoryHandlerTest;
 
@@ -13,7 +14,8 @@ public sealed class ListCategory
     public ListCategory()
     {
         _repositoryMock = new();
-        _handler = new(_repositoryMock.Object);
+        Mock<IRedisService> redisServiceMock = new();
+        _handler = new(_repositoryMock.Object, redisServiceMock.Object);
     }
 
     [Fact]

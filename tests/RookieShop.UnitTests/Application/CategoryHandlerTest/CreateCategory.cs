@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using RookieShop.Application.Categories.Commands.Create;
 using RookieShop.Domain.Entities.CategoryAggregator;
 using RookieShop.Domain.SharedKernel;
@@ -13,8 +14,9 @@ public class CreateCategory
     public CreateCategory()
     {
         Mock<ILogger<CreateCategoryHandler>> loggerMock = new();
+        Mock<IPublisher> publisherMock = new();
         _repositoryMock = new();
-        _handler = new(_repositoryMock.Object, loggerMock.Object);
+        _handler = new(_repositoryMock.Object, loggerMock.Object, publisherMock.Object);
     }
 
     private static Category CreateCategoryEntity() => new("Category Name", "Category Description");

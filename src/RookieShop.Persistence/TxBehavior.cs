@@ -4,7 +4,6 @@ using System.Text.Json;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using RookieShop.Domain.SeedWork;
 using RookieShop.Domain.SharedKernel;
 
 namespace RookieShop.Persistence;

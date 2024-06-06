@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using MediatR;
 using RookieShop.Application.Categories.Commands.Delete;
 using RookieShop.Domain.Entities.CategoryAggregator;
 using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
@@ -13,8 +14,9 @@ public sealed class DeleteCategory
 
     public DeleteCategory()
     {
+        Mock<IPublisher> publisherMock = new();
         _repositoryMock = new();
-        _handler = new(_repositoryMock.Object);
+        _handler = new(_repositoryMock.Object, publisherMock.Object);
     }
 
     private static Category CreateCategoryEntity() => new("Category Name", "Category Description");

@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using RookieShop.Application.Categories.Commands.Update;
 using RookieShop.Domain.Entities.CategoryAggregator;
@@ -15,8 +16,9 @@ public sealed class UpdateCategory
     public UpdateCategory()
     {
         Mock<ILogger<UpdateCategoryHandler>> loggerMock = new();
+        Mock<IPublisher> publisherMock = new();
         _repositoryMock = new();
-        _handler = new(_repositoryMock.Object, loggerMock.Object);
+        _handler = new(_repositoryMock.Object, loggerMock.Object, publisherMock.Object);
     }
 
     private static Category CreateCategoryEntity() => new("Category Name", "Category Description");
