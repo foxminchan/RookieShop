@@ -29,6 +29,7 @@ public sealed class Update(ISender sender) : IEndpoint<Ok<UpdateProductResponse>
                         [FromForm] CategoryId? categoryId = null)
                     => await HandleAsync(new(id, name, description, quantity, price, priceSale, status, productImages,
                         isDeletedOldImage, categoryId)))
+            .DisableAntiforgery()
             .Produces<Ok<UpdateProductResponse>>()
             .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)

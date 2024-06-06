@@ -74,7 +74,10 @@ export const columns: ColumnDef<Product>[] = [
       return description.length > 50 ? (
         <Tooltip>
           <TooltipTrigger asChild>
-            <span>{`${parse(description.slice(0, 50))}...`}</span>
+            <span>
+              {parse(description.substring(0, 120))}
+              <span className="text-blue-500">...</span>
+            </span>
           </TooltipTrigger>
           <TooltipContent>
             <div className="p-4 text-sm w-80">{parse(description)}</div>

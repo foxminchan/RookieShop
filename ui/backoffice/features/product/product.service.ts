@@ -31,9 +31,7 @@ class ProductService extends HttpService {
     formData.append("priceSale", data.priceSale.toString())
     formData.append("quantity", data.quantity.toString())
     formData.append("categoryId", data.categoryId?.toString() ?? "")
-    if (data.productImages) {
-      formData.append("image", data.productImages)
-    }
+    formData.append("productImages", data.productImages ?? "")
     return this.post(`/products`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     })
@@ -48,9 +46,7 @@ class ProductService extends HttpService {
     formData.append("priceSale", data.priceSale.toString())
     formData.append("quantity", data.quantity.toString())
     formData.append("categoryId", data.categoryId?.toString() ?? "")
-    if (data.productImages) {
-      formData.append("image", data.productImages)
-    }
+    formData.append("productImages", data.productImages ?? "")
     formData.append("status", data.status)
     formData.append(
       "isDeletedOldImage",
