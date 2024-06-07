@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 
-import useAuthUser from "@/lib/services/auth.service"
+import useAuthUser from "@/hooks/useAuthUser"
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { Button } from "../ui/button"

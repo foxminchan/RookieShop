@@ -3,7 +3,7 @@
 import { ReactNode, useEffect } from "react"
 import { useRouter } from "next/navigation"
 
-import useAuthUser from "@/lib/services/auth.service"
+import useAuthUser from "@/hooks/useAuthUser"
 import Header from "@/components/layouts/header"
 import Sidebar from "@/components/layouts/sidebar"
 
