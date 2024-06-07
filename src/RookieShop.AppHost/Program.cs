@@ -89,6 +89,9 @@ identityService
 
 bff
     .WithEnvironment("BFF__Authority", identityService.GetEndpoint("https"))
-    .WithEnvironment("BFF__RemoteUrl", $"{apiService.GetEndpoint(protocol)}/api/v1");
+    .WithEnvironment(
+        "ReverseProxy__Clusters__api__Destinations__api__Address",
+        $"{apiService.GetEndpoint(protocol)}/api/v1")
+    .WithEnvironment("BFF__Api__RemoteUrl", $"{apiService.GetEndpoint(protocol)}/api/v1/categories");
 
 await builder.Build().RunAsync();

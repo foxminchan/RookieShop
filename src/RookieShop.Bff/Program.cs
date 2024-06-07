@@ -6,11 +6,15 @@ using RookieShop.Bff;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Configuration config = new();
+builder.Configuration.Bind("BFF", config);
+
 builder.Services.AddBff()
     .AddRemoteApis();
 
-Configuration config = new();
-builder.Configuration.Bind("BFF", config);
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
+    .AddBffExtensions();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -43,7 +47,6 @@ builder.Services.AddAuthentication(options =>
         }
     });
 
-
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -54,10 +57,13 @@ app.UseBff();
 
 app.MapBffManagementEndpoints();
 
-if (!string.IsNullOrEmpty(config.RemoteUrl))
+app.MapBffReverseProxy();
+
+if (config.Api is not null)
 {
-    app.MapRemoteBffApiEndpoint("/api", $"{config.RemoteUrl}/categories")
-        .RequireAccessToken();
+    Console.WriteLine($"Mapping remote API endpoint {config.Api.LocalPath} to {config.Api.RemoteUrl}");
+    app.MapRemoteBffApiEndpoint(config.Api.LocalPath, config.Api.RemoteUrl!)
+        .RequireAccessToken(config.Api.RequiredToken);
 }
 
 await app.RunAsync();

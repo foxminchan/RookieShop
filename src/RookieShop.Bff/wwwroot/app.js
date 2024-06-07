@@ -5,14 +5,14 @@ const apiUrl = "/api";
 let logoutUrl = "/bff/logout";
 
 async function onLoad() {
-    var req = new Request(userUrl, {
+    let req = new Request(userUrl, {
         headers: new Headers({
             'X-CSRF': '1'
         })
     })
 
     try {
-        var resp = await fetch(req);
+        let resp = await fetch(req);
         if (resp.ok) {
 
             let claims = await resp.json();
@@ -36,7 +36,7 @@ async function onLoad() {
             // this will trigger a normal OIDC request in an iframe using prompt=none.
             // if the user is already logged into IdentityServer, then the result will establish a session in the BFF.
             // this whole process avoids redirecting the top window without knowing if the user is logged in or not.
-            var silentLoginResult = await silentLogin();
+            let silentLoginResult = await silentLogin();
 
             // the result is a boolean letting us know if the user has been logged in silently
             log("silent login result: " + silentLoginResult);
@@ -63,12 +63,12 @@ function logout() {
 }
 
 async function callApi() {
-    var req = new Request(apiUrl, {
+    let req = new Request(apiUrl, {
         headers: new Headers({
             'X-CSRF': '1'
         })
     })
-    var resp = await fetch(req);
+    let resp = await fetch(req);
 
     log("API Result: " + resp.status);
     if (resp.ok) {
