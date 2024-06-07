@@ -74,6 +74,8 @@ var storefront = builder
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint(protocol)}/api/v1");
 
+var bff = builder.AddProject<RookieShop_Bff>("BFF");
+
 apiService
     .WithEnvironment("CorsSettings__Storefront", storefront.GetEndpoint(protocol))
     .WithEnvironment("CorsSettings__Backoffice", backoffice.GetEndpoint(protocol));
@@ -81,17 +83,10 @@ apiService
 identityService
     .WithEnvironment("Provider__Google__ClientId", googleClientId)
     .WithEnvironment("Provider__Google__ClientSecret", googleClientSecret)
-    .WithEnvironment("Client__Backoffice", backoffice.GetEndpoint(protocol))
     .WithEnvironment("Client__Storefront", storefront.GetEndpoint(protocol))
-    .WithEnvironment("Client__Swagger", apiService.GetEndpoint(protocol));
+    .WithEnvironment("Client__Swagger", apiService.GetEndpoint(protocol))
+    .WithEnvironment("Client__Bff", bff.GetEndpoint("https"));
 
-// Ingress and reverse proxy
-builder.AddYarp("ingress")
-    .WithEndpoint(scheme: protocol, port: 80)
-    .WithReference(apiService)
-    .WithReference(identityService)
-    .WithReference(backoffice)
-    .WithReference(storefront)
-    .LoadFromConfiguration("ReverseProxy");
+bff.WithEnvironment("BFF__Authority", identityService.GetEndpoint("https"));
 
 await builder.Build().RunAsync();
