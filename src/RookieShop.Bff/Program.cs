@@ -32,6 +32,7 @@ builder.Services.AddAuthentication(options =>
         options.Authority = config.Authority;
         options.ClientId = config.ClientId;
         options.ClientSecret = config.ClientSecret;
+        options.UsePkce = true;
 
         options.ResponseType = OpenIdConnectResponseType.Code;
         options.ResponseMode = OpenIdConnectResponseMode.Query;
@@ -39,6 +40,8 @@ builder.Services.AddAuthentication(options =>
         options.GetClaimsFromUserInfoEndpoint = true;
         options.MapInboundClaims = false;
         options.SaveTokens = true;
+
+        options.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
 
         options.Scope.Clear();
         foreach (var scope in config.Scopes)

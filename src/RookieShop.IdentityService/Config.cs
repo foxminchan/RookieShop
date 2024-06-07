@@ -85,7 +85,7 @@ public static class Config
             RedirectUris = { $"{client.Bff}/signin-oidc" },
             BackChannelLogoutUri = $"{client.Bff}/bff/backchannel",
             PostLogoutRedirectUris = { $"{client.Bff}/signout-callback-oidc" },
-            AllowedCorsOrigins = { $"{client.Bff}" },
+            AllowedCorsOrigins = { $"{client.Bff}", $"{client.BackOffice}" },
             AllowOfflineAccess = true,
             AllowedScopes =
             {

@@ -1,8 +1,8 @@
 "use client"
 
-import { useAtom } from "jotai"
+import { useRouter } from "next/navigation"
 
-import { userAtom } from "@/lib/jotai/userAtom"
+import useAuthUser from "@/lib/services/auth.service"
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { Button } from "../ui/button"
@@ -14,9 +14,10 @@ import {
 } from "../ui/dropdown-menu"
 
 export function UserNav() {
-  const [user, setUser] = useAtom(userAtom)
+  const router = useRouter()
+  const { isLoggedIn, logoutUrl } = useAuthUser()
 
-  if (user) {
+  if (isLoggedIn) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -31,7 +32,7 @@ export function UserNav() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
-          <DropdownMenuItem onClick={() => setUser(null)}>
+          <DropdownMenuItem onClick={() => router.push(`${logoutUrl?.value}`)}>
             Log out
           </DropdownMenuItem>
         </DropdownMenuContent>

@@ -47,6 +47,8 @@ var identityService = builder
     .WithReference(redis)
     .WithReference(userDb);
 
+var bff = builder.AddProject<RookieShop_Bff>("bff");
+
 var apiService = builder
     .AddProject<RookieShop_ApiService>("api-service")
     .WithReference(redis)
@@ -60,8 +62,7 @@ var backoffice = builder
     .AddNpmApp("backoffice", "../../ui/backoffice", "dev")
     .WithHttpEndpoint(3000, env: "PORT")
     .WithEnvironment("BROWSER", "none")
-    .WithEnvironment("NEXT_PUBLIC_BASE_API", $"{apiService.GetEndpoint(protocol)}/api/v1")
-    .WithEnvironment("NEXT_PUBLIC_DUENDE_AUTHORITY", identityService.GetEndpoint("https"))
+    .WithEnvironment("NEXT_PUBLIC_REMOTE_BFF", bff.GetEndpoint(protocol))
     .PublishAsDockerFile();
 
 var storefront = builder
@@ -74,8 +75,6 @@ var storefront = builder
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint(protocol)}/api/v1");
 
-var bff = builder.AddProject<RookieShop_Bff>("bff");
-
 apiService
     .WithEnvironment("CorsSettings__Storefront", storefront.GetEndpoint(protocol))
     .WithEnvironment("CorsSettings__Backoffice", backoffice.GetEndpoint(protocol));
@@ -84,8 +83,9 @@ identityService
     .WithEnvironment("Provider__Google__ClientId", googleClientId)
     .WithEnvironment("Provider__Google__ClientSecret", googleClientSecret)
     .WithEnvironment("Client__Storefront", storefront.GetEndpoint(protocol))
+    .WithEnvironment("Client__Backoffice", backoffice.GetEndpoint(protocol))
     .WithEnvironment("Client__Swagger", apiService.GetEndpoint(protocol))
-    .WithEnvironment("Client__Bff", bff.GetEndpoint("https"));
+    .WithEnvironment("Client__Bff", bff.GetEndpoint(protocol));
 
 bff
     .WithEnvironment("BFF__Authority", identityService.GetEndpoint("https"))
