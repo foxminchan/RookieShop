@@ -74,7 +74,7 @@ var storefront = builder
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint(protocol)}/api/v1");
 
-var bff = builder.AddProject<RookieShop_Bff>("BFF");
+var bff = builder.AddProject<RookieShop_Bff>("bff");
 
 apiService
     .WithEnvironment("CorsSettings__Storefront", storefront.GetEndpoint(protocol))
@@ -87,6 +87,8 @@ identityService
     .WithEnvironment("Client__Swagger", apiService.GetEndpoint(protocol))
     .WithEnvironment("Client__Bff", bff.GetEndpoint("https"));
 
-bff.WithEnvironment("BFF__Authority", identityService.GetEndpoint("https"));
+bff
+    .WithEnvironment("BFF__Authority", identityService.GetEndpoint("https"))
+    .WithEnvironment("BFF__RemoteUrl", $"{apiService.GetEndpoint(protocol)}/api/v1");
 
 await builder.Build().RunAsync();

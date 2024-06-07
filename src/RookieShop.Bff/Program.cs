@@ -54,13 +54,10 @@ app.UseBff();
 
 app.MapBffManagementEndpoints();
 
-if (config.Apis.Any())
+if (!string.IsNullOrEmpty(config.RemoteUrl))
 {
-    foreach (var api in config.Apis)
-    {
-        app.MapRemoteBffApiEndpoint(api.LocalPath, api.RemoteUrl!)
-            .RequireAccessToken(api.RequiredToken);
-    }
+    app.MapRemoteBffApiEndpoint("/api", $"{config.RemoteUrl}/categories")
+        .RequireAccessToken();
 }
 
 await app.RunAsync();
