@@ -99,9 +99,9 @@
 		<PackageVersion Include="Duende.IdentityServer.AspNetIdentity" Version="7.0.5" />
 		<!-- Miscellaneous -->
 		<PackageVersion Include="Scrutor" Version="4.2.2" />
-		<PackageVersion Include="MediatR" Version="12.2.0" />
+		<PackageVersion Include="MediatR" Version="12.3.0" />
 		<PackageVersion Include="Nuke.Common" Version="8.0.0" />
-		<PackageVersion Include="Stripe.net" Version="44.10.0" />
+		<PackageVersion Include="Stripe.net" Version="44.11.0" />
 		<PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
 		<PackageVersion Include="FluentEmail.Mailtrap" Version="2.7.0" />
 		<PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
