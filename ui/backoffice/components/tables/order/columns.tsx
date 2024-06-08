@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Order, PaymentMethod } from "@/features/order/order.type"
 import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
+import { match } from "ts-pattern"
 
 import { Badge } from "@/components/ui/badge"
 import { Icons } from "@/components/custom/icons"
@@ -58,24 +59,13 @@ export const columns: ColumnDef<Order>[] = [
     header: "STATUS",
     cell: (props) => {
       const status = props.getValue() as string
-      let badgeClass = ""
-      switch (status) {
-        case "Pending":
-          badgeClass = "bg-yellow-700 text-white"
-          break
-        case "Shipping":
-          badgeClass = "bg-blue-700 text-white"
-          break
-        case "Completed":
-          badgeClass = "bg-green-700 text-white"
-          break
-        case "Cancelled":
-          badgeClass = "bg-red-700 text-white"
-          break
-        default:
-          badgeClass = "bg-gray-700 text-white"
-          break
-      }
+      const badgeClass = match(status)
+        .with("Pending", () => "bg-yellow-700 text-white")
+        .with("Shipping", () => "bg-blue-700 text-white")
+        .with("Completed", () => "bg-green-700 text-white")
+        .with("Cancelled", () => "bg-red-700 text-white")
+        .otherwise(() => "bg-gray-700 text-white")
+
       return (
         <Badge
           variant="secondary"

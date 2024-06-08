@@ -2,7 +2,7 @@ include .env
 export
 
 .PHONY: publish
-publish-all-dockers: publish-api publish-identity publish-storefront publish-backoffice
+publish-all-dockers: publish-api publish-identity publish-storefront publish-backoffice publish-bff
 
 .PHONY: publish-api
 publish-api:
@@ -24,6 +24,13 @@ publish-storefront:
 	docker tag rookieshop-storefront:latest ghcr.io/foxminchan/rookieshop/rookieshop-storefront:${VERSION}
 	docker rmi rookieshop-storefront:latest
 	docker push ghcr.io/foxminchan/rookieshop/rookieshop-storefront:${VERSION}
+
+.PHONY: publish-bff
+publish-bff:
+	dotnet publish ./src/RookieShop.Bff/RookieShop.Bff.csproj --os linux --arch x64 /t:PublishContainer -c Release
+	docker tag rookieshop-bff:latest ghcr.io/foxminchan/rookieshop/rookieshop-bff:${VERSION}
+	docker rmi rookieshop-bff:latest
+	docker push ghcr.io/foxminchan/rookieshop/rookieshop-bff:${VERSION}
 
 .PHONY: publish-backoffice
 publish-backoffice:

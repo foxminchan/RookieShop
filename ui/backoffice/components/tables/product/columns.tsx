@@ -6,6 +6,7 @@ import { Product } from "@/features/product/product.type"
 import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
 import parse from "html-react-parser"
+import { match } from "ts-pattern"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -48,14 +49,12 @@ export const columns: ColumnDef<Product>[] = [
     header: "STATUS",
     cell: (props) => {
       const status = props.getValue() as string
-      let badgeClass = ""
-      if (status === "InStock") {
-        badgeClass = "bg-green-500 text-white"
-      } else if (status === "OutOfStock") {
-        badgeClass = "bg-yellow-500 text-white"
-      } else {
-        badgeClass = "bg-red-500 text-white"
-      }
+
+      const badgeClass = match(status)
+        .with("InStock", () => "bg-green-500 text-white")
+        .with("OutOfStock", () => "bg-yellow-500 text-white")
+        .otherwise(() => "bg-red-500 text-white")
+
       return (
         <Badge
           variant="secondary"
@@ -93,15 +92,19 @@ export const columns: ColumnDef<Product>[] = [
     header: "QUANTITY",
     cell: (props) => {
       const quantity = props.getValue() as number
-      let className = ""
       const MEDIUM_QTY = 20
-      if (quantity >= MEDIUM_QTY) {
-        className = "text-green-500"
-      } else if (quantity < MEDIUM_QTY) {
-        className = "text-yellow-500"
-      } else {
-        className = "text-red-500"
-      }
+
+      const className = match(quantity)
+        .when(
+          (quantity) => quantity >= MEDIUM_QTY,
+          () => "text-green-500"
+        )
+        .when(
+          (quantity) => quantity < MEDIUM_QTY,
+          () => "text-yellow-500"
+        )
+        .otherwise(() => "text-red-500")
+
       return <span className={className}>{quantity}</span>
     },
   },
