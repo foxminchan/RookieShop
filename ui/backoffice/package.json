@@ -11,10 +11,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:ssl": "cross-env NODE_EXTRA_CA_CERTS=./certificates/localhost.pem next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ca": "dotnet dev-certs https -ep ./certificates/aspnet_https.crt --format PEM",
+    "ca": "dotnet dev-certs https --format pem -ep ./certificates/localhost.pem",
     "format:write": "bun prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "bun prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
     "test": "jest",
@@ -99,6 +100,7 @@
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "ts-pattern": "^5.1.2",
     "uuid": "^9.0.1",
     "vaul": "^0.9.0",
     "zod": "^3.22.5"
@@ -114,6 +116,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/uuid": "^9.0.8",
+    "cross-env": "^7.0.3",
     "cypress": "^13.10.0",
     "eslint": "^9",
     "eslint-config-next": "14.2.3",

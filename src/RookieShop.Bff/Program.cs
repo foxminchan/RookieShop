@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using RookieShop.Bff;
+using RookieShop.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
 Configuration config = new();
 builder.Configuration.Bind("BFF", config);
+
+builder.AddServiceDefaults();
 
 builder.Services.AddBff()
     .AddRemoteApis();
@@ -60,14 +63,10 @@ app.UseBff();
 
 app.MapBffManagementEndpoints();
 
-app.MapBffReverseProxy(proxyApp =>
-{
-    proxyApp.UseAntiforgeryCheck();
-});
+app.MapBffReverseProxy();
 
 if (config.Api is not null)
 {
-    Console.WriteLine($"Mapping remote API endpoint {config.Api.LocalPath} to {config.Api.RemoteUrl}");
     app.MapRemoteBffApiEndpoint(config.Api.LocalPath, config.Api.RemoteUrl!)
         .RequireAccessToken(config.Api.RequiredToken);
 }

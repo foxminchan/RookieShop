@@ -6,7 +6,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 builder.AddForwardedHeaders();
 
-var protocol = "https";
+const string protocol = "https";
 
 // Secret parameters
 var postgresUser = builder.AddParameter("SqlUser", true);
@@ -35,7 +35,6 @@ var storage = builder.AddAzureStorage("storage");
 
 if (builder.Environment.IsDevelopment())
 {
-    protocol = "http";
     storage.RunAsEmulator(config => config.WithDataBindMount("../../mnt/azurite"));
 }
 
@@ -53,13 +52,12 @@ var apiService = builder
     .AddProject<RookieShop_ApiService>("api-service")
     .WithReference(redis)
     .WithReference(shopDb)
-    .WithHttpEndpoint()
     .WithEnvironment("SmtpSettings__Secret", emailSecret)
     .WithEnvironment("AzuriteSettings__ConnectionString", blobs.WithEndpoint())
-    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"));
+    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint(protocol));
 
 var backoffice = builder
-    .AddNpmApp("backoffice", "../../ui/backoffice", "dev")
+    .AddNpmApp("backoffice", "../../ui/backoffice", "dev:ssl")
     .WithHttpEndpoint(3000, env: "PORT")
     .WithEnvironment("BROWSER", "none")
     .WithEnvironment("NEXT_PUBLIC_REMOTE_BFF", bff.GetEndpoint(protocol))
@@ -68,27 +66,27 @@ var backoffice = builder
 var storefront = builder
     .AddProject<RookieShop_Storefront>("storefront")
     .WithReference(redis)
-    .WithHttpEndpoint(7090)
     .WithEnvironment("SmartComponents__ApiKey", openAiKey)
     .WithEnvironment("StripeSettings__StripeSecretKey", stripeApiKey)
     .WithEnvironment("StripeSettings__StripeWebhookSecret", stripeWebhookSecret)
-    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint("https"))
+    .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint(protocol))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint(protocol)}/api/v1");
 
 apiService
     .WithEnvironment("CorsSettings__Storefront", storefront.GetEndpoint(protocol))
-    .WithEnvironment("CorsSettings__Backoffice", backoffice.GetEndpoint(protocol));
+    .WithEnvironment("CorsSettings__Backoffice", backoffice.GetEndpoint("http"));
 
 identityService
     .WithEnvironment("Provider__Google__ClientId", googleClientId)
     .WithEnvironment("Provider__Google__ClientSecret", googleClientSecret)
     .WithEnvironment("Client__Storefront", storefront.GetEndpoint(protocol))
-    .WithEnvironment("Client__Backoffice", backoffice.GetEndpoint(protocol))
+    .WithEnvironment("Client__Backoffice", backoffice.GetEndpoint("http"))
     .WithEnvironment("Client__Swagger", apiService.GetEndpoint(protocol))
     .WithEnvironment("Client__Bff", bff.GetEndpoint(protocol));
 
 bff
-    .WithEnvironment("BFF__Authority", identityService.GetEndpoint("https"))
+    .WithReference(redis)
+    .WithEnvironment("BFF__Authority", identityService.GetEndpoint(protocol))
     .WithEnvironment(
         "ReverseProxy__Clusters__api__Destinations__api__Address",
         $"{apiService.GetEndpoint(protocol)}/api/v1")
