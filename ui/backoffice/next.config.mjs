@@ -35,7 +35,13 @@ const nextConfig = {
   httpAgentOptions: {
     keepAlive: false,
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
   experimental: {
+    instrumentationHook: true,
     turbo: {
       resolveExtensions: [
         ".mdx",
