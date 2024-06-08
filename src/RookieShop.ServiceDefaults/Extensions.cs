@@ -6,6 +6,9 @@ using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using RookieShop.ServiceDefaults.DataProtection;
+using RookieShop.ServiceDefaults.OpenTelemetry.ActivityScope;
+using RookieShop.ServiceDefaults.OpenTelemetry.Metrics;
 
 namespace RookieShop.ServiceDefaults;
 
@@ -29,6 +32,12 @@ public static class Extensions
 
         builder.Services.Configure<ServiceConfig>(config => config.Services = [.. builder.Services]);
 
+        builder.Services.AddSingleton<IActivityScope, ActivityScope>();
+
+        builder.Services.AddSingleton<CommandHandlerMetrics>();
+
+        builder.Services.AddSingleton<QueryHandlerMetrics>();
+
         return builder;
     }
 
@@ -46,7 +55,8 @@ public static class Extensions
                 metrics.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddRuntimeInstrumentation()
-                    .AddMeter("Marten");
+                    .AddMeter("Marten")
+                    .AddMeter(ActivitySourceProvider.DefaultSourceName);
             })
             .WithTracing(tracing =>
             {
@@ -54,7 +64,8 @@ public static class Extensions
                     .AddHttpClientInstrumentation()
                     .AddEntityFrameworkCoreInstrumentation(b => b.SetDbStatementForText = true)
                     .AddQuartzInstrumentation()
-                    .AddSource("Marten");
+                    .AddSource("Marten")
+                    .AddSource(ActivitySourceProvider.DefaultSourceName);
             });
 
         builder.AddOpenTelemetryExporters();

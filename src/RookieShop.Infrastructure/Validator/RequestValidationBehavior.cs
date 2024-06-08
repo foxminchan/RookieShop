@@ -4,6 +4,8 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RookieShop.ServiceDefaults.OpenTelemetry;
+using RookieShop.ServiceDefaults.OpenTelemetry.ActivityScope;
 
 namespace RookieShop.Infrastructure.Validator;
 
@@ -34,6 +36,8 @@ public sealed class RequestValidationBehavior<TRequest, TResponse>(
                              .GetService<IEnumerable<IValidator<TRequest>>>()?.ToList()
                          ?? throw new InvalidOperationException();
 
+        var activityScope = serviceProvider.GetRequiredService<IActivityScope>();
+
         if (validators.Count != 0)
             await Task.WhenAll(
                 validators.Select(v => v.HandleValidationAsync(request))
@@ -44,6 +48,33 @@ public sealed class RequestValidationBehavior<TRequest, TResponse>(
         logger.LogInformation(
             "[{Behavior}] handled response={Response} with content={ResponseData}",
             behavior, typeof(TResponse).FullName, JsonSerializer.Serialize(response));
+
+        await activityScope.Run(
+            behavior,
+            async (_, _) => await next(),
+            new()
+            {
+                Tags =
+                {
+                    {
+                        TelemetryTags.Validator.Validation, typeof(TRequest).Name
+                    },
+                    {
+                        TelemetryTags.Validator.ValidationRequest, JsonSerializer.Serialize(request)
+                    },
+                    {
+                        TelemetryTags.Validator.ValidationResponseType, typeof(TResponse).FullName
+                    },
+                    {
+                        TelemetryTags.Validator.ValidationResponse, JsonSerializer.Serialize(response)
+                    },
+                    {
+                        TelemetryTags.Validator.ValidationValidators, JsonSerializer.Serialize(validators)
+                    }
+                }
+            },
+            cancellationToken
+        );
 
         return response;
     }

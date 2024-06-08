@@ -16,7 +16,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\RookieShop.Application\RookieShop.Application.csproj" />
-		<ProjectReference Include="..\RookieShop.ServiceDefaults\RookieShop.ServiceDefaults.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

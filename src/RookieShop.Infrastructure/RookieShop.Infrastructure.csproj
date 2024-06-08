@@ -44,6 +44,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\RookieShop.Domain\RookieShop.Domain.csproj" />
+		<ProjectReference Include="..\RookieShop.ServiceDefaults\RookieShop.ServiceDefaults.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
