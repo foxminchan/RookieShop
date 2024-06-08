@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Pgvector;
 using RookieShop.Persistence;
 
 #nullable disable
@@ -12,18 +13,19 @@ using RookieShop.Persistence;
 namespace RookieShop.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240526072943_Initalize-database")]
-    partial class Initalizedatabase
+    [Migration("20240608160016_Initialize-database")]
+    partial class Initializedatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
+            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "vector");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("RookieShop.Domain.Entities.CategoryAggregator.Category", b =>
@@ -37,7 +39,7 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 788, DateTimeKind.Utc).AddTicks(5283))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 704, DateTimeKind.Utc).AddTicks(4226))
                         .HasColumnName("created_date");
 
                     b.Property<string>("Description")
@@ -45,6 +47,10 @@ namespace RookieShop.Persistence.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)")
                         .HasColumnName("description");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -55,14 +61,14 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 788, DateTimeKind.Utc).AddTicks(5538))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 704, DateTimeKind.Utc).AddTicks(4626))
                         .HasColumnName("update_date");
 
                     b.Property<Guid>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValue(new Guid("342540df-e719-4f7e-8142-896fd3c057e0"))
+                        .HasDefaultValue(new Guid("bf570dc2-41e6-4f6a-9383-c1d084c32b84"))
                         .HasColumnName("version");
 
                     b.HasKey("Id")
@@ -73,51 +79,57 @@ namespace RookieShop.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("447e4b38-8996-4763-aa81-f43eb8b5d440"),
-                            CreatedDate = new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(766),
+                            Id = new Guid("8d7d55f7-cf10-42d3-936f-7cb6150130d3"),
+                            CreatedDate = new DateTime(2024, 6, 8, 16, 0, 16, 705, DateTimeKind.Utc).AddTicks(895),
                             Description = "A book is a medium for recording information in the form of writing or images, typically composed of many pages bound together and protected by a cover.",
+                            IsDeleted = false,
                             Name = "Books",
-                            Version = new Guid("4102abec-302c-4f9a-bdce-29fca05adae5")
+                            Version = new Guid("1e2c7f60-7dcc-421a-816e-3681209c2fa1")
                         },
                         new
                         {
-                            Id = new Guid("361c599c-138b-4cce-92a6-a85cc39678c8"),
-                            CreatedDate = new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(773),
+                            Id = new Guid("4736ffeb-cfce-4f68-b527-b9f6d5444f7e"),
+                            CreatedDate = new DateTime(2024, 6, 8, 16, 0, 16, 705, DateTimeKind.Utc).AddTicks(913),
                             Description = "A toy is an item that is used in play, especially one designed for such use. Playing with toys can be an enjoyable means of training young children for life in society.",
+                            IsDeleted = false,
                             Name = "Toys",
-                            Version = new Guid("b3c83e68-38ba-4fde-84eb-e9987de0c5b4")
+                            Version = new Guid("9002d6d4-678a-458e-9aae-ecb11da618f6")
                         },
                         new
                         {
-                            Id = new Guid("47493803-5737-4621-b29e-ae5a8b0e1ce0"),
-                            CreatedDate = new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(776),
+                            Id = new Guid("9cf92ba3-2382-4ef4-9899-5d497cce0efe"),
+                            CreatedDate = new DateTime(2024, 6, 8, 16, 0, 16, 705, DateTimeKind.Utc).AddTicks(927),
                             Description = "A comic book, also called comic magazine or (in the United Kingdom and Ireland) simply comic, is a publication that consists of comics art in the form of sequential juxtaposed panels that represent individual scenes.",
+                            IsDeleted = false,
                             Name = "Comics",
-                            Version = new Guid("fbaf7758-5bb0-441f-9d39-5672dc853950")
+                            Version = new Guid("e7cfc774-d83a-4ef2-876b-0f9d786a6951")
                         },
                         new
                         {
-                            Id = new Guid("b8e91b58-7158-45fa-88b5-96fdac4dcbb9"),
-                            CreatedDate = new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(787),
+                            Id = new Guid("624dcddd-9b23-47e7-8e58-54fb92ffd489"),
+                            CreatedDate = new DateTime(2024, 6, 8, 16, 0, 16, 705, DateTimeKind.Utc).AddTicks(929),
                             Description = "Artwork is a term that describes art that is created to be appreciated for its own sake. It generally refers to visual art, such as paintings, sculptures, and printmaking.",
+                            IsDeleted = false,
                             Name = "Artworks",
-                            Version = new Guid("f389691a-1562-4ad4-8287-f2ea9fd1a257")
+                            Version = new Guid("d27c9645-c53c-4ee7-b694-8031f1004886")
                         },
                         new
                         {
-                            Id = new Guid("f7636d3b-7f3e-4040-9beb-73f860041310"),
-                            CreatedDate = new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(789),
+                            Id = new Guid("52bfc10c-7f88-4105-a002-55197ff308ce"),
+                            CreatedDate = new DateTime(2024, 6, 8, 16, 0, 16, 705, DateTimeKind.Utc).AddTicks(932),
                             Description = "A souvenir is an object that is kept as a reminder of a person, place, or event. The object itself may have intrinsic value, or be a symbol of experience.",
+                            IsDeleted = false,
                             Name = "Souvenirs",
-                            Version = new Guid("e20e02eb-a112-421c-b37e-5545c4d6aaf9")
+                            Version = new Guid("bfb9afe1-9c8a-4c1c-b19b-482755ccc16d")
                         },
                         new
                         {
-                            Id = new Guid("05416004-bdec-48d2-8e7f-767873a5a228"),
-                            CreatedDate = new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(791),
+                            Id = new Guid("8eebe4a6-5e66-4655-91a6-b35d50edf167"),
+                            CreatedDate = new DateTime(2024, 6, 8, 16, 0, 16, 705, DateTimeKind.Utc).AddTicks(935),
                             Description = "Stationery is a mass noun referring to commercially manufactured writing materials, including cut paper, envelopes, writing implements, continuous form paper, and other office supplies.",
+                            IsDeleted = false,
                             Name = "Stationery",
-                            Version = new Guid("93af261f-b55e-49a1-903a-33a1ffda21ec")
+                            Version = new Guid("344ca78f-a129-4455-937c-a9254b2ecd85")
                         });
                 });
 
@@ -136,7 +148,7 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(2069))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 705, DateTimeKind.Utc).AddTicks(2354))
                         .HasColumnName("created_date");
 
                     b.Property<string>("Email")
@@ -168,14 +180,14 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(2305))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 705, DateTimeKind.Utc).AddTicks(2590))
                         .HasColumnName("update_date");
 
                     b.Property<Guid>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValue(new Guid("bee3dc2d-b9ef-4a18-b54e-17f6d7c52ebc"))
+                        .HasDefaultValue(new Guid("0c851886-6ca3-4901-afb1-3a9c232eb1af"))
                         .HasColumnName("version");
 
                     b.HasKey("Id")
@@ -186,26 +198,26 @@ namespace RookieShop.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eebda025-0380-4581-92af-57590a790160"),
+                            Id = new Guid("3906a8e8-f63c-4172-991c-3ec2c86a1dc3"),
                             AccountId = new Guid("7055bbfe-25c6-4b33-98cd-fc2b9fb4bb1a"),
-                            CreatedDate = new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(8972),
+                            CreatedDate = new DateTime(2024, 6, 8, 16, 0, 16, 706, DateTimeKind.Utc).AddTicks(1003),
                             Email = "nguyenxuannhan407@gmail.com",
                             Gender = (byte)1,
                             IsDeleted = false,
                             Name = "Nhan Nguyen",
                             Phone = "0123456789",
-                            Version = new Guid("0f3dcc40-38e5-4bf4-9ab7-96505fe666ba")
+                            Version = new Guid("4c4dbc31-e498-4c38-9fa1-97318e29e737")
                         },
                         new
                         {
-                            Id = new Guid("12da5fa6-d57c-4272-b463-06d08c502138"),
-                            CreatedDate = new DateTime(2024, 5, 26, 7, 29, 42, 789, DateTimeKind.Utc).AddTicks(8988),
+                            Id = new Guid("63ccb9b4-daeb-4e12-a6ed-7a8421cbf6a5"),
+                            CreatedDate = new DateTime(2024, 6, 8, 16, 0, 16, 706, DateTimeKind.Utc).AddTicks(1025),
                             Email = "nguyenxuannhan.dev@gmail.com",
                             Gender = (byte)1,
                             IsDeleted = false,
                             Name = "Fox Min Chan",
                             Phone = "0123456789",
-                            Version = new Guid("863d6d38-b255-4650-9017-135f59fb0f32")
+                            Version = new Guid("61618209-9dd9-442b-815f-669419835118")
                         });
                 });
 
@@ -226,7 +238,7 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 790, DateTimeKind.Utc).AddTicks(154))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 706, DateTimeKind.Utc).AddTicks(2389))
                         .HasColumnName("created_date");
 
                     b.Property<Guid?>("CustomerId")
@@ -244,14 +256,14 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 790, DateTimeKind.Utc).AddTicks(368))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 706, DateTimeKind.Utc).AddTicks(2698))
                         .HasColumnName("update_date");
 
                     b.Property<Guid>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValue(new Guid("af8e97c9-85b9-4d6c-9659-2c01e31894ee"))
+                        .HasDefaultValue(new Guid("34b29e8f-3924-4449-9989-9a197a0f8370"))
                         .HasColumnName("version");
 
                     b.HasKey("Id")
@@ -277,7 +289,7 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 791, DateTimeKind.Utc).AddTicks(3000))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 708, DateTimeKind.Utc).AddTicks(949))
                         .HasColumnName("created_date");
 
                     b.Property<Guid>("CustomerId")
@@ -295,14 +307,14 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 791, DateTimeKind.Utc).AddTicks(3258))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 708, DateTimeKind.Utc).AddTicks(1311))
                         .HasColumnName("update_date");
 
                     b.Property<Guid>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValue(new Guid("eb765674-9cb9-4a7b-9795-615f6e6192bc"))
+                        .HasDefaultValue(new Guid("96d2ce25-2ba4-478b-bd4d-59e5bed0132d"))
                         .HasColumnName("version");
 
                     b.HasKey("Id")
@@ -327,7 +339,7 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 794, DateTimeKind.Utc).AddTicks(1361))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 711, DateTimeKind.Utc).AddTicks(5326))
                         .HasColumnName("created_date");
 
                     b.Property<decimal>("Price")
@@ -341,14 +353,14 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 794, DateTimeKind.Utc).AddTicks(2058))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 711, DateTimeKind.Utc).AddTicks(5612))
                         .HasColumnName("update_date");
 
                     b.Property<Guid>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValue(new Guid("b1b1ca74-c1a5-4460-8921-616c712b686c"))
+                        .HasDefaultValue(new Guid("7f826faf-581f-456c-b9b7-d561f96f088c"))
                         .HasColumnName("version");
 
                     b.HasKey("OrderId", "ProductId")
@@ -381,7 +393,7 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 795, DateTimeKind.Utc).AddTicks(1748))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 712, DateTimeKind.Utc).AddTicks(5951))
                         .HasColumnName("created_date");
 
                     b.Property<string>("Description")
@@ -389,6 +401,11 @@ namespace RookieShop.Persistence.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)")
                         .HasColumnName("description");
+
+                    b.Property<Vector>("Embedding")
+                        .IsRequired()
+                        .HasColumnType("vector(384)")
+                        .HasColumnName("embedding");
 
                     b.Property<string>("ImageName")
                         .HasMaxLength(50)
@@ -424,14 +441,14 @@ namespace RookieShop.Persistence.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 5, 26, 7, 29, 42, 795, DateTimeKind.Utc).AddTicks(1990))
+                        .HasDefaultValue(new DateTime(2024, 6, 8, 16, 0, 16, 712, DateTimeKind.Utc).AddTicks(6265))
                         .HasColumnName("update_date");
 
                     b.Property<Guid>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasDefaultValue(new Guid("48ae7fba-a60c-4f09-95ec-1477f6f65318"))
+                        .HasDefaultValue(new Guid("1fd494dd-341f-46ca-a3fb-b4c8f62acd79"))
                         .HasColumnName("version");
 
                     b.HasKey("Id")

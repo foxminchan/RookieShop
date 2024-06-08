@@ -1,4 +1,6 @@
-﻿using Ardalis.GuardClauses;
+﻿using Pgvector;
+using System.Text.Json.Serialization;
+using Ardalis.GuardClauses;
 using RookieShop.Domain.Entities.CategoryAggregator;
 using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
 using RookieShop.Domain.Entities.FeedbackAggregator;
@@ -41,6 +43,7 @@ public sealed class Product : EntityBase, ISoftDelete, IAggregateRoot
     public double AverageRating { get; set; }
     public int TotalReviews { get; set; }
     public CategoryId? CategoryId { get; set; }
+    [JsonIgnore] public Vector Embedding { get; set; } = default!;
     public Category? Category { get; set; }
     public ICollection<OrderDetail>? OrderDetails { get; set; } = [];
     public ICollection<Feedback>? Feedbacks { get; set; } = [];

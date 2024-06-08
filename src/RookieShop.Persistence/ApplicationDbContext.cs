@@ -40,6 +40,7 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.HasPostgresExtension(VectorType.Extension);
         modelBuilder.HasPostgresExtension(UniqueType.Extension);
         modelBuilder.ApplyConfigurationsFromAssembly(AssemblyReference.DbContextAssembly);
     }

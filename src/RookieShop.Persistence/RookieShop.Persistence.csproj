@@ -12,9 +12,6 @@
 		<PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
 		<PackageReference Include="EFCore.NamingConventions" />
 		<PackageReference Include="EntityFrameworkCore.Exceptions.PostgreSQL" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Ardalis.Specification.EntityFrameworkCore" />
 	</ItemGroup>
 

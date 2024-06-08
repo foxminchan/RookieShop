@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿    using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RookieShop.Domain.Constants;
 using RookieShop.Domain.Entities.ProductAggregator;
@@ -47,6 +47,9 @@ public sealed class ProductConfiguration : BaseConfiguration<Product>
 
         builder.Property(p => p.TotalReviews)
             .HasDefaultValue(0);
+
+        builder.Property(p => p.Embedding)
+            .HasColumnType(VectorType.Type);
 
         builder.HasOne(p => p.Category)
             .WithMany(p => p.Products)

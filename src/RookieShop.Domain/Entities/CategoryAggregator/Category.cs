@@ -5,7 +5,7 @@ using RookieShop.Domain.SeedWork;
 
 namespace RookieShop.Domain.Entities.CategoryAggregator;
 
-public sealed class Category : EntityBase, IAggregateRoot
+public sealed class Category : EntityBase, ISoftDelete, IAggregateRoot
 {
     /// <summary>
     ///     EF mapping constructor
@@ -23,6 +23,7 @@ public sealed class Category : EntityBase, IAggregateRoot
     public CategoryId Id { get; set; } = new(Guid.NewGuid());
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
+    public bool IsDeleted { get; set; }
     public ICollection<Product>? Products { get; set; } = [];
 
     public void Update(string name, string? description)

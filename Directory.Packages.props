@@ -9,6 +9,7 @@
 		<PollyVersion>8.4.0</PollyVersion>
 		<AspireVersion>8.0.1</AspireVersion>
 		<AspirantVersion>0.0.3</AspirantVersion>
+		<AspireUnstablePackagesVersion>8.0.1-preview.8.24267.1</AspireUnstablePackagesVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- Aspire -->
@@ -22,8 +23,11 @@
 		<PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Npgsql" Version="$(AspireVersion)" />
 		<PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(AspireVersion)" />
+		<PackageVersion Include="Aspire.Azure.AI.OpenAI" Version="$(AspireUnstablePackagesVersion)" />
 		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.5.0" />
 		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="8.0.1" />
+		<!-- AI -->
+		<PackageVersion Include="Microsoft.SemanticKernel" Version="1.14.1" />
 		<!-- Ardalis -->
 		<PackageVersion Include="Ardalis.GuardClauses" Version="4.5.0" />
 		<PackageVersion Include="Ardalis.Result.AspNetCore" Version="9.1.0" />
@@ -45,6 +49,8 @@
 		<PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(AspnetVersion)" />
 		<PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(AspnetVersion)" />
 		<!-- Entity Framework Core -->
+		<PackageVersion Include="Pgvector" Version="0.2.0" />
+		<PackageVersion Include="Pgvector.EntityFrameworkCore" Version="0.2.0" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EfVersion)" />
 		<PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfVersion)" />

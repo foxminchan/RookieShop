@@ -72,12 +72,13 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseHttpsRedirection();
     app.UseExceptionHandler("/error");
     app.UseHsts();
 }
 
 app.UseAntiforgery();
+
+app.UseHttpsRedirection();
 
 app.UseResponseCompression();
 
