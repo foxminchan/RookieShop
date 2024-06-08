@@ -20,7 +20,7 @@ publish-identityserver:
 
 .PHONY: publish-storefront
 publish-storefront:
-	dotnet publish ./ui/storefront/RookieShop.Storefront.csproj --os linux --arch x64 /t:PublishContainer -c Release
+	dotnet publish ./src/RookieShop.Storefront/RookieShop.Storefront.csproj --os linux --arch x64 /t:PublishContainer -c Release
 	docker tag rookieshop-storefront:latest ghcr.io/foxminchan/rookieshop/rookieshop-storefront:${VERSION}
 	docker rmi rookieshop-storefront:latest
 	docker push ghcr.io/foxminchan/rookieshop/rookieshop-storefront:${VERSION}
@@ -34,6 +34,6 @@ publish-bff:
 
 .PHONY: publish-backoffice
 publish-backoffice:
-	docker build -f ./ui/backoffice/Dockerfile . --tag ghcr.io/foxminchan/rookieshop/rookieshop-backoffice:${VERSION}
+	docker build -f ./src/RookieShop.Backoffice/Dockerfile . --tag ghcr.io/foxminchan/rookieshop/rookieshop-backoffice:${VERSION}
 	docker rmi rookieshop-backoffice:latest
 	docker push ghcr.io/foxminchan/rookieshop/rookieshop-backoffice:${VERSION}
