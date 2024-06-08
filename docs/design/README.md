@@ -20,8 +20,38 @@ The high level design of the system is based on the following components:
 ## Why BFF Authentication?
 
 <p align="justify">
-The BFF (Backend for Frontend) pattern is a software design pattern that allows a backend service to be tailored to the needs of a specific frontend application. The BFF pattern is used to create a backend service that is optimized for a specific frontend application. This allows the backend service to provide the frontend application with the data and functionality it needs, without exposing the entire backend service to the frontend application. The BFF pattern is used to create a backend service that is optimized for a specific frontend application. This allows the backend service to provide the frontend application with the data and functionality it needs, without exposing the entire backend service to the frontend application.
+Backend for Frontend (BFF) Authentication is a security approach designed to optimize both user experience and security in web applications. Utilizing standard OAuth flows, BFF Authentication enables backend clients to authenticate users seamlessly, setting up session cookies to maintain secure and smooth interactions.
 </p>
+
+@startuml
+participant BackOffice as spa
+participant BFF as bff
+participant IdentityServer as identityserver
+participant API as api
+
+spa -> bff: Open login page
+bff -> identityserver: Redirect to IdentityServer login page
+spa <- bff: Redirect response (IdentityServer login page URL)
+
+spa -> identityserver: Access IdentityServer login page
+identityserver -> spa: Display login form
+
+spa -> identityserver: Submit credentials
+identityserver -> identityserver: Validate credentials
+identityserver -> spa: Redirect with authorization code
+
+spa -> bff: Send authorization code
+bff -> identityserver: Exchange authorization code for tokens
+identityserver -> bff: Access token and ID token
+
+bff -> spa: Set cookies (access token)
+
+spa -> bff: Request data from API
+bff -> api: Forward request with access token
+api -> bff: Return data
+bff -> spa: Return data
+
+@enduml
 
 ## Patterns Used
 
