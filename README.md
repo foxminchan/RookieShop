@@ -24,6 +24,7 @@ RookieShop is a .NET Core web application training project demonstrating Clean A
     - [Windows with Visual Studio](#windows-with-visual-studio)
     - [Mac, Linux, \& Windows without Visual Studio](#mac-linux--windows-without-visual-studio)
   - [Setup tools and dependencies](#setup-tools-and-dependencies)
+  - [Setup Stripe webhook](#setup-stripe-webhook)
   - [Running the application](#running-the-application)
 - [Testing](#testing)
 - [CI/CD](#cicd)
@@ -79,10 +80,12 @@ Build an e-commerce web site with minimum functionality below:
 - [Yarp](https://microsoft.github.io/reverse-proxy/)
 - [OpenTelemetry](https://opentelemetry.io/)
 - [NUKE](https://nuke.build/)
+- [Semantic Kernel](aka.ms/semantic-kernel)
+- [OpenAI](https://openai.com/)
 
 ## Software Architecture
 
-<img loading="lazy" src="./img/architecture.png" alt="Software Architecture" width="100%" />
+<img loading="lazy" src="./img/system-design.png" alt="Software Architecture" width="100%" />
 
 | No  | Name            | Usecase                                                                                              | Technology                                |
 | --- | --------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------- |
@@ -94,6 +97,7 @@ Build an e-commerce web site with minimum functionality below:
 | 6   | cache           | A distributed lock manager, cache and cart storage                                                   | Redis                                     |
 | 7   | database        | A relational database that stores the application's data and email outbox                            | Postgres, Marten                          |
 | 8   | observability   | A telemetry data collector that collects and exports telemetry data to the Aspire Dashboard          | OpenTelemetry                             |
+| 9   | openai          | A language model that handles the natural language processing tasks                                  | OpenAI                                    |
 
 ## Getting Started
 
@@ -104,6 +108,8 @@ Build an e-commerce web site with minimum functionality below:
 - Install .NET 8.0 SDK: [https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download)
 - Install Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 - Install bun: [https://bun.sh/](https://bun.sh/)
+- Install Stripe CLI: [https://stripe.com/docs/stripe-cli](https://stripe.com/docs/stripe-cli)
+- Open AI API Key: [https://platform.openai.com/](https://platform.openai.com/)
 
 #### Windows with Visual Studio
 
@@ -129,6 +135,14 @@ dotnet tool restore
 
 cd RookieShop
 dotnet restore ./RookieShop.sln
+```
+
+### Setup Stripe webhook
+
+```bash
+stripe login
+
+stripe listen --forward-to https://localhost:9000/api/stripe
 ```
 
 ### Running the application
