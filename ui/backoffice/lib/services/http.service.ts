@@ -3,7 +3,6 @@ import _omitBy from "lodash/omitBy"
 import { v4 as uuidv4 } from "uuid"
 
 import axiosConfig from "../configs/api.config"
-import { authService } from "./auth.service"
 
 export default class HttpService {
   private instance: AxiosInstance
@@ -19,10 +18,7 @@ export default class HttpService {
   private setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
     axiosInstance.interceptors.request.use(
       async (config) => {
-        const token = authService.getUser()?.id_token
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`
-        }
+        config.headers["X-CSRF"] = "1"
         return config
       },
       (error) => {

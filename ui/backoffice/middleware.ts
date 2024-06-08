@@ -8,7 +8,7 @@ const rateLimiter = new RateLimiterMemory({
 
 export async function middleware(request: NextRequest) {
   try {
-    await rateLimiter.consume(request.ip || "")
+    await rateLimiter.consume(request.ip ?? "")
     return NextResponse.next()
   } catch (rateLimiterRes) {
     return new NextResponse("Too many requests", { status: 429 })

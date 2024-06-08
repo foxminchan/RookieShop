@@ -78,17 +78,15 @@ public static class Config
         },
         new()
         {
-            ClientId = "back-office",
-            ClientName = "Back Office",
-            AccessTokenType = AccessTokenType.Reference,
-            AllowedGrantTypes = GrantTypes.Code,
-            AllowAccessTokensViaBrowser = true,
-            RequireClientSecret = false,
-            RequireConsent = false,
-            RequirePkce = true,
-            RedirectUris = { $"{client.Backoffice}/api/auth/callback" },
-            PostLogoutRedirectUris = { $"{client.Backoffice}", },
-            AllowedCorsOrigins = { $"{client.Backoffice}" },
+            ClientId = "bff",
+            ClientName = "Backend For Frontend",
+            ClientSecrets = { new("secret".Sha256()) },
+            AllowedGrantTypes = [GrantType.AuthorizationCode],
+            RedirectUris = { $"{client.Bff}/signin-oidc" },
+            BackChannelLogoutUri = $"{client.Bff}/bff/backchannel",
+            PostLogoutRedirectUris = { $"{client.Bff}/signout-callback-oidc" },
+            AllowedCorsOrigins = { $"{client.Bff}", $"{client.BackOffice}" },
+            AllowOfflineAccess = true,
             AllowedScopes =
             {
                 IdentityServerConstants.StandardScopes.OpenId,

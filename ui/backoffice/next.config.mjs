@@ -16,7 +16,19 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BASE_API}/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_REMOTE_BFF}/api/v1/:path*`,
+      },
+      {
+        source: "/bff/:path*",
+        destination: `${process.env.NEXT_PUBLIC_REMOTE_BFF}/bff/:path*`,
+      },
+      {
+        source: "/signin-oidc",
+        destination: `${process.env.NEXT_PUBLIC_REMOTE_BFF}/signin-oidc`,
+      },
+      {
+        source: "/signout-callback-oidc",
+        destination: `${process.env.NEXT_PUBLIC_REMOTE_BFF}/signout-callback-oidc`,
       },
     ]
   },
