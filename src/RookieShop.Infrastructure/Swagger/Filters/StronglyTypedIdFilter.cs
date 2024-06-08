@@ -29,6 +29,5 @@ public class StronglyTypedIdFilter : ISchemaFilter
 
         schema.Type = "string";
         schema.Format = "uuid";
-        schema.Example = new OpenApiString(Guid.NewGuid().ToString());
     }
 }

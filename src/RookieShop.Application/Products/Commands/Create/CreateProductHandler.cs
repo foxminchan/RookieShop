@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using RookieShop.Domain.Entities.ProductAggregator;
 using RookieShop.Domain.Entities.ProductAggregator.Primitives;
 using RookieShop.Domain.SharedKernel;
+using RookieShop.Infrastructure.Ai.Embedded;
 using RookieShop.Infrastructure.Storage.Azurite;
 
 namespace RookieShop.Application.Products.Commands.Create;
@@ -12,6 +13,7 @@ namespace RookieShop.Application.Products.Commands.Create;
 public sealed class CreateProductHandler(
     IRepository<Product> repository,
     IAzuriteService azuriteService,
+    IAiService aiService,
     ILogger<CreateProductHandler> logger) : ICommandHandler<CreateProductCommand, Result<ProductId>>
 {
     public async Task<Result<ProductId>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -29,6 +31,8 @@ public sealed class CreateProductHandler(
 
         logger.LogInformation("[{Command}] - Creating product {@Product}", nameof(CreateProductCommand),
             JsonSerializer.Serialize(product));
+
+        product.Embedding = await aiService.GetEmbeddingAsync($"{product.Name} {product.Description}", cancellationToken);
 
         var result = await repository.AddAsync(product, cancellationToken);
 

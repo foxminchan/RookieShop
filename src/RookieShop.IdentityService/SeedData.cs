@@ -19,45 +19,25 @@ public static class SeedData
 
         var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        var admin = roleMgr.FindByNameAsync("admin").Result;
+        var staff = roleMgr.FindByNameAsync("staff").Result;
 
-        if (admin is null)
+        if (staff is null)
         {
-            admin = new("admin");
+            staff = new("admin");
 
-            var result = roleMgr.CreateAsync(admin).Result;
+            var result = roleMgr.CreateAsync(staff).Result;
 
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
 
-            roleMgr.AddClaimAsync(admin, new(JwtClaimTypes.Role, AuthScope.Read)).Wait();
-            roleMgr.AddClaimAsync(admin, new(JwtClaimTypes.Role, AuthScope.Write)).Wait();
-            roleMgr.AddClaimAsync(admin, new(JwtClaimTypes.Role, AuthScope.All)).Wait();
+            roleMgr.AddClaimAsync(staff, new(JwtClaimTypes.Role, AuthScope.Read)).Wait();
+            roleMgr.AddClaimAsync(staff, new(JwtClaimTypes.Role, AuthScope.Write)).Wait();
+            roleMgr.AddClaimAsync(staff, new(JwtClaimTypes.Role, AuthScope.All)).Wait();
 
             Log.Debug("admin created");
         }
         else
         {
             Log.Debug("admin already exists");
-        }
-
-        var user = roleMgr.FindByNameAsync("user").Result;
-
-        if (user is null)
-        {
-            user = new("user");
-
-            var result = roleMgr.CreateAsync(user).Result;
-
-            if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
-
-            roleMgr.AddClaimAsync(user, new(JwtClaimTypes.Role, AuthScope.Read)).Wait();
-            roleMgr.AddClaimAsync(user, new(JwtClaimTypes.Role, AuthScope.Write)).Wait();
-
-            Log.Debug("user created");
-        }
-        else
-        {
-            Log.Debug("user already exists");
         }
 
         var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -121,8 +101,6 @@ public static class SeedData
             ]).Result;
 
             if (!result.Succeeded) throw new SeedException(result.Errors.First().Description);
-
-            userMgr.AddToRoleAsync(fox, "user").Wait();
 
             Log.Debug("fox created");
         }

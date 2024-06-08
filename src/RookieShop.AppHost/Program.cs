@@ -22,6 +22,8 @@ var openAiKey = builder.AddParameter("OpenAiKey", true);
 var db = builder
     .AddPostgres("db", postgresUser, postgresPassword, 5432)
     .WithDataBindMount("../../mnt/postgres")
+    .WithImage("ankane/pgvector")
+    .WithImageTag("latest")
     .WithPgAdmin();
 var shopDb = db.AddDatabase("shopdb");
 var userDb = db.AddDatabase("userdb");
@@ -40,6 +42,11 @@ if (builder.Environment.IsDevelopment())
 
 var blobs = storage.AddBlobs("blobs");
 
+// OpenAI
+const string openAiName = "openai";
+const string textEmbeddingName = "text-embedding-3-small";
+var openAi = builder.AddConnectionString(openAiName);
+
 // Services and applications
 var identityService = builder
     .AddProject<RookieShop_IdentityService>("identity-service")
@@ -52,7 +59,9 @@ var apiService = builder
     .AddProject<RookieShop_ApiService>("api-service")
     .WithReference(redis)
     .WithReference(shopDb)
+    .WithReference(openAi)
     .WithEnvironment("SmtpSettings__Secret", emailSecret)
+    .WithEnvironment("AIOptions__OpenAI__EmbeddingName", textEmbeddingName)
     .WithEnvironment("AzuriteSettings__ConnectionString", blobs.WithEndpoint())
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint(protocol));
 

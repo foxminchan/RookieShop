@@ -7,7 +7,6 @@ using RookieShop.Application.Orders.Workers;
 using RookieShop.Application.Products.Workers;
 using RookieShop.Infrastructure.Cache;
 using RookieShop.Infrastructure.Logging;
-using RookieShop.Infrastructure.Metrics;
 using RookieShop.Infrastructure.Validator;
 using RookieShop.Persistence;
 
@@ -38,7 +37,6 @@ public static class Extension
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TxBehavior<,>),
                     ServiceLifetime.Scoped);
                 cfg.AddOpenBehavior(typeof(QueryCachingBehavior<,>));
-                cfg.AddOpenBehavior(typeof(MetricsBehavior<,>));
             });
 
         builder.Services.AddHostedService<CalculateRatingWorker>();

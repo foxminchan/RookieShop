@@ -19,6 +19,7 @@ public static class Extension
             {
                 dbContextOptionsBuilder.UseNpgsql(optionsBuilder =>
                     {
+                        optionsBuilder.UseVector();
                         optionsBuilder.MigrationsAssembly(AssemblyReference.DbContextAssembly.FullName);
                         optionsBuilder.EnableRetryOnFailure(15, TimeSpan.FromSeconds(30), null);
                     })

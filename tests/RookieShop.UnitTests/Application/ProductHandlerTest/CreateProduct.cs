@@ -2,6 +2,7 @@
 using RookieShop.Application.Products.Commands.Create;
 using RookieShop.Domain.Entities.ProductAggregator;
 using RookieShop.Domain.SharedKernel;
+using RookieShop.Infrastructure.Ai.Embedded;
 using RookieShop.Infrastructure.Storage.Azurite;
 using RookieShop.UnitTests.Builders;
 
@@ -14,10 +15,11 @@ public sealed class CreateProduct
 
     public CreateProduct()
     {
+        Mock<IAiService> aiServiceMock = new();
         Mock<ILogger<CreateProductHandler>> loggerMock = new();
         Mock<IAzuriteService> azuriteServiceMock = new();
         _repositoryMock = new();
-        _handler = new(_repositoryMock.Object, azuriteServiceMock.Object, loggerMock.Object);
+        _handler = new(_repositoryMock.Object, azuriteServiceMock.Object, aiServiceMock.Object, loggerMock.Object);
     }
 
     private static Product CreateProductEntity() =>

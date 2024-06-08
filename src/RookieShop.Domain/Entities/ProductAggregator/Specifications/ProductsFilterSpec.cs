@@ -1,4 +1,6 @@
 ﻿using Ardalis.Specification;
+using Pgvector;
+using Pgvector.EntityFrameworkCore;
 using RookieShop.Domain.Entities.CategoryAggregator.Primitives;
 
 namespace RookieShop.Domain.Entities.ProductAggregator.Specifications;
@@ -23,4 +25,9 @@ public sealed class ProductsFilterSpec : Specification<Product>
     }
 
     public ProductsFilterSpec() => Query.Where(product => !product.IsDeleted);
+
+    public ProductsFilterSpec(Vector vector, int pageIndex, int pageSize) =>
+        Query.Where(product => !product.IsDeleted)
+            .OrderBy(c => c.Embedding.CosineDistance(vector))
+            .ApplyPaging(pageIndex, pageSize);
 }
