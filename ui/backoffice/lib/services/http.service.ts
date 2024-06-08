@@ -18,6 +18,7 @@ export default class HttpService {
   private setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
     axiosInstance.interceptors.request.use(
       async (config) => {
+        config.headers["X-CSRF"] = "1"
         return config
       },
       (error) => {

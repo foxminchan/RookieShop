@@ -60,7 +60,10 @@ app.UseBff();
 
 app.MapBffManagementEndpoints();
 
-app.MapBffReverseProxy();
+app.MapBffReverseProxy(proxyApp =>
+{
+    proxyApp.UseAntiforgeryCheck();
+});
 
 if (config.Api is not null)
 {
