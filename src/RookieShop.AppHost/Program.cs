@@ -66,7 +66,7 @@ var apiService = builder
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint(protocol));
 
 var backoffice = builder
-    .AddNpmApp("backoffice", "../../ui/backoffice", "dev:ssl")
+    .AddNpmApp("backoffice", "../RookieShop.Backoffice", "dev:ssl")
     .WithHttpEndpoint(3000, env: "PORT")
     .WithEnvironment("BROWSER", "none")
     .WithEnvironment("NEXT_PUBLIC_REMOTE_BFF", bff.GetEndpoint(protocol))
