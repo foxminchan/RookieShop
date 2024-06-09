@@ -76,6 +76,7 @@
 		<!-- Scaffolding -->
 		<PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="5.4.4" />
 		<PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+		<PackageVersion Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
 		<!-- xUnit -->
 		<PackageVersion Include="xunit" Version="2.8.1" />
 		<PackageVersion Include="xunit.runner.visualstudio" Version="2.8.1" />

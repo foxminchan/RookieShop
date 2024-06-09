@@ -7,6 +7,7 @@ using RookieShop.Storefront.Middlewares;
 using RookieShop.Storefront.Options;
 using RookieShop.Storefront.Services;
 using SmartComponents.Inference.OpenAI;
+using RookieShop.Storefront.Components;
 using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 var appSettings = new AppSettings();
 
 builder.Configuration.Bind(appSettings);
+
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddCircuitOptions(opt => opt.DetailedErrors = true);
 
 builder.AddServiceDefaults();
 
@@ -89,6 +94,11 @@ app.UseCookiePolicy();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseAntiforgery();
+
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
 
 app.MapControllerRoute(
     "Product",
