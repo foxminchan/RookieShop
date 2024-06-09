@@ -1,0 +1,303 @@
+{
+  "resources": {
+    "SqlUser": {
+      "type": "parameter.v0",
+      "value": "{SqlUser.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "SqlPassword": {
+      "type": "parameter.v0",
+      "value": "{SqlPassword.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "StripeApiKey": {
+      "type": "parameter.v0",
+      "value": "{StripeApiKey.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "StripeWebhookSecret": {
+      "type": "parameter.v0",
+      "value": "{StripeWebhookSecret.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "EmailSecret": {
+      "type": "parameter.v0",
+      "value": "{EmailSecret.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "GoogleClientId": {
+      "type": "parameter.v0",
+      "value": "{GoogleClientId.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "GoogleClientSecret": {
+      "type": "parameter.v0",
+      "value": "{GoogleClientSecret.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "OpenAiKey": {
+      "type": "parameter.v0",
+      "value": "{OpenAiKey.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "db": {
+      "type": "container.v0",
+      "connectionString": "Host={db.bindings.tcp.host};Port={db.bindings.tcp.port};Username={SqlUser.value};Password={SqlPassword.value}",
+      "image": "docker.io/ankane/pgvector:latest",
+      "bindMounts": [
+        {
+          "source": "../../mnt/postgres",
+          "target": "/var/lib/postgresql/data",
+          "readOnly": false
+        }
+      ],
+      "env": {
+        "POSTGRES_HOST_AUTH_METHOD": "scram-sha-256",
+        "POSTGRES_INITDB_ARGS": "--auth-host=scram-sha-256 --auth-local=scram-sha-256",
+        "POSTGRES_USER": "{SqlUser.value}",
+        "POSTGRES_PASSWORD": "{SqlPassword.value}"
+      },
+      "bindings": {
+        "tcp": {
+          "scheme": "tcp",
+          "protocol": "tcp",
+          "transport": "tcp",
+          "targetPort": 5432
+        }
+      }
+    },
+    "shopdb": {
+      "type": "value.v0",
+      "connectionString": "{db.connectionString};Database=shopdb"
+    },
+    "userdb": {
+      "type": "value.v0",
+      "connectionString": "{db.connectionString};Database=userdb"
+    },
+    "redis": {
+      "type": "container.v0",
+      "connectionString": "{redis.bindings.tcp.host}:{redis.bindings.tcp.port}",
+      "image": "docker.io/library/redis:7.2",
+      "args": [
+        "--save",
+        "60",
+        "1"
+      ],
+      "bindMounts": [
+        {
+          "source": "../../mnt/redis",
+          "target": "/data",
+          "readOnly": false
+        }
+      ],
+      "bindings": {
+        "tcp": {
+          "scheme": "tcp",
+          "protocol": "tcp",
+          "transport": "tcp",
+          "targetPort": 6379
+        }
+      }
+    },
+    "storage": {
+      "type": "azure.bicep.v0",
+      "path": "storage.module.bicep",
+      "params": {
+        "principalId": "",
+        "principalType": ""
+      }
+    },
+    "blobs": {
+      "type": "value.v0",
+      "connectionString": "{storage.outputs.blobEndpoint}"
+    },
+    "openai": {
+      "type": "parameter.v0",
+      "connectionString": "{openai.value}",
+      "value": "{openai.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
+        }
+      }
+    },
+    "identity-service": {
+      "type": "project.v0",
+      "path": "../RookieShop.IdentityService/RookieShop.IdentityService.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "ConnectionStrings__redis": "{redis.connectionString}",
+        "ConnectionStrings__userdb": "{userdb.connectionString}",
+        "Provider__Google__ClientId": "{GoogleClientId.value}",
+        "Provider__Google__ClientSecret": "{GoogleClientSecret.value}",
+        "Client__Storefront": "{storefront.bindings.https.url}",
+        "Client__Backoffice": "{backoffice.bindings.http.url}",
+        "Client__Swagger": "{api-service.bindings.https.url}",
+        "Client__Bff": "{bff.bindings.https.url}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    },
+    "bff": {
+      "type": "project.v0",
+      "path": "../RookieShop.Bff/RookieShop.Bff.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "ConnectionStrings__redis": "{redis.connectionString}",
+        "BFF__Authority": "{identity-service.bindings.https.url}",
+        "ReverseProxy__Clusters__api__Destinations__api__Address": "{api-service.bindings.https.url}/api/v1",
+        "BFF__Api__RemoteUrl": "{api-service.bindings.https.url}/api/v1/categories"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    },
+    "api-service": {
+      "type": "project.v0",
+      "path": "../RookieShop.ApiService/RookieShop.ApiService.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "ConnectionStrings__redis": "{redis.connectionString}",
+        "ConnectionStrings__shopdb": "{shopdb.connectionString}",
+        "ConnectionStrings__openai": "{openai.connectionString}",
+        "SmtpSettings__Secret": "{EmailSecret.value}",
+        "AiOptions__OpenAi__EmbeddingName": "text-embedding-3-small",
+        "AzuriteSettings__ConnectionString": "{blobs.connectionString}",
+        "OpenIdSettings__Authority": "{identity-service.bindings.https.url}",
+        "CorsSettings__Storefront": "{storefront.bindings.https.url}",
+        "CorsSettings__Backoffice": "{backoffice.bindings.http.url}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    },
+    "backoffice": {
+      "type": "dockerfile.v0",
+      "path": "../RookieShop.Backoffice/Dockerfile",
+      "context": "../RookieShop.Backoffice",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "{backoffice.bindings.http.targetPort}",
+        "BROWSER": "none",
+        "NEXT_PUBLIC_REMOTE_BFF": "{bff.bindings.https.url}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http",
+          "port": 3000,
+          "targetPort": 8000
+        }
+      }
+    },
+    "storefront": {
+      "type": "project.v0",
+      "path": "../RookieShop.StoreFront/RookieShop.Storefront.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "ConnectionStrings__redis": "{redis.connectionString}",
+        "ConnectionStrings__openai": "{openai.connectionString}",
+        "SmartComponents__ApiKey": "{OpenAiKey.value}",
+        "StripeSettings__StripeSecretKey": "{StripeApiKey.value}",
+        "AiOptions__OpenAi__ModelName": "gpt-4-turbo",
+        "StripeSettings__StripeWebhookSecret": "{StripeWebhookSecret.value}",
+        "OpenIdSettings__Authority": "{identity-service.bindings.https.url}",
+        "BaseApiEndpoint": "{api-service.bindings.https.url}/api/v1"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "projectPath": ".",
+  "inputPath": "aspirate-output",
+  "outputPath": "aspirate-output",
+  "containerImageTags": [
+    "latest"
+  ],
+  "containerBuilder": "docker",
+  "outputFormat": "compose",
+  "privateRegistryEmail": "aspir8@aka.ms",
+  "includeDashboard": true,
+  "secrets": {
+    "salt": "R6qHuUjbNLHZ2OGW",
+    "hash": "MsxHd6VY9VTcrEZOwBP8ng1OC8k/xBEzpYXAVj4e40Q=",
+    "secrets": {
+      "SqlUser": {
+        "value": "R6qHuUjbNLHZ2OGWIalobUuKa6OYU23F6dSf5rDzcGw="
+      },
+      "SqlPassword": {
+        "value": "R6qHuUjbNLHZ2OGWvuz8PBDb3eBcK6z/ozIG\u002BYz9bHAtda1VD4KC4W4="
+      },
+      "StripeApiKey": {
+        "value": "R6qHuUjbNLHZ2OGWJo/Cx9TCfyBBN9bTvwdEA7H3QGwcY7pieoH/tTICqaR2qR9LP8TUwMmIVIbFyieXkIby6tDmSI7waSv2mWCFVMAX7v/y6JVEMc6NktLJf6T2MU0icoAwhQ4sQDN\u002BYvbytx\u002BwGEjLlyMIUSBuvSxe9Whqf0KtLeUOyIx7"
+      },
+      "StripeWebhookSecret": {
+        "value": "R6qHuUjbNLHZ2OGWFlKAsPzvQfAKtt6CSpVNhbX0bH0aT/8MeYaKt2hV/Nx0rzBmacmCta7ZQP6G93DGl4STuKKtc8WxfAGK/jXhU4MWqsyt2d85UcHh1YaaAfO8ejB3Qss="
+      },
+      "EmailSecret": {
+        "value": "R6qHuUjbNLHZ2OGW5qeZUCBuP6Kp\u002BblsgO2BbKz5fnwbf6xYP9HQpS0F9Zs="
+      },
+      "GoogleClientId": {
+        "value": "R6qHuUjbNLHZ2OGW5SZf6b2AymwGoYsyxklmYPOpLylKIPcFeYKA4HcAr4J17z9mP56Itq2cTqvV8DvVyZfTqaypKYL2KhPVpXmwRcFUs8700opnA9WrhpbOW/74Lm5gCZBpmw=="
+      },
+      "GoogleClientSecret": {
+        "value": "R6qHuUjbNLHZ2OGWQT3PL9wHN5vEzhqBUej9/IXTXEspSONxLYT2oRguqY042jBUOpPX8aXZap3U\u002Bh/x4qvA"
+      },
+      "OpenAiKey": {
+        "value": "R6qHuUjbNLHZ2OGW5fI5PMwlj0exOvxtgMqgObH3MmgLf6QQI4GAhRQE7NcH7g1WTLig0/m8fKbkoAvJw4rkkfXTdoDIXlbljROdQcVoqfne86tC"
+      },
+      "openai": {
+        "value": "R6qHuUjbNLHZ2OGWNsVQBOL9rHT3jVwKRmdi6Yn5ZiUKe\u002BNNPd/Y/jZXqrkO\u002BSA4T4m/0NirYpzVwBHK9dLgt/j3VrzoVwHFhhHgY/Vj0d3v8tlbI\u002B6eqg=="
+      },
+      "db": {
+        "POSTGRES_PASSWORD": "R6qHuUjbNLHZ2OGWvuz8PBDb3eBcK6z/ozIG\u002BYz9bHAtda1VD4KC4W4="
+      },
+      "shopdb": {},
+      "userdb": {},
+      "redis": {},
+      "blobs": {},
+      "identity-service": {
+        "ConnectionStrings__redis": "R6qHuUjbNLHZ2OGWLjmGvIgcGZqqlkmjQxkA\u002BLD5e3EKKvgOeIk=",
+        "ConnectionStrings__userdb": "R6qHuUjbNLHZ2OGWAcji\u002Bfd61zNwIpN0eZocIorzbGxEdKwGH9/Ap2dTrNxyoAFzbY6I5/GKGbvf/D2e8YDRqO3zYpK6VgbAoQO0Vtlnr5mpidZPB9S5gYXeUa35OGVmQ5E="
+      },
+      "bff": {
+        "ConnectionStrings__redis": "R6qHuUjbNLHZ2OGWLjmGvIgcGZqqlkmjQxkA\u002BLD5e3EKKvgOeIk="
+      },
+      "api-service": {
+        "ConnectionStrings__redis": "R6qHuUjbNLHZ2OGWLjmGvIgcGZqqlkmjQxkA\u002BLD5e3EKKvgOeIk=",
+        "ConnectionStrings__shopdb": "R6qHuUjbNLHZ2OGW1jMjr\u002BC1dwbZcQ\u002BF7\u002BlIEIrzbGxEdKwGH9/Ap2dTrNxyoAFzbY6I5/GKGbvf/D2e8YDRqO3zYpK6VgbAoQO0Vtlnr5mpidZPB9S5gYXeUa3/I29kQ5E=",
+        "ConnectionStrings__openai": "R6qHuUjbNLHZ2OGWNsVQBOL9rHT3jVwKRmdi6Yn5ZiUKe\u002BNNPd/Y/jZXqrkO\u002BSA4T4m/0NirYpzVwBHK9dLgt/j3VrzoVwHFhhHgY/Vj0d3v8tlbI\u002B6eqg=="
+      },
+      "backoffice": {},
+      "storefront": {
+        "ConnectionStrings__redis": "R6qHuUjbNLHZ2OGWLjmGvIgcGZqqlkmjQxkA\u002BLD5e3EKKvgOeIk=",
+        "ConnectionStrings__openai": "R6qHuUjbNLHZ2OGWNsVQBOL9rHT3jVwKRmdi6Yn5ZiUKe\u002BNNPd/Y/jZXqrkO\u002BSA4T4m/0NirYpzVwBHK9dLgt/j3VrzoVwHFhhHgY/Vj0d3v8tlbI\u002B6eqg=="
+      }
+    }
+  },
+  "processAllComponents": true
+}
