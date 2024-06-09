@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-service
+  labels:
+    app: identity-service
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: identity-service
+    spec:
+      containers:
+        - name: identity-service
+          image: identity-service:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: https
+              containerPort: 8443
+          envFrom:
+            - configMapRef:
+                name: identity-service-env
+            - secretRef:
+                name: identity-service-secrets
+      terminationGracePeriodSeconds: 180
+      automountServiceAccountToken: false

@@ -1,0 +1,25 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: api-service-env
+    literals:
+      - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES=true
+      - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES=true
+      - OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY=in_memory
+      - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
+      - AiOptions__OpenAi__EmbeddingName=text-embedding-3-small
+      - AzuriteSettings__ConnectionString={storage.outputs.blobEndpoint}
+      - CorsSettings__Backoffice=http://backoffice:8000
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://aspire-dashboard:18889
+      - OTEL_SERVICE_NAME=api-service
+      - ASPNETCORE_URLS=http://+:8080;
+
+secretGenerator:
+  - name: api-service-secrets
+    envs:
+      - .api-service.secrets

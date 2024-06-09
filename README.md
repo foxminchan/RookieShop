@@ -110,6 +110,7 @@ Build an e-commerce web site with minimum functionality below:
 - Install Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 - Install bun: [https://bun.sh/](https://bun.sh/)
 - Install Stripe CLI: [https://stripe.com/docs/stripe-cli](https://stripe.com/docs/stripe-cli)
+- Install k3d: [https://k3d.io/](https://k3d.io/)
 - Open AI API Key: [https://platform.openai.com/](https://platform.openai.com/)
 
 #### Windows with Visual Studio
@@ -219,9 +220,12 @@ Deploying the application to the production environment by using <a href="https:
 </p>
 
 ```bash
-dotnet aspirate generate
+cd src/RookieShop.AppHost
 dotnet aspirate apply
 ```
+
+> [!WARNING]
+> Ensure <code>k3d</code> is started and has the <code>cluster</code> context.
 
 ## Observability
 

@@ -2,67 +2,76 @@
   "projectPath": ".",
   "inputPath": "aspirate-output",
   "outputPath": "aspirate-output",
-  "containerImageTags": [
-    "latest"
-  ],
+  "namespace": "rookieshop",
+  "containerImageTags": ["latest"],
+  "imagePullPolicy": "IfNotPresent",
   "containerBuilder": "docker",
-  "outputFormat": "compose",
+  "kubeContext": "k3d-rookieshop",
+  "outputFormat": "kustomize",
+  "skipFinalKustomizeGeneration": false,
   "privateRegistryEmail": "aspir8@aka.ms",
   "includeDashboard": true,
+  "useCustomNamespace": true,
   "secrets": {
-    "salt": "R6qHuUjbNLHZ2OGW",
-    "hash": "MsxHd6VY9VTcrEZOwBP8ng1OC8k/xBEzpYXAVj4e40Q=",
+    "salt": "FUviPyDnEdIv95LE",
+    "hash": "2OusfCaIQ4CTJjop6rn9lxVGs9S6MrgLbJLeSUm336Q=",
     "secrets": {
       "SqlUser": {
-        "value": "R6qHuUjbNLHZ2OGWIalobUuKa6OYU23F6dSf5rDzcGw="
+        "value": "FUviPyDnEdIv95LE\u002BMNH8MwVOHmiRQDq0wiQNEGO8JY="
       },
       "SqlPassword": {
-        "value": "R6qHuUjbNLHZ2OGWvuz8PBDb3eBcK6z/ozIG\u002BYz9bHAtda1VD4KC4W4="
+        "value": "FUviPyDnEdIv95LEqnpF3PNAdtitzuseUimqrX2A7Iq3iQyGa12LKro="
       },
       "StripeApiKey": {
-        "value": "R6qHuUjbNLHZ2OGWJo/Cx9TCfyBBN9bTvwdEA7H3QGwcY7pieoH/tTICqaR2qR9LP8TUwMmIVIbFyieXkIby6tDmSI7waSv2mWCFVMAX7v/y6JVEMc6NktLJf6T2MU0icoAwhQ4sQDN\u002BYvbytx\u002BwGEjLlyMIUSBuvSxe9Whqf0KtLeUOyIx7"
+        "value": "FUviPyDnEdIv95LEFFUzmH1eAfV5Tg58T7wJPECKwJaGnxuxHl72fuaRP/xfNhXIgTJVTtxjh2hpbeDWOALt8G384izvympl/yZXxVoT/NB/RDq5UI7ICDwTD1ieic5qe7OvvqPVflb9X9oNObTsQmZGFhiJyT4tOf484xyWM3PzlOWsqu5w"
       },
       "StripeWebhookSecret": {
-        "value": "R6qHuUjbNLHZ2OGWFlKAsPzvQfAKtt6CSpVNhbX0bH0aT/8MeYaKt2hV/Nx0rzBmacmCta7ZQP6G93DGl4STuKKtc8WxfAGK/jXhU4MWqsyt2d85UcHh1YaaAfO8ejB3Qss="
+        "value": "FUviPyDnEdIv95LEZEi6gQh0Qm80yjoYKvXqckSJ7IeAs17fHVmDfLzGaoRdMDrl1z8DO7sykxAqULeHPwCMoh\u002B32Weu30AZmHMzwhkSuOMgdXDEMIGkT2hAcQ/UwrM/S/g="
       },
       "EmailSecret": {
-        "value": "R6qHuUjbNLHZ2OGW5qeZUCBuP6Kp\u002BblsgO2BbKz5fnwbf6xYP9HQpS0F9Zs="
+        "value": "FUviPyDnEdIv95LE8PmlSYFL2c2IpViZZgSu6l2E/oaBgw2LWw7ZbvmWY8M="
       },
       "GoogleClientId": {
-        "value": "R6qHuUjbNLHZ2OGW5SZf6b2AymwGoYsyxklmYPOpLylKIPcFeYKA4HcAr4J17z9mP56Itq2cTqvV8DvVyZfTqaypKYL2KhPVpXmwRcFUs8700opnA9WrhpbOW/74Lm5gCZBpmw=="
+        "value": "FUviPyDnEdIv95LEfZHvmCn65LsZe2v6kcL1OQLUr9PQ3FbWHV2JK6OTOdpccDXlgWgJOLh3nUV5V/yUYRPMsxGzgyDpiVJGwz9i1FtQoeF5fiWaYpXuHHgUKwKQlu0oAKP2oA=="
       },
       "GoogleClientSecret": {
-        "value": "R6qHuUjbNLHZ2OGWQT3PL9wHN5vEzhqBUej9/IXTXEspSONxLYT2oRguqY042jBUOpPX8aXZap3U\u002Bh/x4qvA"
+        "value": "FUviPyDnEdIv95LEu6CXOMIeaqQ63Ohd7QPyh3Su3LGztEKiSVv/asy9P9URRTrXhGVWf7AyuXN4XdiwSi/f"
       },
       "OpenAiKey": {
-        "value": "R6qHuUjbNLHZ2OGW5fI5PMwlj0exOvxtgMqgObH3MmgLf6QQI4GAhRQE7NcH7g1WTLig0/m8fKbkoAvJw4rkkfXTdoDIXlbljROdQcVoqfne86tC"
+        "value": "FUviPyDnEdIv95LEitx41GoL85rQ99Zvr9Ek7UCKspKRgwXDR16JTsCXeo8ucQfV8k4hXexXr0hIB8yIaw77i0jJ3CLX/Rd261VP0F9su9ZTXwS/"
       },
       "openai": {
-        "value": "R6qHuUjbNLHZ2OGWNsVQBOL9rHT3jVwKRmdi6Yn5ZiUKe\u002BNNPd/Y/jZXqrkO\u002BSA4T4m/0NirYpzVwBHK9dLgt/j3VrzoVwHFhhHgY/Vj0d3v8tlbI\u002B6eqg=="
+        "value": "FUviPyDnEdIv95LEI\u002BgIkVgT5JD0fO8ihjqpR3iE5t\u002BQh0KeWQDRNeLEPOEnZiq78X8\u002BXs1AsXJ5Z9aLXVb/rUXt/B739EBW4Fcy8m9nw/JiXnamQq7bMA=="
       },
       "db": {
-        "POSTGRES_PASSWORD": "R6qHuUjbNLHZ2OGWvuz8PBDb3eBcK6z/ozIG\u002BYz9bHAtda1VD4KC4W4="
+        "POSTGRES_PASSWORD": "FUviPyDnEdIv95LEqnpF3PNAdtitzuseUimqrX2A7Iq3iQyGa12LKro="
       },
       "shopdb": {},
       "userdb": {},
       "redis": {},
       "blobs": {},
       "identity-service": {
-        "ConnectionStrings__redis": "R6qHuUjbNLHZ2OGWLjmGvIgcGZqqlkmjQxkA\u002BLD5e3EKKvgOeIk=",
-        "ConnectionStrings__userdb": "R6qHuUjbNLHZ2OGWAcji\u002Bfd61zNwIpN0eZocIorzbGxEdKwGH9/Ap2dTrNxyoAFzbY6I5/GKGbvf/D2e8YDRqO3zYpK6VgbAoQO0Vtlnr5mpidZPB9S5gYXeUa35OGVmQ5E="
+        "ConnectionStrings__redis": "FUviPyDnEdIv95LE\u002BR/iBjbVoaxL5OYTUQ4pk0GE\u002B4uQ1lndHFY=",
+        "ConnectionStrings__userdb": "FUviPyDnEdIv95LEW1fPr1i\u002BeNfLIOrzFKmacnuO7JbeiA3VewDJbLPAOoRbPwvw03gJaeRhylVzW/rfWQTOslDpyDCl9UdTx0Vmx0NjvbYkJXmyZpT8G2sEIVGRgOYuSqI=",
+        "Provider__Google__ClientId": "FUviPyDnEdIv95LEfZHvmCn65LsZe2v6kcL1OQLUr9PQ3FbWHV2JK6OTOdpccDXlgWgJOLh3nUV5V/yUYRPMsxGzgyDpiVJGwz9i1FtQoeF5fiWaYpXuHHgUKwKQlu0oAKP2oA==",
+        "Provider__Google__ClientSecret": "FUviPyDnEdIv95LEu6CXOMIeaqQ63Ohd7QPyh3Su3LGztEKiSVv/asy9P9URRTrXhGVWf7AyuXN4XdiwSi/f"
       },
       "bff": {
-        "ConnectionStrings__redis": "R6qHuUjbNLHZ2OGWLjmGvIgcGZqqlkmjQxkA\u002BLD5e3EKKvgOeIk="
+        "ConnectionStrings__redis": "FUviPyDnEdIv95LE\u002BR/iBjbVoaxL5OYTUQ4pk0GE\u002B4uQ1lndHFY="
       },
       "api-service": {
-        "ConnectionStrings__redis": "R6qHuUjbNLHZ2OGWLjmGvIgcGZqqlkmjQxkA\u002BLD5e3EKKvgOeIk=",
-        "ConnectionStrings__shopdb": "R6qHuUjbNLHZ2OGW1jMjr\u002BC1dwbZcQ\u002BF7\u002BlIEIrzbGxEdKwGH9/Ap2dTrNxyoAFzbY6I5/GKGbvf/D2e8YDRqO3zYpK6VgbAoQO0Vtlnr5mpidZPB9S5gYXeUa3/I29kQ5E=",
-        "ConnectionStrings__openai": "R6qHuUjbNLHZ2OGWNsVQBOL9rHT3jVwKRmdi6Yn5ZiUKe\u002BNNPd/Y/jZXqrkO\u002BSA4T4m/0NirYpzVwBHK9dLgt/j3VrzoVwHFhhHgY/Vj0d3v8tlbI\u002B6eqg=="
+        "ConnectionStrings__redis": "FUviPyDnEdIv95LE\u002BR/iBjbVoaxL5OYTUQ4pk0GE\u002B4uQ1lndHFY=",
+        "ConnectionStrings__shopdb": "FUviPyDnEdIv95LEffgNMjof96vnZzWNMLTFvXuO7JbeiA3VewDJbLPAOoRbPwvw03gJaeRhylVzW/rfWQTOslDpyDCl9UdTx0Vmx0NjvbYkJXmyZpT8G2sEIVGXm\u002BwsSqI=",
+        "ConnectionStrings__openai": "FUviPyDnEdIv95LEI\u002BgIkVgT5JD0fO8ihjqpR3iE5t\u002BQh0KeWQDRNeLEPOEnZiq78X8\u002BXs1AsXJ5Z9aLXVb/rUXt/B739EBW4Fcy8m9nw/JiXnamQq7bMA==",
+        "SmtpSettings__Secret": "FUviPyDnEdIv95LE8PmlSYFL2c2IpViZZgSu6l2E/oaBgw2LWw7ZbvmWY8M="
       },
       "backoffice": {},
       "storefront": {
-        "ConnectionStrings__redis": "R6qHuUjbNLHZ2OGWLjmGvIgcGZqqlkmjQxkA\u002BLD5e3EKKvgOeIk=",
-        "ConnectionStrings__openai": "R6qHuUjbNLHZ2OGWNsVQBOL9rHT3jVwKRmdi6Yn5ZiUKe\u002BNNPd/Y/jZXqrkO\u002BSA4T4m/0NirYpzVwBHK9dLgt/j3VrzoVwHFhhHgY/Vj0d3v8tlbI\u002B6eqg=="
+        "ConnectionStrings__redis": "FUviPyDnEdIv95LE\u002BR/iBjbVoaxL5OYTUQ4pk0GE\u002B4uQ1lndHFY=",
+        "ConnectionStrings__openai": "FUviPyDnEdIv95LEI\u002BgIkVgT5JD0fO8ihjqpR3iE5t\u002BQh0KeWQDRNeLEPOEnZiq78X8\u002BXs1AsXJ5Z9aLXVb/rUXt/B739EBW4Fcy8m9nw/JiXnamQq7bMA==",
+        "SmartComponents__ApiKey": "FUviPyDnEdIv95LEitx41GoL85rQ99Zvr9Ek7UCKspKRgwXDR16JTsCXeo8ucQfV8k4hXexXr0hIB8yIaw77i0jJ3CLX/Rd261VP0F9su9ZTXwS/",
+        "StripeSettings__StripeSecretKey": "FUviPyDnEdIv95LEFFUzmH1eAfV5Tg58T7wJPECKwJaGnxuxHl72fuaRP/xfNhXIgTJVTtxjh2hpbeDWOALt8G384izvympl/yZXxVoT/NB/RDq5UI7ICDwTD1ieic5qe7OvvqPVflb9X9oNObTsQmZGFhiJyT4tOf484xyWM3PzlOWsqu5w",
+        "StripeSettings__StripeWebhookSecret": "FUviPyDnEdIv95LEZEi6gQh0Qm80yjoYKvXqckSJ7IeAs17fHVmDfLzGaoRdMDrl1z8DO7sykxAqULeHPwCMoh\u002B32Weu30AZmHMzwhkSuOMgdXDEMIGkT2hAcQ/UwrM/S/g="
       }
     }
   },

@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storefront
+  labels:
+    app: storefront
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: storefront
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: storefront
+    spec:
+      containers:
+        - name: storefront
+          image: storefront:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: https
+              containerPort: 8443
+          envFrom:
+            - configMapRef:
+                name: storefront-env
+            - secretRef:
+                name: storefront-secrets
+      terminationGracePeriodSeconds: 180
+      automountServiceAccountToken: false

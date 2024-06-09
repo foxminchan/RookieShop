@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backoffice
+  labels:
+    app: backoffice
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backoffice
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: backoffice
+    spec:
+      containers:
+        - name: backoffice
+          image: backoffice:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - name: http
+              containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: backoffice-env
+      terminationGracePeriodSeconds: 180
+      automountServiceAccountToken: false

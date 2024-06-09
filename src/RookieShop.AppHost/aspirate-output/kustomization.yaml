@@ -1,0 +1,15 @@
+namespace: rookieshop
+
+resources:
+  - db
+  - redis
+  - identity-service
+  - bff
+  - api-service
+  - backoffice
+  - storefront
+  - namespace.yaml
+  - dashboard.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
