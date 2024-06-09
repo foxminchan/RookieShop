@@ -14,4 +14,7 @@ public interface IProductService
 
     [Post("/products/check-stock")]
     Task<CheckStockResponse> CheckStockAsync(CheckStockRequest request, [Header(HeaderName.IdempotencyKey)] Guid requestId);
+
+    [Get("/products/search")]
+    Task<ListProductsViewModel> SearchProductsAsync([Query] ProductSearchParams searchParams);
 }

@@ -4,7 +4,7 @@ using RookieShop.Storefront.Areas.User.Services;
 
 namespace RookieShop.Storefront.Middlewares;
 
-public sealed class CustomerInfoMiddleware(IHttpContextAccessor httpContextAccessor, ICustomerService customerService)
+public sealed class CustomerInfoMiddleware(ICustomerService customerService)
     : IMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -15,7 +15,7 @@ public sealed class CustomerInfoMiddleware(IHttpContextAccessor httpContextAcces
             return;
         }
 
-        var userId = httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         if (string.IsNullOrEmpty(userId))
         {
