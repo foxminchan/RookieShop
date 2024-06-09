@@ -43,10 +43,10 @@ public sealed class AzuriteService(AzuriteSettings azuriteSettings, ResiliencePi
             cancellationToken);
     }
 
-    public string GetFileUrl(string? fileName)
+    public string? GetFileUrl(string? fileName)
     {
         if (string.IsNullOrWhiteSpace(fileName))
-            return string.Empty;
+            return null;
 
         var blobClient = _container.GetBlobClient(fileName);
 

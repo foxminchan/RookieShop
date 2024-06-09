@@ -2803,6 +2803,14 @@ video {
     margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
+  .lg\:object-cover {
+    object-fit: cover;
+  }
+
+  .lg\:object-center {
+    object-position: center;
+  }
+
   .lg\:px-28 {
     padding-left: 7rem;
     padding-right: 7rem;

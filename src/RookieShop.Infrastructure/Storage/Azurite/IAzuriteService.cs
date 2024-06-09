@@ -6,5 +6,5 @@ public interface IAzuriteService
 {
     Task<string> UploadFileAsync(IFormFile file, CancellationToken cancellationToken = default);
     Task DeleteFileAsync(string fileName, CancellationToken cancellationToken = default);
-    string GetFileUrl(string? fileName);
+    string? GetFileUrl(string? fileName);
 }   
