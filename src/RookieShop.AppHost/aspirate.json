@@ -1,9 +1,0 @@
-{
-  "TemplatePath": "./Templates",
-  "ContainerSettings": {
-    "Registry": "ghcr.io/foxminchan/rookieshop",
-    "RepositoryPrefix": null,
-    "Tags": ["0.1.0", "latest"],
-    "Builder": "docker"
-  }
-}
