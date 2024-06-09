@@ -69,20 +69,20 @@ Build an e-commerce web site with minimum functionality below:
 
 ## Technical Stack
 
-- [ASP.NET Core 8.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
 - [htmx](https://htmx.org/)
 - [Alphine.js](https://alpinejs.dev/)
 - [///\_hyperscript](https://hyperscript.org/)
 - [Next.js 14.0](https://nextjs.org/)
+- [ASP.NET Core 8.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
 - [Duende IdentityServer 7.0](https://duendesoftware.com/products/identityserver)
 - [Redis](https://redis.io/)
 - [Postgres](https://www.postgresql.org/)
 - [Aspire](https://learn.microsoft.com/dotnet/aspire)
 - [Yarp](https://microsoft.github.io/reverse-proxy/)
 - [OpenTelemetry](https://opentelemetry.io/)
-- [NUKE](https://nuke.build/)
-- [Semantic Kernel](aka.ms/semantic-kernel)
 - [OpenAI](https://openai.com/)
+- [Semantic Kernel](aka.ms/semantic-kernel)
+- [NUKE](https://nuke.build/)
 
 ## Software Architecture
 
@@ -106,11 +106,11 @@ Build an e-commerce web site with minimum functionality below:
 
 - Get the latest source code: [https://github.com/foxminchan/RookieShop](https://github.com/foxminchan/RookieShop)
 - Install & start Docker Desktop: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+- Install k3d: [https://k3d.io/](https://k3d.io/)
 - Install .NET 8.0 SDK: [https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download)
 - Install Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 - Install bun: [https://bun.sh/](https://bun.sh/)
 - Install Stripe CLI: [https://stripe.com/docs/stripe-cli](https://stripe.com/docs/stripe-cli)
-- Install k3d: [https://k3d.io/](https://k3d.io/)
 - Open AI API Key: [https://platform.openai.com/](https://platform.openai.com/)
 
 #### Windows with Visual Studio
@@ -130,7 +130,7 @@ Build an e-commerce web site with minimum functionality below:
 ```bash
 # Setup the tools
 
-npm install
+npm install --force
 dotnet tool restore
 
 # Install the dependencies for the .NET Core projects

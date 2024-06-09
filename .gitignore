@@ -906,3 +906,7 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,visualstudio,aspnetcore,visualstudiocode
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
