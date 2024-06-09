@@ -18,6 +18,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Include="xunit.runner.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\src\RookieShop.AppHost\RookieShop.AppHost.csproj" />
 	</ItemGroup>
 

@@ -25,6 +25,7 @@ RookieShop is a .NET Core web application training project demonstrating Clean A
     - [Mac, Linux, \& Windows without Visual Studio](#mac-linux--windows-without-visual-studio)
   - [Setup tools and dependencies](#setup-tools-and-dependencies)
   - [Setup Stripe webhook](#setup-stripe-webhook)
+  - [User secrets example](#user-secrets-example)
   - [Running the application](#running-the-application)
 - [Testing](#testing)
 - [CI/CD](#cicd)
@@ -143,6 +144,26 @@ dotnet restore ./RookieShop.sln
 stripe login
 
 stripe listen --forward-to https://localhost:9000/api/stripe
+```
+
+### User secrets example
+
+```json
+{
+  "Parameters": {
+    "SqlUser": "",
+    "SqlPassword": "",
+    "StripeApiKey": "",
+    "StripeWebhookSecret": "",
+    "EmailSecret": "",
+    "GoogleClientId": "",
+    "GoogleClientSecret": "",
+    "OpenAiKey": ""
+  },
+  "ConnectionStrings": {
+    "openai": "Key="
+  }
+}
 ```
 
 ### Running the application
