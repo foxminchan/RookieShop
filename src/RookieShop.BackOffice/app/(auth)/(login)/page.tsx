@@ -23,7 +23,7 @@ export default function LoginPage() {
           </p>
         </div>
         <DuendeAuthButton />
-        <p className="text-sm text-muted-foreground text-center">
+        <p className="text-center text-sm text-muted-foreground">
           Power by{" "}
           <Link
             href="https://duendesoftware.com/"

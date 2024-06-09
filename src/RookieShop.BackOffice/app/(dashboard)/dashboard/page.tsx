@@ -119,7 +119,7 @@ export default function Dashboard() {
           </TabsContent>
         </Tabs>
       </div>
-      <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-7 md:p-8">
+      <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 md:p-8 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
             <CardTitle>Overview</CardTitle>

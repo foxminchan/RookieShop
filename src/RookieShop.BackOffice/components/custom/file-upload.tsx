@@ -51,14 +51,14 @@ export default function FileUpload({
           </div>
         )}
       </div>
-      <div className="flex items-center justify-center w-full">
+      <div className="flex w-full items-center justify-center">
         {!value && (
           <Label
             htmlFor="picture"
-            className="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+            className="dark:hover:bg-bray-800 flex h-80 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
           >
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <Icons.upload className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" />
+            <div className="flex flex-col items-center justify-center pb-6 pt-5">
+              <Icons.upload className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400" />
               <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                 <span className="font-semibold">Click to upload</span> or drag
                 and drop

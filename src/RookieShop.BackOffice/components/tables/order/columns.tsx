@@ -69,7 +69,7 @@ export const columns: ColumnDef<Order>[] = [
       return (
         <Badge
           variant="secondary"
-          className={`px-2 py-1 text-xs font-semibold rounded-full ${badgeClass}`}
+          className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeClass}`}
         >
           {status}
         </Badge>

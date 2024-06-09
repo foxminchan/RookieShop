@@ -29,7 +29,7 @@ export default function OrderPage({ searchParams }: Readonly<paramsProps>) {
   const totalOrders = data?.pagedInfo.totalRecords ?? 0
 
   return (
-    <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
+    <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <Breadcrumb items={breadcrumbItems} />
       <div className="flex items-start justify-between">
         <Heading title={`Order (${totalOrders})`} description="Manage order" />

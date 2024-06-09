@@ -43,7 +43,7 @@ export default function ProductPage({ searchParams }: Readonly<paramsProps>) {
   const totalProducts = data?.pagedInfo.totalRecords ?? 0
 
   return (
-    <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
+    <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <Breadcrumb items={breadcrumbItems} />
       <div className="flex items-start justify-between">
         <Heading

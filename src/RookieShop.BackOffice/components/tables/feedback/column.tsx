@@ -33,7 +33,7 @@ export const columns: ColumnDef<Feedback>[] = [
               return (
                 <svg
                   key={starId}
-                  className={`w-4 h-4 fill-current ${
+                  className={`h-4 w-4 fill-current ${
                     index < rating ? "text-yellow-500" : "text-gray-300"
                   }`}
                   xmlns="http://www.w3.org/2000/svg"

@@ -27,7 +27,7 @@ export const columns: ColumnDef<Product>[] = [
       return imageUrl ? (
         <Image src={imageUrl} alt="product" width={90} height={120} />
       ) : (
-        <div className="flex items-center justify-center w-20 h-20 bg-gray-100 rounded-md">
+        <div className="flex h-20 w-20 items-center justify-center rounded-md bg-gray-100">
           <img
             loading="lazy"
             src="https://fakeimg.pl/90x120/?text=RookieShop"
@@ -58,7 +58,7 @@ export const columns: ColumnDef<Product>[] = [
       return (
         <Badge
           variant="secondary"
-          className={`px-2 py-1 text-xs font-semibold rounded-full ${badgeClass}`}
+          className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeClass}`}
         >
           {status}
         </Badge>
@@ -79,7 +79,7 @@ export const columns: ColumnDef<Product>[] = [
             </span>
           </TooltipTrigger>
           <TooltipContent>
-            <div className="p-4 text-sm w-80">{parse(description)}</div>
+            <div className="w-80 p-4 text-sm">{parse(description)}</div>
           </TooltipContent>
         </Tooltip>
       ) : (
@@ -147,7 +147,7 @@ export const columns: ColumnDef<Product>[] = [
               return (
                 <svg
                   key={starId}
-                  className={`w-4 h-4 fill-current ${
+                  className={`h-4 w-4 fill-current ${
                     index < rating ? "text-yellow-500" : "text-gray-300"
                   }`}
                   xmlns="http://www.w3.org/2000/svg"

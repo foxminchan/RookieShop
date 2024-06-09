@@ -31,7 +31,7 @@ export default function DashboardNav({ items }: Readonly<DashboardNavProps>) {
                 item.disabled && "cursor-not-allowed opacity-80"
               )}
             >
-              <span className="truncate ml-3">{item.title}</span>
+              <span className="ml-3 truncate">{item.title}</span>
             </Link>
           )
         )
