@@ -23,6 +23,8 @@
 		<PackageReference Include="Htmx.TagHelpers" />
 		<PackageReference Include="SmartComponents.AspNetCore" />
 		<PackageReference Include="SmartComponents.Inference.OpenAI" />
+		<PackageReference Include="Microsoft.SemanticKernel" />
+		<PackageReference Include="Aspire.Azure.AI.OpenAI" />
 	</ItemGroup>
 
 	<ItemGroup>

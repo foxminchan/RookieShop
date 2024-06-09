@@ -39,6 +39,8 @@ builder.AddAuthenticationService(appSettings.OpenIdSettings);
 
 builder.AddHttpServices(appSettings.BaseApiEndpoint);
 
+builder.AddAiService(appSettings.AiOptions);
+
 builder.Services.AddMemoryCache();
 
 builder.Services.AddSingleton<IMemoryCacheService, MemoryCacheService>();

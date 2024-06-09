@@ -45,6 +45,7 @@ var blobs = storage.AddBlobs("blobs");
 // OpenAI
 const string openAiName = "openai";
 const string textEmbeddingName = "text-embedding-3-small";
+const string chatModelName = "gpt-4-turbo";
 var openAi = builder.AddConnectionString(openAiName);
 
 // Services and applications
@@ -61,7 +62,7 @@ var apiService = builder
     .WithReference(shopDb)
     .WithReference(openAi)
     .WithEnvironment("SmtpSettings__Secret", emailSecret)
-    .WithEnvironment("AIOptions__OpenAI__EmbeddingName", textEmbeddingName)
+    .WithEnvironment("AiOptions__OpenAi__EmbeddingName", textEmbeddingName)
     .WithEnvironment("AzuriteSettings__ConnectionString", blobs.WithEndpoint())
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint(protocol));
 
@@ -75,8 +76,10 @@ var backoffice = builder
 var storefront = builder
     .AddProject<RookieShop_Storefront>("storefront")
     .WithReference(redis)
+    .WithReference(openAi)
     .WithEnvironment("SmartComponents__ApiKey", openAiKey)
     .WithEnvironment("StripeSettings__StripeSecretKey", stripeApiKey)
+    .WithEnvironment("AiOptions__OpenAi__ModelName", chatModelName)
     .WithEnvironment("StripeSettings__StripeWebhookSecret", stripeWebhookSecret)
     .WithEnvironment("OpenIdSettings__Authority", identityService.GetEndpoint(protocol))
     .WithEnvironment("BaseApiEndpoint", $"{apiService.GetEndpoint(protocol)}/api/v1");
