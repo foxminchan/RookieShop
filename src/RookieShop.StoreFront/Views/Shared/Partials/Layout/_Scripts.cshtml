@@ -1,0 +1,50 @@
+﻿<cache expires-after="@TimeSpan.FromSeconds(300)">
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <environment names="Development,Docker">
+        <script src="~/lib/dist/jquery/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/toastr.js/toastr.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/htmx/htmx.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/alpinejs/cdn.min.js" asp-append-version="true"></script>
+        <script src="~/lib/dist/hyperscript.org/_hyperscript.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://code.jquery.com/jquery-4.0.0-beta.slim.min.js"
+                asp-fallback-src="~/lib/dist/jquery/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                asp-append-version="true"
+                integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+                crossorigin="anonymous">
+            </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.11.0/sweetalert2.min.js"
+                asp-fallback-src="~/lib/dist/sweetalert2/sweetalert2.min.js"
+                asp-fallback-test="window.Swal"
+                asp-append-version="true"
+                integrity="sha512-Wi5Ms24b10EBwWI9JxF03xaAXdwg9nF51qFUDND/Vhibyqbelri3QqLL+cXCgNYGEgokr+GA2zaoYaypaSDHLg=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer">
+            </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+                asp-fallback-src="~/lib/dist/toastr.js/toastr.min.js"
+                asp-fallback-test="window.toastr"
+                asp-append-version="true"
+                integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer">
+            </script>
+        <script src="https://unpkg.com/htmx.org@1.9.12"
+                asp-fallback-src="~/lib/dist/htmx/htmx.min.js"
+                asp-fallback-test="window.htmx"
+                asp-append-version="true"
+                integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+                crossorigin="anonymous">
+            </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"
+                asp-fallback-src="~/lib/dist/alpinejs/cdn.min.js"
+                asp-fallback-test="window.Alpine"
+                asp-append-version="true"></script>
+        <script src="https://unpkg.com/hyperscript.org@0.9.12"
+                asp-fallback-src="~/lib/dist/hyperscript.org/_hyperscript.min.js"
+                asp-append-version="true"></script>
+    </environment>
+</cache>

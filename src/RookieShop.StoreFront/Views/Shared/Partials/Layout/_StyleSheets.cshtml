@@ -1,0 +1,32 @@
+﻿<cache expires-after="@TimeSpan.FromSeconds(300)">
+    <environment names="Development,Docker">
+        <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/dist/toastr.js/toastr.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/dist/sweetalert2/sweetalert2.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/dist/font-awesome/css/fontawesome.min.css" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://cdn.tailwindcss.com" asp-append-version="true" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+              asp-fallback-href="~/lib/dist/font-awesome/css/fontawesome.min.css"
+              asp-append-version="true"
+              rel="stylesheet"
+              integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.11.0/sweetalert2.min.css"
+              asp-fallback-href="~/lib/dist/sweetalert2/sweetalert2.min.css"
+              asp-append-version="true"
+              rel="stylesheet"
+              integrity="sha512-OWGg8FcHstyYFwtjfkiCoYHW2hG3PDWwdtczPAPUcETobBJOVCouKig8rqED0NMLcT9GtE4jw6IT1CSrwY87uw=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"
+              asp-fallback-href="~/lib/dist/toastr.js/toastr.min.css"
+              asp-append-version="true"
+              rel="stylesheet"
+              integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer" />
+    </environment>
+</cache>

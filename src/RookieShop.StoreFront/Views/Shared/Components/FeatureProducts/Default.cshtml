@@ -2,41 +2,42 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model List<RookieShop.Storefront.Models.Report.BestSellerProductViewModel>
 
-@if (Model.Count == 0)
+@if (Model.Count != 0)
 {
-    <div class="text-center text-red-500">
-        <strong>Warning!</strong> There are no products to show.
-    </div>
-}
-else
-{
-    @foreach (var item in Model)
-    {
-        <div class="group relative">
-            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
-                <img loading="lazy" 
-                     src="@(item.ImageUrl ?? "~/imgs/product/default-preview-image.png")" 
-                     alt="@item.ProductName" 
-                     class="h-full w-full" 
-                     asp-append-version="true" />
-            </div>
-            <div class="mt-4 flex justify-between">
-                <div>
-                    <h3 class="text-sm text-gray-700">
-                        <a asp-area="Product"
-                           asp-controller="Product"
-                           asp-action="Detail"
-                           asp-route-id="@item.ProductId" 
-                           class="font-medium hover:text-gray-800">
-                            <span aria-hidden="true" class="absolute inset-0"></span>
-                            @item.ProductName
-                        </a>
-                    </h3>
-                </div>
-                <span class="text-sm font-medium text-gray-900 text-red-900">
-                    @item.Price?.PriceSale?.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
-                </span>
+    <div class="bg-white">
+        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:max-w-7xl lg:px-8">
+            <h1 class="text-2xl font-bold tracking-tight text-gray-900 text-center">Feature Product</h1>
+            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                @foreach (var item in Model)
+                {
+                    <div class="group relative">
+                        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
+                            <img loading="lazy" 
+                                 src="@(item.ImageUrl ?? "~/imgs/product/default-preview-image.png")" 
+                                 alt="@item.ProductName" 
+                                 class="h-full w-full" 
+                                 asp-append-version="true" />
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <div>
+                                <h3 class="text-sm text-gray-700">
+                                    <a asp-area="Product"
+                                       asp-controller="Product"
+                                       asp-action="Detail"
+                                       asp-route-id="@item.ProductId" 
+                                       class="font-medium hover:text-gray-800">
+                                        <span aria-hidden="true" class="absolute inset-0"></span>
+                                        @item.ProductName
+                                    </a>
+                                </h3>
+                            </div>
+                            <span class="text-sm font-medium text-gray-900 text-red-900">
+                                @item.Price?.PriceSale?.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
+                            </span>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
-    }
+    </div>
 }
