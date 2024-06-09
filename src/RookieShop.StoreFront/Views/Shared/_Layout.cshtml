@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using RookieShop.Storefront.Components.Chatbot
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <base href="~/"/>
@@ -130,7 +131,7 @@
         @RenderBody()
     </main>
 </div>
-
+<component type="typeof(ShowChatbotButton)" render-mode="ServerPrerendered"/>
 <cache expires-after="@TimeSpan.FromSeconds(300)">
     <script src="~/js/site.js" asp-append-version="true"></script>
     <environment names="Development,Docker">

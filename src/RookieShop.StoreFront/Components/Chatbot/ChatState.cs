@@ -20,7 +20,9 @@ public sealed class ChatState
     private readonly IHttpContextAccessor _httpContextAccessor;
 
     private readonly OpenAIPromptExecutionSettings _aiSettings = new()
-        { ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions };
+    {
+        ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
+    };
 
     public ChatState(
         IProductService productService,

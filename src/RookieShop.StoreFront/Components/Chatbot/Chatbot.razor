@@ -1,0 +1,28 @@
+﻿@using Microsoft.SemanticKernel
+@using RookieShop.Storefront.Areas.Basket.Services
+@using RookieShop.Storefront.Areas.Product.Services
+@inject IProductService ProductService
+@inject IBasketService BasketService
+@inject IHttpContextAccessor HttpContextAccessor
+@inject ILoggerFactory LoggerFactory
+@inject IServiceProvider ServiceProvider
+
+<h3>Chatbot</h3>
+
+@code {
+    ChatState? _chatState;
+    bool _missingConfiguration;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var kernel = ServiceProvider.GetService<Kernel>();
+        if (kernel is not null)
+        {
+            _chatState = new(ProductService, BasketService, HttpContextAccessor, kernel, LoggerFactory);
+        }
+        else
+        {
+            _missingConfiguration = true;
+        }
+    }
+}
