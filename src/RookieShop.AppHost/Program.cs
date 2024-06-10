@@ -70,7 +70,7 @@ var backoffice = builder
     .AddNpmApp("backoffice", "../RookieShop.Backoffice", "dev:ssl")
     .WithHttpEndpoint(3000, env: "PORT")
     .WithEnvironment("BROWSER", "none")
-    .WithEnvironment("NEXT_PUBLIC_REMOTE_BFF", bff.GetEndpoint(protocol))
+    .WithEnvironment("REMOTE_BFF", bff.GetEndpoint(protocol))
     .PublishAsDockerFile();
 
 var storefront = builder
