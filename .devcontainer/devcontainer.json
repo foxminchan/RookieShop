@@ -1,27 +1,27 @@
 {
-  "name": "C# (.NET)",
+  "name": "Rookie Shop Dev Container",
   "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
+  "postCreateCommand": "bash ./.devcontainer/init.sh",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/rio/features/k3d:1": {},
-    "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "latest"
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true
     },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/dotnet:2": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
     "ghcr.io/devcontainers/features/node:1": {},
-    "ghcr.io/shyim/devcontainers-features/bun:0": {},
-    "ghcr.io/elanhasson/devcontainer-features/dotnet-aspire-daily:1": {},
+    "ghcr.io/rio/features/k3d:1": {},
     "ghcr.io/prom3theu5/aspirational-manifests/aspirate:latest": {}
   },
-  "postCreateCommand": "bash .devcontainer/init.sh",
-  "forwardPorts": ["ingress:80", "dashboard:17249"],
+  "forwardPorts": ["dashboard:17249", "k3s:8081"],
   "portsAttributes": {
-    "80": {
-      "protocol": "http",
-      "label": "Ingess"
-    },
     "17249": {
       "protocol": "https",
       "label": "dashboard"
+    },
+    "8081": {
+      "label": "k3s",
+      "onAutoForward": "silent"
     }
   },
   "customizations": {

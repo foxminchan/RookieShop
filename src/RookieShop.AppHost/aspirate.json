@@ -1,7 +1,7 @@
 {
   "TemplatePath": null,
   "ContainerSettings": {
-    "Registry": "localhost:8080",
+    "Registry": "k3d-foxminchan.localhost",
     "RepositoryPrefix": null,
     "Tags": ["latest"],
     "Builder": "docker"
