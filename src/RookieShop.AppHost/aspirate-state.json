@@ -3,10 +3,12 @@
   "inputPath": "aspirate-output",
   "outputPath": "aspirate-output",
   "namespace": "rookieshop",
-  "containerImageTags": ["latest"],
+  "containerImageTags": [
+    "latest"
+  ],
   "imagePullPolicy": "IfNotPresent",
   "containerBuilder": "docker",
-  "kubeContext": "k3d-rookieshop",
+  "kubeContext": "k3d-foxminchan",
   "outputFormat": "kustomize",
   "skipFinalKustomizeGeneration": false,
   "privateRegistryEmail": "aspir8@aka.ms",
@@ -74,6 +76,5 @@
         "StripeSettings__StripeWebhookSecret": "FUviPyDnEdIv95LEZEi6gQh0Qm80yjoYKvXqckSJ7IeAs17fHVmDfLzGaoRdMDrl1z8DO7sykxAqULeHPwCMoh\u002B32Weu30AZmHMzwhkSuOMgdXDEMIGkT2hAcQ/UwrM/S/g="
       }
     }
-  },
-  "processAllComponents": true
+  }
 }

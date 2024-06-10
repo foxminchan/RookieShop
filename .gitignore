@@ -3,6 +3,7 @@
 mnt/
 keys/
 certificates/
+*.secrets
 
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
