@@ -35,8 +35,9 @@ export default defineConfig({
   projects: [
     {
       name: "setup",
-      testMatch: "**/*.setup.ts",
+      testMatch: "**/setups/*.setup.ts",
     },
+
     // {
     //   name: "chromium",
     //   use: { ...devices["Desktop Chrome"] },

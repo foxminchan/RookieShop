@@ -6,6 +6,7 @@
     "bradlc.vscode-tailwindcss",
     "dsznajder.es7-react-js-snippets",
     "redhat.vscode-yaml",
-    "GitHub.vscode-github-actions"
+    "GitHub.vscode-github-actions",
+    "CucumberOpen.cucumber-official"
   ]
 }
