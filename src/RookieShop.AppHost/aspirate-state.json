@@ -8,7 +8,7 @@
   ],
   "imagePullPolicy": "IfNotPresent",
   "containerBuilder": "docker",
-  "kubeContext": "k3d-foxminchan",
+  "kubeContext": "k3d-k3s-default",
   "outputFormat": "kustomize",
   "skipFinalKustomizeGeneration": false,
   "privateRegistryEmail": "aspir8@aka.ms",

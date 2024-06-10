@@ -9,7 +9,11 @@ dotnet tool restore
 ## Restore the npm packages
 npm install --force
 
+## Install Bun
+npm install -g bun
+
 ## Install Aspire workload
+dotnet workload update
 dotnet workload install aspire
 
 ## Create a k3d cluster
