@@ -3,10 +3,14 @@ import { z } from "zod"
 
 export const env = createEnv({
   server: {
-    PORT: z.string().min(1).default("3000"),
+    TAVILY_API_KEY: z.string().min(1),
+    OPENAI_API_KEY: z.string().min(1),
     REMOTE_BFF: z.string().min(1).url(),
+    PORT: z.string().min(1).default("3000"),
   },
   runtimeEnv: {
+    TAVILY_API_KEY: process.env.TAVILY_API_KEY,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     REMOTE_BFF: process.env.REMOTE_BFF,
     PORT: process.env.PORT,
   },

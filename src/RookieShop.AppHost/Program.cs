@@ -1,3 +1,4 @@
+using Aspire.Hosting;
 using Microsoft.Extensions.Hosting;
 using Projects;
 using RookieShop.AppHost;
@@ -70,6 +71,7 @@ var backoffice = builder
     .AddNpmApp("backoffice", "../RookieShop.Backoffice", "dev:ssl")
     .WithHttpEndpoint(3000, env: "PORT")
     .WithEnvironment("BROWSER", "none")
+    .WithEnvironment("OPENAI_API_KEY", openAiKey)
     .WithEnvironment("REMOTE_BFF", bff.GetEndpoint(protocol))
     .PublishAsDockerFile();
 

@@ -34,7 +34,13 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^41.4.2",
     "@ckeditor/ckeditor5-react": "^7.0.0",
+    "@copilotkit/backend": "^0.37.0",
+    "@copilotkit/react-core": "^0.37.0",
+    "@copilotkit/react-textarea": "^0.37.0",
+    "@copilotkit/react-ui": "^0.37.0",
+    "@copilotkit/shared": "^0.37.0",
     "@hookform/resolvers": "^3.3.4",
+    "@langchain/langgraph": "^0.0.22",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
