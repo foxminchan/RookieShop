@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 
-import useClaims from "./useClaims"
+import useClaim from "./useClaim"
 
 export default function useAuthUser() {
-  const { data: claims, isLoading } = useClaims()
+  const { data: claims, isLoading } = useClaim()
 
   let logoutUrl = claims?.find((claim: any) => claim.type === "bff:logout_url")
   let nameDict =

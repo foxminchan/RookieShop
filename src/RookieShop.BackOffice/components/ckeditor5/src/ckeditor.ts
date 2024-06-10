@@ -4,7 +4,6 @@
  */
 
 import { Alignment } from "@ckeditor/ckeditor5-alignment"
-import { Autoformat } from "@ckeditor/ckeditor5-autoformat"
 import { Bold, Italic } from "@ckeditor/ckeditor5-basic-styles"
 import type { EditorConfig } from "@ckeditor/ckeditor5-core"
 import { ClassicEditor } from "@ckeditor/ckeditor5-editor-classic"
@@ -12,14 +11,18 @@ import { Essentials } from "@ckeditor/ckeditor5-essentials"
 import { FindAndReplace } from "@ckeditor/ckeditor5-find-and-replace"
 import { FontColor, FontFamily, FontSize } from "@ckeditor/ckeditor5-font"
 import { Heading } from "@ckeditor/ckeditor5-heading"
+import { Highlight } from "@ckeditor/ckeditor5-highlight"
+import { Indent, IndentBlock } from "@ckeditor/ckeditor5-indent"
+import { Link } from "@ckeditor/ckeditor5-link"
 import { Paragraph } from "@ckeditor/ckeditor5-paragraph"
-import { TextTransformation } from "@ckeditor/ckeditor5-typing"
 import { Undo } from "@ckeditor/ckeditor5-undo"
+
+// You can read more about extending the build with additional plugins in the "Installing plugins" guide.
+// See https://ckeditor.com/docs/ckeditor5/latest/installation/plugins/installing-plugins.html for details.
 
 class Editor extends ClassicEditor {
   public static override builtinPlugins = [
     Alignment,
-    Autoformat,
     Bold,
     Essentials,
     FindAndReplace,
@@ -27,9 +30,12 @@ class Editor extends ClassicEditor {
     FontFamily,
     FontSize,
     Heading,
+    Highlight,
+    Indent,
+    IndentBlock,
     Italic,
+    Link,
     Paragraph,
-    TextTransformation,
     Undo,
   ]
 
@@ -40,15 +46,21 @@ class Editor extends ClassicEditor {
         "|",
         "bold",
         "italic",
+        "link",
         "alignment",
         "|",
         "fontColor",
         "fontFamily",
         "fontSize",
         "|",
+        "outdent",
+        "indent",
+        "|",
         "undo",
         "redo",
+        "|",
         "findAndReplace",
+        "highlight",
       ],
     },
     language: "en",

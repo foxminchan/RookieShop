@@ -13,7 +13,8 @@ builder.Configuration.Bind("BFF", config);
 builder.AddServiceDefaults();
 
 builder.Services.AddBff()
-    .AddRemoteApis();
+    .AddRemoteApis()
+    .AddServerSideSessions();
 
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
@@ -58,8 +59,11 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseBff();
+app.UseRouting();
+app.UseAuthorization();
 
 app.MapBffManagementEndpoints();
 

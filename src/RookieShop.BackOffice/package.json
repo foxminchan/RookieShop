@@ -11,11 +11,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:ssl": "cross-env NODE_EXTRA_CA_CERTS=./certificates/localhost.pem next dev",
+    "dev:ssl": "cross-env NODE_EXTRA_CA_CERTS=./certificates/certificate.crt next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ca": "dotnet dev-certs https --format pem -ep ./certificates/localhost.pem",
+    "ca": "dotnet dev-certs https --trust --format pem -ep ./certificates/certificate.crt",
     "format:write": "bun prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "bun prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
   },
