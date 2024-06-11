@@ -98,7 +98,7 @@ Build an e-commerce web site with minimum functionality below:
 | 6   | cache           | A distributed lock manager, cache and cart storage                                                   | Redis                                     |
 | 7   | database        | A relational database that stores the application's data and email outbox                            | Postgres, Marten                          |
 | 8   | observability   | A telemetry data collector that collects and exports telemetry data to the Aspire Dashboard          | OpenTelemetry                             |
-| 9   | openai          | A language model that handles the natural language processing tasks                                  | OpenAI                                    |
+| 9   | ai platform     | An AI platform that provides AI services for the application                                         | OpenAI, Tavily                            |
 
 ## Getting Started
 
