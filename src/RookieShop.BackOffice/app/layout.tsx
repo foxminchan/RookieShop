@@ -1,4 +1,5 @@
 import "./globals.css"
+import "@copilotkit/react-textarea/styles.css"
 
 import { ReactNode } from "react"
 import type { Metadata } from "next"

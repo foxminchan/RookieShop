@@ -1,4 +1,3 @@
-using Aspire.Hosting;
 using Microsoft.Extensions.Hosting;
 using Projects;
 using RookieShop.AppHost;
@@ -72,6 +71,7 @@ var backoffice = builder
     .WithHttpEndpoint(3000, env: "PORT")
     .WithEnvironment("BROWSER", "none")
     .WithEnvironment("OPENAI_API_KEY", openAiKey)
+    .WithEnvironment("MODEL_NAME", chatModelName)
     .WithEnvironment("REMOTE_BFF", bff.GetEndpoint(protocol))
     .PublishAsDockerFile();
 

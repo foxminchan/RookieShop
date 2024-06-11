@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { CopilotKit } from "@copilotkit/react-core"
 
 import useAuthUser from "@/hooks/useAuthUser"
 import Header from "@/components/layouts/header"
@@ -15,18 +16,20 @@ export default function MainDashboardLayout({
   const router = useRouter()
   const { isLoggedIn } = useAuthUser()
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     router.push("/")
-  //   }
-  // }, [isLoggedIn])
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/")
+    }
+  }, [isLoggedIn])
 
   return (
     <>
       <Header />
       <div className="flex overflow-hidden">
         <Sidebar />
-        <main className="w-full pt-16">{children}</main>
+        <CopilotKit runtimeUrl="/api/copilot">
+          <main className="w-full pt-16">{children}</main>
+        </CopilotKit>
       </div>
     </>
   )

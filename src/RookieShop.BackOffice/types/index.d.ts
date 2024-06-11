@@ -34,3 +34,10 @@ export type DataTableProps<TData, TValue> = {
     [key: string]: string | string[] | undefined | boolean
   }
 }
+
+export type AgentState = {
+  topic: string
+  searchResults?: string
+  description?: string
+  critique?: string
+}

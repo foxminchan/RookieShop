@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useEffect } from "react"
+import { FC, useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { UpdateCategoryRequest } from "@/features/category/category.type"
 import useCreateCategory from "@/features/category/useCreateCategory"
@@ -100,6 +100,8 @@ export const CategoryForm: FC<CategoryFormProps> = ({ initialData }) => {
     }
   }, [createCategorySuccess, updateCategorySuccess])
 
+  const [copilotText, setCopilotText] = useState("")
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -136,10 +138,11 @@ export const CategoryForm: FC<CategoryFormProps> = ({ initialData }) => {
                 <FormLabel>Description</FormLabel>
                 <FormControl>
                   <CustomEditor
-                    content={initialData?.description ?? ""}
+                    content={initialData?.description ?? copilotText}
                     handleContent={(content: string) => {
                       form.setValue("description", content)
                     }}
+                    event={(event) => setCopilotText(event.target.value)}
                     disabled={isDisabled}
                     {...field}
                   />
