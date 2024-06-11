@@ -28,12 +28,4 @@
 		</PackageReference>
 	</ItemGroup>
 
-	<Target Name="RestoreNpm" BeforeTargets="Build" Condition=" '$(DesignTimeBuild)' != 'true' ">
-		<ItemGroup>
-			<PackageJsons Include="..\..\ui\*\package.json" />
-		</ItemGroup>
-		<Message Importance="Normal" Text="Installing node packages for %(PackageJsons.RelativeDir)" Condition="!Exists('%(PackageJsons.RootDir)%(PackageJsons.Directory)/node_modules')" />
-		<Exec Command="bun install" WorkingDirectory="%(PackageJsons.RootDir)%(PackageJsons.Directory)" Condition="!Exists('%(PackageJsons.RootDir)%(PackageJsons.Directory)/node_modules')" />
-	</Target>
-
 </Project>
