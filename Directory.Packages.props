@@ -99,7 +99,7 @@
     <PackageVersion Include="SmartComponents.AspNetCore" Version="0.1.0-preview10148" />
     <PackageVersion Include="SmartComponents.Inference.OpenAI" Version="0.1.0-preview10148" />
     <!-- Data -->
-    <PackageVersion Include="Marten" Version="7.19.1" />
+    <PackageVersion Include="Marten" Version="7.20.2" />
     <PackageVersion Include="Dapper" Version="2.1.35" />
     <!-- Dunde -->
     <PackageVersion Include="Duende.BFF.Yarp" Version="2.2.0" />
