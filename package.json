@@ -22,7 +22,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.9",
     "@vuepress/bundler-vite": "2.0.0-rc.12",
     "husky": "^9.0.11",
     "vue": "^3.4.27",
