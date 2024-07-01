@@ -27,7 +27,7 @@
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.5.0" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="8.0.1" />
     <!-- AI -->
-    <PackageVersion Include="Microsoft.SemanticKernel" Version="1.14.1" />
+    <PackageVersion Include="Microsoft.SemanticKernel" Version="1.15.0" />
     <!-- Ardalis -->
     <PackageVersion Include="Ardalis.GuardClauses" Version="4.5.0" />
     <PackageVersion Include="Ardalis.Result.AspNetCore" Version="9.1.0" />
