@@ -58,7 +58,7 @@
     <PackageVersion Include="EntityFrameworkCore.Exceptions.PostgreSQL" Version="8.1.2" />
     <!-- OpenTelemetry -->
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
