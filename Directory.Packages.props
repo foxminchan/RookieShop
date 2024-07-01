@@ -6,7 +6,7 @@
     <ApiVersioningVersion>8.1.0</ApiVersioningVersion>
     <EfVersion>8.0.6</EfVersion>
     <XabarilVersion>8.0.1</XabarilVersion>
-    <PollyVersion>8.4.0</PollyVersion>
+    <PollyVersion>8.4.1</PollyVersion>
     <AspireVersion>8.0.1</AspireVersion>
     <AspirantVersion>0.0.3</AspirantVersion>
     <AspireUnstablePackagesVersion>8.0.1-preview.8.24267.1</AspireUnstablePackagesVersion>
