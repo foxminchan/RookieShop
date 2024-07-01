@@ -114,7 +114,7 @@
     <PackageVersion Include="DistributedLock.Redis" Version="1.0.3" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageVersion Include="StronglyTypedId" Version="1.0.0-beta08" />
-    <PackageVersion Include="Quartz.Extensions.Hosting" Version="3.9.0" />
+    <PackageVersion Include="Quartz.Extensions.Hosting" Version="3.10.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.27.0.93347" />
     <PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageVersion Include="MicroElements.Swashbuckle.FluentValidation" Version="6.0.0" />
